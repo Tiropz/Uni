@@ -27,12 +27,13 @@ public class Window {
         window.setBounds(0, 0, 1200, 1000);
         window.getContentPane().setBackground(Color.gray);
         c.fill = BOTH;
-        c.gridy = 1;
+        c.ipadx = 100;
+        c.gridy = 0;
         c.gridx = 0;
         groupPanel.add(this.map, c);
         c.fill = HORIZONTAL;
         c.gridx = 0;
-        c.gridy = 0;
+        c.gridy = 1;
         groupPanel.add(this.status, c);
         window.add(this.groupPanel);
         window.setVisible(true);
