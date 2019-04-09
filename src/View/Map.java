@@ -49,7 +49,7 @@ public class Map extends JPanel {
 
     public void paint(Graphics g) {
         BLOC_SIZE = (int)(Math.round(3*height_screen/(5*y_blocks)));
-        for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2); i++) {
+        for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+1; i++) {
             for (int j = 1; j < y_blocks+1; j++) {
                 int x = i;
                 int y = j;
