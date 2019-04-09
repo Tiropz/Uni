@@ -24,7 +24,7 @@ public class Game implements DeletableObserver {
         players.add(mainChar);
         window.setPlayer(mainChar);
         active_player = mainChar;
-        ArrayList<GameObject> objectList = window.getObjects(1);
+        ArrayList<GameObject> objectList = window.getObjects(2);
         // Map building
         for (int i = 0; i < objectList.size(); i++) {
             objects.add(objectList.get(i));

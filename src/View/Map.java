@@ -40,15 +40,20 @@ public class Map extends JPanel {
         switch (wm) {
             case 1:
                 actualMap = new DesignMap(1);
+                break;
+            case 2:
+                actualMap = new DesignMap(2);
+                break;
         }
         this.y_blocks = actualMap.y_blocks;
         this.x_blocks = actualMap.x_blocks;
-        x_middle = (int)(Math.round(3*height_screen/(5*y_blocks)));
+        this.BLOC_SIZE = (Math.round(3*height_screen/(5*y_blocks)));
+        x_middle = (Math.round(width_screen/(2*BLOC_SIZE)));
+        System.out.println(x_middle);
         System.out.println(screenSize.getWidth());
     }
 
     public void paint(Graphics g) {
-        BLOC_SIZE = (int)(Math.round(3*height_screen/(5*y_blocks)));
         for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+1; i++) {
             for (int j = 1; j < y_blocks+1; j++) {
                 int x = i;
