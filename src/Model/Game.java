@@ -20,15 +20,15 @@ public class Game implements DeletableObserver {
     // private int bombTimer = 3000;
     private int numberOfBreakableBlocks = 40;
 
-    public Game(Window window) {
+    public Game(Window window, Player mainChar) {
         this.window = window;
         size = window.getMapSize();
         // Creating one Player at position (1,1)
-        Player p = new Player(10, 10, 3);
-        objects.add(p);
-        players.add(p);
-        window.setPlayer(p);
-        active_player = p;
+        Player mainChar = new Player(10, 10);
+        objects.add(mainChar);
+        players.add(mainChar);
+        window.setPlayer(mainChar);
+        active_player = mainChar;
 
         // Map building
         for (int i = 0; i < size; i++) {

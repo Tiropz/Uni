@@ -5,7 +5,7 @@ public class Player extends GameObject implements Directable {
     int energy = 100;
     int direction = EAST;  
 
-    public Player(int x, int y, int maxBomb) {
+    public Player(int x, int y) {
         super(x, y, 2);
     }
 

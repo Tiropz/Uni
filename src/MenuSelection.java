@@ -14,15 +14,14 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import org.json.simple.DeserializationException;
 import org.json.simple.JsonObject;
 import org.json.simple.Jsoner;
-import org.json.simple.parser.JSONParser;
+import com.google.gson.Gson;
 
 
 public class MenuSelection extends JDialog {
@@ -119,25 +118,10 @@ public class MenuSelection extends JDialog {
 
         okBouton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0) {
-                Info = new MenuInfo(nom.getText(), (String)sexe.getSelectedItem(), (String)cheveux.getSelectedItem() ,getTaille());
-                JsonObject sampleObject = new JsonObject();
-                sampleObject.put("name", nom.getText());
-                sampleObject.put("sexe", sexe.getSelectedItem());
-                sampleObject.put("hair", cheveux.getSelectedItem());
-                try {
-                    Files.write(Paths.get("example.json"), sampleObject.toJson().getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                JsonObject jsonObject = null;
-                try {
-                    jsonObject = (JsonObject) readJsonSimpleDemo("example.json");
-                } catch (FileNotFoundException e) {
-                    System.out.println("BLAZLGGBEGREGREGRE");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                System.out.println(jsonObject);
+            /*    Info = new MenuInfo(nom.getText(), (String)sexe.getSelectedItem(), (String)cheveux.getSelectedItem() ,getTaille());
+
+                */
+
                 setVisible(false);
             }
 
@@ -151,10 +135,11 @@ public class MenuSelection extends JDialog {
             }
         });
 
-        JButton cancelBouton = new JButton("Annuler");
+        JButton cancelBouton = new JButton("Quitter");
         cancelBouton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0) {
                 setVisible(false);
+
             }
         });
 

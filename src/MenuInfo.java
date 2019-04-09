@@ -5,18 +5,16 @@ public class MenuInfo {
     public MenuInfo(String nom, String sexe, String cheveux, String taille){
         this.nom = nom;
         this.sexe = sexe;
-        this.age = age;
         this.cheveux = cheveux;
         this.taille = taille;
     }
 
     public String toString(){
         String str;
-        if(this.nom != null && this.sexe != null && this.taille != null && this.age != null && this.cheveux != null){
+        if(this.nom != null && this.sexe != null && this.taille != null && this.cheveux != null){
             str = "Voici ton personnage\n";
             str += "Nom : " + this.nom + "\n";
             str += "Sexe : " + this.sexe + "\n";
-            str += "Age : " + this.age + "\n";
             str += "Cheveux : " + this.cheveux + "\n";
             str += "Taille : " + this.taille + "\n";
         }
@@ -24,5 +22,14 @@ public class MenuInfo {
             str = "Aucune information !";
         }
         return str;
+    }
+    public String getNom(){
+        return this.nom;
+    }
+    public String getSexe(){
+        return this.sexe;
+    }
+    public String getCheveux(){
+        return this.cheveux;
     }
 }
