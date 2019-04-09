@@ -46,6 +46,7 @@ public class MenuSelection extends JDialog {
         this.sendData = false;
         this.setVisible(true);
         return this.Info;
+
     }
 
     private void initComponent(){
