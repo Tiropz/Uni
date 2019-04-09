@@ -21,7 +21,6 @@ public class Map extends JPanel {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(MAP_SIZE*BLOC_SIZE, MAP_SIZE*BLOC_SIZE));
-        setLayout(new GridBagLayout());
     }
 
     public void paint(Graphics g) {

@@ -27,7 +27,6 @@ public class Window {
         window.setBounds(0, 0, 1200, 1000);
         window.getContentPane().setBackground(Color.gray);
         c.fill = BOTH;
-        c.ipadx = 100;
         c.gridy = 0;
         c.gridx = 0;
         groupPanel.add(this.map, c);
