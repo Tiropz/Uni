@@ -24,10 +24,9 @@ public class Window extends JFrame {
         this.setLayout(new BorderLayout());
         // JFrame window = new JFrame("Game");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBounds(0, 0, 1000, 1020);
         this.getContentPane().setBackground(Color.gray);
-        this.add(map, BorderLayout.NORTH);
-        this.add(status, BorderLayout.SOUTH);
+        this.add(map, BorderLayout.PAGE_START);
+        this.add(status, BorderLayout.PAGE_END);
         this.pack();
         // this.getContentPane().add(this.groupPanel, BorderLayout.CENTER);
         this.setVisible(true);
