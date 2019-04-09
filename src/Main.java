@@ -13,13 +13,6 @@ import java.io.FileReader;
 
 public class Main extends JFrame {
 
-    public Main(){
-
-
-
-        this.setVisible(true);
-    }
-
     public static void main(String[] args) {
         Gson gson = new Gson();
         Player mainChar = null;
@@ -32,12 +25,17 @@ public class Main extends JFrame {
             MenuInfo Info = menu.showInfo();
             JOptionPane jop = new JOptionPane();
             jop.showMessageDialog(null, Info.toString(), "Informations personnage", JOptionPane.INFORMATION_MESSAGE);
-            mainChar = new Player(3, 4);
+            BufferedReader br = null;
+            try {
+                br = new BufferedReader(
+                        new FileReader("mainChar.json"));
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+            mainChar = gson.fromJson(br, Player.class);
         }
 
         Window window = new Window("Uni");
-
-
         Game game = new Game(window, mainChar);
         Keyboard keyboard = new Keyboard(game);
         Mouse mouse = new Mouse(game);

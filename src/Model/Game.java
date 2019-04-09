@@ -24,7 +24,6 @@ public class Game implements DeletableObserver {
         this.window = window;
         size = window.getMapSize();
         // Creating one Player at position (1,1)
-        Player mainChar = new Player(10, 10);
         objects.add(mainChar);
         players.add(mainChar);
         window.setPlayer(mainChar);
