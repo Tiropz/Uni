@@ -15,7 +15,7 @@ import Controller.Mouse;
 
 public class Window extends JFrame {
 
-    private Map map = new Map(1);
+    private Map map = new Map(2);
     private Status status = new Status();
 
     public Window(String title) {
