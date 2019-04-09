@@ -16,21 +16,22 @@ import Controller.Mouse;
 
 public class Map extends JPanel {
     private ArrayList<GameObject> objects = null;
-    public final int MAP_SIZE = 25;
+    public final int MAP_WIDTH = 75;
+    public final int MAP_HEIGHT = 40;
     private int BLOC_SIZE = 20;
 
     public Map() {
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.setPreferredSize(new Dimension(MAP_SIZE*BLOC_SIZE, MAP_SIZE*BLOC_SIZE));
+        this.setPreferredSize(new Dimension(100, 500));
         this.setBackground(Color.GRAY);
         this.setOpaque(true);
 
     }
 
     public void paint(Graphics g) {
-        for (int i = 0; i < MAP_SIZE; i++) {
-            for (int j = 0; j < MAP_SIZE; j++) {
+        for (int i = 0; i < MAP_WIDTH; i++) {
+            for (int j = 0; j < MAP_WIDTH; j++) {
                 int x = i;
                 int y = j;
                 g.setColor(Color.LIGHT_GRAY);

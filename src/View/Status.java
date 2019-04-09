@@ -15,28 +15,16 @@ public class Status extends JPanel {
     private int AVATAR_SIZE = 100;
 
     public Status() {
-        this.setPreferredSize(new Dimension(450, 400));
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setPreferredSize(new Dimension(450, 200));
+        this.setBackground(Color.BLACK);
         this.setOpaque(true);
     }
 
     public void paint(Graphics g) {
         super.paintComponent(g);
         // draw avatar
-        g.setColor(Color.BLUE);
-        g.fillRect(150, 25, AVATAR_SIZE, AVATAR_SIZE);
 
-        // bars
-        // Energy
-        g.setColor(Color.BLACK);
-        g.drawString("Energy", 0, 200);
-        g.setColor(Color.RED);
-        g.fillRect(0, 200, BAR_LENGTH, BAR_WIDTH);
-        g.setColor(Color.GREEN);
-        int length_ok = (int) Math.round(BAR_LENGTH*p.getEnergy());
-        g.fillRect(0, 200, length_ok, BAR_WIDTH);
     }
-
     public void redraw() {
         this.repaint();
     }

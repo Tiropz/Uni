@@ -34,13 +34,13 @@ public class Window extends JFrame {
 
     public void setGameObjects(ArrayList<GameObject> objects) {
         this.map.setObjects(objects);
-        this.map.updateUI();
+        this.map.redraw();
     }
 
     public void update() {
 
-        this.status.updateUI();
-        this.map.updateUI();
+        this.status.redraw();
+        this.map.redraw();
     }
 
     public void setKeyListener(KeyListener keyboard) {
@@ -49,7 +49,7 @@ public class Window extends JFrame {
 
 
     public int getMapSize() {
-        return map.MAP_SIZE;
+        return 500;
     }
 
     public void setPlayer(Player p) {
