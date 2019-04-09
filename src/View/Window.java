@@ -12,28 +12,19 @@ import javax.swing.JPanel;
 
 import Controller.Mouse;
 
-public class Window extends JFrame {
+public class Window {
     private Map map = new Map();
 
     private Status status = new Status();
     GridBagConstraints gc = new GridBagConstraints();
     public Window(String title) {
-        super(title);
-        this.setLayout(new GridBagLayout());
-        gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.ipady = 25*20;
-        gc.ipadx = 25*20;
-        gc.weightx = 0.0;
-        gc.gridx = 0;
-        gc.gridy = 0;
-        this.add(map,gc);
-        gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.weightx = 0;
-        gc.gridx = 0;
-        gc.gridy = 1;
-        this.add(status,gc);
-        this.pack();
-        this.setVisible(true);
+        JFrame window = new JFrame("Uni");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setBounds(0, 0, 1200, 758);
+        window.getContentPane().setBackground(Color.gray);
+        window.getContentPane().add(this.map);
+        window.setVisible(true);
+
     }
 
     public void setGameObjects(ArrayList<GameObject> objects) {

@@ -32,9 +32,6 @@ public class Keyboard implements KeyListener {
          case KeyEvent.VK_SPACE:
              game.action();
              break;
-         case KeyEvent.VK_Q:
-             game.stop();
-             break;
          case KeyEvent.VK_T:
              game.tirePlayer();
              break;

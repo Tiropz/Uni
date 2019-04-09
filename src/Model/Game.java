@@ -114,9 +114,6 @@ public class Game implements DeletableObserver {
         
     }
 
-	public void stop() {
-		window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
-	}
 
 
 	public void sendPlayer(int x, int y) {
