@@ -3,9 +3,7 @@ package View;
 import Model.Directable;
 import Model.GameObject;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -15,12 +13,14 @@ import javax.swing.JPanel;
 import Controller.Mouse;
 
 public class Map extends JPanel {
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private ArrayList<GameObject> objects = null;
     public final int MAP_WIDTH = 65;
     public final int MAP_HEIGHT = 40;
     private int BLOC_SIZE = 20;
 
     public Map() {
+        System.out.println(screenSize.getWidth());
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(100, 500));
