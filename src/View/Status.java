@@ -15,7 +15,7 @@ public class Status extends JPanel {
     private int AVATAR_SIZE = 100;
 
     public Status() {
-        this.setPreferredSize(new Dimension(450, 200));
+        this.setPreferredSize(new Dimension(450, 100));
         this.setBackground(Color.BLACK);
         this.setOpaque(true);
     }

@@ -15,10 +15,11 @@ import Controller.Mouse;
 
 public class Window extends JFrame {
 
-    private Map map = new Map();
+    private Map map = new Map(1);
     private Status status = new Status();
 
     public Window(String title) {
+
         super(title);
         this.setLayout(new BorderLayout());
         // JFrame window = new JFrame("Game");
@@ -32,9 +33,8 @@ public class Window extends JFrame {
         this.setVisible(true);
     }
 
-    public void setGameObjects(ArrayList<GameObject> objects) {
-        this.map.setObjects(objects);
-        this.map.redraw();
+    public ArrayList<GameObject> getObjects(Integer wm){
+        return this.map.getObjects(wm);
     }
 
     public void update() {
@@ -47,9 +47,12 @@ public class Window extends JFrame {
         this.map.addKeyListener(keyboard);
     }
 
-
+    public void setGameObjects(ArrayList<GameObject> objects) {
+        this.map.setObjects(objects);
+        this.map.redraw();
+    }
     public int getMapSize() {
-        return 500;
+        return map.MAP_WIDTH;
     }
 
     public void setPlayer(Player p) {

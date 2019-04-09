@@ -15,24 +15,42 @@ import Controller.Mouse;
 
 public class Map extends JPanel {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private ArrayList<GameObject> objects = null;
+    private ArrayList<GameObject> objects = new ArrayList<GameObject>();
     public final int MAP_WIDTH = 65;
+    public int width_screen;
+    public int height_screen;
     public final int MAP_HEIGHT = 40;
-    private int BLOC_SIZE = 20;
+    private int BLOC_SIZE;
+    private int test = 0;
+    private int y_blocks;
+    private int x_middle;
+    private int x_blocks;
+    private ArrayList<GameObject> mapObjects;
+    DesignMap actualMap;
 
-    public Map() {
-        System.out.println(screenSize.getWidth());
+    public Map(Integer wm) {
+        width_screen = (int) screenSize.getWidth();
+        height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.setPreferredSize(new Dimension(100, 500));
+        this.setPreferredSize(new Dimension(width_screen, 2*height_screen/3));
         this.setBackground(Color.GRAY);
         this.setOpaque(true);
 
+        switch (wm) {
+            case 1:
+                actualMap = new DesignMap(1);
+        }
+        this.y_blocks = actualMap.y_blocks;
+        this.x_blocks = actualMap.x_blocks;
+        x_middle = (int)(Math.round(3*height_screen/(5*y_blocks)));
+        System.out.println(screenSize.getWidth());
     }
 
-    public void paint(Graphics g, ) {
-        for (int i = 10; i < 37; i++) {
-            for (int j = 3; j < 22; j++) {
+    public void paint(Graphics g) {
+        BLOC_SIZE = (int)(Math.round(3*height_screen/(5*y_blocks)));
+        for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2); i++) {
+            for (int j = 1; j < y_blocks+1; j++) {
                 int x = i;
                 int y = j;
                 g.setColor(Color.LIGHT_GRAY);
@@ -95,7 +113,12 @@ public class Map extends JPanel {
     }
 
     public void setObjects(ArrayList<GameObject> objects) {
+
         this.objects = objects;
+    }
+    public ArrayList<GameObject> getObjects(Integer wm){
+        actualMap = new DesignMap(wm);
+        return this.actualMap.getObjects();
     }
 
     public void redraw() {

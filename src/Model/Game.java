@@ -16,21 +16,24 @@ public class Game implements DeletableObserver {
     private Player active_player = null;
 
     private Window window;
-    private int size;
-    // private int bombTimer = 3000;
-    private int numberOfBreakableBlocks = 40;
 
     public Game(Window window, Player mainChar) {
         this.window = window;
-        size = window.getMapSize();
         // Creating one Player at position (1,1)
         objects.add(mainChar);
         players.add(mainChar);
         window.setPlayer(mainChar);
         active_player = mainChar;
-
+        ArrayList<GameObject> objectList = window.getObjects(1);
         // Map building
-
+        for (int i = 0; i < objectList.size(); i++) {
+            objects.add(objectList.get(i));
+            // use currInstance
+        }
+        for (int i = 0; i < objects.size(); i++) {
+            System.out.println(objects.get(i));
+            // use currInstance
+        }
         window.setGameObjects(this.getGameObjects());
         notifyView();
     }
