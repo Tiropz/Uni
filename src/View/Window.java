@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import Controller.Mouse;
 
 public class Window extends JFrame {
-
+    Player mainChar;
     private Map map = new Map(2);
-    private Status status = new Status();
+    private Status status = new Status(mainChar);
 
     public Window(String title) {
 
@@ -49,6 +49,9 @@ public class Window extends JFrame {
     public void setGameObjects(ArrayList<GameObject> objects) {
         this.map.setObjects(objects);
         this.map.redraw();
+    }
+    public void setChar(Player mainChar){
+        this.status.redraw();
     }
     public int getMapSize() {
         return map.MAP_WIDTH;

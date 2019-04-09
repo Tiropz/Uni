@@ -55,7 +55,7 @@ public class Player extends GameObject implements Directable {
     }
     
     public double getEnergy() {
-    	return energy/100.0;
+    	return energy;
     }
 
 	public void tire() {
