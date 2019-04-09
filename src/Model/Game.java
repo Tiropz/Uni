@@ -30,25 +30,19 @@ public class Game implements DeletableObserver {
         active_player = mainChar;
 
         // Map building
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < 65; i++) {
             objects.add(new BlockUnbreakable(i, 0));
-            objects.add(new BlockUnbreakable(0, i));
-            objects.add(new BlockUnbreakable(i, size - 1));
-            objects.add(new BlockUnbreakable(size - 1, i));
+            objects.add(new BlockUnbreakable(i, 24));
         }
-        Random rand = new Random();
-        for (int i = 0; i < numberOfBreakableBlocks; i++) {
-            int x = rand.nextInt(size-4) + 2;
-            int y = rand.nextInt(size-4) + 2;
-            int lifepoints = rand.nextInt(5) + 1;
-            BlockBreakable block = new BlockBreakable(x, y, lifepoints);
-            block.attachDeletable(this);
-            objects.add(block);
+        for (int j = 0; j < 40; j++){
+            objects.add(new BlockUnbreakable(0, j));
+            objects.add(new BlockUnbreakable(64,j));
         }
-
         window.setGameObjects(this.getGameObjects());
         notifyView();
     }
+
+
 
 
     public void movePlayer(int x, int y) {

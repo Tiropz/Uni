@@ -16,7 +16,7 @@ import Controller.Mouse;
 
 public class Map extends JPanel {
     private ArrayList<GameObject> objects = null;
-    public final int MAP_WIDTH = 75;
+    public final int MAP_WIDTH = 65;
     public final int MAP_HEIGHT = 40;
     private int BLOC_SIZE = 20;
 
@@ -31,7 +31,7 @@ public class Map extends JPanel {
 
     public void paint(Graphics g) {
         for (int i = 0; i < MAP_WIDTH; i++) {
-            for (int j = 0; j < MAP_WIDTH; j++) {
+            for (int j = 0; j < MAP_HEIGHT; j++) {
                 int x = i;
                 int y = j;
                 g.setColor(Color.LIGHT_GRAY);
