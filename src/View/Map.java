@@ -3,7 +3,9 @@ package View;
 import Model.Directable;
 import Model.GameObject;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -21,6 +23,9 @@ public class Map extends JPanel {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(MAP_SIZE*BLOC_SIZE, MAP_SIZE*BLOC_SIZE));
+        this.setBackground(Color.GRAY);
+        this.setOpaque(true);
+
     }
 
     public void paint(Graphics g) {

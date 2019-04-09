@@ -3,7 +3,8 @@ package View;
 import Model.GameObject;
 import Model.Player;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
@@ -12,41 +13,34 @@ import javax.swing.JPanel;
 
 import Controller.Mouse;
 
-import static java.awt.GridBagConstraints.BOTH;
-import static java.awt.GridBagConstraints.HORIZONTAL;
+public class Window extends JFrame {
 
-public class Window {
     private Map map = new Map();
-
     private Status status = new Status();
-    private JPanel groupPanel = new JPanel(new GridBagLayout());
-    GridBagConstraints c = new GridBagConstraints();
-    public Window(String title) {
-        JFrame window = new JFrame("Uni");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setBounds(0, 0, 1200, 1000);
-        window.getContentPane().setBackground(Color.gray);
-        c.fill = BOTH;
-        c.gridy = 0;
-        c.gridx = 0;
-        groupPanel.add(this.map, c);
-        c.fill = HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 1;
-        groupPanel.add(this.status, c);
-        window.add(this.groupPanel);
-        window.setVisible(true);
 
+    public Window(String title) {
+        super(title);
+        this.setLayout(new BorderLayout());
+        // JFrame window = new JFrame("Game");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setBounds(0, 0, 1000, 1020);
+        this.getContentPane().setBackground(Color.gray);
+        this.add(map, BorderLayout.NORTH);
+        this.add(status, BorderLayout.SOUTH);
+        this.pack();
+        // this.getContentPane().add(this.groupPanel, BorderLayout.CENTER);
+        this.setVisible(true);
     }
 
     public void setGameObjects(ArrayList<GameObject> objects) {
         this.map.setObjects(objects);
-        this.map.redraw();
+        this.map.updateUI();
     }
 
     public void update() {
-        this.map.redraw();
-        this.status.redraw();
+
+        this.status.updateUI();
+        this.map.updateUI();
     }
 
     public void setKeyListener(KeyListener keyboard) {
