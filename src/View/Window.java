@@ -28,7 +28,7 @@ public class Window extends JFrame {
         gc.gridy = 0;
         this.add(map,gc);
         gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.weightx = 0.0;
+        gc.weightx = 0;
         gc.gridx = 0;
         gc.gridy = 1;
         this.add(status,gc);
