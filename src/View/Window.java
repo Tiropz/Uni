@@ -27,7 +27,11 @@ public class Window extends JFrame {
         gc.gridx = 0;
         gc.gridy = 0;
         this.add(map,gc);
-       // this.add(status,gc);
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.weightx = 0.0;
+        gc.gridx = 0;
+        gc.gridy = 1;
+        this.add(status,gc);
         this.pack();
         this.setVisible(true);
     }
@@ -39,7 +43,7 @@ public class Window extends JFrame {
 
     public void update() {
         this.map.redraw();
-    //    this.status.redraw();
+        this.status.redraw();
     }
 
     public void setKeyListener(KeyListener keyboard) {
