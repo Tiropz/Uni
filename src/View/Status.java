@@ -28,12 +28,12 @@ public class Status extends JPanel {
         // bars
         // Energy
         g.setColor(Color.BLACK);
-        g.drawString("Energy", 0, 200);
+        g.drawString("Energy", 0, 100);
         g.setColor(Color.RED);
-        g.fillRect(0, 200, BAR_LENGTH, BAR_WIDTH);
+        g.fillRect(0, 100, BAR_LENGTH, BAR_WIDTH);
         g.setColor(Color.GREEN);
         int length_ok = (int) Math.round(BAR_LENGTH*p.getEnergy());
-        g.fillRect(0, 200, length_ok, BAR_WIDTH);
+        g.fillRect(0, 100, length_ok, BAR_WIDTH);
     }
 
     public void redraw() {
