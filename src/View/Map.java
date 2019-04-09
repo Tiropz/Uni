@@ -15,38 +15,42 @@ import Controller.Mouse;
 
 public class Map extends JPanel {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public double height_screen;
-    public double width_screen;
-    private ArrayList<GameObject> objects = null;
+    private ArrayList<GameObject> objects = new ArrayList<GameObject>();
     public final int MAP_WIDTH = 65;
-    public final int MAP_HEIGHT = 27;
+    public int width_screen;
+    public int height_screen;
+    public final int MAP_HEIGHT = 40;
     private int BLOC_SIZE;
-    public int valeur_moyenne_x;
-    public int nombre_de_blocs_y = 20;
+    private int test = 0;
+    private int y_blocks;
+    private int x_middle;
+    private int x_blocks;
+    private ArrayList<GameObject> mapObjects;
+    DesignMap actualMap;
 
-    public Map() {
-        width_screen = screenSize.getWidth();
-        height_screen = screenSize.getHeight();
-        System.out.println(screenSize.getWidth());
-        System.out.println(screenSize.getHeight());
+    public Map(Integer wm) {
+        width_screen = (int) screenSize.getWidth();
+        height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.setPreferredSize(new Dimension((int)width_screen, (int)(2*height_screen/(3))));
+        this.setPreferredSize(new Dimension(width_screen, 2*height_screen/3));
         this.setBackground(Color.GRAY);
         this.setOpaque(true);
 
+        switch (wm) {
+            case 1:
+                actualMap = new DesignMap(1);
+        }
+        this.y_blocks = actualMap.y_blocks;
+        this.x_blocks = actualMap.x_blocks;
+        x_middle = (int)(Math.round(3*height_screen/(5*y_blocks)));
+        System.out.println(screenSize.getWidth());
     }
 
     public void paint(Graphics g) {
-
-        BLOC_SIZE = (int) (long) (Math.round(3*height_screen/(5*nombre_de_blocs_y)));
-        valeur_moyenne_x = (int) (long)((Math.round(width_screen/BLOC_SIZE))/2);
-        System.out.println(valeur_moyenne_x);
-        System.out.println(BLOC_SIZE);
-
-
-        for (int i = valeur_moyenne_x-13; i < valeur_moyenne_x+14; i++) {
-            for (int j = 1; j < nombre_de_blocs_y+1; j++) {
+        BLOC_SIZE = (int)(Math.round(3*height_screen/(5*y_blocks)));
+        for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+1; i++) {
+            for (int j = 1; j < y_blocks+1; j++) {
                 int x = i;
                 int y = j;
                 g.setColor(Color.LIGHT_GRAY);
@@ -55,22 +59,6 @@ public class Map extends JPanel {
                 g.drawRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE - 2, BLOC_SIZE - 2);
             }
         }
-
-        for (int i = valeur_moyenne_x-13; i < valeur_moyenne_x+14; i++) {
-            objects.add(new BlockUnbreakable(i, 0));
-            objects.add(new BlockUnbreakable(i, nombre_de_blocs_y+1));
-        }
-        for (int j = 0; j < nombre_de_blocs_y; j++){
-            objects.add(new BlockUnbreakable(valeur_moyenne_x-13, j));
-            objects.add(new BlockUnbreakable(valeur_moyenne_x+14,j));
-        }
-        for (int j = 4; j <7; j++){
-            objects.add(new BlockUnbreakable(22, j));
-        }
-        for (int j = 9; j <13; j++){
-            objects.add(new BlockUnbreakable(22, j));
-        }
-
 
         for (GameObject object : this.objects) {
             int x = object.getPosX();
@@ -125,7 +113,12 @@ public class Map extends JPanel {
     }
 
     public void setObjects(ArrayList<GameObject> objects) {
+
         this.objects = objects;
+    }
+    public ArrayList<GameObject> getObjects(Integer wm){
+        actualMap = new DesignMap(wm);
+        return this.actualMap.getObjects();
     }
 
     public void redraw() {
