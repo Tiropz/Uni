@@ -30,13 +30,13 @@ public class Game implements DeletableObserver {
         active_player = mainChar;
 
         // Map building
-        for (int i = 0; i < 65; i++) {
-            objects.add(new BlockUnbreakable(i, 0));
-            objects.add(new BlockUnbreakable(i, 24));
+        for (int i = 10; i < 37; i++) {
+            objects.add(new BlockUnbreakable(i, 3));
+            objects.add(new BlockUnbreakable(i, 22));
         }
-        for (int j = 0; j < 40; j++){
-            objects.add(new BlockUnbreakable(0, j));
-            objects.add(new BlockUnbreakable(64,j));
+        for (int j = 3; j < 22; j++){
+            objects.add(new BlockUnbreakable(10, j));
+            objects.add(new BlockUnbreakable(36,j));
         }
         window.setGameObjects(this.getGameObjects());
         notifyView();
