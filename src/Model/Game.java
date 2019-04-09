@@ -38,6 +38,12 @@ public class Game implements DeletableObserver {
             objects.add(new BlockUnbreakable(10, j));
             objects.add(new BlockUnbreakable(36,j));
         }
+        for (int j = 4; j <7; j++){
+            objects.add(new BlockUnbreakable(22, j));
+        }
+        for (int j = 9; j <13; j++){
+            objects.add(new BlockUnbreakable(22, j));
+        }
         window.setGameObjects(this.getGameObjects());
         notifyView();
     }
