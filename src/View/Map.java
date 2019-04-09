@@ -1,5 +1,6 @@
 package View;
 
+import Model.BlockUnbreakable;
 import Model.Directable;
 import Model.GameObject;
 
@@ -29,9 +30,9 @@ public class Map extends JPanel {
 
     }
 
-    public void paint(Graphics g) {
-        for (int i = 0; i < MAP_WIDTH; i++) {
-            for (int j = 0; j < MAP_HEIGHT; j++) {
+    public void paint(Graphics g, ) {
+        for (int i = 10; i < 37; i++) {
+            for (int j = 3; j < 22; j++) {
                 int x = i;
                 int y = j;
                 g.setColor(Color.LIGHT_GRAY);
