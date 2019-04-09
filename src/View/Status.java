@@ -1,21 +1,20 @@
 package View;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
 import Model.Player;
 
 public class Status extends JPanel {
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private Player p;
     private int BAR_LENGTH = 60;
     private int BAR_WIDTH = 20;
     private int AVATAR_SIZE = 100;
 
     public Status() {
-        this.setPreferredSize(new Dimension(450, 600));
+        this.setPreferredSize(new Dimension((int) screenSize.getWidth(), 200));
         this.setBackground(Color.LIGHT_GRAY);
         this.setOpaque(true);
     }

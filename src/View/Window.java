@@ -16,13 +16,15 @@ public class Window {
     private Map map = new Map();
 
     private Status status = new Status();
-    GridBagConstraints gc = new GridBagConstraints();
+    private JPanel groupPanel = new JPanel(new BorderLayout());
     public Window(String title) {
         JFrame window = new JFrame("Uni");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setBounds(0, 0, 1200, 758);
+        window.setBounds(0, 0, 1200, 1000);
         window.getContentPane().setBackground(Color.gray);
-        window.getContentPane().add(this.map);
+        groupPanel.add(this.map, BorderLayout.NORTH);
+        groupPanel.add(this.status, BorderLayout.SOUTH);
+        window.add(this.groupPanel);
         window.setVisible(true);
 
     }
