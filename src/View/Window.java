@@ -3,8 +3,7 @@ package View;
 import Model.GameObject;
 import Model.Player;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
@@ -14,19 +13,22 @@ import javax.swing.JPanel;
 import Controller.Mouse;
 
 public class Window extends JFrame {
-    private JPanel groupPanel = new JPanel(new BorderLayout());
     private Map map = new Map();
-    private Status status = new Status();
 
+    private Status status = new Status();
+    GridBagConstraints gc = new GridBagConstraints();
     public Window(String title) {
         super(title);
-        // JFrame window = new JFrame("Game");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBounds(0, 0, 1000, 1020);
-        this.getContentPane().setBackground(Color.gray);
-        groupPanel.add(map, BorderLayout.LINE_START);
-        groupPanel.add(status, BorderLayout.LINE_END);
-        this.getContentPane().add(this.groupPanel);
+        this.setLayout(new GridBagLayout());
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.ipady = 25*20;
+        gc.ipadx = 25*20;
+        gc.weightx = 0.0;
+        gc.gridx = 0;
+        gc.gridy = 0;
+        this.add(map,gc);
+       // this.add(status,gc);
+        this.pack();
         this.setVisible(true);
     }
 
@@ -37,16 +39,13 @@ public class Window extends JFrame {
 
     public void update() {
         this.map.redraw();
-        this.status.redraw();
+    //    this.status.redraw();
     }
 
     public void setKeyListener(KeyListener keyboard) {
         this.map.addKeyListener(keyboard);
     }
 
-    public void setMouseListener(Mouse m) {
-        this.map.addMouse(m);
-    }
 
     public int getMapSize() {
         return map.MAP_SIZE;

@@ -40,6 +40,5 @@ public class Main extends JFrame {
         Keyboard keyboard = new Keyboard(game);
         Mouse mouse = new Mouse(game);
         window.setKeyListener(keyboard);
-        window.setMouseListener(mouse);
     }
 }
