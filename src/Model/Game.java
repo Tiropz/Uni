@@ -14,12 +14,14 @@ public class Game implements DeletableObserver {
     private ArrayList<GameObject> objects = new ArrayList<GameObject>();
     private ArrayList<Player> players = new ArrayList<Player>();
     private Player active_player = null;
+    private Player mainChar;
 
     private Window window;
 
     public Game(Window window, Player mainChar) {
         this.window = window;
         // Creating one Player at position (1,1)
+        this.mainChar = mainChar;
         objects.add(mainChar);
         players.add(mainChar);
         window.setPlayer(mainChar);
@@ -35,6 +37,7 @@ public class Game implements DeletableObserver {
             // use currInstance
         }
         window.setGameObjects(this.getGameObjects());
+        window.setChar(this.mainChar);
         notifyView();
     }
 
