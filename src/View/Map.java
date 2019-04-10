@@ -93,7 +93,7 @@ public class Map extends JPanel {
             } else if (color == 2) {
                 g.setColor(Color.BLUE);
             } else if (color == 3) {
-                g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                g.drawImage(frigo, x*2*BLOC_SIZE, y*2*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             } else if (color == 4) {
                 g.setColor(Color.RED);
             } else if (color == 5) {
