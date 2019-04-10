@@ -59,10 +59,10 @@ public class DesignMap {
                     objects.add(new Kitchen((x_middle+(x_blocks/2)-1), j)); //suite cuisine + armoire
                     objects.add(new Kitchen((x_middle+(x_blocks/2)), j));
                 }
-                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1)); //frigo
-                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2));
-                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 2));
-                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 1));
+                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1,3)); //frigo
+                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2,5));
+                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 2, 3));
+                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 1,5));
 
 
 

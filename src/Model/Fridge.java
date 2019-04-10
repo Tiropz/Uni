@@ -17,9 +17,9 @@ public class Fridge extends Block implements Activable {
 
     private static JLabel lblClock = new JLabel("");
     private String time;
-    public Fridge(int x, int y) {
+    public Fridge(int x, int y, int color) {
 
-        super(x, y, 3);
+        super(x, y, color);
     }
 
     @Override
