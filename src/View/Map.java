@@ -65,6 +65,7 @@ public class Map extends JPanel {
 
     public void paint(Graphics g) {
         Image frigo = new ImageIcon("src/Image/frigo_projet.png").getImage();
+        Image sol = new ImageIcon("src/Image/sol_2.jpg").getImage();
 
         this.g = (Graphics2D)g;
 
@@ -73,10 +74,7 @@ public class Map extends JPanel {
             for (int j = 1; j < y_blocks+1; j++) {
                 int x = i;
                 int y = j;
-                g.setColor(Color.LIGHT_GRAY);
-                g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE-1, BLOC_SIZE-1);
-                g.setColor(Color.BLACK);
-                g.drawRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE);
+                g.drawImage(sol,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
         }
 
@@ -93,16 +91,14 @@ public class Map extends JPanel {
             } else if (color == 2) {
                 g.setColor(Color.BLUE);
             } else if (color == 3) {
-                g.drawImage(frigo, x*2*BLOC_SIZE, y*2*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             } else if (color == 4) {
                 g.setColor(Color.RED);
             } else if (color == 5) {
                 g.setColor(Color.ORANGE);
             }
 
-            g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE - 2, BLOC_SIZE - 2);
-            g.setColor(Color.BLACK);
-            g.drawRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE - 2, BLOC_SIZE - 2);
+            g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
             // Decouper en fontions
             if(object instanceof Directable) {
                 int direction = ((Directable) object).getDirection();
