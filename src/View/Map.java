@@ -63,6 +63,9 @@ public class Map extends JPanel {
     }
 
     public void paint(Graphics g) {
+        Image frigo = new ImageIcon("Images/ThePlayer.png").getImage();
+
+
 
         super.paintComponent(g);
         for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+1; i++) {
