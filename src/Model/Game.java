@@ -3,11 +3,15 @@ package Model;
 import View.Window;
 
 import java.awt.event.WindowEvent;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.*;
 import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
+import com.google.gson.Gson;
 import org.omg.CosNaming.IstringHelper;
 
 public class Game implements DeletableObserver {
@@ -15,7 +19,6 @@ public class Game implements DeletableObserver {
     private ArrayList<Player> players = new ArrayList<Player>();
     private Player active_player = null;
     private Player mainChar;
-
     private Window window;
 
     public Game(Window window, Player mainChar) {
@@ -37,8 +40,7 @@ public class Game implements DeletableObserver {
             // use currInstance
         }
         window.setGameObjects(this.getGameObjects());
-        window.setChar(this.mainChar);
-        notifyView();
+        notifyView(this.mainChar);
     }
 
 
@@ -61,13 +63,10 @@ public class Game implements DeletableObserver {
         if (obstacle == false) {
             active_player.move(x, y);
         }
-        notifyView();
+        this.mainChar.hunger -= 0.01;
+        notifyView(this.mainChar);
     }
 
-    public void tirePlayer() {
-    	active_player.tire();
-    	notifyView();
-    }
     public void action() {
         Activable aimedObject = null;
 		for(GameObject object : objects){
@@ -79,26 +78,59 @@ public class Game implements DeletableObserver {
 		}
 		if(aimedObject != null){
 		    aimedObject.activate();
-            notifyView();
+            notifyView(this.mainChar);
 		}
         
     }
+    public void close(){
+        //…
+        JOptionPane jop = new JOptionPane();
+        int option = jop.showConfirmDialog(null, "Voulez-vous quitter et sauvegarder ?", "Quitter", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(option == JOptionPane.OK_OPTION){
+            Gson gson = new Gson();
 
-    private void notifyView() {
-        window.update();
+            //convert the Java object to json
+            String jsonString = gson.toJson(mainChar);
+            //Write JSON String to file
+            FileWriter fileWriter = null;
+            try {
+                fileWriter = new FileWriter("mainChar.json");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fileWriter.write(jsonString);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.window.dispose();
+        }
+
+        // Create a new Gson object
+
+    }
+    private void notifyView(Player actualPlayer) {
+        window.update(actualPlayer);
     }
 
     public ArrayList<GameObject> getGameObjects() {
         return this.objects;
     }
-
+    public Player getPlayer(){
+        return this.mainChar;
+    }
     @Override
     synchronized public void delete(Deletable ps, ArrayList<GameObject> loot) {
         objects.remove(ps);
         if (loot != null) {
             objects.addAll(loot);
         }
-        notifyView();
+        notifyView(this.mainChar);
     }
 
 

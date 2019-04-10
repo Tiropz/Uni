@@ -2,11 +2,13 @@ package Model;
 
 public class Player extends GameObject implements Directable {
 
-    int energy = 100;
     int direction = EAST;  
-
-    public Player(int x, int y, String nom, String sexe, String cheveux, String taille){
+    int energy;
+    double hunger;
+    public Player(int x, int y, String name, String sex, String hair, String height, Integer energy,  Double hunger){
         super(x, y, 2);
+        this.energy = energy;
+        this.hunger = hunger.intValue();
     }
 
     public void move(int X, int Y) {
@@ -53,13 +55,12 @@ public class Player extends GameObject implements Directable {
         }
         return this.posY + delta;
     }
-    
+
     public double getEnergy() {
-    	return energy;
+        return energy;
+    }
+    public double getHunger() {
+        return hunger;
     }
 
-	public void tire() {
-		if (energy > 10)
-			energy -= 10;
-	}
 }

@@ -24,11 +24,12 @@ public class Status extends JPanel {
     private int AVATAR_SIZE = 100;
     private Player mainChar;
     private int energy;
+    private int hunger;
 
     public Status(Player mainChar) {
         width_screen = (int) screenSize.getWidth();
         height_screen = (int) screenSize.getHeight();
-        height_status = 1*height_screen/5;
+        height_status = height_screen/5;
         this.setPreferredSize(new Dimension(width_screen, height_status));
         this.setBackground(Color.LIGHT_GRAY);
         this.setOpaque(true);
@@ -40,20 +41,24 @@ public class Status extends JPanel {
             ex.printStackTrace();
         }
         this.mainChar = gson.fromJson(br, Player.class);
-        this.energy = (int) this.mainChar.getEnergy();
+
     }
 
     public void paint(Graphics g) {
+
+        this.energy = (int) this.mainChar.getEnergy();
+        this.hunger = (int) this.mainChar.getHunger();
         super.paintComponent(g);
         super.paintComponent(g);
         g.setColor(Color.BLACK);
-        g.drawString("Energi74e" +" : " + this.energy, 0, height_status/4);
-        g.drawString("Energie" +" : " + this.energy, 0, height_status/2);
+        g.drawString("Energie" +" : " + this.energy, 0, height_status/4);
+        g.drawString("Faim" +" : " + this.hunger, 0, height_status/2);
         g.drawString("Energie" +" : " + this.energy, 0, 3*height_status/4);
         // draw avatar
 
     }
-    public void redraw() {
+    public void redraw(Player actualPlayer) {
+        this.mainChar = actualPlayer;
         this.repaint();
     }
 

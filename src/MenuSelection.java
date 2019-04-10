@@ -27,8 +27,8 @@ public class MenuSelection extends JDialog {
     private boolean sendData;
     private JLabel nomLabel, sexeLabel, cheveuxLabel, ageLabel, tailleLabel,taille2Label, icon;
     private JRadioButton tranche1, tranche2, tranche3, tranche4;
-    private JComboBox sexe, cheveux;
-    private JTextField nom, taille;
+    private JComboBox sex, hair;
+    private JTextField name, height;
 
     public MenuSelection(JFrame parent, String title, boolean modal){
         super(parent, title, modal);
@@ -58,24 +58,24 @@ public class MenuSelection extends JDialog {
         JPanel panNom = new JPanel();
         panNom.setBackground(Color.white);
         panNom.setPreferredSize(new Dimension(220, 60));
-        nom = new JTextField();
-        nom.setPreferredSize(new Dimension(100, 25));
+        name = new JTextField();
+        name.setPreferredSize(new Dimension(100, 25));
         panNom.setBorder(BorderFactory.createTitledBorder("Nom du personnage"));
         nomLabel = new JLabel("Saisir un nom :");
         panNom.add(nomLabel);
-        panNom.add(nom);
+        panNom.add(name);
 
         //Le sexe
         JPanel panSexe = new JPanel();
         panSexe.setBackground(Color.white);
         panSexe.setPreferredSize(new Dimension(220, 60));
         panSexe.setBorder(BorderFactory.createTitledBorder("Sexe du personnage"));
-        sexe = new JComboBox();
-        sexe.addItem("Masculin");
-        sexe.addItem("Féminin");
+        sex = new JComboBox();
+        sex.addItem("Masculin");
+        sex.addItem("Féminin");
         sexeLabel = new JLabel("Sexe : ");
         panSexe.add(sexeLabel);
-        panSexe.add(sexe);
+        panSexe.add(sex);
 
 
         //La taille
@@ -85,10 +85,10 @@ public class MenuSelection extends JDialog {
         panTaille.setBorder(BorderFactory.createTitledBorder("Taille du personnage"));
         tailleLabel = new JLabel("Taille : ");
         taille2Label = new JLabel(" cm");
-        taille = new JTextField("180");
-        taille.setPreferredSize(new Dimension(90, 25));
+        height = new JTextField("180");
+        height.setPreferredSize(new Dimension(90, 25));
         panTaille.add(tailleLabel);
-        panTaille.add(taille);
+        panTaille.add(height);
         panTaille.add(taille2Label);
 
         //La couleur des cheveux
@@ -96,14 +96,14 @@ public class MenuSelection extends JDialog {
         panCheveux.setBackground(Color.white);
         panCheveux.setPreferredSize(new Dimension(220, 60));
         panCheveux.setBorder(BorderFactory.createTitledBorder("Couleur de cheveux du personnage"));
-        cheveux = new JComboBox();
-        cheveux.addItem("Blond");
-        cheveux.addItem("Brun");
-        cheveux.addItem("Roux");
-        cheveux.addItem("Blanc");
+        hair = new JComboBox();
+        hair.addItem("Blond");
+        hair.addItem("Brun");
+        hair.addItem("Roux");
+        hair.addItem("Blanc");
         cheveuxLabel = new JLabel("Cheveux");
         panCheveux.add(cheveuxLabel);
-        panCheveux.add(cheveux);
+        panCheveux.add(hair);
 
         JPanel content = new JPanel();
         content.setBackground(Color.white);
@@ -118,7 +118,7 @@ public class MenuSelection extends JDialog {
         okBouton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0) {
             /*    Info = new MenuInfo(nom.getText(), (String)sexe.getSelectedItem(), (String)cheveux.getSelectedItem() ,getTaille()); */
-                Player mainChar = new Player(3,4, nom.getText(), (String)sexe.getSelectedItem(), (String)cheveux.getSelectedItem() ,getTaille());
+                Player mainChar = new Player(3,4, name.getText(), (String)sex.getSelectedItem(), (String)hair.getSelectedItem() ,getHeight(), 100, 93.5);
                 // Create a new Gson object
                 Gson gson = new Gson();
 
@@ -144,8 +144,8 @@ public class MenuSelection extends JDialog {
                 setVisible(false);
             }
 
-            public String getTaille(){
-                return (taille.getText().equals("")) ? "180" : taille.getText();
+            public String getHeight(){
+                return (height.getText().equals("")) ? "180" : height.getText();
             }
         });
 
