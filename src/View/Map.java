@@ -34,6 +34,7 @@ public class Map extends JPanel {
     private int y_blocks;
     private int x_middle;
     private int x_blocks;
+    private Graphics2D g;
     private ArrayList<GameObject> mapObjects;
     DesignMap actualMap;
 
@@ -63,9 +64,9 @@ public class Map extends JPanel {
     }
 
     public void paint(Graphics g) {
-        Image frigo = new ImageIcon("Images/ThePlayer.png").getImage();
+        Image frigo = new ImageIcon("src/Image/frigo_projet.png").getImage();
 
-
+        this.g = (Graphics2D)g;
 
         super.paintComponent(g);
         for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+1; i++) {
@@ -73,9 +74,9 @@ public class Map extends JPanel {
                 int x = i;
                 int y = j;
                 g.setColor(Color.LIGHT_GRAY);
-                g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE - 2, BLOC_SIZE - 2);
+                g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE-1, BLOC_SIZE-1);
                 g.setColor(Color.BLACK);
-                g.drawRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE - 2, BLOC_SIZE - 2);
+                g.drawRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE);
             }
         }
 
@@ -91,16 +92,13 @@ public class Map extends JPanel {
             } else if (color == 2) {
                 g.setColor(Color.BLUE);
             } else if (color == 3) {
-                g.setColor(Color.GREEN);
+                g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             } else if (color == 4) {
                 g.setColor(Color.RED);
             } else if (color == 5) {
                 g.setColor(Color.ORANGE);
             }
 
-            g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE - 2, BLOC_SIZE - 2);
-            g.setColor(Color.BLACK);
-            g.drawRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE - 2, BLOC_SIZE - 2);
 
             // Decouper en fontions
             if(object instanceof Directable) {
@@ -126,6 +124,7 @@ public class Map extends JPanel {
 
                 int xCenter = x * BLOC_SIZE + (BLOC_SIZE-2)/2;
                 int yCenter = y * BLOC_SIZE + (BLOC_SIZE-2)/2;
+                g.setColor(Color.BLACK);
                 g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
             }
         }
