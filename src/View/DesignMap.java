@@ -42,105 +42,78 @@ public class DesignMap {
                     objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)-1), j));
                     objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)+1), j));
                 }
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 1));
+                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 1)); //télé
                 objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+2), 1));
 
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 1));
+                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 1)); //mur vertical
                 objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 2));
 
                 for (int i = (x_middle-(x_blocks/2)+8); i < (x_middle+(x_blocks/2)+1); i++) {
-                    objects.add(new BlockUnbreakable(i, 1));
+                    objects.add(new BlockUnbreakable(i, 1)); //cuisine + frigo
                     objects.add(new BlockUnbreakable(i, 2));
                 }
 
                 for (int j = 3; j < 7; j++) {
-                    objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), j));
+                    objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), j)); //suite cuisine + armoire
                     objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), j));
                 }
 
                 for (int i = (x_middle+(x_blocks/2)-2); i < (x_middle+(x_blocks/2)+1); i++) {
-                    objects.add(new BlockUnbreakable(i, 8));
+                    objects.add(new BlockUnbreakable(i, 8)); //mur horizontal à côté en haut de la porte d'enntrée
                 }
 
-                objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 9));
-                objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 10));
 
-                objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 11));
+                objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 11)); //mur horizontal à côté en bas de la porte d'enntrée
                 objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), 11));
 
                 for (int j = 11; j < 15; j++) {
-                    objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-4), j));
+                    objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-4), j)); //lit + mur
                     objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-3), j));
                     objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-5), j));
                 }
 
-                objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-6), 11));
+                objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-6), 11)); //mur chambre
                 objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-7), 11));
 
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)), 11));
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 11));
+                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 11)); //mur salle de douche
 
-                objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 13));
+                objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 13)); //toilettes
                 objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), 13));
                 objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 14));
                 objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), 14));
 
-                /*public class ImagePanel extends JPanel{
-
-                    private BufferedImage image;
-
-                    public ImagePanel() {
-                        try {
-                            image = ImageIO.read(new File(Ima));
-                        } catch (IOException ex) {
-                            // handle exception...
-                        }
-                    }
-
-                    @Override
-                    protected void paintComponent(Graphics g) {
-                        super.paintComponent(g);
-                        g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters
-                    }
-
-                }
-                */
-
-
-                for (int j = 12; j < 15; j++) {
-                    objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-4), j));
-                }
 
 
                 for (int j = 11; j < 15; j++) {
-                    objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)), j));
+                    objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)), j)); //douche+mur
                 }
 
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+4), 14));
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+4), 13));
 
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 14));
+                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+4), 14));
+                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+4), 13)); //armoire chmabre
+
+                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 14)); //douche
                 objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 13));
 
                 for (int j = 11; j < 15; j++) {
-                    objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1)+2, j));
+                    objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1)+2, j)); //mur entre chambre et douche
                 }
 
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 7));
+                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 7)); //canapé horizontal
                 objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+2), 7));
 
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 5));
+                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 5)); //table basse
                 objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 4));
 
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+3), 5));
+                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+3), 5)); //canapé vertical
                 objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+3), 4));
 
                 for (int j = 5; j < 9; j++) {
-                    objects.add(new BlockUnbreakable(((x_middle-(x_blocks/2)+5)), j));
+                    objects.add(new BlockUnbreakable(((x_middle-(x_blocks/2)+5)), j)); //mur entre salon et cuisine
                 }
 
-                for (int j = 6; j < 9; j++) {
-                    objects.add(new BlockUnbreakable(((x_middle-(x_blocks/2)+6)), j));
+                for (int j = 5; j < 9; j++) {
+                    objects.add(new BlockUnbreakable(((x_middle-(x_blocks/2)+6)), j)); //  chaises + table dans cuisine + mur horizontal
                     objects.add(new BlockUnbreakable(((x_middle-(x_blocks/2)+7)), j));
                 }
 
