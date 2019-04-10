@@ -52,12 +52,16 @@ public class DesignMap {
                 objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 2));
 
                 for (int i = (x_middle-(x_blocks/2)+10); i < (x_middle+(x_blocks/2)+1); i++) {
-                    objects.add(new Kitchen(i, 1)); //cuisine
-                    objects.add(new Kitchen(i, 2));
+                    objects.add(new Kitchen(i, 1, i - (x_middle-(x_blocks/2)+10)+1)); //cuisine
+                    objects.add(new Kitchen(i, 2, i - (x_middle-(x_blocks/2)+10)+4));
                 }
-                for (int j = 3; j < 7; j++) {
-                    objects.add(new Kitchen((x_middle+(x_blocks/2)-1), j)); //suite cuisine + armoire
-                    objects.add(new Kitchen((x_middle+(x_blocks/2)), j));
+                for (int j = 3; j < 5; j++) {
+                    objects.add(new Kitchen((x_middle+(x_blocks/2)-1), j, j+4)); //suite cuisine
+                    objects.add(new Kitchen((x_middle+(x_blocks/2)), j, j + 6));
+                    System.out.println(j+4);
+                    System.out.println(j+6);
+
+
                 }
                 objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1,1)); //frigo
                 objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2,4));

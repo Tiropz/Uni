@@ -5,8 +5,8 @@ import javax.swing.*;
 public class Kitchen extends Block implements Activable {
     private static JLabel lblClock = new JLabel("");
     private String time;
-    public Kitchen(int x, int y) {
-        super(x, y, 0);
+    public Kitchen(int x, int y, int color) {
+        super(x, y, color);
     }
 
     @Override

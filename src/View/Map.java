@@ -1,9 +1,6 @@
 package View;
 
-import Model.BlockUnbreakable;
-import Model.Directable;
-import Model.Fridge;
-import Model.GameObject;
+import Model.*;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -91,7 +88,11 @@ public class Map extends JPanel {
                 Image frigo = new ImageIcon("src/Image/frigo_"+object.getColor()+".png").getImage();
                 System.out.println("src/Image/frigo_"+object.getColor()+".png");
                 g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            } else if (color == 4) {
+            } else if (object instanceof Kitchen){
+                Image kitchen = new ImageIcon("src/Image/kitchen_"+object.getColor()+".png").getImage();
+                System.out.println("src/Image/kitchen_"+object.getColor()+".png");
+                g.drawImage(kitchen, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+            }else if (color == 4) {
                 Image frigo = new ImageIcon("src/Image/frigo_h_d.png").getImage();
                 g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             } else if (color == 5) {
