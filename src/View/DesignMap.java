@@ -2,7 +2,14 @@ package View;
 
 import Model.BlockUnbreakable;
 import Model.GameObject;
-
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -77,6 +84,28 @@ public class DesignMap {
                 objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), 13));
                 objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 14));
                 objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), 14));
+
+                /*public class ImagePanel extends JPanel{
+
+                    private BufferedImage image;
+
+                    public ImagePanel() {
+                        try {
+                            image = ImageIO.read(new File(Ima));
+                        } catch (IOException ex) {
+                            // handle exception...
+                        }
+                    }
+
+                    @Override
+                    protected void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters
+                    }
+
+                }
+                */
+
 
                 for (int j = 12; j < 15; j++) {
                     objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-4), j));
