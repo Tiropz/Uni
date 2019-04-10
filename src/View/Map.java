@@ -4,6 +4,15 @@ import Model.BlockUnbreakable;
 import Model.Directable;
 import Model.GameObject;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -54,6 +63,7 @@ public class Map extends JPanel {
     }
 
     public void paint(Graphics g) {
+        super.paintComponent(g);
         for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+1; i++) {
             for (int j = 1; j < y_blocks+1; j++) {
                 int x = i;
