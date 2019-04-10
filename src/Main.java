@@ -33,6 +33,7 @@ public class Main extends JFrame {
                 ex.printStackTrace();
             }
             mainChar = gson.fromJson(br, Player.class);
+
         }
 
         Window window = new Window("Uni");

@@ -6,7 +6,7 @@ public class Kitchen extends Block implements Activable {
     private static JLabel lblClock = new JLabel("");
     private String time;
     public Kitchen(int x, int y) {
-        super(x, y, 4);
+        super(x, y, 0);
     }
 
     @Override

@@ -2,6 +2,7 @@ package View;
 
 import Model.BlockUnbreakable;
 import Model.Directable;
+import Model.Fridge;
 import Model.GameObject;
 
 import java.awt.Color;
@@ -64,7 +65,7 @@ public class Map extends JPanel {
     }
 
     public void paint(Graphics g) {
-        Image frigo = new ImageIcon("src/Image/frigo_projet.png").getImage();
+
         Image sol = new ImageIcon("src/Image/sol_2.jpg").getImage();
 
         this.g = (Graphics2D)g;
@@ -83,22 +84,24 @@ public class Map extends JPanel {
             int x = object.getPosX();
             int y = object.getPosY();
             int color = object.getColor();
-
             if (color == 0) {
                 g.setColor(Color.DARK_GRAY);
-            } else if (color == 1) {
-                g.setColor(Color.GRAY);
-            } else if (color == 2) {
-                g.setColor(Color.BLUE);
-            } else if (color == 3) {
+            }  else if (object instanceof Fridge) {
+                Image frigo = new ImageIcon("src/Image/frigo_"+object.getColor()+".png").getImage();
+                System.out.println("src/Image/frigo_"+object.getColor()+".png");
                 g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             } else if (color == 4) {
-                g.setColor(Color.RED);
+                Image frigo = new ImageIcon("src/Image/frigo_h_d.png").getImage();
+                g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             } else if (color == 5) {
-                g.setColor(Color.ORANGE);
+                Image frigo = new ImageIcon("src/Image/frigo_b_g.png").getImage();
+                g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+            }else if (color == 6) {
+                Image frigo = new ImageIcon("src/Image/frigo_b_d.png").getImage();
+                g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
 
-            g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
+            //g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
             // Decouper en fontions
             if(object instanceof Directable) {
                 int direction = ((Directable) object).getDirection();
