@@ -25,6 +25,7 @@ public class Status extends JPanel {
     private Player mainChar;
     private int energy;
     private int hunger;
+    private int bladder;
 
     public Status(Player mainChar) {
         width_screen = (int) screenSize.getWidth();
@@ -48,12 +49,13 @@ public class Status extends JPanel {
 
         this.energy = (int) this.mainChar.getEnergy();
         this.hunger = (int) this.mainChar.getHunger();
+        this.bladder = (int) this.mainChar.getBladder();
         super.paintComponent(g);
         super.paintComponent(g);
         g.setColor(Color.BLACK);
         g.drawString("Energie" +" : " + this.energy, 0, height_status/4);
         g.drawString("Faim" +" : " + this.hunger, 0, height_status/2);
-        g.drawString("Energie" +" : " + this.energy, 0, 3*height_status/4);
+        g.drawString("Vessie" +" : " + this.bladder, 0, 3*height_status/4);
         // draw avatar
 
     }

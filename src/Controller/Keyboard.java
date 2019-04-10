@@ -30,7 +30,11 @@ public class Keyboard implements KeyListener {
             game.movePlayer(0, -1);
              break;
          case KeyEvent.VK_SPACE:
-             game.action();
+             try {
+                 game.action();
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+             }
              break;
              case  KeyEvent.VK_Q:
              game.close();

@@ -100,7 +100,9 @@ public class Map extends JPanel {
                 g.setColor(Color.ORANGE);
             }
 
-
+            g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE - 2, BLOC_SIZE - 2);
+            g.setColor(Color.BLACK);
+            g.drawRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE - 2, BLOC_SIZE - 2);
             // Decouper en fontions
             if(object instanceof Directable) {
                 int direction = ((Directable) object).getDirection();

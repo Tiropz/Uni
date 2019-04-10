@@ -63,11 +63,12 @@ public class Game implements DeletableObserver {
         if (obstacle == false) {
             active_player.move(x, y);
         }
-        this.mainChar.hunger -= 0.01;
+        this.mainChar.hunger -= 0.1;
+        this.mainChar.energy -= 0.01;
         notifyView(this.mainChar);
     }
 
-    public void action() {
+    public void action() throws InterruptedException {
         Activable aimedObject = null;
 		for(GameObject object : objects){
 			if(object.isAtPosition(active_player.getFrontX(),active_player.getFrontY())){

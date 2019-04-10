@@ -2,13 +2,27 @@ package Model;
 
 public class Player extends GameObject implements Directable {
 
-    int direction = EAST;  
-    int energy;
+
+    int direction = EAST;
+    String name;
+    String sex;
+    String hair;
+    String height;
+    double energy;
     double hunger;
-    public Player(int x, int y, String name, String sex, String hair, String height, Integer energy,  Double hunger){
+    double bladder;
+    int nbreFood;
+
+    public Player(int x, int y, String name, String sex, String hair, String height, Double energy,  Double hunger, Double bladder, int nbreFood){
         super(x, y, 2);
+        this.name = name;
+        this.sex = sex;
+        this.hair = hair;
+        this.height = height;
         this.energy = energy;
-        this.hunger = hunger.intValue();
+        this.hunger = hunger;
+        this.bladder = bladder;
+        this.nbreFood = nbreFood;
     }
 
     public void move(int X, int Y) {
@@ -61,6 +75,9 @@ public class Player extends GameObject implements Directable {
     }
     public double getHunger() {
         return hunger;
+    }
+    public double getBladder() {
+        return bladder;
     }
 
 }
