@@ -118,7 +118,7 @@ public class MenuSelection extends JDialog {
         okBouton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0) {
                   Info = new MenuInfo(name.getText(), (String)sex.getSelectedItem(), (String)hair.getSelectedItem() ,getHeight());
-                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)hair.getSelectedItem() ,getHeight(), 100.0, 100.0, 0.0, 5);
+                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)hair.getSelectedItem() ,getHeight(), 100.0, 100.0, 0.0, 5, 100.0);
                 // Create a new Gson object
                 Gson gson = new Gson();
 
