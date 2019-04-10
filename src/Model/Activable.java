@@ -1,6 +1,6 @@
 package Model;
 
 public interface Activable {
-    public void activate();
+    public Player activate(Player mainChar);
 
 }

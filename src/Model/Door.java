@@ -6,8 +6,8 @@ public class Door extends Block implements Activable {
     }
 
     @Override
-    public void activate() {
-
+    public Player activate(Player mainChar) {
+        return mainChar;
     }
 
     @Override

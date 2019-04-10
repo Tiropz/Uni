@@ -11,7 +11,7 @@ public class BlockBreakable extends Block implements Deletable, Activable {
         this.lifepoints = lifepoints; 
     }
     
-    public void activate(){
+    public Player activate(Player mainChar){
         if (lifepoints == 1){
             crush();
         }
@@ -19,6 +19,7 @@ public class BlockBreakable extends Block implements Deletable, Activable {
             lifepoints--;
             this.color = lifepoints + 2; // pour éviter de retourner au gris
         }
+        return mainChar;
     }
 
 

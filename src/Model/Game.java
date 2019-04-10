@@ -77,7 +77,7 @@ public class Game implements DeletableObserver {
 			}
 		}
 		if(aimedObject != null){
-		    aimedObject.activate();
+		    this.mainChar = aimedObject.activate(this.mainChar);
             notifyView(this.mainChar);
 		}
         

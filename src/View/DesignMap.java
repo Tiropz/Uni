@@ -1,6 +1,7 @@
 package View;
 
 import Model.BlockUnbreakable;
+import Model.Fridge;
 import Model.GameObject;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -53,10 +54,10 @@ public class DesignMap {
                     objects.add(new BlockUnbreakable(i, 2));
                 }
 
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+8), 1)); //frigo
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+9), 2));
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+8), 2));
-                objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+9), 1));
+                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1)); //frigo
+                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2));
+                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 2));
+                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 1));
 
 
                 for (int j = 3; j < 7; j++) {
