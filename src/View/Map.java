@@ -80,6 +80,7 @@ public class Map extends JPanel {
         }
 
 
+
         for (GameObject object : this.objects) {
             int x = object.getPosX();
             int y = object.getPosY();
