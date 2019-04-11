@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class StudentRoom extends JPanel implements MapInterface {
+public class Library extends JPanel implements MapInterface {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private ArrayList<GameObject> objects = new ArrayList<GameObject>();
     public int width_screen;
@@ -15,7 +15,7 @@ public class StudentRoom extends JPanel implements MapInterface {
     private int y_blocks;
     private int x_middle;
     private int x_blocks;
-    public StudentRoom() {
+    public Library() {
         this.y_blocks = 14;
         this.x_blocks = 13;
         width_screen = (int) screenSize.getWidth();
@@ -36,7 +36,7 @@ public class StudentRoom extends JPanel implements MapInterface {
 
     public void paint(Graphics g) {
 
-        Image sol = new ImageIcon("src/Image/sol_2.jpg").getImage();
+        Image sol = new ImageIcon("src/Image/table1.png").getImage();
 
 
 

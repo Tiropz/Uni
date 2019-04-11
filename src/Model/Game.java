@@ -1,35 +1,49 @@
 package Model;
 
-import View.Window;
+import View.*;
 
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.KeyListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.*;
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 import com.google.gson.Gson;
-import org.omg.CosNaming.IstringHelper;
 
-public class Game implements DeletableObserver {
+public class Game extends JFrame implements DeletableObserver {
     private ArrayList<GameObject> objects = new ArrayList<GameObject>();
     private ArrayList<Player> players = new ArrayList<Player>();
     private Player active_player = null;
     private Player mainChar;
-    private Window window;
+    private StudentRoom kotMap = new StudentRoom();
+    private Library libraryMap = new Library();
+    private Status status = new Status(mainChar);
+    public MapInterface gamemap;
 
-    public Game(Window window, Player mainChar) {
-        this.window = window;
-        // Creating one Player at position (1,1)
+    public Game(String title, Player mainChar) {
+        super(title);
+        buildMap(libraryMap);
+        this.setLayout(new BorderLayout());
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setBounds(0, 0, 1000, 1020);
+        this.getContentPane().setBackground(Color.gray);
+        this.add((Component) gamemap, BorderLayout.NORTH);
+        this.add(status, BorderLayout.SOUTH);
+        this.pack();
+        // this.getContentPane().add(this.groupPanel, BorderLayout.CENTER);
+        this.setVisible(true);
         this.mainChar = mainChar;
         objects.add(mainChar);
         players.add(mainChar);
-        window.setPlayer(mainChar);
+        this.setPlayer(mainChar);
         active_player = mainChar;
-        ArrayList<GameObject> objectList = window.getObjects(1);
+
+
+    }
+    private void buildMap(MapInterface newmap) {
+        ArrayList<GameObject> objectList = this.getObjects(newmap);
         // Map building
         for (int i = 0; i < objectList.size(); i++) {
             objects.add(objectList.get(i));
@@ -39,13 +53,14 @@ public class Game implements DeletableObserver {
             System.out.println(objects.get(i));
             // use currInstance
         }
-        window.setGameObjects(this.getGameObjects());
-        notifyView(this.mainChar);
+        this.gamemap = newmap;
+        this.setGameObjects(this.objects, newmap);
     }
 
 
-
-
+    public ArrayList<GameObject> getObjects(MapInterface newmap){
+        return newmap.getObjects();
+    }
     public void movePlayer(int x, int y) {
         int nextX = active_player.getPosX() + x;
         int nextY = active_player.getPosY() + y;
@@ -109,14 +124,13 @@ public class Game implements DeletableObserver {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            this.window.dispose();
+            this.dispose();
         }
 
-        // Create a new Gson object
 
     }
     private void notifyView(Player actualPlayer) {
-        window.update(actualPlayer);
+        this.update(actualPlayer);
     }
 
     public ArrayList<GameObject> getGameObjects() {
@@ -134,7 +148,10 @@ public class Game implements DeletableObserver {
         notifyView(this.mainChar);
     }
 
-
+    public void update(Player actualPlayer) {
+        this.status.redraw(actualPlayer);
+        this.gamemap.redraw();
+    }
     public void playerPos() {
         System.out.println(active_player.getPosX() + ":" + active_player.getPosY());
         
@@ -147,5 +164,15 @@ public class Game implements DeletableObserver {
 		t.start();
 	}
 
+    public void setKeyListener(KeyListener keyboard) {
+        this.gamemap.addKeyListener(keyboard);
+    }
 
+    public void setGameObjects(ArrayList<GameObject> objects, MapInterface currentMap) {
+        currentMap.setObjects(objects);
+        currentMap.redraw();
+    }
+    public void setPlayer(Player p) {
+        status.setPlayer(p);
+    }
 }

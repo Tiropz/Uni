@@ -1,8 +1,6 @@
 import Controller.Keyboard;
-import Controller.Mouse;
 import Model.Game;
 import Model.Player;
-import View.Window;
 import com.google.gson.Gson;
 
 import javax.swing.*;
@@ -36,10 +34,8 @@ public class Main extends JFrame {
 
         }
 
-        Window window = new Window("Uni");
-        Game game = new Game(window, mainChar);
+        Game game = new Game("Uni", mainChar);
         Keyboard keyboard = new Keyboard(game);
-        Mouse mouse = new Mouse(game);
-        window.setKeyListener(keyboard);
+        game.setKeyListener(keyboard);
     }
 }
