@@ -25,6 +25,7 @@ public class DesignMap {
     public Integer y_blocks;
     public Integer x_blocks;
     public Integer BLOC_SIZE;
+
     private ArrayList<GameObject> objects = new ArrayList<GameObject>();
     public DesignMap(Integer wm) {
         width_screen = (int) screenSize.getWidth();
@@ -63,10 +64,10 @@ public class DesignMap {
 
 
                 }
-                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1,1)); //frigo
-                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2,4));
-                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 2, 3));
-                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 1,2));
+                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1)); //frigo
+                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2));
+                objects.add(new Fridge((x_middle-(x_blocks/2)+8), 2));
+                objects.add(new Fridge((x_middle-(x_blocks/2)+9), 1));
 
 
 

@@ -35,23 +35,37 @@ public class StudentRoom extends JPanel implements MapInterface {
 
 
     public void paint(Graphics g) {
-
         Image sol = new ImageIcon("src/Image/sol_2.jpg").getImage();
 
 
-
+        Image wall = new ImageIcon("src/Image/wall.jpg").getImage();
         super.paintComponent(g);
+        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+1); i++) {
+            g.setColor(Color.BLACK);
+            g.drawImage(wall,i * BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null );
+            g.drawImage(wall,i * BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+
+        }
+        for (int j = 0; j < y_blocks+2; j++) {
+            g.drawImage(wall,(x_middle-(x_blocks/2)-1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE,null );
+            g.drawImage(wall,(x_middle+(x_blocks/2)+1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE,null );
+
+        }
         for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+1; i++) {
             for (int j = 1; j < y_blocks+1; j++) {
                 int x = i;
                 int y = j;
-                g.drawImage(sol,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+           //     g.drawImage(sol,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                g.setColor(new Color(168,119,90));
+                g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
             }
         }
 
 
         Image frigo = new ImageIcon("src/Image/fridge.png").getImage();
         g.drawImage(frigo, (x_middle-(x_blocks/2)+8)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE*2, BLOC_SIZE*2, null);
+        Image sofa = new ImageIcon("src/Image/sofa.png").getImage();
+        g.drawImage(sofa, (x_middle-(x_blocks/2))*BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE*4, BLOC_SIZE*2, null);
         for (GameObject object : this.objects) {
             int x = object.getPosX();
             int y = object.getPosY();
@@ -69,6 +83,10 @@ public class StudentRoom extends JPanel implements MapInterface {
                 Image kitchen = new ImageIcon("src/Image/kitchen_"+object.getColor()+".png").getImage();
                 System.out.println("src/Image/kitchen_"+object.getColor()+".png");
                 g.drawImage(kitchen, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+            }else if (object instanceof BlockUnbreakable){
+                System.out.println("src/Image/kitchen_"+object.getColor()+".png");
+                g.setColor(Color.white);
+
             }else if (color == 4) {
                 // Image frigo = new ImageIcon("src/Image/frigo_h_d.png").getImage();
                 //  g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
@@ -80,7 +98,7 @@ public class StudentRoom extends JPanel implements MapInterface {
                 //  Image frigo = new ImageIcon("src/Image/frigo_b_d.png").getImage();
                 // g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
-
+         //   g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
             //g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
             // Decouper en fontions
             if(object instanceof Directable) {
@@ -150,10 +168,12 @@ public class StudentRoom extends JPanel implements MapInterface {
 
 
         }
-        objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1,1)); //frigo
-        objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2,4));
-        objects.add(new Fridge((x_middle-(x_blocks/2)+8), 2, 3));
-        objects.add(new Fridge((x_middle-(x_blocks/2)+9), 1,2));
+        objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1)); //frigo
+        objects.add(new Fridge((x_middle-(x_blocks/2)+9), 1));
+        objects.add(new Fridge((x_middle-(x_blocks/2)+8), 2));
+        objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2));
+
+
 
 
 
@@ -199,14 +219,19 @@ public class StudentRoom extends JPanel implements MapInterface {
             objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1)+2, j)); //mur entre chambre et douche
         }
 
-        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 7)); //canapé horizontal
+        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 7)); //table basse
         objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+2), 7));
 
-        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 5)); //table basse
-        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 4));
+        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+3), 5)); //canapé
+        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 5));
+        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+2), 5));
+        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)), 5));
+        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+3), 6)); //canapé
+        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 6));
+        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+2), 6));
+        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)), 6));
 
-        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+3), 5)); //canapé vertical
-        objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+3), 4));
+
 
         for (int j = 5; j < 9; j++) {
             objects.add(new BlockUnbreakable(((x_middle-(x_blocks/2)+5)), j)); //mur entre salon et cuisine

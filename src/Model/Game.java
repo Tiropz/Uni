@@ -24,7 +24,7 @@ public class Game extends JFrame implements DeletableObserver {
 
     public Game(String title, Player mainChar) {
         super(title);
-        buildMap(libraryMap);
+        buildMap(kotMap);
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setBounds(0, 0, 1000, 1020);
