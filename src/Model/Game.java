@@ -42,7 +42,7 @@ public class Game extends JFrame implements DeletableObserver {
 
 
     }
-    private void buildMap(MapInterface newmap) {
+    public void buildMap(MapInterface newmap) {
         ArrayList<GameObject> objectList = this.getObjects(newmap);
         // Map building
         for (int i = 0; i < objectList.size(); i++) {

@@ -29,6 +29,7 @@ public class Fridge extends Block implements Activable {
 
     @Override
     public Player activate(Player mainChar){
+
         JOptionPane jop = new JOptionPane();
         int option = jop.showConfirmDialog(null, "Voulez-vous manger ?\n Il vous reste : " + mainChar.nbreFood + " snacks", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
