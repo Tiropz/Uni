@@ -61,21 +61,21 @@ public class StudentRoom extends JPanel implements MapInterface {
             }
         }
         System.out.println(BLOC_SIZE);
-        System.out.println("Bonjour");
+       // System.out.println("Bonjour");
 
 
-        Image frigo = new ImageIcon("src/Image/frigo_projet.png").getImage();
-        g.drawImage(frigo, (x_middle-(x_blocks/2)+7)*BLOC_SIZE, 15,4*BLOC_SIZE, 3*BLOC_SIZE, null);
-        Image sofa_horizontal = new ImageIcon("src/Image/sofa_1.png").getImage();
+        Image frigo = new ImageIcon("src/Image/fridge.png").getImage();
+        g.drawImage(frigo, (x_middle-(x_blocks/2)+8)*BLOC_SIZE, BLOC_SIZE,2*BLOC_SIZE, 2*BLOC_SIZE, null);
+        Image sofa_horizontal = new ImageIcon("src/Image/sofa.png").getImage();
         g.drawImage(sofa_horizontal, ((x_middle-(x_blocks/2)))*BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE*4, BLOC_SIZE*2, null);
         Image tv = new ImageIcon("src/Image/tv.png").getImage();
         g.drawImage(tv, (x_middle-(x_blocks/2))*BLOC_SIZE, 1*BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, null);
         Image table_basse = new ImageIcon("src/Image/table_basse.png").getImage();
         g.drawImage(table_basse, ((x_middle-(x_blocks/2))+1)*BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         Image plaque_cuisson = new ImageIcon("src/Image/plaque_cuisson.png").getImage();
-        g.drawImage(plaque_cuisson, 825, 30, 124, 80, null);
+        g.drawImage(plaque_cuisson, (x_middle+(x_blocks/2)-2)*BLOC_SIZE, 30, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
         Image évier = new ImageIcon("src/Image/évier.png").getImage();
-        g.drawImage(évier, 857, 100, 120, 85, null);
+        g.drawImage(évier, (x_middle+(x_blocks/2)-1)*BLOC_SIZE, 100, 120, 85, null);
         Image chaise = new ImageIcon("src/Image/chaise_projet.png").getImage();
         g.drawImage(chaise, 680, 187, 52, 52, null);
         g.drawImage(chaise, 718, 187, 52, 52, null);
@@ -183,10 +183,10 @@ public class StudentRoom extends JPanel implements MapInterface {
 
 
         }
-        objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1)); //frigo
-        objects.add(new Fridge((x_middle-(x_blocks/2)+9), 1));
-        objects.add(new Fridge((x_middle-(x_blocks/2)+8), 2));
-        objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2));
+        objects.add(new Door((x_middle-(x_blocks/2)+8), 1)); //frigo
+        objects.add(new Door((x_middle-(x_blocks/2)+9), 1));
+        objects.add(new Door((x_middle-(x_blocks/2)+8), 2));
+        objects.add(new Door((x_middle-(x_blocks/2)+9), 2));
 
 
 

@@ -110,6 +110,7 @@ public class Library extends JPanel implements MapInterface {
                 g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
             }
         }
+        System.out.println("blaaaah");
     }
 
     public void setObjects(ArrayList<GameObject> objects) {

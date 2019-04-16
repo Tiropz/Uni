@@ -20,11 +20,11 @@ public class Game extends JFrame implements DeletableObserver {
     private StudentRoom kotMap = new StudentRoom();
     private Library libraryMap = new Library();
     private Status status = new Status(mainChar);
-    public MapInterface gamemap;
+    public MapInterface gamemap = kotMap;
 
     public Game(String title, Player mainChar) {
         super(title);
-        buildMap(kotMap);
+        buildMap(this.gamemap);
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setBounds(0, 0, 1000, 1020);
@@ -92,6 +92,14 @@ public class Game extends JFrame implements DeletableObserver {
 			    }
 			}
 		}
+		if(aimedObject instanceof Door){
+		  MapInterface changedmap = ((Door) aimedObject).mapChange();
+		  buildMap(changedmap);
+		  System.out.println(this.gamemap);
+		  this.add((Component) changedmap, BorderLayout.NORTH);
+		  this.pack();
+
+        }
 		if(aimedObject != null){
 		    this.mainChar = aimedObject.activate(this.mainChar);
             notifyView(this.mainChar);
