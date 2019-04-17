@@ -55,7 +55,7 @@ public class StudentRoom extends JPanel implements MapInterface {
             for (int j = 1; j < y_blocks+1; j++) {
                 int x = i;
                 int y = j;
-           //     g.drawImage(sol,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                //g.drawImage(sol,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
                 g.setColor(new Color(168,119,90));
                 g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
             }
@@ -64,7 +64,7 @@ public class StudentRoom extends JPanel implements MapInterface {
        // System.out.println("Bonjour");
 
 
-        Image frigo = new ImageIcon("src/Image/fridge.png").getImage();
+        Image frigo = new ImageIcon("src/Image/frigo_projet.png").getImage();
         g.drawImage(frigo, (x_middle-(x_blocks/2)+8)*BLOC_SIZE, BLOC_SIZE,2*BLOC_SIZE, 2*BLOC_SIZE, null);
         Image sofa_horizontal = new ImageIcon("src/Image/sofa.png").getImage();
         g.drawImage(sofa_horizontal, ((x_middle-(x_blocks/2)))*BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE*4, BLOC_SIZE*2, null);
@@ -73,14 +73,33 @@ public class StudentRoom extends JPanel implements MapInterface {
         Image table_basse = new ImageIcon("src/Image/table_basse.png").getImage();
         g.drawImage(table_basse, ((x_middle-(x_blocks/2))+1)*BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         Image plaque_cuisson = new ImageIcon("src/Image/plaque_cuisson.png").getImage();
-        g.drawImage(plaque_cuisson, (x_middle+(x_blocks/2)-2)*BLOC_SIZE, 30, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
+        g.drawImage(plaque_cuisson, (x_middle+(x_blocks/2)-2)*BLOC_SIZE, 1*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
         Image évier = new ImageIcon("src/Image/évier.png").getImage();
-        g.drawImage(évier, (x_middle+(x_blocks/2)-1)*BLOC_SIZE, 100, 120, 85, null);
+        g.drawImage(évier, (x_middle+(x_blocks/2)-1)*BLOC_SIZE, 3 *BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
         Image chaise = new ImageIcon("src/Image/chaise_projet.png").getImage();
-        g.drawImage(chaise, 680, 187, 52, 52, null);
-        g.drawImage(chaise, 718, 187, 52, 52, null);
+        g.drawImage(chaise, (x_middle-(x_blocks/2)+7)*BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        g.drawImage(chaise, (x_middle-(x_blocks/2)+6)*BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         Image table_cuisine = new ImageIcon("src/Image/table_cuisine.png").getImage();
-        g.drawImage(table_cuisine, 690, 228, 64, 75, null);
+        g.drawImage(table_cuisine, (x_middle-(x_blocks/2)+6)*BLOC_SIZE, 6*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
+        Image douche = new ImageIcon("src/Image/douche.png").getImage();
+        g.drawImage(douche, (x_middle-(x_blocks/2)+11)*BLOC_SIZE, 13*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
+        Image lavabot = new ImageIcon("src/Image/lavabot_projet.png").getImage();
+        g.drawImage(lavabot, (x_middle-(x_blocks/2)+10)*BLOC_SIZE, 14*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        Image lit = new ImageIcon("src/Image/lit_projet.png").getImage();
+        g.drawImage(lit, (x_middle-(x_blocks/2)+7)*BLOC_SIZE, 12*BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE, null);
+        Image toilettes = new ImageIcon("src/Image/toilettes.png").getImage();
+        g.drawImage(toilettes, (x_middle-(x_blocks/2))*BLOC_SIZE, 13*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
+        Image lavabot2 = new ImageIcon("src/Image/lavabot_projet2.png").getImage();
+        g.drawImage(lavabot2, (x_middle-(x_blocks/2))*BLOC_SIZE, 12*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        Image armoire = new ImageIcon("src/Image/armoire.png").getImage();
+        g.drawImage(armoire, (x_middle-(x_blocks/2)+4)*BLOC_SIZE, 13*BLOC_SIZE, BLOC_SIZE, 2*BLOC_SIZE, null);
+        Image chaise2 = new ImageIcon("src/Image/chaise_projet2.png").getImage();
+        g.drawImage(chaise2, (x_middle-(x_blocks/2)+1)*BLOC_SIZE, 9*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        Image bureau = new ImageIcon("src/Image/bureau_projet.png").getImage();
+        g.drawImage(bureau, (x_middle-(x_blocks/2)+1)*BLOC_SIZE, 8*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+
+
+
 
 
 
@@ -112,8 +131,8 @@ public class StudentRoom extends JPanel implements MapInterface {
                 g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
             }*/
 
-            //g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
-            //g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
+            g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
+            g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
             // Decouper en fontions
             if(object instanceof Directable) {
                 int direction = ((Directable) object).getDirection();
