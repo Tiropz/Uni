@@ -67,7 +67,7 @@ public class Library extends JPanel implements MapInterface {
            */
             else if (object instanceof Kitchen){
                 Image kitchen = new ImageIcon("src/Image/kitchen_"+object.getColor()+".png").getImage();
-                System.out.println("src/Image/kitchen_"+object.getColor()+".png");
+               // System.out.println("src/Image/kitchen_"+object.getColor()+".png");
                 g.drawImage(kitchen, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }else if (color == 4) {
                 // Image frigo = new ImageIcon("src/Image/frigo_h_d.png").getImage();
@@ -110,7 +110,7 @@ public class Library extends JPanel implements MapInterface {
                 g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
             }
         }
-        System.out.println("blaaaah");
+        System.out.println("L");
     }
 
     public void setObjects(ArrayList<GameObject> objects) {

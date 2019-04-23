@@ -8,18 +8,20 @@ public class Player extends GameObject implements Directable {
     String sex;
     String hair;
     String height;
+    String map;
     double energy;
     double hunger;
     double bladder;
     int nbreFood;
     double san;
 
-    public Player(int x, int y, String name, String sex, String hair, String height, Double energy,  Double hunger, Double bladder, int nbreFood, Double san){
+    public Player(int x, int y, String name, String sex, String hair, String height,String map, Double energy,  Double hunger, Double bladder, int nbreFood, Double san){
         super(x, y, 2);
         this.name = name;
         this.sex = sex;
         this.hair = hair;
         this.height = height;
+        this.map = map;
         this.energy = energy;
         this.hunger = hunger;
         this.bladder = bladder;
@@ -81,5 +83,4 @@ public class Player extends GameObject implements Directable {
     public double getBladder() {
         return bladder;
     }
-
 }

@@ -20,10 +20,14 @@ public class Game extends JFrame implements DeletableObserver {
     private StudentRoom kotMap = new StudentRoom();
     private Library libraryMap = new Library();
     private Status status = new Status(mainChar);
-    public MapInterface gamemap = kotMap;
+    public MapInterface gamemap;
+    private String mapName;
 
     public Game(String title, Player mainChar) {
         super(title);
+        this.mainChar = mainChar;
+        this.mapName = this.mainChar.map;
+        this.gamemap = whichMap(mapName);
         buildMap(this.gamemap);
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -34,7 +38,6 @@ public class Game extends JFrame implements DeletableObserver {
         this.pack();
         // this.getContentPane().add(this.groupPanel, BorderLayout.CENTER);
         this.setVisible(true);
-        this.mainChar = mainChar;
         objects.add(mainChar);
         players.add(mainChar);
         this.setPlayer(mainChar);
@@ -42,6 +45,20 @@ public class Game extends JFrame implements DeletableObserver {
 
 
     }
+
+    private MapInterface whichMap(String mapName) {
+        MapInterface map;
+        switch (mapName){
+            case "Kot": map = kotMap;
+            break;
+            case "Bibliothèque": map = libraryMap;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + mapName);
+        }
+        return map;
+    }
+
     public void buildMap(MapInterface newmap) {
         ArrayList<GameObject> objectList = this.getObjects(newmap);
         // Map building
@@ -93,14 +110,17 @@ public class Game extends JFrame implements DeletableObserver {
 			}
 		}
 		if(aimedObject instanceof Door){
-		  MapInterface changedmap = ((Door) aimedObject).mapChange();
-		  buildMap(changedmap);
+		  this.mapName = ((Door) aimedObject).mapChange(this.mapName);
+		  this.mainChar.map = this.mapName;
+		  this.gamemap = whichMap(mapName);
+		  buildMap(gamemap);
 		  System.out.println(this.gamemap);
-		  this.add((Component) changedmap, BorderLayout.NORTH);
+		  this.add((Component) gamemap, BorderLayout.NORTH);
 		  this.pack();
 
         }
 		if(aimedObject != null){
+		    System.out.println("activate");
 		    this.mainChar = aimedObject.activate(this.mainChar);
             notifyView(this.mainChar);
 		}
