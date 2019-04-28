@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TimerTask;
+import java.util.Timer;
 
 import javax.swing.*;
 
@@ -22,6 +24,8 @@ public class Game extends JFrame implements DeletableObserver {
     private Status status = new Status(mainChar);
     public MapInterface gamemap;
     private String mapName;
+    public int secondpassed = 0;
+    Timer myTimer = new Timer();
 
     public Game(String title, Player mainChar) {
         super(title);
@@ -43,7 +47,18 @@ public class Game extends JFrame implements DeletableObserver {
         this.setPlayer(mainChar);
         active_player = mainChar;
 
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+            secondpassed++;
+            System.out.println(secondpassed);
+            mainChar.hunger -= 0.1;
+            mainChar.energy -= 0.01;
+            status.redraw(mainChar);
+            }
+        };
 
+        myTimer.schedule(task,1000,1000);
     }
 
     private MapInterface whichMap(String mapName) {
@@ -95,8 +110,7 @@ public class Game extends JFrame implements DeletableObserver {
         if (obstacle == false) {
             active_player.move(x, y);
         }
-        this.mainChar.hunger -= 0.1;
-        this.mainChar.energy -= 0.01;
+
         notifyView(this.mainChar);
     }
 
@@ -155,7 +169,7 @@ public class Game extends JFrame implements DeletableObserver {
             this.dispose();
         }
 
-
+        this.myTimer.cancel();
     }
     private void notifyView(Player actualPlayer) {
         this.update(actualPlayer);
