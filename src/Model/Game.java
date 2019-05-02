@@ -21,6 +21,7 @@ public class Game extends JFrame implements DeletableObserver {
     private Player mainChar;
     private StudentRoom kotMap = new StudentRoom();
     private Library libraryMap = new Library();
+    private Jefke jefkeMap = new Jefke();
     private Status status = new Status(mainChar);
     public MapInterface gamemap;
     private String mapName;
@@ -68,7 +69,9 @@ public class Game extends JFrame implements DeletableObserver {
             case "Kot": map = kotMap;
             break;
             case "Bibliothèque": map = libraryMap;
-                break;
+            break;
+            case "Jefke": map = jefkeMap;
+            break;
             default:
                 throw new IllegalStateException("Unexpected value: " + mapName);
         }
