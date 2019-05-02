@@ -26,6 +26,7 @@ public class Door extends Block implements Activable {
             case "Jefke":
                 reachable = new Object[]{"Kot"};
 
+
         }
        String test = (String) JOptionPane.showInputDialog(null, "Où voulez-vous aller ?", "Destinations",
                 JOptionPane.QUESTION_MESSAGE, null, reachable, null);
