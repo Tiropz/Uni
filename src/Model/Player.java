@@ -33,16 +33,16 @@ public class Player extends GameObject implements Directable {
         this.info.add(cercle);
         this.map = map;
         this.energy.add(energy);
-        this.energy.add(100.0);
+        this.energy.add(energy);
         this.energy.add(0.0);
-        this.hunger.add(hunger);
-        this.hunger.add(100.0);
         this.hunger.add(0.0);
+        this.hunger.add(hunger);
+        this.hunger.add(0.0);
+        this.bladder.add(0.0);
         this.bladder.add(bladder);
-        this.bladder.add(100.0);
         this.bladder.add(0.0);
         this.hygene.add(hygene);
-        this.hygene.add(100.0);
+        this.hygene.add(hygene);
         this.hygene.add(0.0);
         this.food.add(nbreFood);
         this.food.add(10);
@@ -105,10 +105,10 @@ public class Player extends GameObject implements Directable {
                             }
                         }
                         Double hung = mainChar.getHunger();
-                        hung += val;
+                        hung -= val;
                         mainChar.hunger.set(0,hung);
-                        if(mainChar.getHunger() > mainChar.getHungerMax()){
-                            mainChar.hunger.set(0,mainChar.getHungerMax());
+                        if(mainChar.getHunger() < mainChar.getHungerMin()){
+                            mainChar.hunger.set(0,mainChar.getHungerMin());
                         }
                         Double blad = mainChar.getBladder();
                         blad += val;
@@ -128,7 +128,7 @@ public class Player extends GameObject implements Directable {
                 dialog.dispose();
                 //  jop.showMessageDialog(null, lblClock, "Attention !", JOptionPane.DEFAULT_OPTION);
 
-            } else if (mainChar.getHunger() > mainChar.getHungerMax()) {
+            } else if (mainChar.getHunger() == mainChar.getHungerMin()) {
                 jop.showMessageDialog(null, "Vous avez déjà trop mangé", "Attention !", JOptionPane.INFORMATION_MESSAGE);
             } else if (mainChar.getBladder() == mainChar.getBladderMax()) {
                 jop.showMessageDialog(null, "Vous devez aller aux toilettes", "Attention !", JOptionPane.INFORMATION_MESSAGE);

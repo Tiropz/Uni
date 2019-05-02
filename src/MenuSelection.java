@@ -27,6 +27,14 @@ public class MenuSelection extends JDialog {
     private JLabel nomLabel, sexeLabel, cheveuxLabel, cercleLabel, icon;
     private JComboBox sex, study, cercle;
     private JTextField name;
+    int lvl;
+    int intel;
+    int social;
+    int money;
+    double energy;
+    double hunger;
+    double bladder;
+    double hygene;
 
     public MenuSelection(JFrame parent, String title, boolean modal){
         super(parent, title, modal);
@@ -122,9 +130,35 @@ public class MenuSelection extends JDialog {
             public void actionPerformed(ActionEvent arg0) {
                 switch ((String)study.getSelectedItem()){
                     case "Polytech":
+                        energy = 100;
+                        hunger = 100;
+                        bladder = 100;
+                        hygene = 80;
+                        intel = 70;
+                        social = 50;
+                        money = 50;
+                        break;
+                    case "Médecine":
+                        energy = 100;
+                        hunger = 100;
+                        bladder = 100;
+                        hygene = 120;
+                        intel = 50;
+                        social = 30;
+                        money = 50;
+                        break;
+                    case "Solvay":
+                        energy = 100;
+                        hunger = 100;
+                        bladder = 100;
+                        hygene = 120;
+                        intel = 50;
+                        social = 30;
+                        money = 50;
+                        break;
                 }
                   Info = new MenuInfo(name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem());
-                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", 100.0, 100.0, 0.0, 0.0,5, 0, 10, 15, 1, 0, 0,0);
+                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", energy, 100.0, 0.0, 0.0,5, 0, 10, 15, 1, 0, 0,0);
                 // Create a new Gson object
                 Gson gson = new Gson();
 
