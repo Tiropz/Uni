@@ -190,15 +190,7 @@ public class Library extends JPanel implements MapInterface {
         return mainChar;
     }
     public ArrayList<GameObject> getObjects(){
-        ArrayList<GameObject> removed = new ArrayList<GameObject>();
         System.out.println("NbreLG " + this.LibraryObjects.size());
-        for(GameObject c:this.LibraryObjects){
-            if(c instanceof Player){
-                removed.add(c);
-                System.out.println("FONCTIONNE");
-            }
-        }
-        this.LibraryObjects.removeAll(removed);
         return this.LibraryObjects;
     }
 

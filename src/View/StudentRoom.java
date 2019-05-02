@@ -216,15 +216,8 @@ public class StudentRoom extends JPanel implements MapInterface {
         return mainChar;
     }
     public ArrayList<GameObject> getObjects(){
-        ArrayList<GameObject> removed = new ArrayList<GameObject>();
         System.out.println("NbreSG " + this.StudentObjects.size());
-        for(GameObject c:this.StudentObjects){
-            if(c instanceof Player){
-                removed.add(c);
-                System.out.println("FONCTIONNE");
-            }
-        }
-        this.StudentObjects.removeAll(removed);
+
         return this.StudentObjects;
     }
 

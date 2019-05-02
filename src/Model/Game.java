@@ -86,11 +86,18 @@ public class Game extends JFrame implements DeletableObserver {
     }
 
     private void buildMap() {
+        ArrayList<GameObject> removed = new ArrayList<GameObject>();
         this.objectList.clear();
 
         this.objectList = new ArrayList<GameObject>(getObjects());
         System.out.println("Objlist " + this.objectList.size());
-
+        for(GameObject c:this.objectList){
+            if(c instanceof Player){
+                removed.add(c);
+                System.out.println("FONCTIONNE");
+            }
+        }
+        this.objectList.removeAll(removed);
         objects.clear();
         objects.add(this.mainChar);
 
