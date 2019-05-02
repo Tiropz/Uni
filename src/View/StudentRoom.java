@@ -131,8 +131,8 @@ public class StudentRoom extends JPanel implements MapInterface {
                 g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
             }*/
 
-            g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
-            g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
+           // g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
+            //g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
             // Decouper en fontions
             if(object instanceof Directable) {
                 int direction = ((Directable) object).getDirection();
@@ -221,8 +221,8 @@ public class StudentRoom extends JPanel implements MapInterface {
         objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), 11));
 
         for (int j = 11; j < 15; j++) {
-            objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-4), j)); //lit + mur
-            objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-3), j));
+            objects.add(new Bed((x_middle+(x_blocks/2)-4), j)); //lit + mur
+            objects.add(new Bed((x_middle+(x_blocks/2)-3), j));
             objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-5), j));
         }
 

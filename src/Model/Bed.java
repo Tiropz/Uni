@@ -5,8 +5,8 @@ import javax.swing.*;
 public class Bed extends Block implements Activable {
     private static JLabel lblClock = new JLabel("");
     private String time;
-    public Bed(int x, int y, int color) {
-        super(x, y, color);
+    public Bed(int x, int y) {
+        super(x, y, 0);
     }
 
     @Override

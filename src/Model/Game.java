@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TimerTask;
+import java.util.Timer;
 
 import javax.swing.*;
 
@@ -20,10 +22,16 @@ public class Game extends JFrame implements DeletableObserver {
     private StudentRoom kotMap = new StudentRoom();
     private Library libraryMap = new Library();
     private Status status = new Status(mainChar);
-    public MapInterface gamemap = kotMap;
+    public MapInterface gamemap;
+    private String mapName;
+    public int secondpassed = 0;
+    Timer myTimer = new Timer();
 
     public Game(String title, Player mainChar) {
         super(title);
+        this.mainChar = mainChar;
+        this.mapName = this.mainChar.map;
+        this.gamemap = whichMap(mapName);
         buildMap(this.gamemap);
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -34,14 +42,38 @@ public class Game extends JFrame implements DeletableObserver {
         this.pack();
         // this.getContentPane().add(this.groupPanel, BorderLayout.CENTER);
         this.setVisible(true);
-        this.mainChar = mainChar;
         objects.add(mainChar);
         players.add(mainChar);
         this.setPlayer(mainChar);
         active_player = mainChar;
 
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+            secondpassed++;
+            System.out.println(secondpassed);
+            mainChar.hunger -= 0.1;
+            mainChar.energy -= 0.01;
+            status.redraw(mainChar);
+            }
+        };
 
+        myTimer.schedule(task,1000,1000);
     }
+
+    private MapInterface whichMap(String mapName) {
+        MapInterface map;
+        switch (mapName){
+            case "Kot": map = kotMap;
+            break;
+            case "Bibliothèque": map = libraryMap;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + mapName);
+        }
+        return map;
+    }
+
     public void buildMap(MapInterface newmap) {
         ArrayList<GameObject> objectList = this.getObjects(newmap);
         // Map building
@@ -78,8 +110,7 @@ public class Game extends JFrame implements DeletableObserver {
         if (obstacle == false) {
             active_player.move(x, y);
         }
-        this.mainChar.hunger -= 0.1;
-        this.mainChar.energy -= 0.01;
+
         notifyView(this.mainChar);
     }
 
@@ -93,14 +124,17 @@ public class Game extends JFrame implements DeletableObserver {
 			}
 		}
 		if(aimedObject instanceof Door){
-		  MapInterface changedmap = ((Door) aimedObject).mapChange();
-		  buildMap(changedmap);
+		  this.mapName = ((Door) aimedObject).mapChange(this.mapName);
+		  this.mainChar.map = this.mapName;
+		  this.gamemap = whichMap(mapName);
+		  buildMap(gamemap);
 		  System.out.println(this.gamemap);
-		  this.add((Component) changedmap, BorderLayout.NORTH);
+		  this.add((Component) gamemap, BorderLayout.NORTH);
 		  this.pack();
 
         }
 		if(aimedObject != null){
+		    System.out.println("activate");
 		    this.mainChar = aimedObject.activate(this.mainChar);
             notifyView(this.mainChar);
 		}
@@ -135,7 +169,7 @@ public class Game extends JFrame implements DeletableObserver {
             this.dispose();
         }
 
-
+        this.myTimer.cancel();
     }
     private void notifyView(Player actualPlayer) {
         this.update(actualPlayer);
