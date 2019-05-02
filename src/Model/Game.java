@@ -53,7 +53,7 @@ public class Game extends JFrame implements DeletableObserver {
             secondpassed++;
             System.out.println(secondpassed);
             Double hung = mainChar.getHunger();
-            hung -= 0.1;
+            hung += 0.1;
             mainChar.hunger.set(0,hung);
             Double ener = mainChar.getEnergy();
             ener -= 0.01;

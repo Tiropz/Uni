@@ -106,7 +106,7 @@ public class MenuSelection extends JDialog {
         panStudy.setBorder(BorderFactory.createTitledBorder("Quelles études voulez-vous entreprendre ?"));
         study = new JComboBox();
         study.addItem("Médecine");
-        study.addItem("Polytech");
+        study.addItem("Polytechnique");
         study.addItem("Solvay");
         study.addItem("Psychologie");
         study.addItem("Droit");
@@ -129,7 +129,7 @@ public class MenuSelection extends JDialog {
         okBouton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0) {
                 switch ((String)study.getSelectedItem()){
-                    case "Polytech":
+                    case "Polytechnique":
                         energy = 100;
                         hunger = 100;
                         bladder = 100;
@@ -176,7 +176,7 @@ public class MenuSelection extends JDialog {
                         break;
                 }
                   Info = new MenuInfo(name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem());
-                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", energy, hunger, bladder, hygene,5, 0, 10, 15, 1, intel, social,money);
+                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", energy, hunger, bladder, hygene,5, 0, 10, 15, 1, intel, social,money, 43200);
                 // Create a new Gson object
                 Gson gson = new Gson();
 

@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import Model.GameObject;
 import Model.Player;
@@ -33,6 +33,14 @@ public class Status extends JPanel {
     private int social;
     private int money;
     private int hygene;
+    private String name;
+    private String cercle;
+    private String study;
+    private String sex;
+    private int timer;
+    private int hours;
+    private int minutes;
+    private int seconds;
 
     public Status(Player mainChar) {
         width_screen = (int) screenSize.getWidth();
@@ -64,20 +72,41 @@ public class Status extends JPanel {
         this.money = this.mainChar.getMoney();
         this.social = this.mainChar.getSocial();
         this.hygene = (int) this.mainChar.getHygene();
+        this.study = this.mainChar.getStudy();
+        this.name = this.mainChar.getName();
+        this.sex = this.mainChar.getSex();
+        this.cercle = this.mainChar.getCercle();
+
+        this.timer = this.mainChar.getTimer();
+        this.hours = timer/3600;
+        this.timer -= this.hours;
+        this.minutes = this.timer/60;
+        this.timer -= this.minutes;
+        this.seconds = this.timer/60;
         super.paintComponent(g);
         super.paintComponent(g);
         g.setColor(Color.BLACK);
-        g.drawString("Energie" +" : " + this.energy, width_screen/4, height_status/4);
-        g.drawString("Faim" +" : " + this.hunger, width_screen/4, height_status/2);
-        g.drawString("Vessie" +" : " + this.bladder, width_screen/4, 3*height_status/4);
-        // draw avatar
-        g.drawString("Level" +" : " + this.lvl, width_screen/2, height_status/2);
-        g.drawString("XP" +" : " + this.xp + "/" + this.xpCurrent, width_screen/2, height_status/4);
-        g.drawString("Argent" +" : " + this.money, width_screen/2, 3*height_status/4);
+        Image cercleImage = new ImageIcon("src/Image/"+this.study+".png").getImage();
+        g.drawImage(cercleImage,0, 0,height_status, height_status, null);
 
-        g.drawString("Intelligence" +" : " + this.intel, 3*width_screen/4, height_status/4);
-        g.drawString("Sociabilité" +" : " + this.social, 3*width_screen/4, height_status/2);
-        g.drawString("Hygiène" +" : " + this.hygene, 3*width_screen/4, 3*height_status/4);
+        g.drawString(this.name, height_status + 10, 1*height_status/5);
+        g.drawString(this.sex, height_status + 10, 2*height_status/5);
+        g.drawString(this.study, height_status + 10, 3*height_status/5);
+        g.drawString(this.cercle, height_status + 10, 4*height_status/5);
+
+        g.drawString(this.hours+":"+this.minutes+":"+this.seconds, height_status+200, height_status/2);
+
+        g.drawString("Energie" +" : " + this.energy, 2*width_screen/5, height_status/4);
+        g.drawString("Faim" +" : " + this.hunger, 2*width_screen/5, height_status/2);
+        g.drawString("Vessie" +" : " + this.bladder, 2*width_screen/5, 3*height_status/4);
+        // draw avatar
+        g.drawString("Level" +" : " + this.lvl, 3*width_screen/5, height_status/2);
+        g.drawString("XP" +" : " + this.xp + "/" + this.xpCurrent, 3*width_screen/5, height_status/4);
+        g.drawString("Argent" +" : " + this.money, 3*width_screen/5, 3*height_status/4);
+
+        g.drawString("Intelligence" +" : " + this.intel, 4*width_screen/5, height_status/4);
+        g.drawString("Sociabilité" +" : " + this.social, 4*width_screen/5, height_status/2);
+        g.drawString("Hygiène" +" : " + this.hygene, 4*width_screen/5, 3*height_status/4);
     }
     public void redraw(Player actualPlayer) {
         this.mainChar = actualPlayer;

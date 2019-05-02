@@ -23,9 +23,10 @@ public class Player extends GameObject implements Directable {
     int money;
     private String time;
     private static JLabel lblClock = new JLabel("");
+    public int timer;
 
 
-    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood,int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money) {
+    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood,int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer) {
         super(x, y, 2);
         this.info.add(name);
         this.info.add(sex);
@@ -53,7 +54,9 @@ public class Player extends GameObject implements Directable {
         this.lvl = lvl;
         this.intel = intel;
         this.social = social;
-        this.money = money;    }
+        this.money = money;
+        this.timer = timer;
+    }
 
     public void move(int X, int Y) {
         this.posX = this.posX + X;
@@ -370,8 +373,11 @@ public class Player extends GameObject implements Directable {
         }
         return this.posY + delta;
     }
-
-
+    public int getTimer(){return timer;}
+    public String getName(){return info.get(0);}
+    public String getSex(){return info.get(1);}
+    public String getStudy(){return info.get(2);}
+    public String getCercle(){return info.get(3);}
     public int getIntel(){ return intel;}
     public int getSocial(){return social;}
     public int getMoney(){return money;}
