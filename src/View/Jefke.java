@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Jefke extends JPanel implements MapInterface {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    private ArrayList<GameObject> JefkeObjects = new ArrayList<GameObject>();
     public int width_screen;
     public int height_screen;
     private int BLOC_SIZE;
@@ -99,7 +99,8 @@ public class Jefke extends JPanel implements MapInterface {
 
 
 
-        for (GameObject object : this.objects) {
+        for (GameObject object : this.JefkeObjects) {
+            if(object != null){
             int x = object.getPosX();
             int y = object.getPosY();
             int color = object.getColor();
@@ -132,17 +133,18 @@ public class Jefke extends JPanel implements MapInterface {
                 //g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
             }
         }
+            }
     }
 
 
     public Player setObjects(ArrayList<GameObject> objects,Player mainChar, MapInterface currentMap) {
 
-        this.objects = objects;
+        this.JefkeObjects = new ArrayList<>(objects);
         return mainChar;
     }
 
     public ArrayList<GameObject> getObjects() {
-        return this.objects;
+        return this.JefkeObjects;
     }
 
     public void redraw() {
@@ -150,54 +152,54 @@ public class Jefke extends JPanel implements MapInterface {
     }
 
     private void construct() {
-
+        this.JefkeObjects.clear();
         for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
-            objects.add(new BlockUnbreakable(i, 0));
+            JefkeObjects.add(new BlockUnbreakable(i, 0));
         }
 
         for (int i = (x_middle-(x_blocks/2)-1); i < 19; i++) {
-            objects.add(new BlockUnbreakable(i, (y_blocks+1)));
+            JefkeObjects.add(new BlockUnbreakable(i, (y_blocks+1)));
         }
 
 
         for (int i = 21; i < (x_middle+(x_blocks/2)+3); i++) {
-            objects.add(new BlockUnbreakable( i, (y_blocks+1)));
+            JefkeObjects.add(new BlockUnbreakable( i, (y_blocks+1)));
         }
 
 
         for (int j = 1;j< y_blocks+1; j++){
-            objects.add(new BlockUnbreakable( 6, j));  //murs jefke verticaux
-            objects.add(new BlockUnbreakable( 31, j));
+            JefkeObjects.add(new BlockUnbreakable( 6, j));  //murs jefke verticaux
+            JefkeObjects.add(new BlockUnbreakable( 31, j));
         }
 
         for (int i = 7; i < x_middle; i++){  // mur bar horizontal
-            objects.add (new BlockUnbreakable (i, (y_blocks-4)));
+            JefkeObjects.add (new BlockUnbreakable (i, (y_blocks-4)));
         }
 
 
         for (int j = y_blocks-3; j < y_blocks+1; j++){    //mur bar
-            objects.add (new BlockUnbreakable(x_middle-1, j));
+            JefkeObjects.add (new BlockUnbreakable(x_middle-1, j));
         }
 
         for (int i = 9; i < 13; i = i + 3){      // pompe à bières
-            objects.add(new BlockUnbreakable( i, (y_blocks-2)));
+            JefkeObjects.add(new BlockUnbreakable( i, (y_blocks-2)));
         }
 
 
 
 
         for (int j =(y_blocks-4); j < (y_blocks); j++ ){
-            objects.add(new BlockUnbreakable(29, j)); //banc + banquette en haut a droite
-            objects.add(new BlockUnbreakable(30, j));
+            JefkeObjects.add(new BlockUnbreakable(29, j)); //banc + banquette en haut a droite
+            JefkeObjects.add(new BlockUnbreakable(30, j));
         }
 
         for (int j =(y_blocks-12); j < (y_blocks-8); j++ ){ //banc + bnaquette en bas a droite
-            objects.add(new BlockUnbreakable(29, j));
-            objects.add(new BlockUnbreakable(30, j));
+            JefkeObjects.add(new BlockUnbreakable(29, j));
+            JefkeObjects.add(new BlockUnbreakable(30, j));
         }
 
         for (int i = 19; i<21; i++){
-            objects.add(new Door(i, y_blocks+1));
+            JefkeObjects.add(new Door(i, y_blocks+1));
         }
 
     }
