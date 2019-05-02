@@ -91,6 +91,7 @@ public class Jefke extends JPanel implements MapInterface {
         }
 
 
+
             g.drawImage(banc, (x_middle+11)*BLOC_SIZE, (y_blocks-3)*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
             g.drawImage(banquette, (x_middle+11)*BLOC_SIZE, (y_blocks-1)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
             g.drawImage(banquette, (x_middle+11)*BLOC_SIZE, (y_blocks-4)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
