@@ -375,8 +375,14 @@ public class Player extends GameObject implements Directable {
     }
     public int getTimer(){return timer;}
     public void setTimer(int val){
-        timer += val;
+        if(timer == 86399){
+            timer = 0;
+        }
+        else{
+            timer += val;
+        }
     }
+    public void setPosXY(int x,int y){posX = x; posY = y;}
     public String getName(){return info.get(0);}
     public String getSex(){return info.get(1);}
     public String getStudy(){return info.get(2);}

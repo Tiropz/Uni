@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Library extends JPanel implements MapInterface {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    private ArrayList<GameObject> LibraryObjects = new ArrayList<GameObject>();
     public int width_screen;
     public int height_screen;
     private int BLOC_SIZE;
@@ -36,7 +36,7 @@ public class Library extends JPanel implements MapInterface {
 
     public void paint(Graphics g) {
 
-
+        System.out.println("PaintLibr");
 
         Image sol = new ImageIcon("src/Image/sol_bibli.jpg").getImage();
         Image poubelle = new ImageIcon("src/Image/trash.png").getImage();
@@ -149,7 +149,7 @@ public class Library extends JPanel implements MapInterface {
 
 
 
-        for (GameObject object : this.objects) {
+        for (GameObject object : this.LibraryObjects) {
             int x = object.getPosX();
             int y = object.getPosY();
             int color = object.getColor();
@@ -183,89 +183,101 @@ public class Library extends JPanel implements MapInterface {
         }
     }
 
-    public void setObjects(ArrayList<GameObject> objects) {
-
-        this.objects = objects;
+    public Player setObjects(ArrayList<GameObject> objects, Player mainChar, MapInterface currentMap) {
+        this.LibraryObjects = new ArrayList<>(objects);
+        mainChar.setPosXY(x_middle+8,10);
+        System.out.println("NbreLS " + this.LibraryObjects.size());
+        return mainChar;
     }
     public ArrayList<GameObject> getObjects(){
-        return this.objects;
+        ArrayList<GameObject> removed = new ArrayList<GameObject>();
+        System.out.println("NbreLG " + this.LibraryObjects.size());
+        for(GameObject c:this.LibraryObjects){
+            if(c instanceof Player){
+                removed.add(c);
+                System.out.println("FONCTIONNE");
+            }
+        }
+        this.LibraryObjects.removeAll(removed);
+        return this.LibraryObjects;
     }
 
     public void redraw() {
         this.repaint();
     }
     private void construct() {
+        this.LibraryObjects.clear();
         for (int i = x_middle-5; i < x_middle+8; i = i+3) { //bibliothèques verticales
-            objects.add(new BlockUnbreakable(i, 2));
-            objects.add(new BlockUnbreakable(i, 3));
-            objects.add(new BlockUnbreakable(i, 4));
+            LibraryObjects.add(new BlockUnbreakable(i, 2));
+            LibraryObjects.add(new BlockUnbreakable(i, 3));
+            LibraryObjects.add(new BlockUnbreakable(i, 4));
         }
 
-        objects.add(new Door(x_middle+9, 9));
-        objects.add(new Door(x_middle+9, 10));
+        LibraryObjects.add(new Door(x_middle+9, 9));
+        LibraryObjects.add(new Door(x_middle+9, 10));
 
         for (int i = (x_middle - (x_blocks / 2) - 1); i < (x_middle + (x_blocks / 2) + 1); i++) {
-            objects.add(new BlockUnbreakable(i, 0));
-            objects.add(new BlockUnbreakable(i, y_blocks + 1));
+            LibraryObjects.add(new BlockUnbreakable(i, 0));
+            LibraryObjects.add(new BlockUnbreakable(i, y_blocks + 1));
         }
         for (int j = 0; j < y_blocks + 2; j++) {
-            objects.add(new BlockUnbreakable((x_middle - (x_blocks / 2) - 1), j));
-            objects.add(new BlockUnbreakable((x_middle + (x_blocks / 2) + 1), j));
+            LibraryObjects.add(new BlockUnbreakable((x_middle - (x_blocks / 2) - 1), j));
+            LibraryObjects.add(new BlockUnbreakable((x_middle + (x_blocks / 2) + 1), j));
         }
 
         for (int i = x_middle-7; i < x_middle+7; i = i+5) {
 
 
-            objects.add(new BlockUnbreakable(i, 13)); //pouvelle
-            objects.add(new BlockUnbreakable(i+1, 13)); //bibliothèques horizontales
-            objects.add(new BlockUnbreakable(i+2, 13));
-            objects.add(new BlockUnbreakable(i+3, 13));
-            objects.add(new BlockUnbreakable(i+1, 17)); //tables horizontales (celles tout en bas
-            objects.add(new BlockUnbreakable(i+2, 17));
-            objects.add(new BlockUnbreakable(i+3, 17));
+            LibraryObjects.add(new BlockUnbreakable(i, 13)); //pouvelle
+            LibraryObjects.add(new BlockUnbreakable(i+1, 13)); //bibliothèques horizontales
+            LibraryObjects.add(new BlockUnbreakable(i+2, 13));
+            LibraryObjects.add(new BlockUnbreakable(i+3, 13));
+            LibraryObjects.add(new BlockUnbreakable(i+1, 17)); //tables horizontales (celles tout en bas
+            LibraryObjects.add(new BlockUnbreakable(i+2, 17));
+            LibraryObjects.add(new BlockUnbreakable(i+3, 17));
         }
-        objects.add(new BlockUnbreakable((x_middle-2), 5)); //poubelle
-        objects.add(new BlockUnbreakable((x_middle+4), 5)); //poubelle
-        objects.add(new BlockUnbreakable((x_middle)-x_blocks/2, 3)); //plante
+        LibraryObjects.add(new BlockUnbreakable((x_middle-2), 5)); //poubelle
+        LibraryObjects.add(new BlockUnbreakable((x_middle+4), 5)); //poubelle
+        LibraryObjects.add(new BlockUnbreakable((x_middle)-x_blocks/2, 3)); //plante
 
         for (int i = x_middle-1; i < x_middle+2; i++) {
-            objects.add(new BlockUnbreakable(i, 8)); //tables horizontales de 2 de large
-            objects.add(new BlockUnbreakable(i, 9));
+            LibraryObjects.add(new BlockUnbreakable(i, 8)); //tables horizontales de 2 de large
+            LibraryObjects.add(new BlockUnbreakable(i, 9));
         }
 
         for (int j = 7; j < 10; j++) {
-            objects.add(new BlockUnbreakable(x_middle-5, j)); //table verticale
-            objects.add(new BlockUnbreakable(x_middle-4, j));
+            LibraryObjects.add(new BlockUnbreakable(x_middle-5, j)); //table verticale
+            LibraryObjects.add(new BlockUnbreakable(x_middle-4, j));
         }
-        objects.add(new BlockUnbreakable((x_middle+x_blocks/2), 8)); //plante
-        objects.add(new BlockUnbreakable((x_middle+x_blocks/2), 11)); //plante
+        LibraryObjects.add(new BlockUnbreakable((x_middle+x_blocks/2), 8)); //plante
+        LibraryObjects.add(new BlockUnbreakable((x_middle+x_blocks/2), 11)); //plante
 
         for (int i = x_middle+4; i < x_middle+7; i++) {
-            objects.add(new BlockUnbreakable(i, 8)); //table horizontale de droite
-            objects.add(new BlockUnbreakable(i, 9));
+            LibraryObjects.add(new BlockUnbreakable(i, 8)); //table horizontale de droite
+            LibraryObjects.add(new BlockUnbreakable(i, 9));
         }
 
-        objects.add(new BlockUnbreakable((x_middle-6), 16)); //chaises
-        objects.add(new BlockUnbreakable((x_middle-4), 16));
-        objects.add(new BlockUnbreakable((x_middle-1), 16));
-        objects.add(new BlockUnbreakable((x_middle+6), 16));
-        objects.add(new BlockUnbreakable((x_middle+4), 16));
-        objects.add(new BlockUnbreakable((x_middle+1), 16));
-        objects.add(new BlockUnbreakable((x_middle+8), 17)); //poubelle
-        objects.add(new BlockUnbreakable((x_middle-8), 16)); //plante
+        LibraryObjects.add(new BlockUnbreakable((x_middle-6), 16)); //chaises
+        LibraryObjects.add(new BlockUnbreakable((x_middle-4), 16));
+        LibraryObjects.add(new BlockUnbreakable((x_middle-1), 16));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+6), 16));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+4), 16));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+1), 16));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+8), 17)); //poubelle
+        LibraryObjects.add(new BlockUnbreakable((x_middle-8), 16)); //plante
 
-        objects.add(new BlockUnbreakable((x_middle-6), 7));
-        objects.add(new BlockUnbreakable((x_middle-6), 9));
-        objects.add(new BlockUnbreakable((x_middle-3), 7));
-        objects.add(new BlockUnbreakable((x_middle-3), 9));
-        objects.add(new BlockUnbreakable((x_middle-1), 7));
-        objects.add(new BlockUnbreakable((x_middle+1), 7));
-        objects.add(new BlockUnbreakable((x_middle-1), 10));
-        objects.add(new BlockUnbreakable((x_middle+1), 10));
-        objects.add(new BlockUnbreakable((x_middle+4), 7));
-        objects.add(new BlockUnbreakable((x_middle+6), 7));
-        objects.add(new BlockUnbreakable((x_middle+4), 10));
-        objects.add(new BlockUnbreakable((x_middle+6), 10));
+        LibraryObjects.add(new BlockUnbreakable((x_middle-6), 7));
+        LibraryObjects.add(new BlockUnbreakable((x_middle-6), 9));
+        LibraryObjects.add(new BlockUnbreakable((x_middle-3), 7));
+        LibraryObjects.add(new BlockUnbreakable((x_middle-3), 9));
+        LibraryObjects.add(new BlockUnbreakable((x_middle-1), 7));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+1), 7));
+        LibraryObjects.add(new BlockUnbreakable((x_middle-1), 10));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+1), 10));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+4), 7));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+6), 7));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+4), 10));
+        LibraryObjects.add(new BlockUnbreakable((x_middle+6), 10));
 
 
 

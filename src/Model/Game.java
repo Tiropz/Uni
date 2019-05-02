@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Keyboard;
 import View.*;
 
 import java.awt.*;
@@ -7,15 +8,18 @@ import java.awt.event.KeyListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.TimerTask;
 import java.util.Timer;
 
 import javax.swing.*;
 
 import com.google.gson.Gson;
+import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 
 public class Game extends JFrame implements DeletableObserver {
     private ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    ArrayList<GameObject> objectList = new ArrayList<GameObject>();
     private ArrayList<Player> players = new ArrayList<Player>();
     private Player active_player = null;
     private Player mainChar;
@@ -26,13 +30,16 @@ public class Game extends JFrame implements DeletableObserver {
     private String mapName;
     public int secondpassed = 0;
     Timer myTimer = new Timer();
+    private int x_middle;
+    private int width_screen;
 
     public Game(String title, Player mainChar) {
         super(title);
         this.mainChar = mainChar;
         this.mapName = this.mainChar.map;
         this.gamemap = whichMap(mapName);
-        buildMap(this.gamemap);
+
+        buildMap();
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setBounds(0, 0, 1000, 1020);
@@ -42,7 +49,7 @@ public class Game extends JFrame implements DeletableObserver {
         this.pack();
         // this.getContentPane().add(this.groupPanel, BorderLayout.CENTER);
         this.setVisible(true);
-        objects.add(mainChar);
+
         players.add(mainChar);
         this.setPlayer(mainChar);
         active_player = mainChar;
@@ -75,24 +82,30 @@ public class Game extends JFrame implements DeletableObserver {
         return map;
     }
 
-    public void buildMap(MapInterface newmap) {
-        ArrayList<GameObject> objectList = this.getObjects(newmap);
+    private void buildMap() {
+        this.objectList.clear();
+
+        this.objectList = new ArrayList<GameObject>(getObjects());
+        System.out.println("Objlist " + this.objectList.size());
+
+        objects.clear();
+        objects.add(this.mainChar);
+
+        System.out.println("Objlist2 " + this.objectList.size());
         // Map building
-        for (int i = 0; i < objectList.size(); i++) {
-            objects.add(objectList.get(i));
-            // use currInstance
-        }
-        for (int i = 0; i < objects.size(); i++) {
-            System.out.println(objects.get(i));
-            // use currInstance
-        }
-        this.gamemap = newmap;
-        this.setGameObjects(this.objects, newmap);
+        // use currInstance
+        objects.addAll(objectList);
+        System.out.println("Obj " + objects.size());
+        this.setGameObjects(this.objects);
+        Keyboard keyboard = new Keyboard(this);
+        this.setKeyListener(keyboard);
     }
 
 
-    public ArrayList<GameObject> getObjects(MapInterface newmap){
-        return newmap.getObjects();
+    private ArrayList<GameObject> getObjects(){
+        System.out.println("called" + gamemap);
+
+        return this.gamemap.getObjects();
     }
     public void movePlayer(int x, int y) {
         int nextX = active_player.getPosX() + x;
@@ -130,14 +143,14 @@ public class Game extends JFrame implements DeletableObserver {
 		      this.mapName = switchMap;
               this.mainChar.map = this.mapName;
               this.gamemap = whichMap(mapName);
-              buildMap(gamemap);
+              buildMap();
               System.out.println(this.gamemap);
               this.add((Component) gamemap, BorderLayout.NORTH);
               this.pack();
           }
         }
 		if(aimedObject != null){
-		    System.out.println("activate");
+		    System.out.println("");
 		    this.mainChar = aimedObject.activate(this.mainChar);
             notifyView(this.mainChar);
 		}
@@ -213,9 +226,9 @@ public class Game extends JFrame implements DeletableObserver {
         this.gamemap.addKeyListener(keyboard);
     }
 
-    public void setGameObjects(ArrayList<GameObject> objects, MapInterface currentMap) {
-        currentMap.setObjects(objects);
-        currentMap.redraw();
+    public void setGameObjects(ArrayList<GameObject> objects) {
+        this.mainChar = this.gamemap.setObjects(objects, this.mainChar, this.gamemap);
+        this.gamemap.redraw();
     }
     public void setPlayer(Player p) {
         status.setPlayer(p);
