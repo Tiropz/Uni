@@ -42,34 +42,62 @@ public class Library extends JPanel implements MapInterface {
         Image poubelle = new ImageIcon("src/Image/trash.png").getImage();
         Image plante = new ImageIcon("src/Image/plante.png").getImage();
         Image chaise_bas = new ImageIcon("src/Image/chaise_projet.png").getImage();
-        Image chaise_haut = new ImageIcon("src/Image/chaise_haut").getImage();
+        Image chaise_haut = new ImageIcon("src/Image/chaise_haut.png").getImage();
         Image chaise_droite = new ImageIcon("src/Image/chaise_droite.png").getImage();
         Image chaise_gauche = new ImageIcon("src/Image/chaise_gauche.png").getImage();
         Image table = new ImageIcon("src/Image/table_cuisine.png").getImage();
         Image bibliothèque = new ImageIcon("src/Image/bibliothèque.png").getImage();
         Image bibliothèque_horizontal = new ImageIcon("src/Image/biblio_horizontal.png").getImage();
+        Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
+        Image porte = new ImageIcon("src/Image/porte.png").getImage();
 
 
         super.paintComponent(g);
-        for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+1; i++) {
+        for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+2; i++) {
             for (int j = 1; j < y_blocks+1; j++) {
                 int x = i;
                 int y = j;
                 g.drawImage(sol,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
+
         }
+
+        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+2); i++) {
+            g.drawImage(brique, i*BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        }
+
+        for (int j = 0; j < 9; j++) {
+            g.drawImage(brique, (x_middle-(x_blocks/2)-1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(brique, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        }
+
+        for (int j = 0; j < y_blocks+2; j++) {
+            g.drawImage(brique, (x_middle-(x_blocks/2)-1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        }
+
+        for (int j = 11; j < y_blocks+2; j++) {
+
+            g.drawImage(brique, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        }
+
+
         for (int i = x_middle-5; i < x_middle+8; i = i+3) {
+
             g.drawImage(bibliothèque, i* BLOC_SIZE, 2 * BLOC_SIZE, BLOC_SIZE, 3 * BLOC_SIZE, null);
         }
 
         for (int i = x_middle-7; i < x_middle+7; i = i+5) {
+
             g.drawImage(poubelle, i* BLOC_SIZE, 13 * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             g.drawImage(bibliothèque_horizontal, (i+1)* BLOC_SIZE, 13 * BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, null);
+
             g.drawImage(table, (i+1)* BLOC_SIZE, 17 * BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, null);
+
         }
 
 
-
+        g.drawImage(porte, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, 9*BLOC_SIZE, BLOC_SIZE, 2*BLOC_SIZE, null);
         g.drawImage(poubelle,(x_middle-2) * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(poubelle,(x_middle+4) * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(plante,((x_middle)-x_blocks/2) * BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
@@ -78,6 +106,7 @@ public class Library extends JPanel implements MapInterface {
         g.drawImage(plante,(x_middle+x_blocks/2) * BLOC_SIZE, 8*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(plante,(x_middle+x_blocks/2) * BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(table,(x_middle-5) * BLOC_SIZE, 7*BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE, null );
+
         g.drawImage(chaise_bas,(x_middle-6) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(chaise_bas,(x_middle-4) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(chaise_bas,(x_middle-1) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
@@ -86,6 +115,7 @@ public class Library extends JPanel implements MapInterface {
         g.drawImage(chaise_bas,(x_middle+6) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(poubelle,(x_middle+8) * BLOC_SIZE, 17*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(plante,(x_middle-8) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+
         g.drawImage(chaise_droite,(x_middle-6) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(chaise_droite,(x_middle-6) * BLOC_SIZE, 9*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(chaise_gauche,(x_middle-3) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
@@ -94,6 +124,11 @@ public class Library extends JPanel implements MapInterface {
         g.drawImage(chaise_bas,(x_middle+1) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(chaise_haut,(x_middle-1) * BLOC_SIZE, 10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(chaise_haut,(x_middle+1) * BLOC_SIZE, 10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle+4) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle+6) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_haut,(x_middle+4) * BLOC_SIZE, 10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_haut,(x_middle+6) * BLOC_SIZE, 10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+
 
 
 
@@ -160,6 +195,15 @@ public class Library extends JPanel implements MapInterface {
         this.repaint();
     }
     private void construct() {
+        for (int i = x_middle-5; i < x_middle+8; i = i+3) { //bibliothèques verticales
+            objects.add(new BlockUnbreakable(i, 2));
+            objects.add(new BlockUnbreakable(i, 3));
+            objects.add(new BlockUnbreakable(i, 4));
+        }
+
+        objects.add(new Door(x_middle+9, 9));
+        objects.add(new Door(x_middle+9, 10));
+
         for (int i = (x_middle - (x_blocks / 2) - 1); i < (x_middle + (x_blocks / 2) + 1); i++) {
             objects.add(new BlockUnbreakable(i, 0));
             objects.add(new BlockUnbreakable(i, y_blocks + 1));
@@ -168,6 +212,63 @@ public class Library extends JPanel implements MapInterface {
             objects.add(new BlockUnbreakable((x_middle - (x_blocks / 2) - 1), j));
             objects.add(new BlockUnbreakable((x_middle + (x_blocks / 2) + 1), j));
         }
+
+        for (int i = x_middle-7; i < x_middle+7; i = i+5) {
+
+
+            objects.add(new BlockUnbreakable(i, 13)); //pouvelle
+            objects.add(new BlockUnbreakable(i+1, 13)); //bibliothèques horizontales
+            objects.add(new BlockUnbreakable(i+2, 13));
+            objects.add(new BlockUnbreakable(i+3, 13));
+            objects.add(new BlockUnbreakable(i+1, 17)); //tables horizontales (celles tout en bas
+            objects.add(new BlockUnbreakable(i+2, 17));
+            objects.add(new BlockUnbreakable(i+3, 17));
+        }
+        objects.add(new BlockUnbreakable((x_middle-2), 5)); //poubelle
+        objects.add(new BlockUnbreakable((x_middle+4), 5)); //poubelle
+        objects.add(new BlockUnbreakable((x_middle)-x_blocks/2, 3)); //plante
+
+        for (int i = x_middle-1; i < x_middle+2; i++) {
+            objects.add(new BlockUnbreakable(i, 8)); //tables horizontales de 2 de large
+            objects.add(new BlockUnbreakable(i, 9));
+        }
+
+        for (int j = 7; j < 10; j++) {
+            objects.add(new BlockUnbreakable(x_middle-5, j)); //table verticale
+            objects.add(new BlockUnbreakable(x_middle-4, j));
+        }
+        objects.add(new BlockUnbreakable((x_middle+x_blocks/2), 8)); //plante
+        objects.add(new BlockUnbreakable((x_middle+x_blocks/2), 11)); //plante
+
+        for (int i = x_middle+4; i < x_middle+7; i++) {
+            objects.add(new BlockUnbreakable(i, 8)); //table horizontale de droite
+            objects.add(new BlockUnbreakable(i, 9));
+        }
+
+        objects.add(new BlockUnbreakable((x_middle-6), 16)); //chaises
+        objects.add(new BlockUnbreakable((x_middle-4), 16));
+        objects.add(new BlockUnbreakable((x_middle-1), 16));
+        objects.add(new BlockUnbreakable((x_middle+6), 16));
+        objects.add(new BlockUnbreakable((x_middle+4), 16));
+        objects.add(new BlockUnbreakable((x_middle+1), 16));
+        objects.add(new BlockUnbreakable((x_middle+8), 17)); //poubelle
+        objects.add(new BlockUnbreakable((x_middle-8), 16)); //plante
+
+        objects.add(new BlockUnbreakable((x_middle-6), 7));
+        objects.add(new BlockUnbreakable((x_middle-6), 9));
+        objects.add(new BlockUnbreakable((x_middle-3), 7));
+        objects.add(new BlockUnbreakable((x_middle-3), 9));
+        objects.add(new BlockUnbreakable((x_middle-1), 7));
+        objects.add(new BlockUnbreakable((x_middle+1), 7));
+        objects.add(new BlockUnbreakable((x_middle-1), 10));
+        objects.add(new BlockUnbreakable((x_middle+1), 10));
+        objects.add(new BlockUnbreakable((x_middle+4), 7));
+        objects.add(new BlockUnbreakable((x_middle+6), 7));
+        objects.add(new BlockUnbreakable((x_middle+4), 10));
+        objects.add(new BlockUnbreakable((x_middle+6), 10));
+
+
+
 
     }
 
