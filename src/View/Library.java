@@ -47,6 +47,8 @@ public class Library extends JPanel implements MapInterface {
         Image chaise_gauche = new ImageIcon("src/Image/chaise_gauche.png").getImage();
         Image table = new ImageIcon("src/Image/table_cuisine.png").getImage();
         Image bibliothèque = new ImageIcon("src/Image/bibliothèque.png").getImage();
+        Image bibliothèque_horizontal = new ImageIcon("src/Image/biblio_horizontal.png").getImage();
+
 
         super.paintComponent(g);
         for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+1; i++) {
@@ -61,8 +63,9 @@ public class Library extends JPanel implements MapInterface {
         }
 
         for (int i = x_middle-7; i < x_middle+7; i = i+5) {
-            g.drawImage(poubelle, i* BLOC_SIZE, 9 * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(bibliothèque, i* BLOC_SIZE, 9 * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(poubelle, i* BLOC_SIZE, 13 * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(bibliothèque_horizontal, (i+1)* BLOC_SIZE, 13 * BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, null);
+
         }
 
         g.drawImage(poubelle,(x_middle-2) * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );

@@ -226,8 +226,18 @@ public class StudentRoom extends JPanel implements MapInterface {
         }
         for (int j = 0; j < y_blocks+2; j++) {
             objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)-1), j));
+        }
+        for (int j = 0; j < y_blocks-5; j++) {
+            objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)+1), j));
+
+        }
+
+        for (int j = 11; j < y_blocks; j++) {
             objects.add(new BlockUnbreakable((x_middle+(x_blocks/2)+1), j));
         }
+        objects.add(new Door((x_middle+(x_blocks/2)+1), 9));
+        objects.add(new Door((x_middle+(x_blocks/2)+1), 10));
+
         objects.add(new Tv((x_middle-(x_blocks/2)+1), 1, 0)); //télé
         objects.add(new Tv((x_middle-(x_blocks/2)+2), 1, 0));
         objects.add(new Tv((x_middle-(x_blocks/2)), 1, 0));
@@ -252,10 +262,10 @@ public class StudentRoom extends JPanel implements MapInterface {
 
 
         }
-        objects.add(new Door((x_middle-(x_blocks/2)+8), 1)); //frigo
-        objects.add(new Door((x_middle-(x_blocks/2)+9), 1));
-        objects.add(new Door((x_middle-(x_blocks/2)+8), 2));
-        objects.add(new Door((x_middle-(x_blocks/2)+9), 2));
+        objects.add(new Fridge((x_middle-(x_blocks/2)+8), 1)); //frigo
+        objects.add(new Fridge((x_middle-(x_blocks/2)+9), 1));
+        objects.add(new Fridge((x_middle-(x_blocks/2)+8), 2));
+        objects.add(new Fridge((x_middle-(x_blocks/2)+9), 2));
 
 
 
