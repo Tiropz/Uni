@@ -97,6 +97,7 @@ public class StudentRoom extends JPanel implements MapInterface {
         g.drawImage(bureau, (x_middle-(x_blocks/2)+1)*BLOC_SIZE, 8*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
         Image porte = new ImageIcon("src/Image/porte.png").getImage();
         g.drawImage(porte, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, 9*BLOC_SIZE, BLOC_SIZE, 2*BLOC_SIZE, null);
+        Image personnage = new ImageIcon("src/Image/personnage.png").getImage();
 
 
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
@@ -204,8 +205,9 @@ public class StudentRoom extends JPanel implements MapInterface {
 
                     int xCenter = x * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
                     int yCenter = y * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
-                    g.setColor(Color.BLACK);
-                    g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
+                    //g.setColor(Color.BLACK);
+                    g.drawImage(personnage, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+                    //g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
                 }
             }
         }

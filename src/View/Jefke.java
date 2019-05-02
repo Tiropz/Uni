@@ -61,15 +61,15 @@ public class Jefke extends JPanel implements MapInterface {
 
         }
 
-        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) {
+        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
             g.drawImage(brique, i*BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null);
         }
 
-        for (int i = (x_middle-(x_blocks/2)-1); i < 19; i++) {
+        for (int i = (x_middle-(x_blocks/2)-1); i < x_middle+1; i++) {
             g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
 
-        for (int i = 21; i < (x_middle+(x_blocks/2)+3); i++) {
+        for (int i = x_middle+3; i < (x_middle+(x_blocks/2)+3); i++) {
             g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
 
@@ -78,7 +78,8 @@ public class Jefke extends JPanel implements MapInterface {
             g.drawImage(brique, (x_middle+13)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
 
-        for (int i = x_middle-11; i < x_middle; i++){
+        for (int i = x_middle-11; i < x_middle
+                ; i++){
             g.drawImage(bar, (i*BLOC_SIZE), (y_blocks-4)*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE,null);
         }
         for (int j = y_blocks-3; j < y_blocks+1; j++){
