@@ -1,1 +1,1 @@
-{"direction":3,"name":"Ilan","sex":"Masculin","hair":"Blond","height":"180","map":"Bibliothèque","energy":90.25999999999502,"hunger":-120.89999999999584,"bladder":2.0,"nbreFood":4,"san":0.0,"posX":21,"posY":10,"color":2}
+{"direction":1,"info":["Ilan","Masculin","Médecine","CM"],"map":"Bibliothèque","energy":[89.75999999999988,100.0,0.0],"hunger":[99.40000000000003,100.0,0.0],"bladder":[30.0,100.0,0.0],"hygene":[0.0,100.0,0.0],"food":[2,10,0],"xp":[5,25,40],"lvl":3,"intel":0,"social":0,"money":0,"time":"1","posX":22,"posY":3,"color":2}

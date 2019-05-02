@@ -20,13 +20,22 @@ public class Keyboard implements KeyListener {
         case KeyEvent.VK_RIGHT:
             game.movePlayer(1, 0);
             break;
+            case KeyEvent.VK_NUMPAD6:
+                game.movePlayer(1, 0);
+                break;
         case KeyEvent.VK_LEFT:
             game.movePlayer(-1, 0);
+            case KeyEvent.VK_NUMPAD4:
+                game.movePlayer(-1, 0);
             break;
         case KeyEvent.VK_DOWN:
             game.movePlayer(0, 1);
+            case KeyEvent.VK_NUMPAD2:
+                game.movePlayer(0, 1);
             break;
-        case KeyEvent.VK_UP:
+            case KeyEvent.VK_UP:
+                game.movePlayer(0, -1);
+        case KeyEvent.VK_NUMPAD8:
             game.movePlayer(0, -1);
              break;
          case KeyEvent.VK_SPACE:

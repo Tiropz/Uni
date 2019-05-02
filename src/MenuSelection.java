@@ -24,11 +24,9 @@ import com.google.gson.Gson;
 
 public class MenuSelection extends JDialog {
     private MenuInfo Info = new MenuInfo();
-    private boolean sendData;
-    private JLabel nomLabel, sexeLabel, cheveuxLabel, ageLabel, tailleLabel,taille2Label, icon;
-    private JRadioButton tranche1, tranche2, tranche3, tranche4;
-    private JComboBox sex, hair;
-    private JTextField name, height;
+    private JLabel nomLabel, sexeLabel, cheveuxLabel, cercleLabel, icon;
+    private JComboBox sex, study, cercle;
+    private JTextField name;
 
     public MenuSelection(JFrame parent, String title, boolean modal){
         super(parent, title, modal);
@@ -40,7 +38,6 @@ public class MenuSelection extends JDialog {
     }
 
     public MenuInfo showInfo(){
-        this.sendData = false;
         this.setVisible(true);
         return this.Info;
 
@@ -48,8 +45,9 @@ public class MenuSelection extends JDialog {
 
     private void initComponent(){
         //Icône
-        icon = new JLabel(new ImageIcon("images/icone.jpg"));
+        icon = new JLabel(new ImageIcon("Image/sol_2.jpg"));
         JPanel panIcon = new JPanel();
+        panIcon.setPreferredSize(new Dimension(70,70));
         panIcon.setBackground(Color.white);
         panIcon.setLayout(new BorderLayout());
         panIcon.add(icon);
@@ -79,46 +77,54 @@ public class MenuSelection extends JDialog {
 
 
         //La taille
-        JPanel panTaille = new JPanel();
-        panTaille.setBackground(Color.white);
-        panTaille.setPreferredSize(new Dimension(220, 60));
-        panTaille.setBorder(BorderFactory.createTitledBorder("Taille du personnage"));
-        tailleLabel = new JLabel("Taille : ");
-        taille2Label = new JLabel(" cm");
-        height = new JTextField("180");
-        height.setPreferredSize(new Dimension(90, 25));
-        panTaille.add(tailleLabel);
-        panTaille.add(height);
-        panTaille.add(taille2Label);
+        JPanel panCercle = new JPanel();
+        panCercle.setBackground(Color.white);
+        panCercle.setPreferredSize(new Dimension(220, 60));
+        panCercle.setBorder(BorderFactory.createTitledBorder("Choisissez un cercle"));
+        cercle = new JComboBox();
+        cercle.addItem("CM");
+        cercle.addItem("CP");
+        cercle.addItem("C$");
+        cercle.addItem("CPsy");
+        cercle.addItem("CD");
+        cercleLabel = new JLabel("Cercle");
+        panCercle.add(cercleLabel);
+        panCercle.add(cercle);
 
         //La couleur des cheveux
-        JPanel panCheveux = new JPanel();
-        panCheveux.setBackground(Color.white);
-        panCheveux.setPreferredSize(new Dimension(220, 60));
-        panCheveux.setBorder(BorderFactory.createTitledBorder("Couleur de cheveux du personnage"));
-        hair = new JComboBox();
-        hair.addItem("Blond");
-        hair.addItem("Brun");
-        hair.addItem("Roux");
-        hair.addItem("Blanc");
-        cheveuxLabel = new JLabel("Cheveux");
-        panCheveux.add(cheveuxLabel);
-        panCheveux.add(hair);
+        JPanel panStudy = new JPanel();
+        panStudy.setBackground(Color.white);
+        panStudy.setPreferredSize(new Dimension(220, 60));
+        panStudy.setBorder(BorderFactory.createTitledBorder("Quelles études voulez-vous entreprendre ?"));
+        study = new JComboBox();
+        study.addItem("Médecine");
+        study.addItem("Polytech");
+        study.addItem("Solvay");
+        study.addItem("Psychologie");
+        study.addItem("Droit");
+        cheveuxLabel = new JLabel("Etudes");
+        panStudy.add(cheveuxLabel);
+        panStudy.add(study);
 
         JPanel content = new JPanel();
         content.setBackground(Color.white);
+        content.add(panIcon);
         content.add(panNom);
         content.add(panSexe);
-        content.add(panTaille);
-        content.add(panCheveux);
+        content.add(panCercle);
+        content.add(panStudy);
+
 
         JPanel control = new JPanel();
         JButton okBouton = new JButton("OK");
 
         okBouton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0) {
-                  Info = new MenuInfo(name.getText(), (String)sex.getSelectedItem(), (String)hair.getSelectedItem() ,getHeight());
-                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)hair.getSelectedItem() ,getHeight(),"Kot", 100.0, 100.0, 0.0, 5, 100.0);
+                switch ((String)study.getSelectedItem()){
+                    case "Polytech":
+                }
+                  Info = new MenuInfo(name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem());
+                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", 100.0, 100.0, 0.0, 0.0,5, 0, 10, 15, 1, 0, 0,0);
                 // Create a new Gson object
                 Gson gson = new Gson();
 
@@ -144,21 +150,12 @@ public class MenuSelection extends JDialog {
                 setVisible(false);
             }
 
-            public String getHeight(){
-                return (height.getText().equals("")) ? "180" : height.getText();
-            }
+
         });
 
-        JButton cancelBouton = new JButton("Quitter");
-        cancelBouton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent arg0) {
-                setVisible(false);
-
-            }
-        });
 
         control.add(okBouton);
-        control.add(cancelBouton);
+
 
         this.getContentPane().add(panIcon, BorderLayout.WEST);
         this.getContentPane().add(content, BorderLayout.CENTER);

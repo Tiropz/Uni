@@ -3,6 +3,7 @@ package Model;
 import javax.swing.*;
 
 public class Door extends Block implements Activable {
+    Object[] reachable;
 
     public Door(int x, int y) {
         super(x, y, 2);
@@ -14,10 +15,16 @@ public class Door extends Block implements Activable {
         return mainChar;
 
     }
-    public String mapChange(String mapNbr){
+    public String mapChange(String map){
+        switch (map){
+            case "Kot":
+                reachable = new Object[]{"Bibliothèque"};
+                break;
+            case "Bibliothèque":
+                reachable = new Object[]{"Kot"};
+        }
        String test = (String) JOptionPane.showInputDialog(null, "Où voulez-vous aller ?", "Destinations",
-                JOptionPane.QUESTION_MESSAGE, null, new Object[] { "Bibliothèque",
-                        "Kot" }, "Joe");
+                JOptionPane.QUESTION_MESSAGE, null, reachable, "Joe");
        System.out.println(test);
         return  test;
 }
