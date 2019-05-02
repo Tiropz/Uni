@@ -117,9 +117,10 @@ public class Jefke extends JPanel implements MapInterface {
     }
 
 
-    public void setObjects(ArrayList<GameObject> objects) {
+    public Player setObjects(ArrayList<GameObject> objects,Player mainChar, MapInterface currentMap) {
 
         this.objects = objects;
+        return mainChar;
     }
 
     public ArrayList<GameObject> getObjects() {
