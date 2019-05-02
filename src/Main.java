@@ -35,7 +35,6 @@ public class Main extends JFrame {
         }
 
         Game game = new Game("Uni", mainChar);
-        Keyboard keyboard = new Keyboard(game);
-        game.setKeyListener(keyboard);
+
     }
 }
