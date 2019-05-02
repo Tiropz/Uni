@@ -374,6 +374,9 @@ public class Player extends GameObject implements Directable {
         return this.posY + delta;
     }
     public int getTimer(){return timer;}
+    public void setTimer(int val){
+        timer += val;
+    }
     public String getName(){return info.get(0);}
     public String getSex(){return info.get(1);}
     public String getStudy(){return info.get(2);}
@@ -385,6 +388,11 @@ public class Player extends GameObject implements Directable {
     public double getEnergy() {
         return energy.get(0);
     }
+    public void setEnergy(double val){
+        Double ener = getEnergy();
+        ener -= 0.01;
+        energy.set(0,ener);
+    }
     public double getEnergyMax(){
         return energy.get(1);
     }
@@ -393,6 +401,11 @@ public class Player extends GameObject implements Directable {
     }
     public double getHunger() {
         return hunger.get(0);
+    }
+    public void setHunger(double val){
+    Double hung = getHunger();
+    hung -= val;
+    hunger.set(0,hung);
     }
     public double getHungerMax() {
         return hunger.get(1);

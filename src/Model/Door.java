@@ -22,10 +22,10 @@ public class Door extends Block implements Activable {
                 break;
             case "Bibliothèque":
                 reachable = new Object[]{"Kot"};
+
         }
        String test = (String) JOptionPane.showInputDialog(null, "Où voulez-vous aller ?", "Destinations",
                 JOptionPane.QUESTION_MESSAGE, null, reachable, null);
-       System.out.println(test);
         return  test;
 }
     @Override

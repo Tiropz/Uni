@@ -78,11 +78,13 @@ public class Status extends JPanel {
         this.cercle = this.mainChar.getCercle();
 
         this.timer = this.mainChar.getTimer();
+
         this.hours = timer/3600;
-        this.timer -= this.hours;
+        this.timer -= this.hours*3600;
         this.minutes = this.timer/60;
-        this.timer -= this.minutes;
-        this.seconds = this.timer/60;
+        this.timer -= this.minutes*60;
+        this.seconds = this.timer;
+
         super.paintComponent(g);
         super.paintComponent(g);
         g.setColor(Color.BLACK);

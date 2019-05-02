@@ -52,13 +52,9 @@ public class Game extends JFrame implements DeletableObserver {
             public void run() {
             secondpassed++;
             System.out.println(secondpassed);
-            Double hung = mainChar.getHunger();
-            hung += 0.1;
-            mainChar.hunger.set(0,hung);
-            Double ener = mainChar.getEnergy();
-            ener -= 0.01;
-            mainChar.energy.set(0,ener);
-
+            mainChar.setHunger(-0.1);
+            mainChar.setEnergy(0.01);
+            mainChar.setTimer(1);
             status.redraw(mainChar);
             }
         };
@@ -129,14 +125,16 @@ public class Game extends JFrame implements DeletableObserver {
 			}
 		}
 		if(aimedObject instanceof Door){
-		  this.mapName = ((Door) aimedObject).mapChange(this.mapName);
-		  this.mainChar.map = this.mapName;
-		  this.gamemap = whichMap(mapName);
-		  buildMap(gamemap);
-		  System.out.println(this.gamemap);
-		  this.add((Component) gamemap, BorderLayout.NORTH);
-		  this.pack();
-
+		    String switchMap = ((Door) aimedObject).mapChange(this.mapName);
+		  if(switchMap != null) {
+		      this.mapName = switchMap;
+              this.mainChar.map = this.mapName;
+              this.gamemap = whichMap(mapName);
+              buildMap(gamemap);
+              System.out.println(this.gamemap);
+              this.add((Component) gamemap, BorderLayout.NORTH);
+              this.pack();
+          }
         }
 		if(aimedObject != null){
 		    System.out.println("activate");
