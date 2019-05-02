@@ -50,6 +50,7 @@ public class Library extends JPanel implements MapInterface {
         Image bibliothèque_horizontal = new ImageIcon("src/Image/biblio_horizontal.png").getImage();
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
         Image porte = new ImageIcon("src/Image/porte.png").getImage();
+        Image personnage = new ImageIcon("src/Image/personnage.png").getImage();
 
 
         super.paintComponent(g);
@@ -177,8 +178,9 @@ public class Library extends JPanel implements MapInterface {
 
                 int xCenter = x * BLOC_SIZE + (BLOC_SIZE-2)/2;
                 int yCenter = y * BLOC_SIZE + (BLOC_SIZE-2)/2;
-                g.setColor(Color.BLACK);
-                g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
+                //g.setColor(Color.BLACK);
+                g.drawImage(personnage, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+                //g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
             }
         }
     }
