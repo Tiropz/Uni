@@ -2,7 +2,6 @@ package Model;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Player extends GameObject implements Directable {
@@ -58,10 +57,6 @@ public class Player extends GameObject implements Directable {
         this.timer = timer;
     }
 
-    public void move(int X, int Y) {
-        this.posX = this.posX + X;
-        this.posY = this.posY + Y;
-    }
 
     public void rotate(int x, int y) {
         if (x == 0 && y == -1)
@@ -116,9 +111,7 @@ public class Player extends GameObject implements Directable {
                         Double blad = mainChar.getBladder();
                         blad += val;
                         mainChar.bladder.set(0,blad);
-                        int bouf = mainChar.getFood();
-                        bouf -= 1;
-                        mainChar.food.set(0,bouf);
+                        mainChar.setFood(-1);
                         dialog.dispose();
                     }
 
@@ -300,9 +293,7 @@ public class Player extends GameObject implements Directable {
                                 e.printStackTrace();
                             }
                         }
-                        int bouf = mainChar.getFood();
-                        bouf += val;
-                        mainChar.food.set(0,bouf);
+                        mainChar.setFood(1);
                         dialog.dispose();
                     }
 
@@ -429,6 +420,12 @@ public class Player extends GameObject implements Directable {
         return bladder.get(2);
     }
 
+
+    public void setFood(int val){
+        int bouf = getFood();
+        bouf += val;
+        food.set(0,bouf);
+    }
     public int getFood(){ return food.get(0); }
     public int getFoodMax(){ return food.get(1); }
     public int getFoodMin(){ return food.get(2); }

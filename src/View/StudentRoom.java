@@ -150,61 +150,63 @@ public class StudentRoom extends JPanel implements MapInterface {
 
 
         for (GameObject object : this.StudentObjects) {
-            int x = object.getPosX();
-            int y = object.getPosY();
-            int color = object.getColor();
+            if (object != null) {
+                int x = object.getPosX();
+                int y = object.getPosY();
+                int color = object.getColor();
 
-            if (color == 0) {
-                g.setColor(Color.DARK_GRAY);
-            }
+                if (color == 0) {
+                    g.setColor(Color.DARK_GRAY);
+                }
             /*else if (object instanceof Kitchen){
                 Image kitchen = new ImageIcon("src/Image/kitchen_"+object.getColor()+".png").getImage();
                 System.out.println("src/Image/kitchen_"+object.getColor()+".png");
                 g.drawImage(kitchen, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }*/
-            else if (color == 4) {
-                // Image frigo = new ImageIcon("src/Image/frigo_h_d.png").getImage();
-                //  g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            } else if (color == 5) {
-                //  Image frigo = new ImageIcon("src/Image/frigo_b_g.png").getImage();
-                //  g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            }else if (color == 6) {
+                else if (color == 4) {
+                    // Image frigo = new ImageIcon("src/Image/frigo_h_d.png").getImage();
+                    //  g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                } else if (color == 5) {
+                    //  Image frigo = new ImageIcon("src/Image/frigo_b_g.png").getImage();
+                    //  g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                } else if (color == 6) {
 
-                //  Image frigo = new ImageIcon("src/Image/frigo_b_d.png").getImage();
-                // g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            }/*else if (color == 7) {
+                    //  Image frigo = new ImageIcon("src/Image/frigo_b_d.png").getImage();
+                    // g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                }/*else if (color == 7) {
                 Image canapé = new ImageIcon("src/Image/sofa.png").getImage();
                 g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
             }*/
 
-           // g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
-            //g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
-            // Decouper en fontions
-            if(object instanceof Directable) {
-                int direction = ((Directable) object).getDirection();
+                // g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
+                //g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
+                // Decouper en fontions
+                if (object instanceof Directable) {
+                    int direction = ((Directable) object).getDirection();
 
-                int deltaX = 0;
-                int deltaY = 0;
+                    int deltaX = 0;
+                    int deltaY = 0;
 
-                switch (direction) {
-                    case Directable.EAST:
-                        deltaX = +(BLOC_SIZE-2)/2;
-                        break;
-                    case Directable.NORTH:
-                        deltaY = -(BLOC_SIZE-2)/2;
-                        break;
-                    case Directable.WEST:
-                        deltaX = -(BLOC_SIZE-2)/2;
-                        break;
-                    case Directable.SOUTH:
-                        deltaY = (BLOC_SIZE-2)/2;
-                        break;
+                    switch (direction) {
+                        case Directable.EAST:
+                            deltaX = +(BLOC_SIZE - 2) / 2;
+                            break;
+                        case Directable.NORTH:
+                            deltaY = -(BLOC_SIZE - 2) / 2;
+                            break;
+                        case Directable.WEST:
+                            deltaX = -(BLOC_SIZE - 2) / 2;
+                            break;
+                        case Directable.SOUTH:
+                            deltaY = (BLOC_SIZE - 2) / 2;
+                            break;
+                    }
+
+                    int xCenter = x * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
+                    int yCenter = y * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
+                    g.setColor(Color.BLACK);
+                    g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
                 }
-
-                int xCenter = x * BLOC_SIZE + (BLOC_SIZE-2)/2;
-                int yCenter = y * BLOC_SIZE + (BLOC_SIZE-2)/2;
-                g.setColor(Color.BLACK);
-                g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
             }
         }
     }

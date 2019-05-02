@@ -11,6 +11,10 @@ public abstract class GameObject {
         this.color = color;
     }
 
+    public void move(int X, int Y) {
+        this.posX = this.posX + X;
+        this.posY = this.posY + Y;
+    }
     public int getPosX() {
         return this.posX;
     }

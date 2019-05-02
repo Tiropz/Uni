@@ -154,7 +154,7 @@ public class Library extends JPanel implements MapInterface {
             int y = object.getPosY();
             int color = object.getColor();
 
-            if(object instanceof Directable) {
+            if(object instanceof Player) {
                 int direction = ((Directable) object).getDirection();
 
                 int deltaX = 0;

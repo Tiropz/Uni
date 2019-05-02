@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class AStar {
-	private static int mapSize = 25;
+	private static int mapSize = 100;
 	private boolean closed[][];
 	private int startI, startJ;
 	private int endI, endJ;

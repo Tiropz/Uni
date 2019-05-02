@@ -1,5 +1,6 @@
 import Controller.Keyboard;
 import Model.Game;
+import Model.PNJ;
 import Model.Player;
 import com.google.gson.Gson;
 
@@ -14,6 +15,8 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         Gson gson = new Gson();
         Player mainChar = null;
+        PNJ partner = null;
+        PNJ kid = null;
         try {
             BufferedReader br = new BufferedReader(
                     new FileReader("mainChar.json"));
@@ -33,8 +36,20 @@ public class Main extends JFrame {
             mainChar = gson.fromJson(br, Player.class);
 
         }
+        try {
+            BufferedReader br = new BufferedReader(
+                    new FileReader("partner.json"));
+            partner = gson.fromJson(br, PNJ.class);
+        } catch (FileNotFoundException e) {
 
-        Game game = new Game("Uni", mainChar);
+        }try {
+            BufferedReader br = new BufferedReader(
+                    new FileReader("kid.json"));
+            kid = gson.fromJson(br, PNJ.class);
+        } catch (FileNotFoundException e) {
+
+        }
+        Game game = new Game("Uni", mainChar, partner, kid);
 
     }
 }

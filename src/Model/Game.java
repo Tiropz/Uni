@@ -18,11 +18,13 @@ import com.google.gson.Gson;
 import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 
 public class Game extends JFrame implements DeletableObserver {
-    private ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    public static ArrayList<GameObject> objects = new ArrayList<GameObject>();
     ArrayList<GameObject> objectList = new ArrayList<GameObject>();
     private ArrayList<Player> players = new ArrayList<Player>();
     private Player active_player = null;
     private Player mainChar;
+    private PNJ partner;
+    private PNJ kid;
     private StudentRoom kotMap = new StudentRoom();
     private Library libraryMap = new Library();
     private Jefke jefkeMap = new Jefke();
@@ -31,14 +33,14 @@ public class Game extends JFrame implements DeletableObserver {
     private String mapName;
     public int secondpassed = 0;
     Timer myTimer = new Timer();
-    private int x_middle;
-    private int width_screen;
 
-    public Game(String title, Player mainChar) {
+    public Game(String title, Player mainChar, PNJ partner, PNJ kid) {
         super(title);
         this.mainChar = mainChar;
         this.mapName = this.mainChar.map;
         this.gamemap = whichMap(mapName);
+        this.partner = partner;
+        this.kid = kid;
 
         buildMap();
         this.setLayout(new BorderLayout());
@@ -60,10 +62,21 @@ public class Game extends JFrame implements DeletableObserver {
             public void run() {
             secondpassed++;
             System.out.println(secondpassed);
+            try{
+                partner.setHunger(-0.1, mainChar);
+                partner.action(mainChar);
+            }catch (NullPointerException e){
+
+            }
+            try{
+           //     kid.action(mainChar);
+            }catch (NullPointerException e){
+
+            }
             mainChar.setHunger(-0.1);
             mainChar.setEnergy(0.01);
             mainChar.setTimer(1);
-            status.redraw(mainChar);
+            notifyView(mainChar);
             }
         };
 
@@ -92,19 +105,21 @@ public class Game extends JFrame implements DeletableObserver {
         this.objectList = new ArrayList<GameObject>(getObjects());
         System.out.println("Objlist " + this.objectList.size());
         for(GameObject c:this.objectList){
-            if(c instanceof Player){
+            if(c instanceof Directable){
                 removed.add(c);
                 System.out.println("FONCTIONNE");
             }
         }
         this.objectList.removeAll(removed);
-        objects.clear();
-        objects.add(this.mainChar);
+        this.objects.clear();
+        this.objects.add(this.mainChar);
+        this.objects.add(this.partner);
+     //   this.objects.add(this.kid);
 
         System.out.println("Objlist2 " + this.objectList.size());
         // Map building
         // use currInstance
-        objects.addAll(objectList);
+        this.objects.addAll(objectList);
         System.out.println("Obj " + objects.size());
         this.setGameObjects(this.objects);
         Keyboard keyboard = new Keyboard(this);
@@ -123,11 +138,13 @@ public class Game extends JFrame implements DeletableObserver {
 
         boolean obstacle = false;
         for (GameObject object : objects) {
-            if (object.isAtPosition(nextX, nextY)) {
-                obstacle = object.isObstacle();
-            }
-            if (obstacle == true) {
-                break;
+            if (object != null) {
+                if (object.isAtPosition(nextX, nextY)) {
+                    obstacle = object.isObstacle();
+                }
+                if (obstacle == true) {
+                    break;
+                }
             }
         }
         active_player.rotate(x, y);
@@ -174,21 +191,26 @@ public class Game extends JFrame implements DeletableObserver {
             Gson gson = new Gson();
 
             //convert the Java object to json
-            String jsonString = gson.toJson(mainChar);
+            String jsonStringp = gson.toJson(partner);
+            String jsonStringc = gson.toJson(mainChar);
             //Write JSON String to file
-            FileWriter fileWriter = null;
+            FileWriter fileWriterc = null;
+            FileWriter fileWriterp = null;
             try {
-                fileWriter = new FileWriter("mainChar.json");
+                fileWriterc = new FileWriter("mainChar.json");
+                fileWriterp = new FileWriter("partner.json");
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                fileWriter.write(jsonString);
+                fileWriterc.write(jsonStringc);
+                fileWriterp.write(jsonStringp);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                fileWriter.close();
+                fileWriterc.close();
+                fileWriterp.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -222,10 +244,7 @@ public class Game extends JFrame implements DeletableObserver {
     }
     public void playerPos() {
         System.out.println(active_player.getPosX() + ":" + active_player.getPosY());
-        
     }
-
-
 
 	public void sendPlayer(int x, int y) {
 		Thread t = new Thread(new AStarThread(this, active_player, x,  y));
