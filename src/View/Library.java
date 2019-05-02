@@ -65,8 +65,10 @@ public class Library extends JPanel implements MapInterface {
         for (int i = x_middle-7; i < x_middle+7; i = i+5) {
             g.drawImage(poubelle, i* BLOC_SIZE, 13 * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             g.drawImage(bibliothèque_horizontal, (i+1)* BLOC_SIZE, 13 * BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, null);
-
+            g.drawImage(table, (i+1)* BLOC_SIZE, 17 * BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, null);
         }
+
+
 
         g.drawImage(poubelle,(x_middle-2) * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(poubelle,(x_middle+4) * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
@@ -76,6 +78,21 @@ public class Library extends JPanel implements MapInterface {
         g.drawImage(plante,(x_middle+x_blocks/2) * BLOC_SIZE, 8*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(plante,(x_middle+x_blocks/2) * BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(table,(x_middle-5) * BLOC_SIZE, 7*BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle-6) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle-4) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle-1) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle+1) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle+4) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle+6) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(poubelle,(x_middle+8) * BLOC_SIZE, 17*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(plante,(x_middle-8) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+
+
+
+
+
+
+
 
 
 
