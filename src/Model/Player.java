@@ -372,7 +372,10 @@ public class Player extends GameObject implements Directable {
     }
 
 
-
+    public int getIntel(){ return intel;}
+    public int getSocial(){return social;}
+    public int getMoney(){return money;}
+    public double getHygene(){return hygene.get(0);}
     public double getEnergy() {
         return energy.get(0);
     }

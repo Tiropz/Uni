@@ -29,6 +29,10 @@ public class Status extends JPanel {
     private int xp;
     private int xpCurrent;
     private int lvl;
+    private int intel;
+    private int social;
+    private int money;
+    private int hygene;
 
     public Status(Player mainChar) {
         width_screen = (int) screenSize.getWidth();
@@ -56,16 +60,24 @@ public class Status extends JPanel {
         this.xp = this.mainChar.getXp();
         this.lvl = this.mainChar.getLvl();
         this.xpCurrent = this.mainChar.getXpCurrent();
+        this.intel = this.mainChar.getIntel();
+        this.money = this.mainChar.getMoney();
+        this.social = this.mainChar.getSocial();
+        this.hygene = (int) this.mainChar.getHygene();
         super.paintComponent(g);
         super.paintComponent(g);
         g.setColor(Color.BLACK);
-        g.drawString("Energie" +" : " + this.energy, 0, height_status/4);
-        g.drawString("XP" +" : " + this.xp + "/" + this.xpCurrent, width_screen/2, height_status/4);
-        g.drawString("Faim" +" : " + this.hunger, 0, height_status/2);
-        g.drawString("Level" +" : " + this.lvl, width_screen/2, height_status/2);
-        g.drawString("Vessie" +" : " + this.bladder, 0, 3*height_status/4);
+        g.drawString("Energie" +" : " + this.energy, width_screen/4, height_status/4);
+        g.drawString("Faim" +" : " + this.hunger, width_screen/4, height_status/2);
+        g.drawString("Vessie" +" : " + this.bladder, width_screen/4, 3*height_status/4);
         // draw avatar
+        g.drawString("Level" +" : " + this.lvl, width_screen/2, height_status/2);
+        g.drawString("XP" +" : " + this.xp + "/" + this.xpCurrent, width_screen/2, height_status/4);
+        g.drawString("Argent" +" : " + this.money, width_screen/2, 3*height_status/4);
 
+        g.drawString("Intelligence" +" : " + this.intel, 3*width_screen/4, height_status/4);
+        g.drawString("Sociabilité" +" : " + this.social, 3*width_screen/4, height_status/2);
+        g.drawString("Hygiène" +" : " + this.hygene, 3*width_screen/4, 3*height_status/4);
     }
     public void redraw(Player actualPlayer) {
         this.mainChar = actualPlayer;
