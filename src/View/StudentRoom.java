@@ -97,6 +97,10 @@ public class StudentRoom extends JPanel implements MapInterface {
         g.drawImage(chaise2, (x_middle-(x_blocks/2)+1)*BLOC_SIZE, 9*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         Image bureau = new ImageIcon("src/Image/bureau_projet.png").getImage();
         g.drawImage(bureau, (x_middle-(x_blocks/2)+1)*BLOC_SIZE, 8*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+        Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
+        g.drawImage(brique, (x_middle-(x_blocks/2)+5)*BLOC_SIZE, 1*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        g.drawImage(brique, (x_middle-(x_blocks/2)+5)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+
 
 
 
@@ -189,6 +193,7 @@ public class StudentRoom extends JPanel implements MapInterface {
 
         objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 1)); //mur vertical
         objects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 2));
+
 
         for (int i = (x_middle-(x_blocks/2)+10); i < (x_middle+(x_blocks/2)+1); i++) {
             objects.add(new Kitchen(i, 1, i - (x_middle-(x_blocks/2)+10)+1)); //cuisine
