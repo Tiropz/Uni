@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PNJ extends GameObject implements Directable {
+public class PNJ extends GameObject implements Directable, Activable{
     int direction = EAST;
     String name;
     boolean indep;
@@ -50,14 +50,21 @@ public class PNJ extends GameObject implements Directable {
     }
     public double getHunger() {
         return hunger.get(0);
+    } public double getHungerMax() {
+        return hunger.get(1);
     }
     public Player setHunger(double val, Player mainChar){
         Double hung = getHunger();
         hung -= val;
-        if(hung >= hunger.get(1)/2){
+        if(hung >= getHungerMax()/2 && indep){
             mainChar.setFood(-1);
             hunger.set(0,hung-hung/2);
             System.out.println("PROUTA");
+        }
+        else if(hung >= getHungerMax()/2 && !indep){
+
+          alerte(mainChar);
+
         }
         else{
             hunger.set(0,hung);
@@ -65,6 +72,16 @@ public class PNJ extends GameObject implements Directable {
 
         return mainChar;
     }
+    private void alerte(Player mainChar){
+        JOptionPane jop = new JOptionPane();
+        int option = jop.showConfirmDialog(null, "Vous devez nourrir votre enfant\n Il vous reste : " + mainChar.getFood() + " snacks", "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
+            mainChar.setPosXY(getPosX(),getPosY());
+            mainChar.setFood(-1);
+            this.hunger.set(0,0.0);
+        }
+    }
+
     public void movePNJ(int x, int y) {
         int nextX = this.getPosX() + x;
         int nextY = this.getPosY() + y;
@@ -94,4 +111,31 @@ public class PNJ extends GameObject implements Directable {
         else if (x == -1 && y == 0)
             direction = WEST;
     }
+
+    @Override
+    public Player activate(Player mainChar) throws InterruptedException {
+        if(!indep){
+            JOptionPane jop = new JOptionPane();
+
+            int option = jop.showConfirmDialog(null, "Voulez-vous manger ?\n Il vous reste : " + mainChar.getFood() + " snacks", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (option == JOptionPane.OK_OPTION) {
+                if (this.getHunger() < this.getHungerMax() && mainChar.getFood() > mainChar.getFoodMin()) {
+
+                    final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+
+
+                    final JDialog dialog = new JDialog();
+                    dialog.setTitle("Message");
+                    dialog.setModal(true);
+                    dialog.setLocationRelativeTo(null);
+                    dialog.setContentPane(optionPane);
+                    dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+                    dialog.pack();
+                }
+            }
+
+
+    }
+        return null;
 }
+    }

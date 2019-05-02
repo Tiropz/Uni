@@ -69,7 +69,8 @@ public class Game extends JFrame implements DeletableObserver {
 
             }
             try{
-           //     kid.action(mainChar);
+                kid.action(mainChar);
+                kid.setHunger(-1, mainChar);
             }catch (NullPointerException e){
 
             }
@@ -114,6 +115,8 @@ public class Game extends JFrame implements DeletableObserver {
         this.objects.clear();
         this.objects.add(this.mainChar);
         this.objects.add(this.partner);
+        this.objects.add(this.kid);
+
      //   this.objects.add(this.kid);
 
         System.out.println("Objlist2 " + this.objectList.size());
@@ -181,7 +184,7 @@ public class Game extends JFrame implements DeletableObserver {
 		    this.mainChar = aimedObject.activate(this.mainChar);
             notifyView(this.mainChar);
 		}
-        
+
     }
     public void close(){
         //…
@@ -191,26 +194,31 @@ public class Game extends JFrame implements DeletableObserver {
             Gson gson = new Gson();
 
             //convert the Java object to json
+            String jsonStringk = gson.toJson(kid);
             String jsonStringp = gson.toJson(partner);
             String jsonStringc = gson.toJson(mainChar);
             //Write JSON String to file
             FileWriter fileWriterc = null;
             FileWriter fileWriterp = null;
+            FileWriter fileWriterk = null;
             try {
                 fileWriterc = new FileWriter("mainChar.json");
                 fileWriterp = new FileWriter("partner.json");
+                fileWriterk = new FileWriter("kid.json");
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
                 fileWriterc.write(jsonStringc);
                 fileWriterp.write(jsonStringp);
+                fileWriterk.write(jsonStringk);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
                 fileWriterc.close();
                 fileWriterp.close();
+                fileWriterk.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
