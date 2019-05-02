@@ -86,6 +86,18 @@ public class Library extends JPanel implements MapInterface {
         g.drawImage(chaise_bas,(x_middle+6) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(poubelle,(x_middle+8) * BLOC_SIZE, 17*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(plante,(x_middle-8) * BLOC_SIZE, 16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_droite,(x_middle-6) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_droite,(x_middle-6) * BLOC_SIZE, 9*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_gauche,(x_middle-3) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_gauche,(x_middle-3) * BLOC_SIZE, 9*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle-1) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_bas,(x_middle+1) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_haut,(x_middle-1) * BLOC_SIZE, 10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+        g.drawImage(chaise_haut,(x_middle+1) * BLOC_SIZE, 10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+
+
+
+
 
 
 
