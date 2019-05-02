@@ -62,7 +62,7 @@ public class Library extends JPanel implements MapInterface {
 
         for (int i = x_middle-7; i < x_middle+7; i = i+5) {
             g.drawImage(poubelle, i* BLOC_SIZE, 9 * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(biblio, i* BLOC_SIZE, 9 * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(bibliothèque, i* BLOC_SIZE, 9 * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
 
         g.drawImage(poubelle,(x_middle-2) * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
