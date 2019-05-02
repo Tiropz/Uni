@@ -151,14 +151,32 @@ public class MenuSelection extends JDialog {
                         energy = 100;
                         hunger = 100;
                         bladder = 100;
-                        hygene = 120;
+                        hygene = 100;
+                        intel = 30;
+                        social = 50;
+                        money = 100;
+                        break;
+                    case "Psychologie":
+                        energy = 100;
+                        hunger = 100;
+                        bladder = 100;
+                        hygene = 100;
+                        intel = 30;
+                        social = 70;
+                        money = 50;
+                        break;
+                    case "Droit":
+                        energy = 100;
+                        hunger = 100;
+                        bladder = 100;
+                        hygene = 100;
                         intel = 50;
                         social = 30;
-                        money = 50;
+                        money = 100;
                         break;
                 }
                   Info = new MenuInfo(name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem());
-                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", energy, 100.0, 0.0, 0.0,5, 0, 10, 15, 1, 0, 0,0);
+                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", energy, hunger, bladder, hygene,5, 0, 10, 15, 1, intel, social,money);
                 // Create a new Gson object
                 Gson gson = new Gson();
 
