@@ -26,12 +26,11 @@ public class Jefke extends JPanel implements MapInterface {
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));
         this.setBackground(Color.GRAY);
         this.setOpaque(true);
+        System.out.println("coucou" + y_blocks);
         this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));
 
 
         x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));
-        System.out.println("coucou" + x_middle);
-        System.out.println("coucou" + y_blocks);
         System.out.println(screenSize.getWidth());
         construct();
     }
@@ -45,10 +44,14 @@ public class Jefke extends JPanel implements MapInterface {
         Image banquette = new ImageIcon("src/Image/banc.png").getImage();
         Image banc = new ImageIcon("src/Image/banc.jpg").getImage();
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
+        Image personnage = new ImageIcon("src/Image/personnage.png").getImage();
+        Image porte_horizontale = new ImageIcon("src/Image/porte_horizontale.png").getImage();
+
+
 
         super.paintComponent(g);
         for (int i = x_middle - (x_blocks / 2); i < x_middle + (x_blocks / 2) + 2; i++) {
-            for (int j = 1; j < y_blocks + 1; j++) {
+            for (int j = 1; j < y_blocks + 2; j++) {
                 int x = i;
                 int y = j;
                 g.drawImage(sol_jefke, x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
@@ -56,29 +59,43 @@ public class Jefke extends JPanel implements MapInterface {
 
         }
 
-        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+2); i++) {
+        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) {
             g.drawImage(brique, i*BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null);
+        }
+
+        for (int i = (x_middle-(x_blocks/2)-1); i < 19; i++) {
             g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
 
-        for (int i = 6; i < x_middle-1; i++){
+        for (int i = 21; i < (x_middle+(x_blocks/2)+3); i++) {
+            g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        }
+
+        for (int j = 1;j< y_blocks+1; j++){
+            g.drawImage(brique, 6*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(brique, 31*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+        }
+
+        for (int i = 7; i < x_middle; i++){
             g.drawImage(bar, (i*BLOC_SIZE), (y_blocks-4)*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE,null);
         }
         for (int j = y_blocks-3; j < y_blocks+1; j++){
-            g.drawImage(bar, (x_middle-2)*BLOC_SIZE, j*BLOC_SIZE,BLOC_SIZE,BLOC_SIZE,null);
+            g.drawImage(bar, (x_middle-1)*BLOC_SIZE, j*BLOC_SIZE,BLOC_SIZE,BLOC_SIZE,null);
         }
 
-        for (int i = 8; i < 12; i = i + 3){
+        for (int i = 9; i < 13; i = i + 3){
             g.drawImage(pompe_bière, i*BLOC_SIZE, (y_blocks-2)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
         }
 
 
-            g.drawImage(banc, 28*BLOC_SIZE, (y_blocks-3)*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
-            g.drawImage(banquette, 28*BLOC_SIZE, (y_blocks-1)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(banquette, 28*BLOC_SIZE, (y_blocks-4)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(banquette, 28*BLOC_SIZE, (y_blocks-9)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(banc, 28*BLOC_SIZE, (y_blocks-11)*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
-            g.drawImage(banquette, 28*BLOC_SIZE, (y_blocks-12)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(banc, 29*BLOC_SIZE, (y_blocks-3)*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
+            g.drawImage(banquette, 29*BLOC_SIZE, (y_blocks-1)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(banquette, 29*BLOC_SIZE, (y_blocks-4)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(banquette, 29*BLOC_SIZE, (y_blocks-9)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(banc, 29*BLOC_SIZE, (y_blocks-11)*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
+            g.drawImage(banquette, 29*BLOC_SIZE, (y_blocks-12)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(porte_horizontale, 19*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+
 
 
 
@@ -110,8 +127,9 @@ public class Jefke extends JPanel implements MapInterface {
 
                 int xCenter = x * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
                 int yCenter = y * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
-                g.setColor(Color.BLACK);
-                g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
+                g.drawImage(personnage, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+                //g.setColor(Color.BLUE);
+                //g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
             }
         }
     }
@@ -132,6 +150,55 @@ public class Jefke extends JPanel implements MapInterface {
     }
 
     private void construct() {
-        objects.add(new BlockUnbreakable(2, 9));
+
+        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
+            objects.add(new BlockUnbreakable(i, 0));
+        }
+
+        for (int i = (x_middle-(x_blocks/2)-1); i < 19; i++) {
+            objects.add(new BlockUnbreakable(i, (y_blocks+1)));
+        }
+
+
+        for (int i = 21; i < (x_middle+(x_blocks/2)+3); i++) {
+            objects.add(new BlockUnbreakable( i, (y_blocks+1)));
+        }
+
+
+        for (int j = 1;j< y_blocks+1; j++){
+            objects.add(new BlockUnbreakable( 6, j));  //murs jefke verticaux
+            objects.add(new BlockUnbreakable( 31, j));
+        }
+
+        for (int i = 7; i < x_middle; i++){  // mur bar horizontal
+            objects.add (new BlockUnbreakable (i, (y_blocks-4)));
+        }
+
+
+        for (int j = y_blocks-3; j < y_blocks+1; j++){    //mur bar
+            objects.add (new BlockUnbreakable(x_middle-1, j));
+        }
+
+        for (int i = 9; i < 13; i = i + 3){      // pompe à bières
+            objects.add(new BlockUnbreakable( i, (y_blocks-2)));
+        }
+
+
+
+
+        for (int j =(y_blocks-4); j < (y_blocks); j++ ){
+            objects.add(new BlockUnbreakable(29, j)); //banc + banquette en haut a droite
+            objects.add(new BlockUnbreakable(30, j));
+        }
+
+        for (int j =(y_blocks-12); j < (y_blocks-8); j++ ){ //banc + bnaquette en bas a droite
+            objects.add(new BlockUnbreakable(29, j));
+            objects.add(new BlockUnbreakable(30, j));
+        }
+
+        for (int i = 19; i<21; i++){
+            objects.add(new Door(i, y_blocks+1));
+        }
+
     }
 }
