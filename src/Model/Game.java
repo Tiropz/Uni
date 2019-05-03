@@ -60,24 +60,26 @@ public class Game extends JFrame implements DeletableObserver {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-            secondpassed++;
-            System.out.println(secondpassed);
-            try{
-                partner.setHunger(-0.1, mainChar);
-                partner.action(mainChar);
-            }catch (NullPointerException e){
+                secondpassed++;
+                System.out.println(secondpassed);
+                if (gamemap == kotMap) {
+                    try {
+                        partner.setHunger(-0.1, mainChar);
+                        partner.action(mainChar);
+                    } catch (NullPointerException e) {
 
-            }
-            try{
-                kid.action(mainChar);
-                kid.setHunger(-1, mainChar);
-            }catch (NullPointerException e){
+                    }
+                    try {
+                        kid.action(mainChar);
+                        kid.setHunger(-1, mainChar);
+                    } catch (NullPointerException e) {
 
-            }
-            mainChar.setHunger(-0.1);
-            mainChar.setEnergy(0.01);
-            mainChar.setTimer(1);
-            notifyView(mainChar);
+                    }
+                    mainChar.setHunger(-0.1);
+                    mainChar.setEnergy(0.01);
+                    mainChar.setTimer(1);
+                    notifyView(mainChar);
+                }
             }
         };
 
@@ -114,8 +116,12 @@ public class Game extends JFrame implements DeletableObserver {
         this.objectList.removeAll(removed);
         this.objects.clear();
         this.objects.add(this.mainChar);
+        if(gamemap == kotMap){
+
+
         this.objects.add(this.partner);
         this.objects.add(this.kid);
+        }
 
      //   this.objects.add(this.kid);
 

@@ -246,15 +246,15 @@ public class StudentRoom extends JPanel implements MapInterface {
             StudentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)+1), j));
         }
         StudentObjects.add(new Door((x_middle+(x_blocks/2)+1), 9));
-        StudentObjects.add(new Door((x_middle+(x_blocks/2)+1), 10));
+        StudentObjects.add(new Door((x_middle+(x_blocks/2)+1), 10)); //porte
 
         StudentObjects.add(new Tv((x_middle-(x_blocks/2)+1), 1, 0)); //télé
         StudentObjects.add(new Tv((x_middle-(x_blocks/2)+2), 1, 0));
         StudentObjects.add(new Tv((x_middle-(x_blocks/2)), 1, 0));
 
-        StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 8)); //bureau + chaise
-        StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 9));
-        StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+2), 8));
+        StudentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 8)); //bureau + chaise
+        StudentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 9));
+        StudentObjects.add(new Desk((x_middle-(x_blocks/2)+2), 8));
 
         StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 1)); //mur vertical
         StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 2));
@@ -304,10 +304,10 @@ public class StudentRoom extends JPanel implements MapInterface {
 
         StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 11)); //mur salle de douche
 
-        StudentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 13)); //toilettes
-        StudentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), 13));
-        StudentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 14));
-        StudentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), 14));
+        StudentObjects.add(new Shower((x_middle+(x_blocks/2)), 13)); //Douche
+        StudentObjects.add(new Shower((x_middle+(x_blocks/2)-1), 13));
+        StudentObjects.add(new Shower((x_middle+(x_blocks/2)), 14));
+        StudentObjects.add(new Shower((x_middle+(x_blocks/2)-1), 14));
 
         StudentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-2), 14));
 
@@ -321,8 +321,8 @@ public class StudentRoom extends JPanel implements MapInterface {
         StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+4), 14));
         StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+4), 13)); //armoire chmabre
 
-        StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 14)); //douche
-        StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 13));
+        StudentObjects.add(new Toilet((x_middle-(x_blocks/2)+1), 14)); //toilette
+        StudentObjects.add(new Toilet((x_middle-(x_blocks/2)+1), 13));
 
         for (int j = 11; j < 15; j++) {
             StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1)+2, j)); //mur entre chambre et douche
@@ -354,8 +354,8 @@ public class StudentRoom extends JPanel implements MapInterface {
         }
 
         for (int j = 5; j < 9; j++) {
-            StudentObjects.add(new BlockUnbreakable(((x_middle-(x_blocks/2)+6)), j)); //  chaises + table dans cuisine + mur horizontal
-            StudentObjects.add(new BlockUnbreakable(((x_middle-(x_blocks/2)+7)), j));
+            StudentObjects.add(new Fridge(((x_middle-(x_blocks/2)+6)), j)); //  chaises + table dans cuisine + mur horizontal
+            StudentObjects.add(new Fridge(((x_middle-(x_blocks/2)+7)), j));
         }
     }
 }

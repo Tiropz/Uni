@@ -79,6 +79,8 @@ public class PNJ extends GameObject implements Directable, Activable{
             mainChar.setPosXY(getPosX(),getPosY());
             mainChar.setFood(-1);
             this.hunger.set(0,0.0);
+        }else{
+
         }
     }
 
