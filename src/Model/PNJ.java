@@ -13,8 +13,8 @@ public class PNJ extends GameObject implements Directable, Activable{
     private String time;
     private static JLabel lblClock = new JLabel("");
     public int timer;
-    public PNJ(int X, int Y, boolean indep,String name, Double hunger) {
-        super(X, Y, 0);
+    public PNJ(int x, int y, boolean indep,String name, Double hunger) {
+        super(x, y, 0);
         this.indep = indep;
         this.name = name;
         this.hunger.add(0.0);
@@ -24,7 +24,7 @@ public class PNJ extends GameObject implements Directable, Activable{
 
     @Override
     public int getDirection() {
-        return 0;
+        return direction;
     }
 
         @Override
@@ -32,32 +32,41 @@ public class PNJ extends GameObject implements Directable, Activable{
         return true;
     }
 
-    public void action(Player mainChar) {
+    public void action(Game g, Player mainChar) {
 
         Random rand = new Random();
-        int movevalue = rand.nextInt(4);
+        int movevalue = rand.nextInt(30);
         switch (movevalue){
             case 0:
                 movePNJ(0,1);
                 break;
             case 1:
                 movePNJ(0,-1);
+                break;
             case 2:
                 movePNJ(1,0);
+                break;
             case 3:
                 movePNJ(-1,0);
+                break;
         }
+        g.update(mainChar);
     }
     public double getHunger() {
         return hunger.get(0);
     } public double getHungerMax() {
         return hunger.get(1);
+    }public double getHungerMin(){
+        return hunger.get(2);
+    }
+    public boolean getIndep(){
+        return indep;
     }
     public Player setHunger(double val, Player mainChar){
         Double hung = getHunger();
         hung -= val;
         if(hung >= getHungerMax()/2 && indep){
-            mainChar.setFood(-1);
+            mainChar.setFoodFridge(-1);
             hunger.set(0,hung-hung/2);
             System.out.println("PROUTA");
         }
@@ -77,8 +86,16 @@ public class PNJ extends GameObject implements Directable, Activable{
         int option = jop.showConfirmDialog(null, "Vous devez nourrir votre enfant\n Il vous reste : " + mainChar.getFood() + " snacks", "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
             mainChar.setPosXY(getPosX(),getPosY());
-            mainChar.setFood(-1);
+            if (mainChar.getFood() == mainChar.getFoodMin()) {
+                jop.showMessageDialog(null, "Vous n'avez plus de nourriture, vous devez payer 5e", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+                mainChar.setMoney(-5);
+                mainChar.setFoodFridge(1);
+            }else{
+
+
+            mainChar.setFoodFridge(-1);
             this.hunger.set(0,0.0);
+            }
         }else{
 
         }
@@ -99,9 +116,10 @@ public class PNJ extends GameObject implements Directable, Activable{
         }
         this.rotate(x, y);
         if (obstacle == false) {
+            System.out.println("move x" + x);
+            System.out.println("move y" + y);
             this.move(x, y);
         }
-
     }
     public void rotate(int x, int y) {
         if (x == 0 && y == -1)
@@ -127,7 +145,7 @@ public class PNJ extends GameObject implements Directable, Activable{
 
 
                     final JDialog dialog = new JDialog();
-                    dialog.setTitle("Message");
+                    dialog.setTitle("?");
                     dialog.setModal(true);
                     dialog.setLocationRelativeTo(null);
                     dialog.setContentPane(optionPane);
@@ -163,6 +181,10 @@ public class PNJ extends GameObject implements Directable, Activable{
                     System.out.println("afterclock");
                     dialog.dispose();
 
+                } else if (this.getHunger() == this.getHungerMin()) {
+                    jop.showMessageDialog(null, "Vous avez déjà trop mangé", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+                } else if (mainChar.getFood() == mainChar.getFoodMin()) {
+                    jop.showMessageDialog(null, "Vous n'avez plus de nourriture", "Attention !", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
 

@@ -64,9 +64,7 @@ public class StudentRoom extends JPanel implements MapInterface {
         System.out.println(BLOC_SIZE);
        // System.out.println("Bonjour");
 
-        Image personnage_bas = new ImageIcon("src/Image/personnage_bas.png").getImage();
-        Image personnage_droite = new ImageIcon("src/Image/personnage_droite.png").getImage();
-        Image personnage_gauche = new ImageIcon("src/Image/personnage_gauche.png").getImage();
+
         Image frigo = new ImageIcon("src/Image/frigo_projet.png").getImage();
         g.drawImage(frigo, (x_middle-(x_blocks/2)+8)*BLOC_SIZE, BLOC_SIZE,2*BLOC_SIZE, 2*BLOC_SIZE, null);
         Image sofa_horizontal = new ImageIcon("src/Image/sofa.png").getImage();
@@ -102,7 +100,7 @@ public class StudentRoom extends JPanel implements MapInterface {
         g.drawImage(bureau, (x_middle-(x_blocks/2)+1)*BLOC_SIZE, 8*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
         Image porte = new ImageIcon("src/Image/porte.png").getImage();
         g.drawImage(porte, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, 9*BLOC_SIZE, BLOC_SIZE, 2*BLOC_SIZE, null);
-        Image personnage = new ImageIcon("src/Image/personnage.png").getImage();
+
 
 
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
@@ -159,63 +157,65 @@ public class StudentRoom extends JPanel implements MapInterface {
             if (object != null) {
                 int x = object.getPosX();
                 int y = object.getPosY();
-                int color = object.getColor();
 
-                if (color == 0) {
-                    g.setColor(Color.DARK_GRAY);
-                }
-            /*else if (object instanceof Kitchen){
-                Image kitchen = new ImageIcon("src/Image/kitchen_"+object.getColor()+".png").getImage();
-                System.out.println("src/Image/kitchen_"+object.getColor()+".png");
-                g.drawImage(kitchen, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            }*/
-                else if (color == 4) {
-                    // Image frigo = new ImageIcon("src/Image/frigo_h_d.png").getImage();
-                    //  g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-                } else if (color == 5) {
-                    //  Image frigo = new ImageIcon("src/Image/frigo_b_g.png").getImage();
-                    //  g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-                } else if (color == 6) {
-
-                    //  Image frigo = new ImageIcon("src/Image/frigo_b_d.png").getImage();
-                    // g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-                }/*else if (color == 7) {
-                Image canapé = new ImageIcon("src/Image/sofa.png").getImage();
-                g.drawImage(frigo, x*BLOC_SIZE, y*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
-            }*/
-
-                // g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE );
-                //g.fillRect(x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE , BLOC_SIZE);
-                // Decouper en fontions
-                if (object instanceof Directable) {
+                if (object instanceof Player) {
                     int direction = ((Directable) object).getDirection();
-
-                    int deltaX = 0;
-                    int deltaY = 0;
-
+                    Image perso = null;
                     switch (direction) {
                         case Directable.EAST:
-                            g.drawImage(personnage_droite, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-                            deltaX = +(BLOC_SIZE - 2) / 2;
+                            perso = new ImageIcon("src/Image/personnage_droite.png").getImage();
                             break;
                         case Directable.NORTH:
-                            g.drawImage(personnage, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-                            deltaY = -(BLOC_SIZE - 2) / 2;
+                            perso = new ImageIcon("src/Image/personnage.png").getImage();
                             break;
                         case Directable.WEST:
-                            g.drawImage(personnage_gauche, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-                            deltaX = -(BLOC_SIZE - 2) / 2;
+                            perso = new ImageIcon("src/Image/personnage_gauche.png").getImage();
                             break;
                         case Directable.SOUTH:
-                            g.drawImage(personnage_bas, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-                            deltaY = (BLOC_SIZE - 2) / 2;
+                            perso = new ImageIcon("src/Image/personnage_bas.png").getImage();
                             break;
                     }
+                    g.drawImage(perso,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+                }else if(object instanceof PNJ){
+                    if(((PNJ) object).getIndep()){
+                        int direction = ((Directable) object).getDirection();
 
-                    int xCenter = x * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
-                    int yCenter = y * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
-                    //g.setColor(Color.BLACK);
-                    //g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
+                        Image perso = null;
+                        switch (direction) {
+                            case Directable.EAST:
+                                perso = new ImageIcon("src/Image/personnage_fille_droite.png").getImage();
+                                break;
+                            case Directable.NORTH:
+                                perso = new ImageIcon("src/Image/personnage_fille_haut.png").getImage();
+                                break;
+                            case Directable.WEST:
+                                perso = new ImageIcon("src/Image/personnage_fille_gauche.png").getImage();
+                                break;
+                            case Directable.SOUTH:
+                                perso = new ImageIcon("src/Image/personnage_fille_bas.png").getImage();
+                                break;
+                        }
+                        g.drawImage(perso,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+                    }else{
+                        int direction = ((Directable) object).getDirection();
+
+                        Image perso = null;
+                        switch (direction) {
+                            case Directable.EAST:
+                                perso = new ImageIcon("src/Image/personnage_kid_droite.png").getImage();
+                                break;
+                            case Directable.NORTH:
+                                perso = new ImageIcon("src/Image/personnage_kid_haut.png").getImage();
+                                break;
+                            case Directable.WEST:
+                                perso = new ImageIcon("src/Image/personnage_kid_gauche.png").getImage();
+                                break;
+                            case Directable.SOUTH:
+                                perso = new ImageIcon("src/Image/personnage_kid_bas.png").getImage();
+                                break;
+                        }
+                        g.drawImage(perso,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+                    }
                 }
             }
         }
@@ -362,8 +362,8 @@ public class StudentRoom extends JPanel implements MapInterface {
         }
 
         for (int j = 5; j < 9; j++) {
-            StudentObjects.add(new Fridge(((x_middle-(x_blocks/2)+6)), j)); //  chaises + table dans cuisine + mur horizontal
-            StudentObjects.add(new Fridge(((x_middle-(x_blocks/2)+7)), j));
+            StudentObjects.add(new Table(((x_middle-(x_blocks/2)+6)), j)); //  chaises + table dans cuisine + mur horizontal
+            StudentObjects.add(new Table(((x_middle-(x_blocks/2)+7)), j));
         }
     }
 }

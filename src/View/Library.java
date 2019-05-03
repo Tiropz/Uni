@@ -102,7 +102,6 @@ public class Library extends JPanel implements MapInterface {
 
         }
 
-
         g.drawImage(porte, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, 9*BLOC_SIZE, BLOC_SIZE, 2*BLOC_SIZE, null);
         g.drawImage(poubelle,(x_middle-2) * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(poubelle,(x_middle+4) * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
@@ -135,60 +134,30 @@ public class Library extends JPanel implements MapInterface {
         g.drawImage(chaise_haut,(x_middle+4) * BLOC_SIZE, 10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
         g.drawImage(chaise_haut,(x_middle+6) * BLOC_SIZE, 10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         for (GameObject object : this.LibraryObjects) {
-            int x = object.getPosX();
-            int y = object.getPosY();
-            int color = object.getColor();
+            if (object != null) {
+                int x = object.getPosX();
+                int y = object.getPosY();
 
-            if(object instanceof Player) {
-                int direction = ((Directable) object).getDirection();
-
-                int deltaX = 0;
-                int deltaY = 0;
-
-                switch (direction) {
-                    case Directable.EAST:
-                        g.drawImage(personnage_droite, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-                        deltaX = +(BLOC_SIZE - 2) / 2;
-                        break;
-                    case Directable.NORTH:
-                        g.drawImage(personnage, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-                        deltaY = -(BLOC_SIZE - 2) / 2;
-                        break;
-                    case Directable.WEST:
-                        g.drawImage(personnage_gauche, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-                        deltaX = -(BLOC_SIZE - 2) / 2;
-                        break;
-                    case Directable.SOUTH:
-                        g.drawImage(personnage_bas, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-                        deltaY = (BLOC_SIZE - 2) / 2;
-                        break;
+                if (object instanceof Player) {
+                    int direction = ((Directable) object).getDirection();
+                    Image perso = null;
+                    switch (direction) {
+                        case Directable.EAST:
+                            perso = new ImageIcon("src/Image/personnage_droite.png").getImage();
+                            break;
+                        case Directable.NORTH:
+                            perso = new ImageIcon("src/Image/personnage.png").getImage();
+                            break;
+                        case Directable.WEST:
+                            perso = new ImageIcon("src/Image/personnage_gauche.png").getImage();
+                            break;
+                        case Directable.SOUTH:
+                            perso = new ImageIcon("src/Image/personnage_bas.png").getImage();
+                            break;
+                    }
+                    g.drawImage(perso,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                 }
-
-                int xCenter = x * BLOC_SIZE + (BLOC_SIZE-2)/2;
-                int yCenter = y * BLOC_SIZE + (BLOC_SIZE-2)/2;
-                //g.setColor(Color.BLACK);
-                //g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
             }
         }
     }

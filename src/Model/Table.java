@@ -13,10 +13,10 @@ import java.util.Date;
 
 import static java.lang.Thread.sleep;
 
-public class Fridge extends Block implements Activable {
+public class Table extends Block implements Activable {
 
     int nbreFoodIn;
-    public Fridge(int x, int y) {
+    public Table(int x, int y) {
 
         super(x, y, 4);
 
@@ -29,7 +29,8 @@ public class Fridge extends Block implements Activable {
 
     @Override
     public Player activate(Player mainChar){
-        mainChar.fillFridge(4, mainChar);
+
+        mainChar.eat(10,10, mainChar);
         return mainChar;
     }
 

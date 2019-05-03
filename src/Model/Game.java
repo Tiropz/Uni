@@ -64,26 +64,27 @@ public class Game extends JFrame implements DeletableObserver {
                 System.out.println(secondpassed);
                 if (gamemap == kotMap) {
                     try {
-                        partner.setHunger(-0.1, mainChar);
-                        partner.action(mainChar);
+                        partner.setHunger(-0.01, mainChar);
+                        partner.action(Game.this, mainChar);
                     } catch (NullPointerException e) {
 
                     }
                     try {
-                        kid.action(mainChar);
-                        kid.setHunger(-1, mainChar);
+                        kid.action(Game.this, mainChar);
+                        kid.setHunger(-0.01, mainChar);
                     } catch (NullPointerException e) {
 
                     }
-                    mainChar.setHunger(-0.1);
-                    mainChar.setEnergy(0.01);
-                    mainChar.setTimer(1);
-                    notifyView(mainChar);
+
                 }
+                mainChar.setHunger(0.01);
+                mainChar.setEnergy(-0.001);
+                mainChar.setTimer(1);
+                status.redraw(mainChar);
             }
         };
 
-        myTimer.schedule(task,1000,1000);
+        myTimer.schedule(task,100,100);
     }
 
     private MapInterface whichMap(String mapName) {

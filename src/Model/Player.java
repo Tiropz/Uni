@@ -15,6 +15,7 @@ public class Player extends GameObject implements Directable {
     List<Double> bladder = new ArrayList<>();
     List<Double> hygene = new ArrayList<>();
     List<Integer> food = new ArrayList<>();
+    List<Integer> foodFridge = new ArrayList<>();
     List<Integer> xp = new ArrayList<>();
     int lvl;
     int intel;
@@ -25,7 +26,7 @@ public class Player extends GameObject implements Directable {
     public int timer;
 
 
-    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood,int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer) {
+    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer) {
         super(x, y, 2);
         this.info.add(name);
         this.info.add(sex);
@@ -47,6 +48,9 @@ public class Player extends GameObject implements Directable {
         this.food.add(nbreFood);
         this.food.add(10);
         this.food.add(0);
+        this.foodFridge.add(nbreFoodFridge);
+        this.foodFridge.add(50);
+        this.foodFridge.add(0);
         this.xp.add(0);
         this.xp.add(10);
         this.xp.add(15);
@@ -77,7 +81,7 @@ public class Player extends GameObject implements Directable {
 
 
             final JDialog dialog = new JDialog();
-            dialog.setTitle("Message");
+            dialog.setTitle("Vous travaillez");
             dialog.setModal(true);
             dialog.setLocationRelativeTo(null);
             dialog.setContentPane(optionPane);
@@ -100,7 +104,7 @@ public class Player extends GameObject implements Directable {
                             e.printStackTrace();
                         }
                     }
-                    mainChar.setMoney(10);
+                    mainChar.setMoney(val);
                     dialog.dispose();
                 }
 
@@ -120,15 +124,15 @@ public class Player extends GameObject implements Directable {
     }
     public void eat(int val, int timer, Player mainChar) {
         JOptionPane jop = new JOptionPane();
-        int option = jop.showConfirmDialog(null, "Voulez-vous manger ?\n Il vous reste : " + mainChar.getFood() + " snacks", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int option = jop.showConfirmDialog(null, "Voulez-vous manger ?\n Il vous reste : " + mainChar.getFoodFridge() + " nourriture dans votre frigo", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
-            if (mainChar.getHunger() > mainChar.getHungerMin() && mainChar.getBladder() < mainChar.getBladderMax() && mainChar.getFood() > getFoodMin()) {
+            if ((int) mainChar.getHunger() > mainChar.getHungerMin() && mainChar.getBladder() < mainChar.getBladderMax() && mainChar.getFoodFridge() > getFoodFridgeMin()) {
 
                 final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
 
 
                 final JDialog dialog = new JDialog();
-                dialog.setTitle("Message");
+                dialog.setTitle("Vous mangez");
                 dialog.setModal(true);
                 dialog.setLocationRelativeTo(null);
                 dialog.setContentPane(optionPane);
@@ -153,10 +157,11 @@ public class Player extends GameObject implements Directable {
                         }
                         mainChar.setHunger(-val);
                         if(mainChar.getHunger() < mainChar.getHungerMin()){
-                            mainChar.setHunger(0);
+                            System.out.println("PROUTA");
+                            mainChar.setHunger(-mainChar.getHunger());
                         }
                         mainChar.setBladder(0.5);
-                        mainChar.setFood(-1);
+                        mainChar.setFoodFridge(-1);
                         dialog.dispose();
                     }
 
@@ -169,12 +174,12 @@ public class Player extends GameObject implements Directable {
                 dialog.dispose();
                 //  jop.showMessageDialog(null, lblClock, "Attention !", JOptionPane.DEFAULT_OPTION);
 
-            } else if (mainChar.getHunger() == mainChar.getHungerMin()) {
+            } else if ((int) mainChar.getHunger() == mainChar.getHungerMin()) {
                 jop.showMessageDialog(null, "Vous avez déjà trop mangé", "Attention !", JOptionPane.INFORMATION_MESSAGE);
             } else if (mainChar.getBladder() == mainChar.getBladderMax()) {
                 jop.showMessageDialog(null, "Vous devez aller aux toilettes", "Attention !", JOptionPane.INFORMATION_MESSAGE);
-            } else if (mainChar.getFood() == mainChar.getFoodMin()) {
-                jop.showMessageDialog(null, "Vous n'avez plus de nourriture", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+            } else if (mainChar.getFoodFridge() == mainChar.getFoodFridgeMin()) {
+                jop.showMessageDialog(null, "Vous n'avez plus de nourriture dans votre frigo", "Attention !", JOptionPane.INFORMATION_MESSAGE);
             }
 
 
@@ -218,7 +223,7 @@ public class Player extends GameObject implements Directable {
                         }
                         mainChar.setEnergy(val);
                         if(mainChar.getEnergy() > mainChar.getEnergyMax()) {
-                            mainChar.setEnergy(mainChar.getEnergyMax());
+                            mainChar.setEnergy(getEnergyMax()-getEnergy());
                         }
                         dialog.dispose();
                     }
@@ -244,7 +249,7 @@ public class Player extends GameObject implements Directable {
         JOptionPane jop = new JOptionPane();
         int option = jop.showConfirmDialog(null, "Voulez-vous aller aux toilettes ?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
-            if (mainChar.getBladder() < mainChar.getEnergyMax()) {
+            if (mainChar.getBladder() > mainChar.getBladderMin()) {
 
                 System.out.println("fini1");
                 final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
@@ -253,7 +258,7 @@ public class Player extends GameObject implements Directable {
                 //  t.start();
 
                 final JDialog dialog = new JDialog();
-                dialog.setTitle("Message");
+                dialog.setTitle("Vous pissez");
                 dialog.setModal(true);
                 dialog.setLocationRelativeTo(null);
                 dialog.setContentPane(optionPane);
@@ -278,7 +283,9 @@ public class Player extends GameObject implements Directable {
                         }
                         mainChar.setBladder(-val);
                         if(mainChar.getBladder() < mainChar.getBladderMin()) {
-                            mainChar.setBladder(mainChar.getBladderMin());
+                            System.out.println("PRTGERGEGEGERG");
+                            mainChar.setBladder(-mainChar.getBladder());
+
                         }
                         dialog.dispose();
                     }
@@ -302,16 +309,16 @@ public class Player extends GameObject implements Directable {
     }
     public Player makeFood(int val, int timer, Player mainChar){
         JOptionPane jop = new JOptionPane();
-        int option = jop.showConfirmDialog(null, "Voulez-vous faire à manger ?\n Il vous reste : " + mainChar.getFood() + " snacks", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int option = jop.showConfirmDialog(null, "Voulez-vous faire à manger ?\n Il vous reste : " + mainChar.getFoodFridge() + " nourriture dans votre frigo", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
-            if (mainChar.getFood() < mainChar.getFoodMax()) {
+            if (mainChar.getFoodFridge() < mainChar.getFoodFridgeMax()) {
 
                 final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
                 // Thread t = new SampleThread(lblClock, optionPane);
                 //  t.start();
 
                 final JDialog dialog = new JDialog();
-                dialog.setTitle("Message");
+                dialog.setTitle("Vous cuisinez");
                 dialog.setModal(true);
                 dialog.setLocationRelativeTo(null);
                 dialog.setContentPane(optionPane);
@@ -334,7 +341,7 @@ public class Player extends GameObject implements Directable {
                                 e.printStackTrace();
                             }
                         }
-                        mainChar.setFood(1);
+                        mainChar.setFoodFridge(1);
                         dialog.dispose();
                     }
 
@@ -348,7 +355,7 @@ public class Player extends GameObject implements Directable {
                 //  jop.showMessageDialog(null, lblClock, "Attention !", JOptionPane.DEFAULT_OPTION);
 
             } else {
-                jop.showMessageDialog(null, "Vous avez déjà trop de nourriture", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+                jop.showMessageDialog(null, "Vous avez déjà trop de nourriture dans le frigo", "Attention !", JOptionPane.INFORMATION_MESSAGE);
             }
 
 
@@ -366,7 +373,7 @@ public class Player extends GameObject implements Directable {
                 //  t.start();
 
                 final JDialog dialog = new JDialog();
-                dialog.setTitle("Message");
+                dialog.setTitle("Vous vous lavez");
                 dialog.setModal(true);
                 dialog.setLocationRelativeTo(null);
                 dialog.setContentPane(optionPane);
@@ -410,6 +417,64 @@ public class Player extends GameObject implements Directable {
         }
         return mainChar;
     }
+    public Player fillFridge(int timer, Player mainChar){
+        JOptionPane jop = new JOptionPane();
+        int option = jop.showConfirmDialog(null, "Voulez-vous déposer votre nourriture ?\n Il vous reste : " + mainChar.getFoodFridge() + " nourriture dans votre frigo et "+mainChar.getFood()+ " nourriture sur vous", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
+            if (mainChar.getFoodFridge() < mainChar.getFoodFridgeMax() && mainChar.getFood() > mainChar.getFoodMin()) {
+
+                final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+                // Thread t = new SampleThread(lblClock, optionPane);
+                //  t.start();
+
+                final JDialog dialog = new JDialog();
+                dialog.setTitle("Remplissage");
+                dialog.setModal(true);
+                dialog.setLocationRelativeTo(null);
+                dialog.setContentPane(optionPane);
+                dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+                dialog.pack();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(int i=timer ;i>0;i--){
+
+                            try {
+                                if(i==0){
+
+                                }
+                                time = (Integer.toString(i));
+                                System.out.println("te");
+                                lblClock.setText(time);
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        mainChar.setFoodFridge(mainChar.getFood());
+                        mainChar.setFood(-mainChar.getFood());
+                        dialog.dispose();
+                    }
+
+                }).start();
+
+                dialog.setVisible(true);
+
+                //  t.join();
+                System.out.println("afterclock");
+                dialog.dispose();
+                //  jop.showMessageDialog(null, lblClock, "Attention !", JOptionPane.DEFAULT_OPTION);
+
+            } else if(mainChar.getFoodFridge() == mainChar.getFoodFridgeMax()) {
+                jop.showMessageDialog(null, "Vous avez déjà trop de nourriture dans le frigo", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+            }else if(mainChar.getFood() == mainChar.getFoodMin()) {
+                jop.showMessageDialog(null, "Vous n'avez plus de nourriture sur vous", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+
+        }
+        return mainChar;
+    }
     public void upXp(int val){
         int newXp;
         int x = xp.get(0);
@@ -437,7 +502,7 @@ public class Player extends GameObject implements Directable {
 
     @Override
     public boolean isObstacle() {
-        return false;
+        return true;
     }
 
     @Override
@@ -538,7 +603,14 @@ public class Player extends GameObject implements Directable {
     public int getFood(){ return food.get(0); }
     public int getFoodMax(){ return food.get(1); }
     public int getFoodMin(){ return food.get(2); }
-
+    public int getFoodFridge(){ return foodFridge.get(0); }
+    public int getFoodFridgeMax(){ return foodFridge.get(1); }
+    public int getFoodFridgeMin(){ return foodFridge.get(2); }
+    public void setFoodFridge(int val){
+        int bouf = getFoodFridge();
+        bouf += val;
+        foodFridge.set(0,bouf);
+    }
     public int getXp(){ return xp.get(0);}
     public int getXpCurrent(){return xp.get(1);}
     public int getXpNext(){return xp.get(2);}
