@@ -23,7 +23,7 @@ public class Game extends JFrame implements DeletableObserver {
     private ArrayList<Player> players = new ArrayList<Player>();
     private Player active_player = null;
     private Player mainChar;
-    private PNJ partner;
+    public PNJ partner;
     private PNJ kid;
     private StudentRoom kotMap = new StudentRoom();
     private Library libraryMap = new Library();
@@ -65,10 +65,11 @@ public class Game extends JFrame implements DeletableObserver {
                 System.out.println(secondpassed);
                 if (gamemap == kotMap) {
                     try {
+                        System.out.println("NOCATCH");
                         partner.setHunger(-0.01, mainChar);
                         partner.action(Game.this, mainChar);
                     } catch (NullPointerException e) {
-
+                        System.out.println("CATCH");
                     }
                     try {
                         kid.action(Game.this, mainChar);
@@ -81,7 +82,7 @@ public class Game extends JFrame implements DeletableObserver {
                 mainChar.setHunger(0.01);
                 mainChar.setEnergy(-0.001);
                 mainChar.setTimer(1);
-                status.redraw(mainChar);
+                update(mainChar);
             }
         };
 
@@ -173,11 +174,13 @@ public class Game extends JFrame implements DeletableObserver {
     public void action() throws InterruptedException {
         Activable aimedObject = null;
 		for(GameObject object : objects){
-			if(object.isAtPosition(active_player.getFrontX(),active_player.getFrontY())){
-			    if(object instanceof Activable){
-			        aimedObject = (Activable) object;
-			    }
-			}
+		    if(object != null) {
+                if (object.isAtPosition(active_player.getFrontX(), active_player.getFrontY())) {
+                    if (object instanceof Activable) {
+                        aimedObject = (Activable) object;
+                    }
+                }
+            }
 		}
 		if(aimedObject instanceof Door){
 		    String switchMap = ((Door) aimedObject).mapChange(this.mapName);
@@ -193,10 +196,49 @@ public class Game extends JFrame implements DeletableObserver {
         }
 		if(aimedObject != null){
 		    System.out.println("");
-		    this.mainChar = aimedObject.activate(this.mainChar);
+		    this.mainChar = aimedObject.activate(this.mainChar, Game.this);
             notifyView(this.mainChar);
 		}
 
+    }
+    public void reload(PNJ kid, PNJ partner){
+        myTimer.cancel();
+        this.partner = partner;
+        this.kid = kid;
+        Gson gson = new Gson();
+
+        //convert the Java object to json
+        String jsonStringk = gson.toJson(kid);
+        String jsonStringp = gson.toJson(partner);
+        String jsonStringc = gson.toJson(mainChar);
+        //Write JSON String to file
+        FileWriter fileWriterc = null;
+        FileWriter fileWriterp = null;
+        FileWriter fileWriterk = null;
+        try {
+            fileWriterc = new FileWriter("mainChar.json");
+            fileWriterp = new FileWriter("partner.json");
+            fileWriterk = new FileWriter("kid.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileWriterc.write(jsonStringc);
+            fileWriterp.write(jsonStringp);
+            fileWriterk.write(jsonStringk);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileWriterc.close();
+            fileWriterp.close();
+            fileWriterk.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.dispose();
+        this.myTimer.cancel();
+        new Game("Uni", this.mainChar, this.partner, this.kid);
     }
     public void close(){
         //…

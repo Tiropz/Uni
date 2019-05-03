@@ -1,6 +1,9 @@
 package Model;
 
+import com.google.gson.Gson;
+
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +75,7 @@ public class Player extends GameObject implements Directable {
         else if (x == -1 && y == 0)
             direction = WEST;
     }
-    public void work(int val, int timer, Player mainChar){
+    public void work(int val, int timer, Player mainChar, Game g){
         JOptionPane jop = new JOptionPane();
         int option = jop.showConfirmDialog(null, "Voulez-vous travailler ?\n", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
@@ -90,7 +93,7 @@ public class Player extends GameObject implements Directable {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    for (int i = timer; i > 0; i--) {
+                    for (int i = 3; i > 0; i--) {
 
 
                         try {
@@ -112,7 +115,7 @@ public class Player extends GameObject implements Directable {
             }).start();
 
             dialog.setVisible(true);
-            upXp(5, mainChar);
+            upXp(5, mainChar, g);
             mainChar.setIntel(2);
             //  t.join();
             System.out.println("afterclock");
@@ -124,7 +127,7 @@ public class Player extends GameObject implements Directable {
 
 
     }
-    public void eat(int val, int timer, Player mainChar) {
+    public void eat(int val, int timer, Player mainChar, Game g) {
         JOptionPane jop = new JOptionPane();
         int option = jop.showConfirmDialog(null, "Voulez-vous manger ?\n Il vous reste : " + mainChar.getFoodFridge() + " nourriture dans votre frigo", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
@@ -170,7 +173,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-                upXp(1, mainChar);
+                upXp(1, mainChar, g);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -247,7 +250,7 @@ public class Player extends GameObject implements Directable {
         }
         return mainChar;
     }
-    public Player pee(double val, int timer, Player mainChar) {
+    public Player pee(double val, int timer, Player mainChar, Game g) {
         JOptionPane jop = new JOptionPane();
         int option = jop.showConfirmDialog(null, "Voulez-vous aller aux toilettes ?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
@@ -295,7 +298,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-                upXp(1, mainChar);
+                upXp(1, mainChar, g);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -309,7 +312,7 @@ public class Player extends GameObject implements Directable {
         }
        return mainChar;
     }
-    public Player makeFood(int val, int timer, Player mainChar){
+    public Player makeFood(int val, int timer, Player mainChar, Game g){
         JOptionPane jop = new JOptionPane();
         int option = jop.showConfirmDialog(null, "Voulez-vous faire à manger ?\n Il vous reste : " + mainChar.getFoodFridge() + " nourriture dans votre frigo", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
@@ -350,7 +353,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-                upXp(1, mainChar);
+                upXp(1, mainChar, g);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -364,7 +367,7 @@ public class Player extends GameObject implements Directable {
         }
         return mainChar;
     }
-    public Player wash(int val, int timer, Player mainChar){
+    public Player wash(int val, int timer, Player mainChar, Game g){
         JOptionPane jop = new JOptionPane();
         int option = jop.showConfirmDialog(null, "Voulez-vous vous laver ?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
@@ -405,7 +408,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-                upXp(1, mainChar);
+                upXp(1, mainChar, g);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -481,7 +484,7 @@ public class Player extends GameObject implements Directable {
         JOptionPane jop = new JOptionPane();
     jop.showMessageDialog(null, "Vous avez dans votre inventaire :\n" + "- " + mainChar.getFood()+ " nourriture", "Inventaire", JOptionPane.INFORMATION_MESSAGE);
     }
-    public void upXp(int val, Player mainChar){
+    public void upXp(int val, Player mainChar, Game g){
         int newXp;
         int x = mainChar.xp.get(0);
         x += val;
@@ -498,8 +501,53 @@ public class Player extends GameObject implements Directable {
             mainChar.xp.set(1,xpCurrent);
             mainChar.xp.set(2,xpNext);
             mainChar.lvl +=1;
-        }
 
+        }
+        if(mainChar.lvl >= 15 && mainChar.getSocial() >= 350){
+            PNJ partner = null;
+            Gson gson = new Gson();
+            try {
+
+                BufferedReader br = new BufferedReader(
+                        new FileReader("partner.json"));
+                partner = gson.fromJson(br, PNJ.class);
+            } catch (FileNotFoundException e) {
+
+            }
+                JOptionPane jop = new JOptionPane();
+                int option = jop.showConfirmDialog(null, "Voulez-vous faire un enfant", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (option == JOptionPane.OK_OPTION) {
+                    if (partner != null) {
+                        PNJ kid = new PNJ(mainChar.getPosX(),mainChar.getPosY(), false, "Enfant", 0.0, true);
+
+                        //convert the Java object to json
+                        String jsonString = gson.toJson(kid);
+                        //Write JSON String to file
+                        FileWriter fileWriter = null;
+                        try {
+                            fileWriter = new FileWriter("kid.json");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            fileWriter.write(jsonString);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            fileWriter.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        g.reload(kid, partner);
+                    } else {
+                        jop.showMessageDialog(null, "Vous devez d'abord avoir un/une partenaire", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+
+                }
+
+        }
     }
 
 
@@ -548,6 +596,7 @@ public class Player extends GameObject implements Directable {
     public int getIntel(){ return intel;}
     public void setIntel(int val){intel += val;}
     public int getSocial(){return social;}
+    public void setSocial(int val){social += val;}
     public int getMoney(){return money;}
     public void setHygene(int val){
         double hyg = getHygene();

@@ -10,7 +10,7 @@ public class Bed extends Block implements Activable {
     }
 
     @Override
-    public Player activate(Player mainChar) throws InterruptedException {
+    public Player activate(Player mainChar, Game game) throws InterruptedException {
         mainChar.rest(30,30, mainChar);
         return mainChar;
     }

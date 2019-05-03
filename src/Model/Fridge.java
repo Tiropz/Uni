@@ -1,16 +1,5 @@
 package Model;
 
-import com.google.gson.Gson;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-
 import static java.lang.Thread.sleep;
 
 public class Fridge extends Block implements Activable {
@@ -28,7 +17,7 @@ public class Fridge extends Block implements Activable {
     }
 
     @Override
-    public Player activate(Player mainChar){
+    public Player activate(Player mainChar, Game game){
         mainChar.fillFridge(4, mainChar);
         return mainChar;
     }

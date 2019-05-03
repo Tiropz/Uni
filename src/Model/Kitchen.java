@@ -10,8 +10,8 @@ public class Kitchen extends Block implements Activable {
     }
 
     @Override
-    public Player activate(Player mainChar) {
-        mainChar.makeFood(1,10, mainChar);
+    public Player activate(Player mainChar, Game game) {
+        mainChar.makeFood(1,10, mainChar, game);
         return mainChar;
     }
 

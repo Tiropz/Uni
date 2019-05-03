@@ -10,8 +10,8 @@ public class Shower extends Block implements Activable {
     }
 
     @Override
-    public Player activate(Player mainChar) throws InterruptedException {
-        mainChar.wash(10, 3, mainChar);
+    public Player activate(Player mainChar, Game game) throws InterruptedException {
+        mainChar.wash(10, 3, mainChar, game);
         return mainChar;
     }
 

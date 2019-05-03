@@ -49,7 +49,7 @@ public class Main extends JFrame {
         } catch (FileNotFoundException e) {
 
         }
-        Game game = new Game("Uni", mainChar, partner, kid);
+      new Game("Uni", mainChar, partner, kid);
 
     }
 }

@@ -10,7 +10,7 @@ public class Door extends Block implements Activable {
     }
 
     @Override
-    public Player activate(Player mainChar) {
+    public Player activate(Player mainChar, Game game) {
         System.out.println("aahzahheaheazheaheazheah");
         return mainChar;
 

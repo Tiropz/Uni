@@ -11,7 +11,7 @@ public class BlockBreakable extends Block implements Deletable, Activable {
         this.lifepoints = lifepoints; 
     }
     
-    public Player activate(Player mainChar){
+    public Player activate(Player mainChar, Game game){
         if (lifepoints == 1){
             crush();
         }

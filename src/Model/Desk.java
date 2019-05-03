@@ -6,8 +6,8 @@ public class Desk extends Block implements Activable {
     }
 
     @Override
-    public Player activate(Player mainChar) throws InterruptedException {
-        mainChar.work(10,10, mainChar);
+    public Player activate(Player mainChar, Game game) throws InterruptedException {
+        mainChar.work(10,10, mainChar, game);
         return mainChar;
     }
 

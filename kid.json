@@ -1,1 +1,1 @@
-{"direction":3,"name":"Enfant","indep":false,"hunger":[0.38000000000000017,100.0,0.0],"time":"1","timer":0,"posX":20,"posY":14,"color":2}
+{"direction":3,"name":"Enfant","indep":false,"movable":true,"hunger":[2.4199999999999924,100.0,0.0],"timer":0,"posX":16,"posY":10,"color":0}
