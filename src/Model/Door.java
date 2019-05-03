@@ -25,6 +25,9 @@ public class Door extends Block implements Activable {
                 break;
             case "Jefke":
                 reachable = new Object[]{"Kot"};
+                break;
+            case "Grocery":
+                reachable = new Object[]{"Kot","Jefke","Bibliothèque"};
 
 
         }
