@@ -35,6 +35,8 @@ public class StudentRoom extends JPanel implements MapInterface {
 
 
 
+
+
     public void paint(Graphics g) {
         System.out.println("PaintStud");
         Image sol = new ImageIcon("src/Image/sol_2.jpg").getImage();
