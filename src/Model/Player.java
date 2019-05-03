@@ -68,12 +68,61 @@ public class Player extends GameObject implements Directable {
         else if (x == -1 && y == 0)
             direction = WEST;
     }
+    public void work(int val, int timer, Player mainChar){
+        JOptionPane jop = new JOptionPane();
+        int option = jop.showConfirmDialog(null, "Voulez-vous travailler ?\n", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
 
+            final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+
+
+            final JDialog dialog = new JDialog();
+            dialog.setTitle("Message");
+            dialog.setModal(true);
+            dialog.setLocationRelativeTo(null);
+            dialog.setContentPane(optionPane);
+            dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+            dialog.pack();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = timer; i > 0; i--) {
+
+                        try {
+                            if (i == 0) {
+
+                            }
+                            time = (Integer.toString(i));
+                            System.out.println("te");
+                            lblClock.setText(time);
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    mainChar.setMoney(10);
+                    dialog.dispose();
+                }
+
+            }).start();
+
+            dialog.setVisible(true);
+
+            //  t.join();
+            System.out.println("afterclock");
+            dialog.dispose();
+            //  jop.showMessageDialog(null, lblClock, "Attention !", JOptionPane.DEFAULT_OPTION);
+
+
+        }
+
+        upXp(6);
+    }
     public void eat(int val, int timer, Player mainChar) {
         JOptionPane jop = new JOptionPane();
         int option = jop.showConfirmDialog(null, "Voulez-vous manger ?\n Il vous reste : " + mainChar.getFood() + " snacks", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
-            if (mainChar.getHunger() < mainChar.getHungerMax() && mainChar.getBladder() < mainChar.getBladderMax() && mainChar.getFood() > getFoodMin()) {
+            if (mainChar.getHunger() > mainChar.getHungerMin() && mainChar.getBladder() < mainChar.getBladderMax() && mainChar.getFood() > getFoodMin()) {
 
                 final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
 
@@ -102,15 +151,11 @@ public class Player extends GameObject implements Directable {
                                 e.printStackTrace();
                             }
                         }
-                        Double hung = mainChar.getHunger();
-                        hung -= val;
-                        mainChar.hunger.set(0,hung);
+                        mainChar.setHunger(-val);
                         if(mainChar.getHunger() < mainChar.getHungerMin()){
-                            mainChar.hunger.set(0,mainChar.getHungerMin());
+                            mainChar.setHunger(0);
                         }
-                        Double blad = mainChar.getBladder();
-                        blad += val;
-                        mainChar.bladder.set(0,blad);
+                        mainChar.setBladder(0.5);
                         mainChar.setFood(-1);
                         dialog.dispose();
                     }
@@ -139,7 +184,7 @@ public class Player extends GameObject implements Directable {
     }
     public Player rest(int val, int timer, Player mainChar){
         JOptionPane jop = new JOptionPane();
-        int option = jop.showConfirmDialog(null, "Voulez-vous regarder la TV ?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int option = jop.showConfirmDialog(null, "Voulez-vous vous reposer ?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
             if (mainChar.getEnergy() < mainChar.getEnergyMax()) {
 
@@ -171,11 +216,9 @@ public class Player extends GameObject implements Directable {
                                 e.printStackTrace();
                             }
                         }
-                        Double ener = mainChar.getEnergy();
-                        ener += val;
-                        mainChar.energy.set(0,ener);
+                        mainChar.setEnergy(val);
                         if(mainChar.getEnergy() > mainChar.getEnergyMax()) {
-                            mainChar.energy.set(0,100.0);
+                            mainChar.setEnergy(mainChar.getEnergyMax());
                         }
                         dialog.dispose();
                     }
@@ -233,11 +276,9 @@ public class Player extends GameObject implements Directable {
                                 e.printStackTrace();
                             }
                         }
-                        Double blad = mainChar.getBladder();
-                        blad += val;
-                        mainChar.bladder.set(0,blad);
+                        mainChar.setBladder(-val);
                         if(mainChar.getBladder() < mainChar.getBladderMin()) {
-                            mainChar.bladder.set(0,mainChar.getBladderMin());
+                            mainChar.setBladder(mainChar.getBladderMin());
                         }
                         dialog.dispose();
                     }
@@ -314,6 +355,61 @@ public class Player extends GameObject implements Directable {
         }
         return mainChar;
     }
+    public Player wash(int val, int timer, Player mainChar){
+        JOptionPane jop = new JOptionPane();
+        int option = jop.showConfirmDialog(null, "Voulez-vous vous laver ?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
+            if (mainChar.getHygene() < mainChar.getHygeneMax()) {
+
+                final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+                // Thread t = new SampleThread(lblClock, optionPane);
+                //  t.start();
+
+                final JDialog dialog = new JDialog();
+                dialog.setTitle("Message");
+                dialog.setModal(true);
+                dialog.setLocationRelativeTo(null);
+                dialog.setContentPane(optionPane);
+                dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+                dialog.pack();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(int i=timer;i>0;i--){
+
+                            try {
+                                if(i==0){
+
+                                }
+                                time = (Integer.toString(i));
+                                System.out.println("te");
+                                lblClock.setText(time);
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        mainChar.setHygene(val);
+                        dialog.dispose();
+                    }
+
+                }).start();
+
+                dialog.setVisible(true);
+
+                //  t.join();
+                System.out.println("afterclock");
+                dialog.dispose();
+                //  jop.showMessageDialog(null, lblClock, "Attention !", JOptionPane.DEFAULT_OPTION);
+
+            } else {
+                jop.showMessageDialog(null, "Vous avez déjà propre", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+
+        }
+        return mainChar;
+    }
     public void upXp(int val){
         int newXp;
         int x = xp.get(0);
@@ -381,13 +477,19 @@ public class Player extends GameObject implements Directable {
     public int getIntel(){ return intel;}
     public int getSocial(){return social;}
     public int getMoney(){return money;}
+    public void setHygene(int val){
+        double hyg = getHygene();
+        hyg += val;
+        hygene.set(0,hyg);
+    }
     public double getHygene(){return hygene.get(0);}
+    public double getHygeneMax(){return hygene.get(1);}
     public double getEnergy() {
         return energy.get(0);
     }
     public void setEnergy(double val){
         Double ener = getEnergy();
-        ener -= 0.01;
+        ener += val;
         energy.set(0,ener);
     }
     public double getEnergyMax(){
@@ -401,7 +503,7 @@ public class Player extends GameObject implements Directable {
     }
     public void setHunger(double val){
     Double hung = getHunger();
-    hung -= val;
+    hung += val;
     hunger.set(0,hung);
     }
     public double getHungerMax() {
@@ -409,6 +511,11 @@ public class Player extends GameObject implements Directable {
     }
     public double getHungerMin() {
         return hunger.get(2);
+    }
+    public void setBladder(double val){
+        Double blad = getBladder();
+        blad += val;
+        bladder.set(0,blad);
     }
     public double getBladder() {
         return bladder.get(0);
@@ -419,7 +526,9 @@ public class Player extends GameObject implements Directable {
     public double getBladderMin() {
         return bladder.get(2);
     }
-
+    public void setMoney(int val){
+        money += val;
+    }
 
     public void setFood(int val){
         int bouf = getFood();

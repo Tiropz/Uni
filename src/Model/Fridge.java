@@ -30,7 +30,7 @@ public class Fridge extends Block implements Activable {
     @Override
     public Player activate(Player mainChar){
 
-       mainChar.eat(10,5, mainChar);
+       mainChar.eat(10,10, mainChar);
         return mainChar;
     }
 

@@ -151,6 +151,7 @@ public class Jefke extends JPanel implements MapInterface {
     public Player setObjects(ArrayList<GameObject> objects,Player mainChar, MapInterface currentMap) {
 
         this.JefkeObjects = new ArrayList<>(objects);
+        mainChar.setPosXY(x_middle+1,y_blocks);
         return mainChar;
     }
 

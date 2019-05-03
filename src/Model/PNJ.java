@@ -79,6 +79,8 @@ public class PNJ extends GameObject implements Directable, Activable{
             mainChar.setPosXY(getPosX(),getPosY());
             mainChar.setFood(-1);
             this.hunger.set(0,0.0);
+        }else{
+
         }
     }
 
@@ -117,7 +119,7 @@ public class PNJ extends GameObject implements Directable, Activable{
         if(!indep){
             JOptionPane jop = new JOptionPane();
 
-            int option = jop.showConfirmDialog(null, "Voulez-vous manger ?\n Il vous reste : " + mainChar.getFood() + " snacks", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int option = jop.showConfirmDialog(null, "Voulez-vous lui donner à manger ?\n Il vous reste : " + mainChar.getFood() + " snacks", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (option == JOptionPane.OK_OPTION) {
                 if (this.getHunger() < this.getHungerMax() && mainChar.getFood() > mainChar.getFoodMin()) {
 
@@ -131,11 +133,41 @@ public class PNJ extends GameObject implements Directable, Activable{
                     dialog.setContentPane(optionPane);
                     dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
                     dialog.pack();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for(int i=4;i>0;i--){
+
+                                try {
+                                    if(i==0){
+
+                                    }
+                                    time = (Integer.toString(i));
+                                    System.out.println("te");
+                                    lblClock.setText(time);
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            mainChar.setFood(-1);
+                            hunger.set(0,0.0);
+                            dialog.dispose();
+                        }
+
+                    }).start();
+
+                    dialog.setVisible(true);
+
+                    //  t.join();
+                    System.out.println("afterclock");
+                    dialog.dispose();
+
                 }
             }
 
 
     }
-        return null;
+        return mainChar;
 }
     }
