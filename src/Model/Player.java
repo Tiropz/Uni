@@ -92,6 +92,7 @@ public class Player extends GameObject implements Directable {
                 public void run() {
                     for (int i = timer; i > 0; i--) {
 
+
                         try {
                             if (i == 0) {
 
