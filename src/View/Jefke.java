@@ -48,6 +48,9 @@ public class Jefke extends JPanel implements MapInterface {
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
         Image personnage = new ImageIcon("src/Image/personnage.png").getImage();
         Image porte_horizontale = new ImageIcon("src/Image/porte_horizontale.png").getImage();
+        Image personnage_bas = new ImageIcon("src/Image/personnage_bas.png").getImage();
+        Image personnage_droite = new ImageIcon("src/Image/personnage_droite.png").getImage();
+        Image personnage_gauche = new ImageIcon("src/Image/personnage_gauche.png").getImage();
 
 
 
@@ -117,22 +120,26 @@ public class Jefke extends JPanel implements MapInterface {
 
                 switch (direction) {
                     case Directable.EAST:
+                        g.drawImage(personnage_droite, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                         deltaX = +(BLOC_SIZE - 2) / 2;
                         break;
                     case Directable.NORTH:
+                        g.drawImage(personnage, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                         deltaY = -(BLOC_SIZE - 2) / 2;
                         break;
                     case Directable.WEST:
+                        g.drawImage(personnage_gauche, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                         deltaX = -(BLOC_SIZE - 2) / 2;
                         break;
                     case Directable.SOUTH:
+                        g.drawImage(personnage_bas, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                         deltaY = (BLOC_SIZE - 2) / 2;
                         break;
                 }
 
                 int xCenter = x * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
                 int yCenter = y * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
-                g.drawImage(personnage, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+
                 //g.setColor(Color.BLUE);
                 //g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
             }

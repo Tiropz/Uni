@@ -61,7 +61,9 @@ public class StudentRoom extends JPanel implements MapInterface {
         System.out.println(BLOC_SIZE);
        // System.out.println("Bonjour");
 
-
+        Image personnage_bas = new ImageIcon("src/Image/personnage_bas.png").getImage();
+        Image personnage_droite = new ImageIcon("src/Image/personnage_droite.png").getImage();
+        Image personnage_gauche = new ImageIcon("src/Image/personnage_gauche.png").getImage();
         Image frigo = new ImageIcon("src/Image/frigo_projet.png").getImage();
         g.drawImage(frigo, (x_middle-(x_blocks/2)+8)*BLOC_SIZE, BLOC_SIZE,2*BLOC_SIZE, 2*BLOC_SIZE, null);
         Image sofa_horizontal = new ImageIcon("src/Image/sofa.png").getImage();
@@ -190,15 +192,19 @@ public class StudentRoom extends JPanel implements MapInterface {
 
                     switch (direction) {
                         case Directable.EAST:
+                            g.drawImage(personnage_droite, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                             deltaX = +(BLOC_SIZE - 2) / 2;
                             break;
                         case Directable.NORTH:
+                            g.drawImage(personnage, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                             deltaY = -(BLOC_SIZE - 2) / 2;
                             break;
                         case Directable.WEST:
+                            g.drawImage(personnage_gauche, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                             deltaX = -(BLOC_SIZE - 2) / 2;
                             break;
                         case Directable.SOUTH:
+                            g.drawImage(personnage_bas, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                             deltaY = (BLOC_SIZE - 2) / 2;
                             break;
                     }
@@ -206,7 +212,6 @@ public class StudentRoom extends JPanel implements MapInterface {
                     int xCenter = x * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
                     int yCenter = y * BLOC_SIZE + (BLOC_SIZE - 2) / 2;
                     //g.setColor(Color.BLACK);
-                    g.drawImage(personnage, x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                     //g.drawLine(xCenter, yCenter, xCenter + deltaX, yCenter + deltaY);
                 }
             }
