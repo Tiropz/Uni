@@ -83,10 +83,10 @@ public class PNJ extends GameObject implements Directable, Activable{
     }
     private void alerte(Player mainChar){
         JOptionPane jop = new JOptionPane();
-        int option = jop.showConfirmDialog(null, "Vous devez nourrir votre enfant\n Il vous reste : " + mainChar.getFood() + " snacks", "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int option = jop.showConfirmDialog(null, "Vous devez nourrir votre enfant\n Il vous reste : " + mainChar.getFoodFridge() + " snacks", "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
             mainChar.setPosXY(getPosX(),getPosY());
-            if (mainChar.getFood() == mainChar.getFoodMin()) {
+            if (mainChar.getFoodFridge() == mainChar.getFoodFridgeMin()) {
                 jop.showMessageDialog(null, "Vous n'avez plus de nourriture, vous devez payer 5e", "Attention !", JOptionPane.INFORMATION_MESSAGE);
                 mainChar.setMoney(-5);
                 mainChar.setFoodFridge(1);
@@ -137,9 +137,9 @@ public class PNJ extends GameObject implements Directable, Activable{
         if(!indep){
             JOptionPane jop = new JOptionPane();
 
-            int option = jop.showConfirmDialog(null, "Voulez-vous lui donner à manger ?\n Il vous reste : " + mainChar.getFood() + " snacks", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int option = jop.showConfirmDialog(null, "Voulez-vous lui donner à manger ?\n Il vous reste : " + mainChar.getFoodFridge() + " snacks", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (option == JOptionPane.OK_OPTION) {
-                if (this.getHunger() < this.getHungerMax() && mainChar.getFood() > mainChar.getFoodMin()) {
+                if ((int)this.getHunger() > this.getHungerMin() && mainChar.getFoodFridge() > mainChar.getFoodFridgeMin()) {
 
                     final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
 
@@ -168,7 +168,7 @@ public class PNJ extends GameObject implements Directable, Activable{
                                     e.printStackTrace();
                                 }
                             }
-                            mainChar.setFood(-1);
+                            mainChar.setFoodFridge(-1);
                             hunger.set(0,0.0);
                             dialog.dispose();
                         }
@@ -181,9 +181,9 @@ public class PNJ extends GameObject implements Directable, Activable{
                     System.out.println("afterclock");
                     dialog.dispose();
 
-                } else if (this.getHunger() == this.getHungerMin()) {
-                    jop.showMessageDialog(null, "Vous avez déjà trop mangé", "Attention !", JOptionPane.INFORMATION_MESSAGE);
-                } else if (mainChar.getFood() == mainChar.getFoodMin()) {
+                } else if ((int)this.getHunger() == this.getHungerMin()) {
+                    jop.showMessageDialog(null, "Votre enfant à déjà trop mangé", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+                } else if (mainChar.getFoodFridge() == mainChar.getFoodFridgeMin()) {
                     jop.showMessageDialog(null, "Vous n'avez plus de nourriture", "Attention !", JOptionPane.INFORMATION_MESSAGE);
                 }
             }

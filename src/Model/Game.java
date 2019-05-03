@@ -167,7 +167,9 @@ public class Game extends JFrame implements DeletableObserver {
 
         notifyView(this.mainChar);
     }
-
+    public void showInv(){
+        this.mainChar.inv(this.mainChar);
+    }
     public void action() throws InterruptedException {
         Activable aimedObject = null;
 		for(GameObject object : objects){

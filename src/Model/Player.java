@@ -112,7 +112,8 @@ public class Player extends GameObject implements Directable {
             }).start();
 
             dialog.setVisible(true);
-
+            upXp(5, mainChar);
+            mainChar.setIntel(2);
             //  t.join();
             System.out.println("afterclock");
             dialog.dispose();
@@ -121,7 +122,7 @@ public class Player extends GameObject implements Directable {
 
         }
 
-        upXp(6);
+
     }
     public void eat(int val, int timer, Player mainChar) {
         JOptionPane jop = new JOptionPane();
@@ -169,7 +170,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-
+                upXp(1, mainChar);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -186,7 +187,7 @@ public class Player extends GameObject implements Directable {
 
         }
 
-        upXp(6);
+
     }
     public Player rest(int val, int timer, Player mainChar){
         JOptionPane jop = new JOptionPane();
@@ -294,7 +295,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-
+                upXp(1, mainChar);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -349,7 +350,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-
+                upXp(1, mainChar);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -404,7 +405,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-
+                upXp(1, mainChar);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -476,11 +477,15 @@ public class Player extends GameObject implements Directable {
         }
         return mainChar;
     }
-    public void upXp(int val){
+    public void inv(Player mainChar){
+        JOptionPane jop = new JOptionPane();
+    jop.showMessageDialog(null, "Vous avez dans votre inventaire :\n" + "- " + mainChar.getFood()+ " nourriture", "Inventaire", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public void upXp(int val, Player mainChar){
         int newXp;
-        int x = xp.get(0);
+        int x = mainChar.xp.get(0);
         x += val;
-        xp.set(0,x);
+        mainChar.xp.set(0,x);
         int xpCurrent = getXpCurrent();
         int xpNext = getXpNext();
         if(x >= xpCurrent){
@@ -489,10 +494,10 @@ public class Player extends GameObject implements Directable {
             xpNext = xpCurrent - xpNext;
             xpCurrent = xpCurrent - xpNext;
             xpNext = xpNext + xpCurrent;
-            this.xp.set(0,newXp);
-            this.xp.set(1,xpCurrent);
-            this.xp.set(2,xpNext);
-            this.lvl +=1;
+            mainChar.xp.set(0,newXp);
+            mainChar.xp.set(1,xpCurrent);
+            mainChar.xp.set(2,xpNext);
+            mainChar.lvl +=1;
         }
 
     }
@@ -541,6 +546,7 @@ public class Player extends GameObject implements Directable {
     public String getStudy(){return info.get(2);}
     public String getCercle(){return info.get(3);}
     public int getIntel(){ return intel;}
+    public void setIntel(int val){intel += val;}
     public int getSocial(){return social;}
     public int getMoney(){return money;}
     public void setHygene(int val){

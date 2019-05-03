@@ -17,6 +17,9 @@ public class Keyboard implements KeyListener {
         int key = event.getKeyCode();
 
         switch (key) {
+            case KeyEvent.VK_I:
+                game.showInv();
+                break;
         case KeyEvent.VK_RIGHT:
             game.movePlayer(1, 0);
             break;
