@@ -29,6 +29,8 @@ public class Game extends JFrame implements DeletableObserver {
     private Library libraryMap = new Library();
     private Jefke jefkeMap = new Jefke();
     private Grocery groceryMap = new Grocery();
+    private Work workMap = new Work();
+    private appartement appartementMap = new appartement();
     private Status status = new Status(mainChar);
     public MapInterface gamemap;
     private String mapName;
@@ -100,6 +102,11 @@ public class Game extends JFrame implements DeletableObserver {
             break;
             case "Grocery": map = groceryMap;
             break;
+            case "Work": map = workMap;
+            break;
+            case "appartement": map = appartementMap;
+                break;
+
             default:
                 throw new IllegalStateException("Unexpected value: " + mapName);
         }
