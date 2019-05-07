@@ -174,7 +174,7 @@ public class Game extends JFrame implements DeletableObserver {
         notifyView(this.mainChar);
     }
     public void showInv(){
-        this.mainChar.inv(this.mainChar);
+        this.mainChar.inv(this.mainChar, mapName);
     }
     public void action() throws InterruptedException {
         Activable aimedObject = null;
@@ -188,7 +188,7 @@ public class Game extends JFrame implements DeletableObserver {
             }
 		}
 		if(aimedObject instanceof Door){
-		    String switchMap = ((Door) aimedObject).mapChange(this.mapName);
+		    String switchMap = ((Door) aimedObject).mapChange(this.mapName, this.mainChar);
 		  if(switchMap != null) {
 		      this.mapName = switchMap;
               this.mainChar.map = this.mapName;

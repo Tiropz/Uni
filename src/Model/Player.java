@@ -1,5 +1,6 @@
 package Model;
 
+import View.MapInterface;
 import com.google.gson.Gson;
 
 import javax.swing.*;
@@ -28,10 +29,9 @@ public class Player extends GameObject implements Directable {
     private String time;
     private static JLabel lblClock = new JLabel("");
     public int timer;
-    boolean hasPayed;
 
 
-    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer, int foodBasket, boolean hasPayed) {
+    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer, int foodBasket) {
         super(x, y, 2);
         this.info.add(name);
         this.info.add(sex);
@@ -56,16 +56,15 @@ public class Player extends GameObject implements Directable {
         this.foodFridge.add(nbreFoodFridge);
         this.foodFridge.add(50);
         this.foodFridge.add(0);
-        this.xp.add(xp);
-        this.xp.add(xpCurrent);
-        this.xp.add(xpNext);
+        this.xp.add(0);
+        this.xp.add(10);
+        this.xp.add(15);
         this.lvl = lvl;
         this.intel = intel;
         this.social = social;
         this.money = money;
         this.timer = timer;
         this.foodBasket = foodBasket;
-        this.hasPayed = hasPayed;
     }
 
 
@@ -484,10 +483,59 @@ public class Player extends GameObject implements Directable {
         }
         return mainChar;
     }
-    public void inv(Player mainChar){
+
+
+    public Player getFoodFromCounter(Player mainChar){
+        SpinnerNumberModel sModel = new SpinnerNumberModel(0, 0, 5, 1);
+        JSpinner spinner = new JSpinner(sModel);
         JOptionPane jop = new JOptionPane();
-    jop.showMessageDialog(null, "Vous avez dans votre inventaire :\n" + "- " + mainChar.getFood()+ " nourriture", "Inventaire", JOptionPane.INFORMATION_MESSAGE);
+        int option = JOptionPane.showOptionDialog(null, spinner, "Prendre de la nourriture", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+        if (option == JOptionPane.OK_OPTION) {
+            if (mainChar.getFood() + mainChar.getFoodBasket() + (int) spinner.getValue() <= mainChar.getFoodMax()) {
+
+                mainChar.setFoodBasket((int)spinner.getValue());
+            } else{
+                jop.showMessageDialog(null, "Vous avez déjà trop de nourriture sur vous", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+
+        }
+        return mainChar;
     }
+
+    public Player pay(Player mainChar){
+        JOptionPane jop = new JOptionPane();
+        int option = jop.showConfirmDialog(null, "Voulez-vous payer ?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
+            if (mainChar.getFoodBasket() != 0 && mainChar.getMoney() >= (mainChar.getFoodBasket()*3)) {
+
+                mainChar.setFood(mainChar.getFoodBasket());
+                mainChar.setFoodBasket(-mainChar.getFoodBasket());
+            } else if (mainChar.getMoney() < (mainChar.getFoodBasket()*3)){
+                jop.showMessageDialog(null, "Vous n'avez pas assez d'argent", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+            }else if(mainChar.getFoodBasket() == 0){
+                jop.showMessageDialog(null, "Vous n'avez rien dans votre panier", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+
+        }
+        return mainChar;
+    }
+
+
+    public void inv(Player mainChar, String map){
+        System.out.println(map);
+        if(map.equals("Supermarché")){
+
+        JOptionPane jop = new JOptionPane();
+        jop.showMessageDialog(null, "Vous avez dans votre inventaire :\n" + "- " + mainChar.getFood()+ " nourriture\nEt dans votre panier :\n" + "- "+ mainChar.getFoodBasket()+ " nourriture", "Inventaire", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(null, "Vous avez dans votre inventaire :\n" + "- " + mainChar.getFood()+ " nourriture\n", "Inventaire", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+        }
+
     public void upXp(int val, Player mainChar, Game g){
         int newXp;
         int x = mainChar.xp.get(0);
@@ -522,7 +570,7 @@ public class Player extends GameObject implements Directable {
                 int option = jop.showConfirmDialog(null, "Voulez-vous faire un enfant", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (option == JOptionPane.OK_OPTION) {
                     if (partner != null) {
-                        PNJ kid = new PNJ(mainChar.getPosX(),mainChar.getPosY(), false, "Enfant", 0.0, true);
+                        PNJ kid = new PNJ(mainChar.getPosX(),mainChar.getPosY(), 1, "Enfant", 0.0, true);
 
                         //convert the Java object to json
                         String jsonString = gson.toJson(kid);
@@ -551,6 +599,41 @@ public class Player extends GameObject implements Directable {
 
                 }
 
+        }if(mainChar.lvl >= 10 && mainChar.getSocial() >= 150){
+            PNJ partner = g.partner;
+            Gson gson = new Gson();
+            System.out.println(partner);
+            if (partner == null) {
+                JOptionPane jop = new JOptionPane();
+                int option = jop.showConfirmDialog(null, "Voulez-vous avoir un partenaire", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (option == JOptionPane.OK_OPTION) {
+
+                    partner = new PNJ(mainChar.getPosX(), mainChar.getPosY(), 0, "Partner", 0.0, true);
+
+                    //convert the Java object to json
+                    String jsonString = gson.toJson(partner);
+                    //Write JSON String to file
+                    FileWriter fileWriter = null;
+                    try {
+                        fileWriter = new FileWriter("partner.json");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        fileWriter.write(jsonString);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        fileWriter.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    g.reload(null, partner);
+
+
+                }
+            }
         }
     }
 
@@ -602,7 +685,7 @@ public class Player extends GameObject implements Directable {
     public int getSocial(){return social;}
     public void setSocial(int val){social += val;}
     public int getMoney(){return money;}
-    public void setHygene(int val){
+    public void setHygene(double val){
         double hyg = getHygene();
         hyg += val;
         hygene.set(0,hyg);
@@ -676,7 +759,5 @@ public class Player extends GameObject implements Directable {
     public int getXpNext(){return xp.get(2);}
     public int getLvl(){return lvl;}
     public int getFoodBasket(){return foodBasket;}
-    public void setFoodBasket(int foodBasket){this.foodBasket = foodBasket;}
-    public boolean getHasPayed(){return hasPayed;}
-    public void setHasPayed(boolean hasPayed){this.hasPayed = hasPayed;}
+    public void setFoodBasket(int foodBasket){this.foodBasket += foodBasket;}
 }

@@ -1,9 +1,9 @@
 package Model;
 
 
-public class Fridge extends Block implements Activable {
+public class Register extends Block implements Activable {
 
-    public Fridge(int x, int y) {
+    public Register(int x, int y) {
 
         super(x, y, 4);
 
@@ -16,7 +16,7 @@ public class Fridge extends Block implements Activable {
 
     @Override
     public Player activate(Player mainChar, Game game){
-        mainChar.fillFridge(4, mainChar);
+        mainChar.pay(mainChar);
         return mainChar;
     }
 

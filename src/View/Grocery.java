@@ -189,54 +189,54 @@ public class Grocery extends JPanel implements MapInterface {
         }
 
         for (int j = 3; j < 10; j = j+6){
-            GroceryObjects.add(new BlockUnbreakable((x_middle-8), (j+1))); //2 caisses
-            GroceryObjects.add(new BlockUnbreakable((x_middle-7), (j+1)));
-            GroceryObjects.add(new BlockUnbreakable(x_middle-6, (j+1)));
-            GroceryObjects.add(new BlockUnbreakable(x_middle-8, j));
-            GroceryObjects.add(new BlockUnbreakable(x_middle-7, j));
-            GroceryObjects.add(new BlockUnbreakable(x_middle-6, j));
+            GroceryObjects.add(new Register((x_middle-8), (j+1))); //2 caisses
+            GroceryObjects.add(new Register((x_middle-7), (j+1)));
+            GroceryObjects.add(new Register(x_middle-6, (j+1)));
+            GroceryObjects.add(new Register(x_middle-8, j));
+            GroceryObjects.add(new Register(x_middle-7, j));
+            GroceryObjects.add(new Register(x_middle-6, j));
 
         }
 
         for (int i = x_middle-2; i < x_middle+2; i ++){
-            GroceryObjects.add(new BlockUnbreakable( i, 2)); //pates haut
-            GroceryObjects.add(new BlockUnbreakable( i, 3));
-            GroceryObjects.add(new BlockUnbreakable( i, 4));
+            GroceryObjects.add(new FoodCounter( i, 2)); //pates haut
+            GroceryObjects.add(new FoodCounter( i, 3));
+            GroceryObjects.add(new FoodCounter( i, 4));
 
 
 
 
-            GroceryObjects.add(new BlockUnbreakable(i, 7));
-            GroceryObjects.add(new BlockUnbreakable(i, 8)); //pates bas
-            GroceryObjects.add(new BlockUnbreakable(i, 9));
+            GroceryObjects.add(new FoodCounter(i, 7));
+            GroceryObjects.add(new FoodCounter(i, 8)); //pates bas
+            GroceryObjects.add(new FoodCounter(i, 9));
 
         }
 
 
         for (int i = (x_middle+4); i < (x_middle+8); i++){
             for (int j = 5; j < 9; j++){
-                GroceryObjects.add(new BlockUnbreakable(i, j)); //pain
+                GroceryObjects.add(new FoodCounter(i, j)); //pain
             }
         }
 
 
 
         for (int i = (x_middle+6); i < (x_middle+12); i++){  //meat
-            GroceryObjects.add(new BlockUnbreakable(i, 1));
-            GroceryObjects.add(new BlockUnbreakable(i, 2));
+            GroceryObjects.add(new FoodCounter(i, 1));
+            GroceryObjects.add(new FoodCounter(i, 2));
         }
 
         for (int j = 3; j < y_blocks; j++){
-            GroceryObjects.add(new BlockUnbreakable((x_middle+10), j));
-            GroceryObjects.add(new BlockUnbreakable((x_middle+11), j)); //vegetables
+            GroceryObjects.add(new FoodCounter((x_middle+10), j));
+            GroceryObjects.add(new FoodCounter((x_middle+11), j)); //vegetables
 
         }
 
 
 
         for (int i = x_middle+3; i <x_middle+10; i ++ ){
-            GroceryObjects.add(new BlockUnbreakable( i, (y_blocks)));
-            GroceryObjects.add(new BlockUnbreakable( i, (y_blocks-1))); //fruits
+            GroceryObjects.add(new FoodCounter(i, (y_blocks)));
+            GroceryObjects.add(new FoodCounter(i, (y_blocks-1))); //fruits
         }
 
 

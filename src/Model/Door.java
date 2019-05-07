@@ -15,7 +15,8 @@ public class Door extends Block implements Activable {
         return mainChar;
 
     }
-    public String mapChange(String map){
+    public String mapChange(String map, Player mainChar){
+        String test = null;
         switch (map){
             case "Kot":
                 reachable = new Object[]{"Bibliothèque","Jefke","Supermarché"};
@@ -31,8 +32,14 @@ public class Door extends Block implements Activable {
 
 
         }
-       String test = (String) JOptionPane.showInputDialog(null, "Où voulez-vous aller ?", "Destinations",
+        if(mainChar.getFoodBasket() == 0){
+        test = (String) JOptionPane.showInputDialog(null, "Où voulez-vous aller ?", "Destinations",
                 JOptionPane.QUESTION_MESSAGE, null, reachable, null);
+        }else{
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(null, "Vous devez d'abord payer", "Attention!", JOptionPane.INFORMATION_MESSAGE);
+        }
+
         return  test;
 }
     @Override
