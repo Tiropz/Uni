@@ -18,15 +18,15 @@ public class Door extends Block implements Activable {
     public String mapChange(String map){
         switch (map){
             case "Kot":
-                reachable = new Object[]{"Bibliothèque","Jefke","Grocery"};
+                reachable = new Object[]{"Bibliothèque","Jefke","Supermarché"};
                 break;
             case "Bibliothèque":
-                reachable = new Object[]{"Kot","Jefke","Grocery"};
+                reachable = new Object[]{"Kot","Jefke","Supermarché"};
                 break;
             case "Jefke":
                 reachable = new Object[]{"Kot"};
                 break;
-            case "Grocery":
+            case "Supermarché":
                 reachable = new Object[]{"Kot","Jefke","Bibliothèque"};
 
 

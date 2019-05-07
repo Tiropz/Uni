@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class appartement extends JPanel implements MapInterface {
+public class Appartement extends JPanel implements MapInterface {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private ArrayList<GameObject> appartementObjects = new ArrayList<GameObject>();
     public int width_screen;
@@ -16,7 +16,7 @@ public class appartement extends JPanel implements MapInterface {
     private int x_middle;
     private int x_blocks;
 
-    public appartement() {
+    public Appartement() {
         this.y_blocks = 13;
         this.x_blocks = 17;
         width_screen = (int) screenSize.getWidth();

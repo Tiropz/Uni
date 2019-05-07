@@ -8,14 +8,12 @@ import java.awt.event.KeyListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.TimerTask;
 import java.util.Timer;
 
 import javax.swing.*;
 
 import com.google.gson.Gson;
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 
 public class Game extends JFrame implements DeletableObserver {
     public static ArrayList<GameObject> objects = new ArrayList<GameObject>();
@@ -30,7 +28,7 @@ public class Game extends JFrame implements DeletableObserver {
     private Jefke jefkeMap = new Jefke();
     private Grocery groceryMap = new Grocery();
     private Work workMap = new Work();
-    private appartement appartementMap = new appartement();
+    private Appartement appartementMap = new Appartement();
     private Status status = new Status(mainChar);
     public MapInterface gamemap;
     private String mapName;
@@ -100,11 +98,11 @@ public class Game extends JFrame implements DeletableObserver {
             break;
             case "Jefke": map = jefkeMap;
             break;
-            case "Grocery": map = groceryMap;
+            case "Supermarché": map = groceryMap;
             break;
-            case "Work": map = workMap;
+            case "Travail": map = workMap;
             break;
-            case "appartement": map = appartementMap;
+            case "Appartement": map = appartementMap;
                 break;
 
             default:
