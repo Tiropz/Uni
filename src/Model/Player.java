@@ -24,12 +24,14 @@ public class Player extends GameObject implements Directable {
     int intel;
     int social;
     int money;
+    int foodBasket;
     private String time;
     private static JLabel lblClock = new JLabel("");
     public int timer;
+    boolean hasPayed;
 
 
-    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer) {
+    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer, int foodBasket, boolean hasPayed) {
         super(x, y, 2);
         this.info.add(name);
         this.info.add(sex);
@@ -54,14 +56,16 @@ public class Player extends GameObject implements Directable {
         this.foodFridge.add(nbreFoodFridge);
         this.foodFridge.add(50);
         this.foodFridge.add(0);
-        this.xp.add(0);
-        this.xp.add(10);
-        this.xp.add(15);
+        this.xp.add(xp);
+        this.xp.add(xpCurrent);
+        this.xp.add(xpNext);
         this.lvl = lvl;
         this.intel = intel;
         this.social = social;
         this.money = money;
         this.timer = timer;
+        this.foodBasket = foodBasket;
+        this.hasPayed = hasPayed;
     }
 
 
@@ -671,4 +675,8 @@ public class Player extends GameObject implements Directable {
     public int getXpCurrent(){return xp.get(1);}
     public int getXpNext(){return xp.get(2);}
     public int getLvl(){return lvl;}
+    public int getFoodBasket(){return foodBasket;}
+    public void setFoodBasket(int foodBasket){this.foodBasket = foodBasket;}
+    public boolean getHasPayed(){return hasPayed;}
+    public void setHasPayed(boolean hasPayed){this.hasPayed = hasPayed;}
 }

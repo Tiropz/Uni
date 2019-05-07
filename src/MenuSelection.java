@@ -176,7 +176,7 @@ public class MenuSelection extends JDialog {
                         break;
                 }
                   Info = new MenuInfo(name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem());
-                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", energy, hunger, bladder, hygene,0,10, 0, 10, 15, 1, intel, social,money, 43200);
+                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", energy, hunger, bladder, hygene,0,10, 0, 10, 15, 1, intel, social,money, 43200, 0 , false);
                 // Create a new Gson object
                 Gson gson = new Gson();
 
