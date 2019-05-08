@@ -152,7 +152,8 @@ public class Work extends JPanel implements MapInterface {
 
         g.drawImage(bureau_special,(x_middle+6) * BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE,2* BLOC_SIZE, null );
 
-        g.drawImage(plante,(x_middle+7) * BLOC_SIZE, 12*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
+
+
 
 
         for (GameObject object : this.WorkObjects) {
