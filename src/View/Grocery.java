@@ -47,10 +47,6 @@ public class Grocery extends JPanel implements MapInterface {
         Image fruits = new ImageIcon("src/Image/fruits_projet.png").getImage();
         Image caisse = new ImageIcon("src/Image/cash_register.png").getImage();
         Image présentoir = new ImageIcon("src/Image/table_cuisine.png").getImage();
-        Image personnage = new ImageIcon("src/Image/personnage.png").getImage();
-        Image personnage_bas = new ImageIcon("src/Image/personnage_bas.png").getImage();
-        Image personnage_droite = new ImageIcon("src/Image/personnage_droite.png").getImage();
-        Image personnage_gauche = new ImageIcon("src/Image/personnage_gauche.png").getImage();
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
         Image porte = new ImageIcon("src/Image/porte_horizontale.png").getImage();
 

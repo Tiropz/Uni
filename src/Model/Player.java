@@ -27,11 +27,13 @@ public class Player extends GameObject implements Directable {
     int money;
     int foodBasket;
     private String time;
+    boolean hasWork;
+    boolean hasApp;
     private static JLabel lblClock = new JLabel("");
     public int timer;
 
 
-    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer, int foodBasket) {
+    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer, int foodBasket, boolean hasWork, boolean hasApp) {
         super(x, y, 2);
         this.info.add(name);
         this.info.add(sex);
@@ -65,6 +67,8 @@ public class Player extends GameObject implements Directable {
         this.money = money;
         this.timer = timer;
         this.foodBasket = foodBasket;
+        this.hasWork = hasWork;
+        this.hasApp = hasApp;
     }
 
 
@@ -760,4 +764,8 @@ public class Player extends GameObject implements Directable {
     public int getLvl(){return lvl;}
     public int getFoodBasket(){return foodBasket;}
     public void setFoodBasket(int foodBasket){this.foodBasket += foodBasket;}
+    public boolean getHasWork(){return hasWork;}
+    public void setHasWork(boolean hasWork){this.hasWork = hasWork;}
+    public boolean getHasApp(){return hasApp;}
+    public void setHasApp(boolean hasApp){this.hasApp = hasApp;}
 }
