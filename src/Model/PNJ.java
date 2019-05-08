@@ -8,13 +8,13 @@ import java.util.Random;
 public class PNJ extends GameObject implements Directable, Activable{
     int direction = EAST;
     String name;
-    boolean indep;
+    int indep;
     boolean movable;
     List<Double> hunger = new ArrayList<>();
     private String time;
     private static JLabel lblClock = new JLabel("");
     public int timer;
-    public PNJ(int x, int y, boolean indep,String name, Double hunger, boolean movable) {
+    public PNJ(int x, int y, int indep,String name, Double hunger, boolean movable) {
         super(x, y, 0);
         this.indep = indep;
         this.name = name;
@@ -61,18 +61,18 @@ public class PNJ extends GameObject implements Directable, Activable{
     }public double getHungerMin(){
         return hunger.get(2);
     }
-    public boolean getIndep(){
+    public int getIndep(){
         return indep;
     }
     public Player setHunger(double val, Player mainChar){
         Double hung = getHunger();
         hung -= val;
-        if(hung >= getHungerMax()/2 && indep){
+        if(hung >= getHungerMax()/2 && indep == 0){
             mainChar.setFoodFridge(-1);
             hunger.set(0,hung-hung/2);
             System.out.println("PROUTA");
         }
-        else if(hung >= getHungerMax()/2 && !indep){
+        else if(hung >= getHungerMax()/2 && indep == 1){
 
           alerte(mainChar);
 
@@ -104,17 +104,21 @@ public class PNJ extends GameObject implements Directable, Activable{
     }
 
     public void movePNJ(int x, int y) {
+
         if(this.movable) {
+
             int nextX = this.getPosX() + x;
             int nextY = this.getPosY() + y;
 
             boolean obstacle = false;
             for (GameObject object : Game.objects) {
-                if (object.isAtPosition(nextX, nextY)) {
-                    obstacle = object.isObstacle();
-                }
-                if (obstacle == true) {
-                    break;
+                if (object != null) {
+                    if (object.isAtPosition(nextX, nextY)) {
+                        obstacle = object.isObstacle();
+                    }
+                    if (obstacle == true) {
+                        break;
+                    }
                 }
             }
             this.rotate(x, y);
@@ -138,7 +142,8 @@ public class PNJ extends GameObject implements Directable, Activable{
 
     @Override
     public Player activate(Player mainChar, Game game) throws InterruptedException {
-        if(!indep){
+        if(indep == 1){
+            this.movable = false;
             JOptionPane jop = new JOptionPane();
             Object[] options = {"Nourrir",
                     "Interagir"};
@@ -158,7 +163,7 @@ public class PNJ extends GameObject implements Directable, Activable{
                         dialog.setContentPane(optionPane);
                         dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
                         dialog.pack();
-                        this.movable = false;
+
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -187,7 +192,7 @@ public class PNJ extends GameObject implements Directable, Activable{
 
                         //  t.join();
                         System.out.println("afterclock");
-                        this.movable = true;
+
                         dialog.dispose();
                     } else if ((int) this.getHunger() == this.getHungerMin()) {
                         jop.showMessageDialog(null, "Votre enfant à déjà trop mangé", "Attention !", JOptionPane.INFORMATION_MESSAGE);
@@ -237,7 +242,9 @@ public class PNJ extends GameObject implements Directable, Activable{
                 this.movable = true;
                 dialog.dispose();
             }
-            }else{
+            this.movable = true;
+            }else if (indep == 0){
+            this.movable = false;
             JOptionPane jop = new JOptionPane();
             int option = jop.showConfirmDialog(null, "Voulez-vous discutez avec votre femme?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (option == JOptionPane.OK_OPTION) {
@@ -253,7 +260,7 @@ public class PNJ extends GameObject implements Directable, Activable{
                     dialog.setContentPane(optionPane);
                     dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
                     dialog.pack();
-                    this.movable = false;
+
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -281,7 +288,7 @@ public class PNJ extends GameObject implements Directable, Activable{
 
                     //  t.join();
                     System.out.println("afterclock");
-                    this.movable = true;
+
                     dialog.dispose();
                     //  jop.showMessageDialog(null, lblClock, "Attention !", JOptionPane.DEFAULT_OPTION);
 
@@ -289,6 +296,7 @@ public class PNJ extends GameObject implements Directable, Activable{
 
 
             }
+            this.movable = true;
 
         }
 

@@ -178,7 +178,7 @@ public class StudentRoom extends JPanel implements MapInterface {
                     }
                     g.drawImage(perso,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
                 }else if(object instanceof PNJ){
-                    if(((PNJ) object).getIndep()){
+                    if(((PNJ) object).getIndep() == 0){
                         int direction = ((Directable) object).getDirection();
 
                         Image perso = null;
