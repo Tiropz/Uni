@@ -198,7 +198,7 @@ public class Appartement extends JPanel implements MapInterface {
     public Player setObjects(ArrayList<GameObject> objects, Player mainChar, MapInterface currentMap) {
 
         this.appartementObjects = new ArrayList<>(objects);
-        mainChar.setPosXY(x_middle + 1, y_blocks);
+        mainChar.setPosXY(x_middle - 4, 15);
         return mainChar;
     }
 
