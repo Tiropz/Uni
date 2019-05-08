@@ -19,7 +19,7 @@ public class Door extends Block implements Activable {
         String test = null;
         switch (map){
             case "Kot":
-                reachable = new Object[]{"Bibliothèque","Jefke","Supermarché"};
+                reachable = new Object[]{"Bibliothèque","Jefke","Supermarché","Appartement"};
                 break;
             case "Bibliothèque":
                 reachable = new Object[]{"Kot","Jefke","Supermarché"};
@@ -29,6 +29,7 @@ public class Door extends Block implements Activable {
                 break;
             case "Supermarché":
                 reachable = new Object[]{"Kot","Jefke","Bibliothèque"};
+                break;
 
 
         }
