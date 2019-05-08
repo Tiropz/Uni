@@ -63,7 +63,6 @@ public class Jefke extends JPanel implements MapInterface {
             }
 
         }
-        g.drawImage(brique,(x_middle-11) * BLOC_SIZE, 1*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
 
 
         for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
