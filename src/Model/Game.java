@@ -90,6 +90,7 @@ public class Game extends JFrame implements DeletableObserver {
 
 
                 }
+
                 else if(gamemap == jefkeMap){
                     try{
                         for(PNJ jpnj : randPNJ){
