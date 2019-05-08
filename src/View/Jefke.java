@@ -5,6 +5,7 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Jefke extends JPanel implements MapInterface {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -13,7 +14,7 @@ public class Jefke extends JPanel implements MapInterface {
     public int height_screen;
     private int BLOC_SIZE;
     private int y_blocks;
-    private int x_middle;
+    public int x_middle;
     private int x_blocks;
 
     public Jefke() {
@@ -46,11 +47,7 @@ public class Jefke extends JPanel implements MapInterface {
         Image banquette = new ImageIcon("src/Image/banc.png").getImage();
         Image banc = new ImageIcon("src/Image/banc.jpg").getImage();
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
-        Image personnage = new ImageIcon("src/Image/personnage.png").getImage();
         Image porte_horizontale = new ImageIcon("src/Image/porte_horizontale.png").getImage();
-        Image personnage_bas = new ImageIcon("src/Image/personnage_bas.png").getImage();
-        Image personnage_droite = new ImageIcon("src/Image/personnage_droite.png").getImage();
-        Image personnage_gauche = new ImageIcon("src/Image/personnage_gauche.png").getImage();
 
 
 

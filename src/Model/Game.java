@@ -8,6 +8,8 @@ import java.awt.event.KeyListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.TimerTask;
 import java.util.Timer;
 
@@ -19,6 +21,7 @@ public class Game extends JFrame implements DeletableObserver {
     public static ArrayList<GameObject> objects = new ArrayList<GameObject>();
     ArrayList<GameObject> objectList = new ArrayList<GameObject>();
     private ArrayList<Player> players = new ArrayList<Player>();
+    List<PNJ> randPNJ = new ArrayList<PNJ>();
     private Player active_player = null;
     private Player mainChar;
     public PNJ partner;
@@ -42,7 +45,14 @@ public class Game extends JFrame implements DeletableObserver {
         this.gamemap = whichMap(mapName);
         this.partner = partner;
         this.kid = kid;
-
+        Random rand = new Random();
+        int nbrPNJ = rand.nextInt(15)+1;
+        for(int i = 0;i<nbrPNJ;i++){
+            int randx = rand.nextInt(20)+1;
+            int randy = rand.nextInt(8)+1;
+            PNJ newPNJ = new PNJ(jefkeMap.x_middle-11+randx,randy,3,"PNJJEFKE",100.0,true);
+            this.randPNJ.add(newPNJ);
+        }
         buildMap();
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -78,6 +88,16 @@ public class Game extends JFrame implements DeletableObserver {
 
                     }
 
+
+                }
+                else if(gamemap == jefkeMap){
+                    try{
+                        for(PNJ jpnj : randPNJ){
+                            jpnj.action(Game.this, mainChar);
+                        }
+                    }catch (NullPointerException e){
+
+                    }
                 }
                 mainChar.setHunger(0.01);
                 mainChar.setEnergy(-0.001);
@@ -93,15 +113,15 @@ public class Game extends JFrame implements DeletableObserver {
         MapInterface map;
         switch (mapName){
             case "Kot": map = kotMap;
-            break;
+                break;
             case "Bibliothèque": map = libraryMap;
-            break;
+                break;
             case "Jefke": map = jefkeMap;
-            break;
+                break;
             case "Supermarché": map = groceryMap;
-            break;
+                break;
             case "Travail": map = workMap;
-            break;
+                break;
             case "Appartement": map = appartementMap;
                 break;
 
@@ -131,6 +151,9 @@ public class Game extends JFrame implements DeletableObserver {
 
         this.objects.add(this.partner);
         this.objects.add(this.kid);
+        }
+        if(gamemap == jefkeMap){
+            this.objects.addAll(randPNJ);
         }
 
      //   this.objects.add(this.kid);
