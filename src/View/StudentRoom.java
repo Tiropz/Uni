@@ -261,9 +261,9 @@ public class StudentRoom extends JPanel implements MapInterface {
         StudentObjects.add(new Tv((x_middle-(x_blocks/2)+2), 1, 0));
         StudentObjects.add(new Tv((x_middle-(x_blocks/2)), 1, 0));
 
-        StudentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 8)); //bureau + chaise
-        StudentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 9));
-        StudentObjects.add(new Desk((x_middle-(x_blocks/2)+2), 8));
+        StudentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 8,10)); //bureau + chaise
+        StudentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 9,10));
+        StudentObjects.add(new Desk((x_middle-(x_blocks/2)+2), 8,10));
 
         StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 1)); //mur vertical
         StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 2));

@@ -242,7 +242,7 @@ public class Work extends JPanel implements MapInterface {
 
         for (int i = x_middle+6; i < x_middle+9; i++){
             for (int j = 2; j < 4; j++){
-                WorkObjects.add(new WorkDesk(i,j )); //bureau en haut a droite
+                WorkObjects.add(new Desk(i,j, 30 )); //bureau en haut a droite
 
 
             }

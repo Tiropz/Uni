@@ -1,13 +1,15 @@
 package Model;
 
 public class Desk extends Block implements Activable {
-    public Desk(int x, int y) {
+    int val;
+    public Desk(int x, int y, int val) {
         super(x, y, 0);
+        this.val = val;
     }
 
     @Override
     public Player activate(Player mainChar, Game game) throws InterruptedException {
-        mainChar.work(10,10, mainChar, game);
+        mainChar.work(val,10, mainChar, game);
         return mainChar;
     }
 

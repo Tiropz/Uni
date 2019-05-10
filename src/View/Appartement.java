@@ -280,9 +280,9 @@ public class Appartement extends JPanel implements MapInterface {
 
         for (int i = x_middle-3; i < x_middle+1; i++){
             for (int j = 1; j < 3; j++){
-                appartementObjects.add(new Desk(i,  j));
-                appartementObjects.add(new Desk(x_middle-2,  3));
-                appartementObjects.add(new Desk(x_middle-1,  3));
+                appartementObjects.add(new Desk(i,  j,15));
+                appartementObjects.add(new Desk(x_middle-2,  3,15));
+                appartementObjects.add(new Desk(x_middle-1,  3,15));
 
 
             }
