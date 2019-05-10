@@ -4,7 +4,6 @@ import static java.lang.Thread.sleep;
 
 public class Table extends Block implements Activable {
 
-    int nbreFoodIn;
     public Table(int x, int y) {
 
         super(x, y, 4);

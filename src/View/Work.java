@@ -226,23 +226,23 @@ public class Work extends JPanel implements MapInterface {
         }
 
         for (int j = 8; j< 10; j++){
-            WorkObjects.add(new Door(x_middle+10, j)); //mur vertical droite
+            WorkObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
 
         }
 
         for (int j = 1; j< 6; j++){
-            WorkObjects.add(new Door(x_middle+3, j)); //mur vertical bureau
+            WorkObjects.add(new BlockUnbreakable(x_middle+3, j)); //mur vertical bureau
 
         }
 
         for (int i = x_middle+6; i < x_middle+11; i++){
-            WorkObjects.add(new Desk(i,5 ));    //mur horizontal bureau
+            WorkObjects.add(new BlockUnbreakable(i,5 ));    //mur horizontal bureau
 
         }
 
         for (int i = x_middle+6; i < x_middle+9; i++){
             for (int j = 2; j < 4; j++){
-                WorkObjects.add(new Desk(i,j )); //bureau en haut a droite
+                WorkObjects.add(new WorkDesk(i,j )); //bureau en haut a droite
 
 
             }

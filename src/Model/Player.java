@@ -100,7 +100,7 @@ public class Player extends GameObject implements Directable {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    for (int i = 3; i > 0; i--) {
+                    for (int i = timer; i > 0; i--) {
 
 
                         try {
@@ -540,25 +540,29 @@ public class Player extends GameObject implements Directable {
         }
         }
 
-    public void upXp(int val, Player mainChar, Game g){
+    public void upXp(int val, Player mainChar, Game g) {
         int newXp;
         int x = mainChar.xp.get(0);
         x += val;
-        mainChar.xp.set(0,x);
+        mainChar.xp.set(0, x);
         int xpCurrent = getXpCurrent();
         int xpNext = getXpNext();
-        if(x >= xpCurrent){
+        if (x >= xpCurrent) {
             newXp = x - xpCurrent;
             xpCurrent = xpCurrent + xpNext;
             xpNext = xpCurrent - xpNext;
             xpCurrent = xpCurrent - xpNext;
             xpNext = xpNext + xpCurrent;
-            mainChar.xp.set(0,newXp);
-            mainChar.xp.set(1,xpCurrent);
-            mainChar.xp.set(2,xpNext);
-            mainChar.lvl +=1;
+            mainChar.xp.set(0, newXp);
+            mainChar.xp.set(1, xpCurrent);
+            mainChar.xp.set(2, xpNext);
+            mainChar.lvl += 1;
+            upLvl(mainChar, g);
 
         }
+    }
+    public void upLvl(Player mainChar, Game g){
+
         if(mainChar.lvl >= 15 && mainChar.getSocial() >= 350){
             PNJ partner = null;
             Gson gson = new Gson();
@@ -636,6 +640,28 @@ public class Player extends GameObject implements Directable {
                     g.reload(null, partner);
 
 
+                }
+            }
+        }
+        if(mainChar.lvl >= 10 && mainChar.getIntel() >= 200){
+            if (!hasWork) {
+                JOptionPane jop = new JOptionPane();
+                int option = jop.showConfirmDialog(null, "Voulez-vous avoir un travail", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (option == JOptionPane.OK_OPTION) {
+                    mainChar.setHasWork(true);
+                }
+            }
+        }
+        if(mainChar.lvl >= 10){
+            JOptionPane jop = new JOptionPane();
+            int option = jop.showConfirmDialog(null, "Voulez-vous acheter un appartement", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (option == JOptionPane.OK_OPTION) {
+                if(mainChar.getMoney() >= 500){
+
+                mainChar.setMoney(-500);
+                mainChar.setHasApp(true);
+                }else{
+                    jop.showMessageDialog(null, "Vous n'avez pas assez d'argent il faut 500 euros", "Attention !", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }

@@ -73,7 +73,7 @@ public class Game extends JFrame implements DeletableObserver {
             public void run() {
                 secondpassed++;
                 System.out.println(secondpassed);
-                if (gamemap == kotMap) {
+                if (gamemap == kotMap || gamemap == appartementMap) {
                     try {
                         System.out.println("NOCATCH");
                         partner.setHunger(-0.01, mainChar);
