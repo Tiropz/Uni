@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Jefke extends JPanel implements MapInterface {
-    private ArrayList<GameObject> JefkeObjects = new ArrayList<>();
+    private ArrayList<GameObject> jefkeObjects = new ArrayList<>();
     private int BLOC_SIZE;
     private int y_blocks;
     public int x_middle;
@@ -88,7 +88,7 @@ public class Jefke extends JPanel implements MapInterface {
 
         //drawing of the player and PNJ
 
-        for (GameObject object : this.JefkeObjects) {
+        for (GameObject object : this.jefkeObjects) {
             if (object != null) {
                 int x = object.getPosX();
                 int y = object.getPosY();
@@ -139,13 +139,13 @@ public class Jefke extends JPanel implements MapInterface {
 
     public Player setObjects(ArrayList<GameObject> objects,Player mainChar, MapInterface currentMap) {
 
-        this.JefkeObjects = new ArrayList<>(objects);
+        this.jefkeObjects = new ArrayList<>(objects);
         mainChar.setPosXY(x_middle+1,y_blocks);         //Player start at the door
         return mainChar;
     }
 
     public ArrayList<GameObject> getObjects() {
-        return this.JefkeObjects;
+        return this.jefkeObjects;
     }
 
     public void redraw() {
@@ -153,48 +153,48 @@ public class Jefke extends JPanel implements MapInterface {
     }
 
     private void construct() {                  //Add all the room objects to the Map list
-        this.JefkeObjects.clear();
+        this.jefkeObjects.clear();
         for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
-            JefkeObjects.add(new BlockUnbreakable(i, 0));
+            jefkeObjects.add(new BlockUnbreakable(i, 0));
         }
 
         for (int i = (x_middle-(x_blocks/2)-1); i < 19; i++) {
-            JefkeObjects.add(new BlockUnbreakable(i, (y_blocks+1)));
+            jefkeObjects.add(new BlockUnbreakable(i, (y_blocks+1)));
         }
 
 
         for (int i = 21; i < (x_middle+(x_blocks/2)+3); i++) {
-            JefkeObjects.add(new BlockUnbreakable( i, (y_blocks+1)));
+            jefkeObjects.add(new BlockUnbreakable( i, (y_blocks+1)));
         }
 
 
         for (int j = 1;j< y_blocks+1; j++){
-            JefkeObjects.add(new BlockUnbreakable( x_middle-12, j));  //murs jefke verticaux
-            JefkeObjects.add(new BlockUnbreakable( x_middle+13, j));
+            jefkeObjects.add(new BlockUnbreakable( x_middle-12, j));  //murs jefke verticaux
+            jefkeObjects.add(new BlockUnbreakable( x_middle+13, j));
         }
 
         for (int i = 7; i < x_middle; i++){  // mur bar horizontal
-            JefkeObjects.add (new BlockUnbreakable (i, (y_blocks-4)));
+            jefkeObjects.add (new BlockUnbreakable (i, (y_blocks-4)));
         }
 
 
         for (int j = y_blocks-3; j < y_blocks+1; j++){    //mur bar
-            JefkeObjects.add (new BlockUnbreakable(x_middle-1, j));
+            jefkeObjects.add (new BlockUnbreakable(x_middle-1, j));
         }
 
 
         for (int j =(y_blocks-4); j < (y_blocks); j++ ){
-            JefkeObjects.add(new BlockUnbreakable((x_middle+11), j)); //banc + banquette en haut a droite
-            JefkeObjects.add(new BlockUnbreakable((x_middle+12), j));
+            jefkeObjects.add(new BlockUnbreakable((x_middle+11), j)); //banc + banquette en haut a droite
+            jefkeObjects.add(new BlockUnbreakable((x_middle+12), j));
         }
 
         for (int j =(y_blocks-12); j < (y_blocks-8); j++ ){ //banc + bnaquette en bas a droite
-            JefkeObjects.add(new BlockUnbreakable((x_middle+11), j));
-            JefkeObjects.add(new BlockUnbreakable((x_middle+12), j));
+            jefkeObjects.add(new BlockUnbreakable((x_middle+11), j));
+            jefkeObjects.add(new BlockUnbreakable((x_middle+12), j));
         }
 
         for (int i = x_middle+1; i<x_middle+3; i++){
-            JefkeObjects.add(new Door(i, y_blocks+1));
+            jefkeObjects.add(new Door(i, y_blocks+1));
         }
 
     }

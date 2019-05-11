@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Work extends JPanel implements MapInterface {
-    private ArrayList<GameObject> WorkObjects = new ArrayList<>();
+    private ArrayList<GameObject> workObjects = new ArrayList<>();
     private int BLOC_SIZE;
     private int y_blocks;
     private int x_middle;
@@ -108,7 +108,7 @@ public class Work extends JPanel implements MapInterface {
 
         //drawing of the player and PNJ
 
-        for (GameObject object : this.WorkObjects) {
+        for (GameObject object : this.workObjects) {
             if (object != null) {
                 int x = object.getPosX();
                 int y = object.getPosY();
@@ -140,13 +140,13 @@ public class Work extends JPanel implements MapInterface {
 
     public Player setObjects(ArrayList<GameObject> objects, Player mainChar, MapInterface currentMap) {
 
-        this.WorkObjects = new ArrayList<>(objects);
+        this.workObjects = new ArrayList<>(objects);
         mainChar.setPosXY(x_middle + 1, y_blocks);           //Player start at the door
         return mainChar;
     }
 
     public ArrayList<GameObject> getObjects() {
-        return this.WorkObjects;
+        return this.workObjects;
     }
 
     public void redraw() {
@@ -154,130 +154,75 @@ public class Work extends JPanel implements MapInterface {
     }
 
     private void construct() {                  //Add all the room objects to the Map list
-        this.WorkObjects.clear();
+        this.workObjects.clear();
 
         for (int i = x_middle-9; i < x_middle+11; i++){
-            WorkObjects.add(new BlockUnbreakable(i, 0)); //mur horizontal supérieur
-            WorkObjects.add(new BlockUnbreakable(i, 15)); //mur horizontal inférieur
-
+            workObjects.add(new BlockUnbreakable(i, 0)); //mur horizontal supérieur
+            workObjects.add(new BlockUnbreakable(i, 15)); //mur horizontal inférieur
         }
-
         for (int j = 1; j< 15; j++){
-            WorkObjects.add(new BlockUnbreakable(x_middle-9, j)); //mur vertical gauche
-
+            workObjects.add(new BlockUnbreakable(x_middle-9, j)); //mur vertical gauche
         }
-
         for (int j = 1; j< 8; j++){
-            WorkObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
-
+            workObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
         }
-
         for(int j =8; j<10; j++){
-            WorkObjects.add(new Door(x_middle+10,j));
+            workObjects.add(new Door(x_middle+10,j));
         }
-
         for (int j = 10; j< 15; j++){
-            WorkObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
-
+            workObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
         }
-
         for (int j = 8; j< 10; j++){
-            WorkObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
-
+            workObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
         }
-
         for (int j = 1; j< 6; j++){
-            WorkObjects.add(new BlockUnbreakable(x_middle+3, j)); //mur vertical bureau
-
+            workObjects.add(new BlockUnbreakable(x_middle+3, j)); //mur vertical bureau
         }
-
         for (int i = x_middle+6; i < x_middle+11; i++){
-            WorkObjects.add(new BlockUnbreakable(i,5 ));    //mur horizontal bureau
-
+            workObjects.add(new BlockUnbreakable(i,5 ));    //mur horizontal bureau
         }
-
         for (int i = x_middle+6; i < x_middle+9; i++){
             for (int j = 2; j < 4; j++){
-                WorkObjects.add(new Desk(i,j,30)); //bureau en haut a droite
-
-
+                workObjects.add(new Desk(i,j,30)); //bureau en haut a droite
             }
-
         }
-
         for (int i = x_middle+3; i < x_middle+7; i++){
             for (int j = 8; j < 11; j++){
-                WorkObjects.add(new BlockUnbreakable(i,j )); //bureau avec gens a droite
-
-
+                workObjects.add(new BlockUnbreakable(i,j )); //bureau avec gens a droite
             }
-
         }
-
         for (int i = x_middle+3; i< x_middle+8; i++){
-            WorkObjects.add(new BlockUnbreakable(i, 12)); //poubelle+biblio+plante horizontale bas
-
+            workObjects.add(new BlockUnbreakable(i, 12)); //poubelle+biblio+plante horizontale bas
         }
-
         for (int j = 10; j< 13; j++){
-            WorkObjects.add(new BlockUnbreakable(x_middle-1, j));  //bureau bas milieu + chaise
-            WorkObjects.add(new BlockUnbreakable(x_middle, j));
-
+            workObjects.add(new BlockUnbreakable(x_middle-1, j));  //bureau bas milieu + chaise
+            workObjects.add(new BlockUnbreakable(x_middle, j));
         }
-        WorkObjects.add(new BlockUnbreakable(x_middle-2, 11)); // poubelle a coté du bureau
-
-
         for (int j = 11; j< 14; j++){
-            WorkObjects.add(new BlockUnbreakable(x_middle-5, j));  //bureau bas gauche + chaise
-            WorkObjects.add(new BlockUnbreakable(x_middle-6, j));
-
+            workObjects.add(new BlockUnbreakable(x_middle-5, j));  //bureau bas gauche + chaise
+            workObjects.add(new BlockUnbreakable(x_middle-6, j));
         }
-        WorkObjects.add(new BlockUnbreakable(x_middle-7, 11)); // poubelle a coté du bureau
-
         for (int i  = x_middle-6; i< x_middle-2; i++){
-            WorkObjects.add(new BlockUnbreakable(i, 8));  //bureau milieu gauche
-            WorkObjects.add(new BlockUnbreakable(i, 7));
-
+            workObjects.add(new BlockUnbreakable(i, 8));  //bureau milieu gauche
+            workObjects.add(new BlockUnbreakable(i, 7));
         }
-        WorkObjects.add(new BlockUnbreakable(x_middle-6, 9)); //chaise
-        WorkObjects.add(new BlockUnbreakable(x_middle-5, 9));
-
-        WorkObjects.add(new BlockUnbreakable(x_middle-4, 6));//chaise
-        WorkObjects.add(new BlockUnbreakable(x_middle-3, 6));
-
-        WorkObjects.add(new BlockUnbreakable(x_middle-7, 8)); //poubelle
-        WorkObjects.add(new BlockUnbreakable(x_middle-2, 7)); //plante
-
-
         for (int i = x_middle-6; i < x_middle-2; i++){
             for (int j = 2; j < 5; j++){
-                WorkObjects.add(new BlockUnbreakable(i,j )); //bureau avec gens a gauche
-
-
+                workObjects.add(new BlockUnbreakable(i,j )); //bureau avec gens a gauche
             }
-
         }
-
         for (int j = 2; j < 6; j++){
-            WorkObjects.add(new BlockUnbreakable(x_middle,j )); //biblio+poubelle
-
+            workObjects.add(new BlockUnbreakable(x_middle,j )); //biblio+poubelle
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        workObjects.add(new BlockUnbreakable(x_middle-2, 11)); // poubelle a coté du bureau
+        workObjects.add(new BlockUnbreakable(x_middle-7, 11)); // poubelle a coté du bureau
+        workObjects.add(new BlockUnbreakable(x_middle-6, 9)); //chaise
+        workObjects.add(new BlockUnbreakable(x_middle-5, 9));
+        workObjects.add(new BlockUnbreakable(x_middle-4, 6));//chaise
+        workObjects.add(new BlockUnbreakable(x_middle-3, 6));
+        workObjects.add(new BlockUnbreakable(x_middle-7, 8)); //poubelle
+        workObjects.add(new BlockUnbreakable(x_middle-2, 7)); //plante
 
     }
 }
