@@ -169,7 +169,6 @@ public class Player extends GameObject implements Directable {
                         }
                         mainChar.setHunger(-val);
                         if(mainChar.getHunger() < mainChar.getHungerMin()){
-                            System.out.println("PROUTA");
                             mainChar.setHunger(-mainChar.getHunger());
                         }
                         mainChar.setBladder(0.5);
@@ -180,7 +179,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-                upXp(1, mainChar, g);
+                upXp(2, mainChar, g);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -305,7 +304,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-                upXp(1, mainChar, g);
+                upXp(2, mainChar, g);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -360,7 +359,7 @@ public class Player extends GameObject implements Directable {
                 }).start();
 
                 dialog.setVisible(true);
-                upXp(1, mainChar, g);
+                upXp(2, mainChar, g);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -409,13 +408,16 @@ public class Player extends GameObject implements Directable {
                             }
                         }
                         mainChar.setHygene(val);
+                        if(mainChar.getHygene() > mainChar.getHygeneMax()){
+                            mainChar.setHygene(mainChar.getHygeneMax()-mainChar.getHygene());
+                        }
                         dialog.dispose();
                     }
 
                 }).start();
 
                 dialog.setVisible(true);
-                upXp(1, mainChar, g);
+                upXp(2, mainChar, g);
                 //  t.join();
                 System.out.println("afterclock");
                 dialog.dispose();
@@ -666,8 +668,18 @@ public class Player extends GameObject implements Directable {
             }
         }
     }
+    public void checkGO(Player mainChar, Game g){
+        if(mainChar.getHunger() == mainChar.getHungerMax() && mainChar.getEnergy() == getEnergyMin()){
+            JOptionPane jop = new JOptionPane();
+            int option = jop.showConfirmDialog(null, "Voulez-vous quitter ou rejouer ?", "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(option == JOptionPane.OK_OPTION){
+                g.dispose();
 
+            }
 
+        }
+
+    }
     // //////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -722,6 +734,7 @@ public class Player extends GameObject implements Directable {
     }
     public double getHygene(){return hygene.get(0);}
     public double getHygeneMax(){return hygene.get(1);}
+    public double getHygeneMin(){return hygene.get(2);}
     public double getEnergy() {
         return energy.get(0);
     }

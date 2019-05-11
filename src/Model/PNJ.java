@@ -56,9 +56,11 @@ public class PNJ extends GameObject implements Directable, Activable{
     }
     public double getHunger() {
         return hunger.get(0);
-    } public double getHungerMax() {
+    }
+    public double getHungerMax() {
         return hunger.get(1);
-    }public double getHungerMin(){
+    }
+    public double getHungerMin(){
         return hunger.get(2);
     }
     public int getIndep(){
@@ -68,9 +70,12 @@ public class PNJ extends GameObject implements Directable, Activable{
         Double hung = getHunger();
         hung -= val;
         if(hung >= getHungerMax()/2 && indep == 0){
+            if (mainChar.getFoodFridge() == mainChar.getFoodFridgeMin()) {
+                mainChar.setMoney(-5);
+                mainChar.setFoodFridge(1);
+            }
             mainChar.setFoodFridge(-1);
             hunger.set(0,hung-hung/2);
-            System.out.println("PROUTA");
         }
         else if(hung >= getHungerMax()/2 && indep == 1){
 
