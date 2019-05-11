@@ -7,10 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Library extends JPanel implements MapInterface {
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private ArrayList<GameObject> LibraryObjects = new ArrayList<GameObject>();
-    public int width_screen;
-    public int height_screen;
+    private ArrayList<GameObject> LibraryObjects = new ArrayList<>();
     private int BLOC_SIZE;
     private int y_blocks;
     private int x_middle;
@@ -18,30 +15,22 @@ public class Library extends JPanel implements MapInterface {
     public Library() {
         this.y_blocks = 17;
         this.x_blocks = 17;
-        width_screen = (int) screenSize.getWidth();
-        height_screen = (int) screenSize.getHeight();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width_screen = (int) screenSize.getWidth();
+        int height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.setPreferredSize(new Dimension(width_screen, 2*height_screen/3));
+        this.setPreferredSize(new Dimension(width_screen, 2* height_screen /3));
         this.setBackground(Color.GRAY);
         this.setOpaque(true);
-        this.BLOC_SIZE = (Math.round(3*height_screen/(5*y_blocks)));
-        x_middle = (Math.round(width_screen/(2*BLOC_SIZE)));
-        System.out.println(x_middle);
-        System.out.println(screenSize.getWidth());
+        this.BLOC_SIZE = (Math.round(3* height_screen /(5*y_blocks)));
+        x_middle = (Math.round(width_screen /(2*BLOC_SIZE)));
         construct();
     }
 
 
 
     public void paint(Graphics g) {
-
-        System.out.println("PaintLibr");
-
-        Image personnage_bas = new ImageIcon("src/Image/personnage_bas.png").getImage();
-        Image personnage_droite = new ImageIcon("src/Image/personnage_droite.png").getImage();
-        Image personnage_gauche = new ImageIcon("src/Image/personnage_gauche.png").getImage();
-
 
         Image sol = new ImageIcon("src/Image/sol_bibli.jpg").getImage();
         Image poubelle = new ImageIcon("src/Image/trash.png").getImage();

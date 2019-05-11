@@ -7,37 +7,34 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Appartement extends JPanel implements MapInterface {
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private ArrayList<GameObject> appartementObjects = new ArrayList<GameObject>();
-    public int width_screen;
-    public int height_screen;
+    private ArrayList<GameObject> appartementObjects = new ArrayList<>();
     private int BLOC_SIZE;
     private int y_blocks;
     private int x_middle;
     private int x_blocks;
 
 
-    public Appartement() {
+    public Appartement() {                      //Constructor
         this.y_blocks = 15;
         this.x_blocks = 27;
-        width_screen = (int) screenSize.getWidth();
-        height_screen = (int) screenSize.getHeight();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width_screen = (int) screenSize.getWidth();
+        int height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));
         this.setBackground(Color.GRAY);
         this.setOpaque(true);
-        this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));
-
-
-        x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));
-        System.out.println("salut nicolas" + x_middle);
-        System.out.println(screenSize.getWidth());
+        this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));          //Blocsize equation
+        x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));                    //x_middle equation
         construct();
+
     }
 
 
     public void paint(Graphics g) {
+
+        //Instantiation of all images for paint
 
         Image sol_appartement = new ImageIcon("src/Image/sol.jpg").getImage();
         Image cuisine1 = new ImageIcon("src/Image/kitchen_appartement.png").getImage();
@@ -59,101 +56,72 @@ public class Appartement extends JPanel implements MapInterface {
         Image porte = new ImageIcon("src/Image/porte_horizontale.png").getImage();
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
 
-
         super.paintComponent(g);
+
+        //Painting at the right place
+
         for (int i = x_middle - (x_blocks / 2); i < x_middle + (x_blocks / 2) + 3; i++) {
             for (int j = 1; j < y_blocks + 2; j++) {
-                int x = i;
-                int y = j;
-                g.drawImage(sol_appartement, x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                g.drawImage(sol_appartement, i * BLOC_SIZE, j * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
-
         }
-
         for (int i = x_middle-14; i < x_middle+16; i++){
             g.drawImage(brique, i * BLOC_SIZE,  0, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int j = 1; j< y_blocks+2; j++){
             g.drawImage(brique, (x_middle-14) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             g.drawImage(brique, (x_middle+15) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int i = x_middle-14; i <x_middle-4; i++){
             g.drawImage(brique, i * BLOC_SIZE,  16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int i = x_middle-2; i <x_middle+16; i++){
             g.drawImage(brique, i * BLOC_SIZE,  16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int j = 11; j < 16; j++){
             g.drawImage(brique, (x_middle-5) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int j = 10; j < 13; j++){
             g.drawImage(brique, (x_middle-2) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
-
         for (int j = 14; j < 16; j++){
             g.drawImage(brique, (x_middle-2) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int i = x_middle-1; i < x_middle+2; i++){
             g.drawImage(brique, i * BLOC_SIZE,  10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int j = 11; j < 16; j++){
             g.drawImage(brique, (x_middle+1) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int i = x_middle+2; i < x_middle+5; i++){
             g.drawImage(brique, i * BLOC_SIZE,  11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int j = 10; j < 16; j++){
             g.drawImage(brique, (x_middle+7) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
-
         for (int i = x_middle+10; i < x_middle+15; i++){
             g.drawImage(brique, i * BLOC_SIZE,  10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-
         }
 
-
-
-
-
-        g.drawImage(bureau, (x_middle-3) * BLOC_SIZE, 1 * BLOC_SIZE,4* BLOC_SIZE, 3*BLOC_SIZE, null);
+        g.drawImage(bureau, (x_middle-3) * BLOC_SIZE, BLOC_SIZE,4* BLOC_SIZE, 3*BLOC_SIZE, null);
         g.drawImage(table_a_manger, (x_middle-12) * BLOC_SIZE, 3 * BLOC_SIZE,8* BLOC_SIZE, 4*BLOC_SIZE, null);
         g.drawImage(cuisine1, (x_middle-13) * BLOC_SIZE, 10 * BLOC_SIZE,2* BLOC_SIZE, 6*BLOC_SIZE, null);
-        g.drawImage(cuisine2, (x_middle-11) * BLOC_SIZE, 15 * BLOC_SIZE,3* BLOC_SIZE, 1*BLOC_SIZE, null);
-        g.drawImage(porte, (x_middle-4) * BLOC_SIZE, 16 * BLOC_SIZE,2* BLOC_SIZE, 1*BLOC_SIZE, null);
+        g.drawImage(cuisine2, (x_middle-11) * BLOC_SIZE, 15 * BLOC_SIZE,3* BLOC_SIZE, BLOC_SIZE, null);
+        g.drawImage(porte, (x_middle-4) * BLOC_SIZE, 16 * BLOC_SIZE,2* BLOC_SIZE, BLOC_SIZE, null);
         g.drawImage(toilettes, (x_middle-1) * BLOC_SIZE, 14 * BLOC_SIZE,2* BLOC_SIZE, 2*BLOC_SIZE, null);
-        g.drawImage(lavabot_toilettes, (x_middle-1) * BLOC_SIZE, 11 * BLOC_SIZE,2* BLOC_SIZE, 1*BLOC_SIZE, null);
+        g.drawImage(lavabot_toilettes, (x_middle-1) * BLOC_SIZE, 11 * BLOC_SIZE,2* BLOC_SIZE, BLOC_SIZE, null);
         g.drawImage(baignoire, (x_middle+2) * BLOC_SIZE, 12 * BLOC_SIZE,2* BLOC_SIZE, 4*BLOC_SIZE, null);
-        g.drawImage(lavabot_sdb, (x_middle+6) * BLOC_SIZE, 13 * BLOC_SIZE,1* BLOC_SIZE, 2*BLOC_SIZE, null);
+        g.drawImage(lavabot_sdb, (x_middle+6) * BLOC_SIZE, 13 * BLOC_SIZE, BLOC_SIZE, 2*BLOC_SIZE, null);
         g.drawImage(armoire, (x_middle+8) * BLOC_SIZE, 12 * BLOC_SIZE,2* BLOC_SIZE, 4*BLOC_SIZE, null);
         g.drawImage(lit, (x_middle+12) * BLOC_SIZE, 12 * BLOC_SIZE,3* BLOC_SIZE, 4*BLOC_SIZE, null);
         g.drawImage(TV, (x_middle+13) * BLOC_SIZE, 3 * BLOC_SIZE,2* BLOC_SIZE, 3*BLOC_SIZE, null);
         g.drawImage(table_basse, (x_middle+9) * BLOC_SIZE, 3 * BLOC_SIZE,2* BLOC_SIZE, 2*BLOC_SIZE, null);
-        g.drawImage(canape1, (x_middle+3) * BLOC_SIZE, 1 * BLOC_SIZE,2* BLOC_SIZE, 5*BLOC_SIZE, null);
-        g.drawImage(canape2, (x_middle+5) * BLOC_SIZE, 1 * BLOC_SIZE,3* BLOC_SIZE, 2*BLOC_SIZE, null);
+        g.drawImage(canape1, (x_middle+3) * BLOC_SIZE, BLOC_SIZE,2* BLOC_SIZE, 5*BLOC_SIZE, null);
+        g.drawImage(canape2, (x_middle+5) * BLOC_SIZE, BLOC_SIZE,3* BLOC_SIZE, 2*BLOC_SIZE, null);
         g.drawImage(kicker, (x_middle+6) * BLOC_SIZE, 7 * BLOC_SIZE,4* BLOC_SIZE, 2*BLOC_SIZE, null);
         g.drawImage(frigo, (x_middle-7) * BLOC_SIZE, 14 * BLOC_SIZE,2* BLOC_SIZE, 2*BLOC_SIZE, null);
 
+        //drawing of the player and PNJ
 
         for (GameObject object : this.appartementObjects) {
             if (object != null) {
@@ -198,23 +166,19 @@ public class Appartement extends JPanel implements MapInterface {
     public Player setObjects(ArrayList<GameObject> objects, Player mainChar, MapInterface currentMap) {
 
         this.appartementObjects = new ArrayList<>(objects);
-        mainChar.setPosXY(x_middle - 4, 15);
+        mainChar.setPosXY(x_middle - 4, 15);            //Player start at the door
         return mainChar;
     }
 
     public ArrayList<GameObject> getObjects() {
         return this.appartementObjects;
-
-
-
-
     }
 
     public void redraw() {
         this.repaint();
     }
 
-    private void construct() {
+    private void construct() {                  //Add all the room objects to the Map list
         this.appartementObjects.clear();
 
         for (int i = x_middle - 14; i < x_middle + 16; i++) { //mur horizontal supérieur
@@ -384,9 +348,6 @@ public class Appartement extends JPanel implements MapInterface {
 
 
     }
-
-
-
 
 
 }

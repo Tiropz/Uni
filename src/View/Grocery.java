@@ -7,38 +7,33 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Grocery extends JPanel implements MapInterface {
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private ArrayList<GameObject> GroceryObjects = new ArrayList<GameObject>();
-    public int width_screen;
-    public int height_screen;
+    private ArrayList<GameObject> groceryObjects = new ArrayList<>();
     private int BLOC_SIZE;
     private int y_blocks;
     private int x_middle;
     private int x_blocks;
 
-    public Grocery() {
+    public Grocery() {                        //Constructor
         this.y_blocks = 12;
         this.x_blocks = 20;
-        width_screen = (int) screenSize.getWidth();
-        height_screen = (int) screenSize.getHeight();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width_screen = (int) screenSize.getWidth();
+        int height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));
         this.setBackground(Color.GRAY);
         this.setOpaque(true);
-        System.out.println("coucou nicolas" + y_blocks);
-        System.out.println(x_blocks);
-        this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));
-
-
-        x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));
-        System.out.println(x_middle);
-        System.out.println(screenSize.getWidth());
+        this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));  //Blocsize equation
+        x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));            //x_middle equation
         construct();
     }
 
 
     public void paint(Graphics g) {
+
+        //Instantiation of all images for paint
+
         Image sol_grocery = new ImageIcon("src/Image/sol_grocery.jpg").getImage();
         Image vegetables = new ImageIcon("src/Image/vegetables.png").getImage();
         Image bread = new ImageIcon("src/Image/bread.png").getImage();
@@ -46,70 +41,59 @@ public class Grocery extends JPanel implements MapInterface {
         Image meat = new ImageIcon("src/Image/meat.png").getImage();
         Image fruits = new ImageIcon("src/Image/fruits_projet.png").getImage();
         Image caisse = new ImageIcon("src/Image/cash_register.png").getImage();
-        Image présentoir = new ImageIcon("src/Image/table_cuisine.png").getImage();
+        Image presentoir = new ImageIcon("src/Image/table_cuisine.png").getImage();
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
         Image porte = new ImageIcon("src/Image/porte_horizontale.png").getImage();
 
-
-
         super.paintComponent(g);
+
+        //Painting at the right place
+
         for (int i = x_middle - (x_blocks / 2); i < x_middle + (x_blocks / 2) + 2; i++) {
             for (int j = 1; j < y_blocks + 2; j++) {
-                int x = i;
-                int y = j;
-                g.drawImage(sol_grocery, x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                g.drawImage(sol_grocery, i * BLOC_SIZE, j * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
-
         }
-
         for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
             g.drawImage(brique, i*BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null);
         }
-
         for (int i = (x_middle-(x_blocks/2)-1); i < x_middle-6; i++) {
             g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
-
         for (int i = x_middle-4; i < (x_middle+(x_blocks/2)+3); i++) {
             g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
-
-        g.drawImage(porte, (x_middle-6)*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
-
-
         for (int j = 1;j< y_blocks+1; j++){
             g.drawImage(brique, (x_middle-11)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             g.drawImage(brique, (x_middle+12)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
-
-
         for (int j = 3; j < 10; j = j+6){
             g.drawImage(caisse, (x_middle-8)*BLOC_SIZE, j*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
         }
-
         for (int i = x_middle-2; i < x_middle+2; i = i + 2){
             g.drawImage(pasta, i*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE, null);
             g.drawImage(pasta, i*BLOC_SIZE, 7*BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE, null);
         }
-        g.drawImage(présentoir, (x_middle+4)*BLOC_SIZE, 5*BLOC_SIZE, 4*BLOC_SIZE, 4*BLOC_SIZE, null);
-        g.drawImage(bread, (x_middle+4)*BLOC_SIZE, 5*BLOC_SIZE, 4*BLOC_SIZE, 4*BLOC_SIZE, null);
-
-        g.drawImage(présentoir, (x_middle+6)*BLOC_SIZE, 1*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
-        g.drawImage(présentoir, (x_middle+9)*BLOC_SIZE, 1*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
-
-        g.drawImage(meat, (x_middle+6)*BLOC_SIZE, 1*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
-        g.drawImage(meat, (x_middle+9)*BLOC_SIZE, 1*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
 
         for (int j = 3; j < 11; j = j + 2){
             g.drawImage(vegetables, (x_middle+10)*BLOC_SIZE, j*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
-
         }
-
         for (int i = x_middle+3; i <x_middle+10; i = i + 3 ){
-            g.drawImage(présentoir, i*BLOC_SIZE, (y_blocks-1)*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
+            g.drawImage(presentoir, i*BLOC_SIZE, (y_blocks-1)*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
             g.drawImage(fruits, i*BLOC_SIZE, (y_blocks-1)*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
         }
-        for (GameObject object : this.GroceryObjects) {
+
+        g.drawImage(porte, (x_middle-6)*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+        g.drawImage(presentoir, (x_middle+4)*BLOC_SIZE, 5*BLOC_SIZE, 4*BLOC_SIZE, 4*BLOC_SIZE, null);
+        g.drawImage(bread, (x_middle+4)*BLOC_SIZE, 5*BLOC_SIZE, 4*BLOC_SIZE, 4*BLOC_SIZE, null);
+        g.drawImage(presentoir, (x_middle+6)*BLOC_SIZE, BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
+        g.drawImage(presentoir, (x_middle+9)*BLOC_SIZE, BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
+        g.drawImage(meat, (x_middle+6)*BLOC_SIZE, BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
+        g.drawImage(meat, (x_middle+9)*BLOC_SIZE, BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
+
+        //drawing of the player and PNJ
+
+        for (GameObject object : this.groceryObjects) {
             if (object != null) {
                 int x = object.getPosX();
                 int y = object.getPosY();
@@ -144,98 +128,78 @@ public class Grocery extends JPanel implements MapInterface {
 
     public Player setObjects(ArrayList<GameObject> objects,Player mainChar, MapInterface currentMap) {
 
-        this.GroceryObjects = new ArrayList<>(objects);
-        mainChar.setPosXY(x_middle+1,y_blocks);
+        this.groceryObjects = new ArrayList<>(objects);
+        mainChar.setPosXY(x_middle+1,y_blocks);             //Player start at the door
         return mainChar;
     }
 
     public ArrayList<GameObject> getObjects() {
-        return this.GroceryObjects;
+        return this.groceryObjects;
     }
 
     public void redraw() {
         this.repaint();
     }
 
-    private void construct() {
-        this.GroceryObjects.clear();
+    private void construct() {          //Add all the room objects to the Map list
+        this.groceryObjects.clear();
 
         for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
-            GroceryObjects.add(new BlockUnbreakable(i, 0));
+            groceryObjects.add(new BlockUnbreakable(i, 0));
         }
-
-        GroceryObjects.add(new Door(x_middle-6, y_blocks+1));
-        GroceryObjects.add(new Door(x_middle-5, y_blocks+1));
-
-
 
         for (int i = (x_middle-(x_blocks/2)-1); i < x_middle-6; i++) { //mur inférieur
-            GroceryObjects.add(new BlockUnbreakable(i, (y_blocks+1)));
+            groceryObjects.add(new BlockUnbreakable(i, (y_blocks+1)));
         }
-
-
         for (int i = x_middle-4; i < (x_middle+(x_blocks/2)+3); i++) { //mur inférieur
-            GroceryObjects.add(new BlockUnbreakable( i, (y_blocks+1)));
+            groceryObjects.add(new BlockUnbreakable( i, (y_blocks+1)));
         }
-
-
         for (int j = 1;j< y_blocks+2; j++){
-            GroceryObjects.add(new BlockUnbreakable( x_middle-11, j));  //murs grocery verticaux
-            GroceryObjects.add(new BlockUnbreakable( x_middle+12, j));
+            groceryObjects.add(new BlockUnbreakable( x_middle-11, j));  //murs grocery verticaux
+            groceryObjects.add(new BlockUnbreakable( x_middle+12, j));
         }
-
         for (int j = 3; j < 10; j = j+6){
-            GroceryObjects.add(new Register((x_middle-8), (j+1))); //2 caisses
-            GroceryObjects.add(new Register((x_middle-7), (j+1)));
-            GroceryObjects.add(new Register(x_middle-6, (j+1)));
-            GroceryObjects.add(new Register(x_middle-8, j));
-            GroceryObjects.add(new Register(x_middle-7, j));
-            GroceryObjects.add(new Register(x_middle-6, j));
+            groceryObjects.add(new Register((x_middle-8), (j+1))); //2 caisses
+            groceryObjects.add(new Register((x_middle-7), (j+1)));
+            groceryObjects.add(new Register(x_middle-6, (j+1)));
+            groceryObjects.add(new Register(x_middle-8, j));
+            groceryObjects.add(new Register(x_middle-7, j));
+            groceryObjects.add(new Register(x_middle-6, j));
 
         }
-
         for (int i = x_middle-2; i < x_middle+2; i ++){
-            GroceryObjects.add(new FoodCounter( i, 2)); //pates haut
-            GroceryObjects.add(new FoodCounter( i, 3));
-            GroceryObjects.add(new FoodCounter( i, 4));
-
-
-
-
-            GroceryObjects.add(new FoodCounter(i, 7));
-            GroceryObjects.add(new FoodCounter(i, 8)); //pates bas
-            GroceryObjects.add(new FoodCounter(i, 9));
+            groceryObjects.add(new FoodCounter( i, 2)); //pates haut
+            groceryObjects.add(new FoodCounter( i, 3));
+            groceryObjects.add(new FoodCounter( i, 4));
+            groceryObjects.add(new FoodCounter(i, 7));
+            groceryObjects.add(new FoodCounter(i, 8)); //pates bas
+            groceryObjects.add(new FoodCounter(i, 9));
 
         }
-
-
         for (int i = (x_middle+4); i < (x_middle+8); i++){
             for (int j = 5; j < 9; j++){
-                GroceryObjects.add(new FoodCounter(i, j)); //pain
+                groceryObjects.add(new FoodCounter(i, j)); //pain
             }
         }
 
-
-
         for (int i = (x_middle+6); i < (x_middle+12); i++){  //meat
-            GroceryObjects.add(new FoodCounter(i, 1));
-            GroceryObjects.add(new FoodCounter(i, 2));
+            groceryObjects.add(new FoodCounter(i, 1));
+            groceryObjects.add(new FoodCounter(i, 2));
         }
 
         for (int j = 3; j < y_blocks; j++){
-            GroceryObjects.add(new FoodCounter((x_middle+10), j));
-            GroceryObjects.add(new FoodCounter((x_middle+11), j)); //vegetables
+            groceryObjects.add(new FoodCounter((x_middle+10), j));
+            groceryObjects.add(new FoodCounter((x_middle+11), j)); //vegetables
 
         }
-
-
 
         for (int i = x_middle+3; i <x_middle+10; i ++ ){
-            GroceryObjects.add(new FoodCounter(i, (y_blocks)));
-            GroceryObjects.add(new FoodCounter(i, (y_blocks-1))); //fruits
+            groceryObjects.add(new FoodCounter(i, (y_blocks)));
+            groceryObjects.add(new FoodCounter(i, (y_blocks-1))); //fruits
         }
 
-
+        groceryObjects.add(new Door(x_middle-6, y_blocks+1));
+        groceryObjects.add(new Door(x_middle-5, y_blocks+1));
 
     }
 

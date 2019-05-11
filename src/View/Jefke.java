@@ -5,23 +5,20 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Jefke extends JPanel implements MapInterface {
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private ArrayList<GameObject> JefkeObjects = new ArrayList<GameObject>();
-    public int width_screen;
-    public int height_screen;
+    private ArrayList<GameObject> JefkeObjects = new ArrayList<>();
     private int BLOC_SIZE;
     private int y_blocks;
     public int x_middle;
     private int x_blocks;
 
-    public Jefke() {
+    public Jefke() {                        //Constructor
         this.y_blocks = 13;
         this.x_blocks = 22;
-        width_screen = (int) screenSize.getWidth();
-        height_screen = (int) screenSize.getHeight();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width_screen = (int) screenSize.getWidth();
+        int height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));
@@ -30,10 +27,8 @@ public class Jefke extends JPanel implements MapInterface {
         System.out.println("coucou" + y_blocks);
         System.out.println(x_blocks);
         System.out.println(x_middle);
-        this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));
-
-
-        x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));
+        this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));  //Blocsize equation
+        x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));            //x_middle equation
         System.out.println(screenSize.getWidth());
         construct();
     }
@@ -41,57 +36,47 @@ public class Jefke extends JPanel implements MapInterface {
 
     public void paint(Graphics g) {
 
+        //Instantiation of all images for paint
+
         Image sol_jefke = new ImageIcon("src/Image/sol_jefke.jpg").getImage();
-        Image pompe_bière = new ImageIcon("src/Image/pompe_biere.png").getImage();
+        Image pompe_biere = new ImageIcon("src/Image/pompe_biere.png").getImage();
         Image bar = new ImageIcon("src/Image/sol_2.jpg").getImage();
         Image banquette = new ImageIcon("src/Image/banc.png").getImage();
         Image banc = new ImageIcon("src/Image/banc.jpg").getImage();
         Image brique = new ImageIcon("src/Image/brique.jpg").getImage();
         Image porte_horizontale = new ImageIcon("src/Image/porte_horizontale.png").getImage();
 
-
-
         super.paintComponent(g);
+
+        //Painting at the right place
+
         for (int i = x_middle - (x_blocks / 2); i < x_middle + (x_blocks / 2) + 2; i++) {
             for (int j = 1; j < y_blocks + 2; j++) {
-                int x = i;
-                int y = j;
-                g.drawImage(sol_jefke, x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                g.drawImage(sol_jefke, i * BLOC_SIZE, j * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
-
         }
-
-
         for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
             g.drawImage(brique, i*BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null);
         }
-
         for (int i = (x_middle-(x_blocks/2)-1); i < x_middle+1; i++) {
             g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
-
         for (int i = x_middle+3; i < (x_middle+(x_blocks/2)+3); i++) {
             g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
-
         for (int j = 1;j< y_blocks+1; j++){
             g.drawImage(brique, (x_middle-12)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             g.drawImage(brique, (x_middle+13)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         }
-
-        for (int i = x_middle-11; i < x_middle
-                ; i++){
+        for (int i = x_middle-11; i < x_middle; i++){
             g.drawImage(bar, (i*BLOC_SIZE), (y_blocks-4)*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE,null);
         }
         for (int j = y_blocks-3; j < y_blocks+1; j++){
             g.drawImage(bar, (x_middle-1)*BLOC_SIZE, j*BLOC_SIZE,BLOC_SIZE,BLOC_SIZE,null);
         }
-
         for (int i = x_middle-8; i < x_middle-4; i = i + 3){
-            g.drawImage(pompe_bière, i*BLOC_SIZE, (y_blocks-2)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
+            g.drawImage(pompe_biere, i*BLOC_SIZE, (y_blocks-2)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
         }
-
-
 
             g.drawImage(banc, (x_middle+11)*BLOC_SIZE, (y_blocks-3)*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
             g.drawImage(banquette, (x_middle+11)*BLOC_SIZE, (y_blocks-1)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
@@ -101,8 +86,7 @@ public class Jefke extends JPanel implements MapInterface {
             g.drawImage(banquette, (x_middle+11)*BLOC_SIZE, (y_blocks-12)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
             g.drawImage(porte_horizontale, (x_middle+1)*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, null);
 
-
-
+        //drawing of the player and PNJ
 
         for (GameObject object : this.JefkeObjects) {
             if (object != null) {
@@ -153,11 +137,10 @@ public class Jefke extends JPanel implements MapInterface {
         }
     }
 
-
     public Player setObjects(ArrayList<GameObject> objects,Player mainChar, MapInterface currentMap) {
 
         this.JefkeObjects = new ArrayList<>(objects);
-        mainChar.setPosXY(x_middle+1,y_blocks);
+        mainChar.setPosXY(x_middle+1,y_blocks);         //Player start at the door
         return mainChar;
     }
 
@@ -169,7 +152,7 @@ public class Jefke extends JPanel implements MapInterface {
         this.repaint();
     }
 
-    private void construct() {
+    private void construct() {                  //Add all the room objects to the Map list
         this.JefkeObjects.clear();
         for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
             JefkeObjects.add(new BlockUnbreakable(i, 0));
