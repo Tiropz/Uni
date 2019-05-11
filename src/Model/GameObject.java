@@ -1,17 +1,15 @@
 package Model;
 
 public abstract class GameObject {
-    protected int posX;
-    protected int posY;
-    protected int color;
+    int posX;
+    int posY;
 
-    public GameObject(int X, int Y, int color) {
+    public GameObject(int X, int Y) {
         this.posX = X;
         this.posY = Y;
-        this.color = color;
     }
 
-    public void move(int X, int Y) {
+    void move(int X, int Y) {
         this.posX = this.posX + X;
         this.posY = this.posY + Y;
     }
@@ -23,11 +21,7 @@ public abstract class GameObject {
         return this.posY;
     }
 
-    public int getColor() {
-        return this.color;
-    }
-
-    public boolean isAtPosition(int x, int y) {
+    boolean isAtPosition(int x, int y) {
         return this.posX == x && this.posY == y;
     }
 

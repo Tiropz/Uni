@@ -17,7 +17,7 @@ public class Player extends GameObject implements Directable {
     List<Double> energy = new ArrayList<>();
     List<Double> hunger = new ArrayList<>();
     List<Double> bladder = new ArrayList<>();
-    List<Double> hygene = new ArrayList<>();
+    List<Double> hygiene = new ArrayList<>();
     List<Integer> food = new ArrayList<>();
     List<Integer> foodFridge = new ArrayList<>();
     List<Integer> xp = new ArrayList<>();
@@ -33,8 +33,8 @@ public class Player extends GameObject implements Directable {
     public int timer;
 
 
-    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer, int foodBasket, boolean hasWork, boolean hasApp) {
-        super(x, y, 2);
+    public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygiene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer, int foodBasket, boolean hasWork, boolean hasApp) {
+        super(x, y);
         this.info.add(name);
         this.info.add(sex);
         this.info.add(study);
@@ -49,9 +49,9 @@ public class Player extends GameObject implements Directable {
         this.bladder.add(0.0);
         this.bladder.add(bladder);
         this.bladder.add(0.0);
-        this.hygene.add(hygene);
-        this.hygene.add(hygene);
-        this.hygene.add(0.0);
+        this.hygiene.add(hygiene);
+        this.hygiene.add(hygiene);
+        this.hygiene.add(0.0);
         this.food.add(nbreFood);
         this.food.add(10);
         this.food.add(0);
@@ -377,7 +377,7 @@ public class Player extends GameObject implements Directable {
         JOptionPane jop = new JOptionPane();
         int option = jop.showConfirmDialog(null, "Voulez-vous vous laver ?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
-            if (mainChar.getHygene() < mainChar.getHygeneMax()) {
+            if (mainChar.getHygiene() < mainChar.getHygieneMax()) {
 
                 final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
                 // Thread t = new SampleThread(lblClock, optionPane);
@@ -407,9 +407,9 @@ public class Player extends GameObject implements Directable {
                                 e.printStackTrace();
                             }
                         }
-                        mainChar.setHygene(val);
-                        if(mainChar.getHygene() > mainChar.getHygeneMax()){
-                            mainChar.setHygene(mainChar.getHygeneMax()-mainChar.getHygene());
+                        mainChar.setHygiene(val);
+                        if(mainChar.getHygiene() > mainChar.getHygieneMax()){
+                            mainChar.setHygiene(mainChar.getHygieneMax()-mainChar.getHygiene());
                         }
                         dialog.dispose();
                     }
@@ -668,18 +668,7 @@ public class Player extends GameObject implements Directable {
             }
         }
     }
-    public void checkGO(Player mainChar, Game g){
-        if(mainChar.getHunger() == mainChar.getHungerMax() && mainChar.getEnergy() == getEnergyMin()){
-            JOptionPane jop = new JOptionPane();
-            int option = jop.showConfirmDialog(null, "Voulez-vous quitter ou rejouer ?", "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(option == JOptionPane.OK_OPTION){
-                g.dispose();
 
-            }
-
-        }
-
-    }
     // //////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -727,14 +716,14 @@ public class Player extends GameObject implements Directable {
     public int getSocial(){return social;}
     public void setSocial(int val){social += val;}
     public int getMoney(){return money;}
-    public void setHygene(double val){
-        double hyg = getHygene();
+    public void setHygiene(double val){
+        double hyg = getHygiene();
         hyg += val;
-        hygene.set(0,hyg);
+        hygiene.set(0,hyg);
     }
-    public double getHygene(){return hygene.get(0);}
-    public double getHygeneMax(){return hygene.get(1);}
-    public double getHygeneMin(){return hygene.get(2);}
+    public double getHygiene(){return hygiene.get(0);}
+    public double getHygieneMax(){return hygiene.get(1);}
+    public double getHygieneMin(){return hygiene.get(2);}
     public double getEnergy() {
         return energy.get(0);
     }

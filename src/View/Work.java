@@ -220,6 +220,10 @@ public class Work extends JPanel implements MapInterface {
 
         }
 
+        for(int j =8; j<10; j++){
+            WorkObjects.add(new Door(x_middle+10,j));
+        }
+
         for (int j = 10; j< 15; j++){
             WorkObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
 
@@ -242,7 +246,7 @@ public class Work extends JPanel implements MapInterface {
 
         for (int i = x_middle+6; i < x_middle+9; i++){
             for (int j = 2; j < 4; j++){
-                WorkObjects.add(new Desk(i,j, 30 )); //bureau en haut a droite
+                WorkObjects.add(new Desk(i,j,30)); //bureau en haut a droite
 
 
             }

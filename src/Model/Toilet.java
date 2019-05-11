@@ -1,16 +1,14 @@
 package Model;
 
-import javax.swing.*;
 
-public class Toilet extends Block implements Activable {
-    private static JLabel lblClock = new JLabel("");
-    private String time;
+public class Toilet extends GameObject implements Activable {
+
     public Toilet(int x, int y) {
-        super(x, y, 0);
+        super(x, y);
     }
 
     @Override
-    public Player activate(Player mainChar, Game game) throws InterruptedException {
+    public Player activate(Player mainChar, Game game) {
         mainChar.pee(10, 3, mainChar, game);
         return mainChar;
     }

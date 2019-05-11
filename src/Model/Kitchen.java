@@ -1,18 +1,15 @@
 package Model;
 
-import javax.swing.*;
+public class Kitchen extends GameObject implements Activable {
 
-public class Kitchen extends Block implements Activable {
-    private static JLabel lblClock = new JLabel("");
-    private String time;
-    public Kitchen(int x, int y, int color) {
-        super(x, y, color);
+    public Kitchen(int x, int y) {
+        super(x, y);
     }
 
     @Override
     public Player activate(Player mainChar, Game game) {
-        mainChar.makeFood(1,10, mainChar, game);
-        return mainChar;
+        mainChar.makeFood(1,10, mainChar, game);        //Call makeFood method for 10 sec and gives +1 foodFridge
+        return mainChar;                                           //return mainChar
     }
 
     @Override

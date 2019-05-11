@@ -17,7 +17,7 @@ import javax.swing.*;
 
 import com.google.gson.Gson;
 
-public class Game extends JFrame implements DeletableObserver {
+public class Game extends JFrame {
     public static ArrayList<GameObject> objects = new ArrayList<GameObject>();
     ArrayList<GameObject> objectList = new ArrayList<GameObject>();
     private ArrayList<Player> players = new ArrayList<Player>();
@@ -34,7 +34,7 @@ public class Game extends JFrame implements DeletableObserver {
     private Appartement appartementMap = new Appartement();
     private Status status = new Status(mainChar);
     public MapInterface gamemap;
-    private String mapName;
+    public String mapName;
     public int secondpassed = 0;
     Timer myTimer = new Timer();
 
@@ -320,14 +320,6 @@ public class Game extends JFrame implements DeletableObserver {
     public Player getPlayer(){
         return this.mainChar;
     }
-    @Override
-    synchronized public void delete(Deletable ps, ArrayList<GameObject> loot) {
-        objects.remove(ps);
-        if (loot != null) {
-            objects.addAll(loot);
-        }
-        notifyView(this.mainChar);
-    }
 
     public void update(Player actualPlayer) {
         this.status.redraw(actualPlayer);
@@ -337,10 +329,6 @@ public class Game extends JFrame implements DeletableObserver {
         System.out.println(active_player.getPosX() + ":" + active_player.getPosY());
     }
 
-	public void sendPlayer(int x, int y) {
-		Thread t = new Thread(new AStarThread(this, active_player, x,  y));
-		t.start();
-	}
 
     public void setKeyListener(KeyListener keyboard) {
         this.gamemap.addKeyListener(keyboard);

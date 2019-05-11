@@ -15,7 +15,7 @@ public class PNJ extends GameObject implements Directable, Activable{
     private static JLabel lblClock = new JLabel("");
     public int timer;
     public PNJ(int x, int y, int indep,String name, Double hunger, boolean movable) {
-        super(x, y, 0);
+        super(x, y);
         this.indep = indep;
         this.name = name;
         this.hunger.add(0.0);

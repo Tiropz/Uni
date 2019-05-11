@@ -1,23 +1,23 @@
 package Model;
 
 
-public class Register extends Block implements Activable {
+public class Register extends GameObject implements Activable {
 
     public Register(int x, int y) {
 
-        super(x, y, 4);
+        super(x, y);
 
     }
-
+    @Override
+    public Player activate(Player mainChar, Game game){
+        mainChar.pay(mainChar);                                     //Call pay method
+        return mainChar;                                            //return mainChar
+    }
     @Override
     public boolean isObstacle() {
         return true;
     }
 
-    @Override
-    public Player activate(Player mainChar, Game game){
-        mainChar.pay(mainChar);
-        return mainChar;
-    }
+
 
 }

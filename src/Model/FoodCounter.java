@@ -1,12 +1,17 @@
 package Model;
 
 
-public class FoodCounter extends Block implements Activable {
+public class FoodCounter extends GameObject implements Activable {
 
-    public FoodCounter(int x, int y) {
+    public FoodCounter(int x, int y) {      //FoodCounter constructor
 
-        super(x, y, 4);
+        super(x, y);
 
+    }
+    @Override
+    public Player activate(Player mainChar, Game game){         //Call getFoodFromCounter method
+        mainChar.getFoodFromCounter(mainChar);                  //return mainChar
+        return mainChar;
     }
 
     @Override
@@ -14,10 +19,6 @@ public class FoodCounter extends Block implements Activable {
         return true;
     }
 
-    @Override
-    public Player activate(Player mainChar, Game game){
-        mainChar.getFoodFromCounter(mainChar);
-        return mainChar;
-    }
+
 
 }

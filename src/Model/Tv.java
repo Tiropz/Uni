@@ -1,12 +1,12 @@
 package Model;
 
-public class Tv extends Block implements Activable {
-    public Tv(int x, int y, int color) {
-        super(x, y, color);
+public class Tv extends GameObject implements Activable {
+    public Tv(int x, int y) {
+        super(x, y);
     }
 
     @Override
-    public Player activate(Player mainChar, Game game) throws InterruptedException {
+    public Player activate(Player mainChar, Game game){
         mainChar.rest(10,10, mainChar);
         return mainChar;
     }

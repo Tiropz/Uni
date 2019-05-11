@@ -10,12 +10,12 @@ public class Keyboard implements KeyListener {
 
     public Keyboard(Game game) {
         this.game = game;
-    }
+    }           //Keyboard constructor
 
     @Override
     public void keyPressed(KeyEvent event) {
         int key = event.getKeyCode();
-
+                                                                // Switch for key detection
         switch (key) {
             case KeyEvent.VK_I:
                 game.showInv();

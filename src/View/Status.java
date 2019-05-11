@@ -32,7 +32,7 @@ public class Status extends JPanel {
     private int intel;
     private int social;
     private int money;
-    private int hygene;
+    private int hygiene;
     private String name;
     private String cercle;
     private String study;
@@ -71,7 +71,7 @@ public class Status extends JPanel {
         this.intel = this.mainChar.getIntel();
         this.money = this.mainChar.getMoney();
         this.social = this.mainChar.getSocial();
-        this.hygene = (int) this.mainChar.getHygene();
+        this.hygiene = (int) this.mainChar.getHygiene();
         this.study = this.mainChar.getStudy();
         this.name = this.mainChar.getName();
         this.sex = this.mainChar.getSex();
@@ -108,7 +108,7 @@ public class Status extends JPanel {
 
         g.drawString("Intelligence" +" : " + this.intel, 4*width_screen/5, height_status/4);
         g.drawString("Sociabilité" +" : " + this.social, 4*width_screen/5, height_status/2);
-        g.drawString("Hygiène" +" : " + this.hygene, 4*width_screen/5, 3*height_status/4);
+        g.drawString("Hygiène" +" : " + this.hygiene, 4*width_screen/5, 3*height_status/4);
     }
     public void redraw(Player actualPlayer) {
         this.mainChar = actualPlayer;

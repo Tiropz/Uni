@@ -1,18 +1,15 @@
 package Model;
 
-import javax.swing.*;
 
-public class Shower extends Block implements Activable {
-    private static JLabel lblClock = new JLabel("");
-    private String time;
+public class Shower extends GameObject implements Activable {
+
     public Shower(int x, int y) {
-        super(x, y, 0);
+        super(x, y);
     }
-
     @Override
-    public Player activate(Player mainChar, Game game) throws InterruptedException {
-        mainChar.wash(10, 3, mainChar, game);
-        return mainChar;
+    public Player activate(Player mainChar, Game game) {
+        mainChar.wash(10, 10, mainChar, game);       //Call wash method for 10 sec and gives +10 Hygiene
+        return mainChar;                                       //return mainChar
     }
 
     @Override

@@ -257,9 +257,9 @@ public class StudentRoom extends JPanel implements MapInterface {
         StudentObjects.add(new Door((x_middle+(x_blocks/2)+1), 9));
         StudentObjects.add(new Door((x_middle+(x_blocks/2)+1), 10)); //porte
 
-        StudentObjects.add(new Tv((x_middle-(x_blocks/2)+1), 1, 0)); //télé
-        StudentObjects.add(new Tv((x_middle-(x_blocks/2)+2), 1, 0));
-        StudentObjects.add(new Tv((x_middle-(x_blocks/2)), 1, 0));
+        StudentObjects.add(new Tv((x_middle-(x_blocks/2)+1), 1)); //télé
+        StudentObjects.add(new Tv((x_middle-(x_blocks/2)+2), 1));
+        StudentObjects.add(new Tv((x_middle-(x_blocks/2)), 1));
 
         StudentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 8,10)); //bureau + chaise
         StudentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 9,10));
@@ -270,12 +270,12 @@ public class StudentRoom extends JPanel implements MapInterface {
 
 
         for (int i = (x_middle-(x_blocks/2)+10); i < (x_middle+(x_blocks/2)+1); i++) {
-            StudentObjects.add(new Kitchen(i, 1, i - (x_middle-(x_blocks/2)+10)+1)); //cuisine
-            StudentObjects.add(new Kitchen(i, 2, i - (x_middle-(x_blocks/2)+10)+4));
+            StudentObjects.add(new Kitchen(i, 1)); //cuisine
+            StudentObjects.add(new Kitchen(i, 2));
         }
         for (int j = 3; j < 5; j++) {
-            StudentObjects.add(new Kitchen((x_middle+(x_blocks/2)-1), j, j+4)); //suite cuisine
-            StudentObjects.add(new Kitchen((x_middle+(x_blocks/2)), j, j + 6));
+            StudentObjects.add(new Kitchen((x_middle+(x_blocks/2)-1), j)); //suite cuisine
+            StudentObjects.add(new Kitchen((x_middle+(x_blocks/2)), j));
             System.out.println(j+4);
             System.out.println(j+6);
 
@@ -342,14 +342,14 @@ public class StudentRoom extends JPanel implements MapInterface {
         StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 3)); //table basse
 
         //StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+3), 5));
-        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+1), 5, 7)); //canapé horizontal
-        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+2), 5, 7));
-        StudentObjects.add(new Couch((x_middle-(x_blocks/2)), 5, 7));
-        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+3), 5, 7));
-        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+1), 6, 7)); //canapé horizontal
-        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+2), 6, 7));
-        StudentObjects.add(new Couch((x_middle-(x_blocks/2)), 6, 7));
-        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+3), 6, 7));
+        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+1), 5)); //canapé horizontal
+        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+2), 5));
+        StudentObjects.add(new Couch((x_middle-(x_blocks/2)), 5));
+        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+3), 5));
+        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+1), 6)); //canapé horizontal
+        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+2), 6));
+        StudentObjects.add(new Couch((x_middle-(x_blocks/2)), 6));
+        StudentObjects.add(new Couch((x_middle-(x_blocks/2)+3), 6));
         //StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)), 5));
         //StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+3), 6)); //canapé
         //StudentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 6));

@@ -299,13 +299,13 @@ public class Appartement extends JPanel implements MapInterface {
 
         for (int i = x_middle-13; i < x_middle-11; i++){
             for (int j = 10; j < 16; j++){
-                appartementObjects.add(new Kitchen(i,  j,0));
+                appartementObjects.add(new Kitchen(i,j));
             }
 
         }
 
         for (int i = x_middle-11; i < x_middle-8; i++){
-            appartementObjects.add(new Kitchen(i,  15,0));
+            appartementObjects.add(new Kitchen(i,  15));
 
         }
 
@@ -348,7 +348,7 @@ public class Appartement extends JPanel implements MapInterface {
 
         for (int i = x_middle+13; i < x_middle+15; i++){
             for (int j = 3; j < 6; j++) {
-                appartementObjects.add(new Tv(i, j,0));
+                appartementObjects.add(new Tv(i, j));
             }
         }
 
@@ -360,13 +360,13 @@ public class Appartement extends JPanel implements MapInterface {
 
         for (int i = x_middle+3; i < x_middle+5; i++){
             for (int j = 1; j < 6; j++) {
-                appartementObjects.add(new Couch(i, j,0));
+                appartementObjects.add(new Couch(i, j));
             }
         }
 
         for (int i = x_middle+5; i < x_middle+8; i++){
             for (int j = 1; j < 3; j++) {
-                appartementObjects.add(new Couch(i, j,0));
+                appartementObjects.add(new Couch(i, j));
             }
         }
 

@@ -1,21 +1,22 @@
 package Model;
 
+
 import javax.swing.*;
 
-public class Door extends Block implements Activable {
-    Object[] reachable;
+public class Door extends GameObject implements Activable {
+    private Object[] reachable;
 
-    public Door(int x, int y) {
-        super(x, y, 2);
+    public Door(int x, int y) {     //Door constructor
+        super(x, y);
     }
 
     @Override
     public Player activate(Player mainChar, Game game) {
-        System.out.println("aahzahheaheazheaheazheah");
+                                                            //return mainChar
         return mainChar;
 
     }
-    public String mapChange(String map, Player mainChar){
+    String mapChange(String map, Player mainChar){
         String test = null;
         if(mainChar.hasApp && mainChar.hasWork){
             switch (map){
@@ -102,8 +103,7 @@ public class Door extends Block implements Activable {
         test = (String) JOptionPane.showInputDialog(null, "Où voulez-vous aller ?", "Destinations",
                 JOptionPane.QUESTION_MESSAGE, null, reachable, null);
         }else{
-            JOptionPane jop = new JOptionPane();
-            jop.showMessageDialog(null, "Vous devez d'abord payer", "Attention!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Vous devez d'abord payer", "Attention!", JOptionPane.INFORMATION_MESSAGE);
         }
 
         return  test;

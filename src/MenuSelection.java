@@ -34,7 +34,7 @@ public class MenuSelection extends JDialog {
     double energy;
     double hunger;
     double bladder;
-    double hygene;
+    double hygiene;
 
     public MenuSelection(JFrame parent, String title, boolean modal){
         super(parent, title, modal);
@@ -133,7 +133,7 @@ public class MenuSelection extends JDialog {
                         energy = 100;
                         hunger = 100;
                         bladder = 100;
-                        hygene = 80;
+                        hygiene = 80;
                         intel = 70;
                         social = 50;
                         money = 50;
@@ -142,7 +142,7 @@ public class MenuSelection extends JDialog {
                         energy = 100;
                         hunger = 100;
                         bladder = 100;
-                        hygene = 120;
+                        hygiene = 120;
                         intel = 50;
                         social = 30;
                         money = 50;
@@ -151,7 +151,7 @@ public class MenuSelection extends JDialog {
                         energy = 100;
                         hunger = 100;
                         bladder = 100;
-                        hygene = 100;
+                        hygiene = 100;
                         intel = 30;
                         social = 50;
                         money = 100;
@@ -160,7 +160,7 @@ public class MenuSelection extends JDialog {
                         energy = 100;
                         hunger = 100;
                         bladder = 100;
-                        hygene = 100;
+                        hygiene = 100;
                         intel = 30;
                         social = 70;
                         money = 50;
@@ -169,14 +169,14 @@ public class MenuSelection extends JDialog {
                         energy = 100;
                         hunger = 100;
                         bladder = 100;
-                        hygene = 100;
+                        hygiene = 100;
                         intel = 50;
                         social = 30;
                         money = 100;
                         break;
                 }
                   Info = new MenuInfo(name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem());
-                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", energy, hunger, bladder, hygene,0,10, 0, 10, 15, 1, intel, social,money, 43200, 0, false, false);
+                Player mainChar = new Player(15,10, name.getText(), (String)sex.getSelectedItem(), (String)study.getSelectedItem() ,(String)cercle.getSelectedItem(),"Kot", energy, hunger, bladder, hygiene,0,10, 0, 10, 15, 1, intel, social,money, 43200, 0, false, false);
                 // Create a new Gson object
                 Gson gson = new Gson();
 
