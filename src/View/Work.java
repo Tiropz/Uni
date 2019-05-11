@@ -7,36 +7,33 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Work extends JPanel implements MapInterface {
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private ArrayList<GameObject> WorkObjects = new ArrayList<GameObject>();
-    public int width_screen;
-    public int height_screen;
+    private ArrayList<GameObject> WorkObjects = new ArrayList<>();
     private int BLOC_SIZE;
     private int y_blocks;
     private int x_middle;
     private int x_blocks;
 
-    public Work() {
+    public Work() {                         //Constructor
         this.y_blocks = 13;
         this.x_blocks = 17;
-        width_screen = (int) screenSize.getWidth();
-        height_screen = (int) screenSize.getHeight();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width_screen = (int) screenSize.getWidth();
+        int height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));
         this.setBackground(Color.GRAY);
         this.setOpaque(true);
-        this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));
-
-
-        x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));
-        System.out.println("salut" + x_middle);
-        System.out.println(screenSize.getWidth());
+        this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));      //Blocsize equation
+        x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));                //x_middle equation
         construct();
     }
 
 
     public void paint(Graphics g) {
+
+        //Instantiation of all images for paint
+
         Image sol_travail = new ImageIcon("src/Image/sol_bibli.jpg").getImage();
         Image poubelle = new ImageIcon("src/Image/trash.png").getImage();
         Image plante = new ImageIcon("src/Image/plante.png").getImage();
@@ -51,110 +48,65 @@ public class Work extends JPanel implements MapInterface {
         Image chaise_bureau_bas = new ImageIcon("src/Image/chaise_bureau_bas.png").getImage();
         Image livres_horizontaux = new ImageIcon("src/Image/biblio_horizontal.png").getImage();
         Image bureau_special = new ImageIcon("src/Image/bureau_special.png").getImage();
-
         Image livres = new ImageIcon("src/Image/bibliothèque.png").getImage();
         Image porte = new ImageIcon("src/Image/porte.png").getImage();
 
-
-        Image personnage = new ImageIcon("src/Image/personnage.png").getImage();
-        Image personnage_bas = new ImageIcon("src/Image/personnage_bas.png").getImage();
-        Image personnage_droite = new ImageIcon("src/Image/personnage_droite.png").getImage();
-        Image personnage_gauche = new ImageIcon("src/Image/personnage_gauche.png").getImage();
-
-
-
-
-
-
-
-
-
         super.paintComponent(g);
+
+        //Painting at the right place
+
         for (int i = x_middle - (x_blocks / 2); i < x_middle + (x_blocks / 2) + 3; i++) {
             for (int j = 1; j < y_blocks + 2; j++) {
-                int x = i;
-                int y = j;
-                g.drawImage(sol_travail, x * BLOC_SIZE, y * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
+                g.drawImage(sol_travail, i * BLOC_SIZE, j * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
-
         }
-
         for (int i =x_middle-9; i < x_middle+11; i++){
-            g.drawImage(brique,i * BLOC_SIZE, 0, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-            g.drawImage(brique,i * BLOC_SIZE, 15*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-
+            g.drawImage(brique,i * BLOC_SIZE, 0, BLOC_SIZE,BLOC_SIZE, null );
+            g.drawImage(brique,i * BLOC_SIZE, 15*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
         }
-
         for (int j = 1; j< 15; j++){
-            g.drawImage(brique,(x_middle-9) * BLOC_SIZE, j*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-
+            g.drawImage(brique,(x_middle-9) * BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
         }
-
         for (int j = 1; j< 8; j++){
-            g.drawImage(brique,(x_middle+10) * BLOC_SIZE, j*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-
+            g.drawImage(brique,(x_middle+10) * BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
         }
-
         for (int j = 10; j< 15; j++){
-            g.drawImage(brique,(x_middle+10) * BLOC_SIZE, j*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-
+            g.drawImage(brique,(x_middle+10) * BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
         }
-        g.drawImage(porte,(x_middle+10) * BLOC_SIZE, 8*BLOC_SIZE, 1*BLOC_SIZE,2* BLOC_SIZE, null );
+        for (int j = 1; j < 6; j++){
+            g.drawImage(brique,(x_middle+3) * BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+        }
+        for (int i = x_middle+6; i < x_middle+10; i++){
+            g.drawImage(brique,i * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+        }
 
-
-
-
-
-
+        g.drawImage(porte,(x_middle+10) * BLOC_SIZE, 8*BLOC_SIZE, BLOC_SIZE,2* BLOC_SIZE, null );
         g.drawImage(bureau_complet1,(x_middle-6) * BLOC_SIZE, 2*BLOC_SIZE, 4*BLOC_SIZE,3* BLOC_SIZE, null );
-
         g.drawImage(support_bureau,(x_middle-6) * BLOC_SIZE, 7*BLOC_SIZE, 2*BLOC_SIZE,2* BLOC_SIZE, null );
         g.drawImage(bureau1,(x_middle-6) * BLOC_SIZE, 7*BLOC_SIZE, 2*BLOC_SIZE,2* BLOC_SIZE, null );
-        g.drawImage(chaise_bureau_haut,(x_middle-6) * BLOC_SIZE, 9*BLOC_SIZE, 2*BLOC_SIZE,1* BLOC_SIZE, null );
+        g.drawImage(chaise_bureau_haut,(x_middle-6) * BLOC_SIZE, 9*BLOC_SIZE, 2*BLOC_SIZE,BLOC_SIZE, null );
         g.drawImage(poubelle,(x_middle-7) * BLOC_SIZE, 8*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-
-
         g.drawImage(support_bureau,(x_middle-4) * BLOC_SIZE, 7*BLOC_SIZE, 2*BLOC_SIZE,2* BLOC_SIZE, null );
         g.drawImage(bureau3,(x_middle-4) * BLOC_SIZE, 7*BLOC_SIZE, 2*BLOC_SIZE,2* BLOC_SIZE, null );
-        g.drawImage(chaise_bureau_bas,(x_middle-4) * BLOC_SIZE, 6*BLOC_SIZE, 2*BLOC_SIZE,1* BLOC_SIZE, null );
-        g.drawImage(plante,(x_middle-2) * BLOC_SIZE, 7*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-
-
-        g.drawImage(livres,x_middle * BLOC_SIZE, 2*BLOC_SIZE, 1*BLOC_SIZE,3* BLOC_SIZE, null );
-        g.drawImage(poubelle,x_middle * BLOC_SIZE, 5*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-        g.drawImage(chaise_bureau_bas,(x_middle-4) * BLOC_SIZE, 6*BLOC_SIZE, 2*BLOC_SIZE,1* BLOC_SIZE, null );
+        g.drawImage(chaise_bureau_bas,(x_middle-4) * BLOC_SIZE, 6*BLOC_SIZE, 2*BLOC_SIZE,BLOC_SIZE, null );
+        g.drawImage(plante,(x_middle-2) * BLOC_SIZE, 7*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+        g.drawImage(livres,x_middle * BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE,3* BLOC_SIZE, null );
+        g.drawImage(poubelle,x_middle * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+        g.drawImage(chaise_bureau_bas,(x_middle-4) * BLOC_SIZE, 6*BLOC_SIZE, 2*BLOC_SIZE,BLOC_SIZE, null );
         g.drawImage(support_bureau,(x_middle-6) * BLOC_SIZE, 11*BLOC_SIZE, 2*BLOC_SIZE,2* BLOC_SIZE, null );
         g.drawImage(bureau2,(x_middle-6) * BLOC_SIZE, 11*BLOC_SIZE, 2*BLOC_SIZE,2* BLOC_SIZE, null );
-        g.drawImage(chaise_bureau_haut,(x_middle-6) * BLOC_SIZE, 13*BLOC_SIZE, 2*BLOC_SIZE,1* BLOC_SIZE, null );
-        g.drawImage(plante,(x_middle-7) * BLOC_SIZE, 11*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-
-
+        g.drawImage(chaise_bureau_haut,(x_middle-6) * BLOC_SIZE, 13*BLOC_SIZE, 2*BLOC_SIZE,BLOC_SIZE, null );
+        g.drawImage(plante,(x_middle-7) * BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
         g.drawImage(support_bureau,(x_middle-1) * BLOC_SIZE, 11*BLOC_SIZE, 2*BLOC_SIZE,2* BLOC_SIZE, null );
         g.drawImage(bureau3,(x_middle-1) * BLOC_SIZE, 11*BLOC_SIZE, 2*BLOC_SIZE,2* BLOC_SIZE, null );
-        g.drawImage(chaise_bureau_bas,(x_middle-1) * BLOC_SIZE, 10*BLOC_SIZE, 2*BLOC_SIZE,1* BLOC_SIZE, null );
+        g.drawImage(chaise_bureau_bas,(x_middle-1) * BLOC_SIZE, 10*BLOC_SIZE, 2*BLOC_SIZE,BLOC_SIZE, null );
         g.drawImage(poubelle,(x_middle-2) * BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-
-
-        g.drawImage(poubelle,(x_middle+3) * BLOC_SIZE, 12*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-        g.drawImage(livres_horizontaux,(x_middle+4) * BLOC_SIZE, 12*BLOC_SIZE, 3*BLOC_SIZE,1* BLOC_SIZE, null );
-
+        g.drawImage(poubelle,(x_middle+3) * BLOC_SIZE, 12*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+        g.drawImage(livres_horizontaux,(x_middle+4) * BLOC_SIZE, 12*BLOC_SIZE, 3*BLOC_SIZE,BLOC_SIZE, null );
         g.drawImage(bureau_complet2,(x_middle+3) * BLOC_SIZE, 8*BLOC_SIZE, 4*BLOC_SIZE,3* BLOC_SIZE, null );
-
-        for (int j = 1; j < 6; j++){
-            g.drawImage(brique,(x_middle+3) * BLOC_SIZE, j*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-
-        }
-
-        for (int i = x_middle+6; i < x_middle+10; i++){
-            g.drawImage(brique,i * BLOC_SIZE, 5*BLOC_SIZE, 1*BLOC_SIZE,1* BLOC_SIZE, null );
-
-        }
-
         g.drawImage(bureau_special,(x_middle+6) * BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE,2* BLOC_SIZE, null );
 
-
-
-
+        //drawing of the player and PNJ
 
         for (GameObject object : this.WorkObjects) {
             if (object != null) {
@@ -189,7 +141,7 @@ public class Work extends JPanel implements MapInterface {
     public Player setObjects(ArrayList<GameObject> objects, Player mainChar, MapInterface currentMap) {
 
         this.WorkObjects = new ArrayList<>(objects);
-        mainChar.setPosXY(x_middle + 1, y_blocks);
+        mainChar.setPosXY(x_middle + 1, y_blocks);           //Player start at the door
         return mainChar;
     }
 
@@ -201,7 +153,7 @@ public class Work extends JPanel implements MapInterface {
         this.repaint();
     }
 
-    private void construct() {
+    private void construct() {                  //Add all the room objects to the Map list
         this.WorkObjects.clear();
 
         for (int i = x_middle-9; i < x_middle+11; i++){

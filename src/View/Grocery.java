@@ -119,11 +119,6 @@ public class Grocery extends JPanel implements MapInterface {
                 }
             }
         }
-
-
-
-
-
     }
 
     public Player setObjects(ArrayList<GameObject> objects,Player mainChar, MapInterface currentMap) {
