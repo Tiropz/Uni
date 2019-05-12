@@ -12,9 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.TimerTask;
 import java.util.Timer;
-
 import javax.swing.*;
-
 import com.google.gson.Gson;
 
 public class Game extends JFrame {
@@ -23,7 +21,6 @@ public class Game extends JFrame {
     private List<PNJ> randPNJ = new ArrayList<>();
     private Player active_player;
     private Player mainChar;
-    PNJ partner;
     private PNJ kid;
     private StudentRoom kotMap = new StudentRoom();
     private Library libraryMap = new Library();
@@ -34,13 +31,13 @@ public class Game extends JFrame {
     private Status status = new Status(null);
     private MapInterface gamemap;
     private String mapName;
-    private int secondpassed = 0;
     private Timer myTimer = new Timer();
     private FileWriter fileWriterc = null;
     private FileWriter fileWriterp = null;
     private FileWriter fileWriterk = null;
+    PNJ partner;
 
-    public Game(String title, Player mainChar, PNJ partner, PNJ kid) {
+    public Game(String title, Player mainChar, PNJ partner, PNJ kid) {              //Constructor
         super(title);
         this.mainChar = mainChar;
         this.mapName = this.mainChar.map;
@@ -49,13 +46,13 @@ public class Game extends JFrame {
         this.kid = kid;
         Random rand = new Random();
         int nbrPNJ = rand.nextInt(15)+1;
-        for(int i = 0;i<nbrPNJ;i++){
+        for(int i = 0;i<nbrPNJ;i++){                                              //Random creation of Jefke's PNJ's
             int randx = rand.nextInt(20)+1;
             int randy = rand.nextInt(8)+1;
             PNJ newPNJ = new PNJ(jefkeMap.x_middle-11+randx,randy,3,"PNJJEFKE",100.0,true);
             this.randPNJ.add(newPNJ);
         }
-        buildMap();
+        buildMap();                                                             //Building the map at start
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setBounds(0, 0, 1000, 1020);
@@ -67,11 +64,9 @@ public class Game extends JFrame {
         this.setPlayer(mainChar);
         active_player = mainChar;
 
-        TimerTask task = new TimerTask() {
+        TimerTask task = new TimerTask() {                                  //Setting Timer with call's for PNJ's
             @Override
             public void run() {
-                secondpassed++;
-                System.out.println(secondpassed);
                 if (gamemap == kotMap || gamemap == appartementMap) {
                     try {
                         partner.setHunger(-0.01, mainChar);
@@ -86,27 +81,25 @@ public class Game extends JFrame {
                         System.out.println("No kid");
                     }
                 }
-
                 else if(gamemap == jefkeMap){
                     try{
                         for(PNJ jpnj : randPNJ){
                             jpnj.action(Game.this, mainChar);
                         }
                     }catch (NullPointerException e){
-                        System.out.println("No kid");
+                        System.out.println("No PNJ");
                     }
                 }
                 mainChar.setHunger(0.01);
                 mainChar.setEnergy(-0.001);
                 mainChar.setTimer();
-                update(mainChar);
+                notifyView(mainChar);
             }
         };
-
         myTimer.schedule(task,100,100);
     }
 
-    private MapInterface whichMap(String mapName) {
+    private MapInterface whichMap(String mapName) {                         //Method to transform String name of the map to the MapInterface object
         MapInterface map;
         switch (mapName){
             case "Kot": map = kotMap;
@@ -128,7 +121,7 @@ public class Game extends JFrame {
         return map;
     }
 
-    private void buildMap() {
+    private void buildMap() {                                       //Method to build the map by removing all the current object and putting the player and PNJ's into the new map
         ArrayList<GameObject> removed = new ArrayList<>();
         this.objectList.clear();
         this.objectList = new ArrayList<>(getObjects());
@@ -144,23 +137,16 @@ public class Game extends JFrame {
         objects.add(this.partner);
         objects.add(this.kid);
         }
-        if(gamemap == jefkeMap){
+        else if(gamemap == jefkeMap){
             objects.addAll(randPNJ);
         }
         objects.addAll(objectList);
-        System.out.println("Obj " + objects.size());
         this.setGameObjects(objects);
         Keyboard keyboard = new Keyboard(this);
         this.setKeyListener(keyboard);
     }
 
-
-    private ArrayList<GameObject> getObjects(){
-        System.out.println("called" + gamemap);
-
-        return this.gamemap.getObjects();
-    }
-    public void movePlayer(int x, int y) {
+    public void movePlayer(int x, int y) {                        //Simple method to move the player
         int nextX = active_player.getPosX() + x;
         int nextY = active_player.getPosY() + y;
 
@@ -179,13 +165,14 @@ public class Game extends JFrame {
         if (!obstacle) {
             active_player.move(x, y);
         }
-
         notifyView(this.mainChar);
     }
-    public void showInv(){
+
+    public void showInv(){                                       //Call the invetory method of the player and pass the name of the map
         this.mainChar.inv(this.mainChar, mapName);
     }
-    public void action() throws InterruptedException {
+
+    public void action() throws InterruptedException {          //Method to call activate if activable is in front or call door method if it's a door
         Activable aimedObject = null;
 		for(GameObject object : objects){
 		    if(object != null) {
@@ -196,14 +183,13 @@ public class Game extends JFrame {
                 }
             }
 		}
-		if(aimedObject instanceof Door){
+		if(aimedObject instanceof Door){                                                        //Checking for doors
 		    String switchMap = ((Door) aimedObject).mapChange(this.mapName, this.mainChar);
 		  if(switchMap != null) {
 		      this.mapName = switchMap;
               this.mainChar.map = this.mapName;
               this.gamemap = whichMap(mapName);
               buildMap();
-              System.out.println(this.gamemap);
               this.add((Component) gamemap, BorderLayout.NORTH);
               this.pack();
           }
@@ -214,7 +200,8 @@ public class Game extends JFrame {
 		}
 
     }
-    void reload(PNJ kid, PNJ partner){
+
+    void reload(PNJ kid, PNJ partner){                      //Method to save and reload after adding a family member
         myTimer.cancel();
         this.partner = partner;
         this.kid = kid;
@@ -250,12 +237,12 @@ public class Game extends JFrame {
         this.myTimer.cancel();
         new Game("Uni", this.mainChar, this.partner, this.kid);
     }
-    public void close(){
+
+    public void close(){                                                    //Method to save upon close into JSON
         int option = JOptionPane.showConfirmDialog(null, "Voulez-vous quitter et sauvegarder ?", "Quitter", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(option == JOptionPane.OK_OPTION){
             Gson gson = new Gson();
-
-            //convert the Java object to json
+            //Convert the Java object to json
             String jsonStringk = gson.toJson(kid);
             String jsonStringp = gson.toJson(partner);
             String jsonStringc = gson.toJson(mainChar);
@@ -286,28 +273,18 @@ public class Game extends JFrame {
             }
             this.dispose();
         }
-
         this.myTimer.cancel();
     }
-    private void notifyView(Player actualPlayer) {
-        this.update(actualPlayer);
-    }
 
-    public ArrayList<GameObject> getGameObjects() {
-        return objects;
-    }
-    public Player getPlayer(){
-        return this.mainChar;
-    }
-
-    void update(Player actualPlayer) {
+    void notifyView(Player actualPlayer) {
         this.status.redraw(actualPlayer);
         this.gamemap.redraw();
     }
-    public void playerPos() {
-        System.out.println(active_player.getPosX() + ":" + active_player.getPosY());
-    }
 
+    private ArrayList<GameObject> getObjects(){ return this.gamemap.getObjects(); }
+    public Player getPlayer(){
+        return this.mainChar;
+    }
 
     private void setKeyListener(KeyListener keyboard) {
         this.gamemap.addKeyListener(keyboard);

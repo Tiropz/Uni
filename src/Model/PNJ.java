@@ -13,7 +13,8 @@ public class PNJ extends GameObject implements Directable, Activable{
     private boolean movable;
     private List<Double> hunger = new ArrayList<>();
     private String time;
-    public PNJ(int x, int y, int indep,String name, Double hunger, boolean movable) {
+
+    public PNJ(int x, int y, int indep,String name, Double hunger, boolean movable) {       //Constructor
         super(x, y);
         this.indep = indep;
         this.name = name;
@@ -31,7 +32,7 @@ public class PNJ extends GameObject implements Directable, Activable{
         return true;
     }
 
-    void action(Game g, Player mainChar) {
+    void action(Game g, Player mainChar) {                      //Call the movePNJ method based on a random value
         Random rand = new Random();
         int movevalue = rand.nextInt(30);
         switch (movevalue){
@@ -48,8 +49,64 @@ public class PNJ extends GameObject implements Directable, Activable{
                 movePNJ(-1,0);
                 break;
         }
-        g.update(mainChar);
+        g.notifyView(mainChar);
     }
+
+    private void movePNJ(int x, int y) {
+        if(this.movable) {
+            int nextX = this.getPosX() + x;
+            int nextY = this.getPosY() + y;
+
+            boolean obstacle = false;
+            for (GameObject object : Game.objects) {
+                if (object != null) {
+                    if (object.isAtPosition(nextX, nextY)) {
+                        obstacle = object.isObstacle();
+                    }
+                    if (obstacle) {
+                        break;
+                    }
+                }
+            }
+            this.rotate(x, y);
+            if (!obstacle) {
+                this.move(x, y);
+            }
+        }
+    }
+
+    private void rotate(int x, int y) {
+        if (x == 0 && y == -1)
+            direction = NORTH;
+        else if (x == 0 && y == 1)
+            direction = SOUTH;
+        else if (x == 1 && y == 0)
+            direction = EAST;
+        else if (x == -1 && y == 0)
+            direction = WEST;
+    }
+
+    private void alerte(Player mainChar){                   //Method to tell the player that his child is hungry
+
+        int option = JOptionPane.showConfirmDialog(null, "Vous devez nourrir votre enfant\n Il vous reste : " + mainChar.getFoodFridge() + " snacks", "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
+            mainChar.setPosXY(getPosX(),getPosY());
+            if (mainChar.getFoodFridge() == mainChar.getFoodFridgeMin()) {
+                JOptionPane.showMessageDialog(null, "Vous n'avez plus de nourriture, vous devez payer 5e", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+                mainChar.setMoney(-5);
+                mainChar.setFoodFridge(1);
+            }else{
+                mainChar.setFoodFridge(-1);
+                this.hunger.set(0,0.0);
+            }
+        }
+    }
+
+
+
+    ///////////////////////Getters and Setters/////////////////////
+
+
     private double getHunger() {
         return hunger.get(0);
     }
@@ -75,66 +132,16 @@ public class PNJ extends GameObject implements Directable, Activable{
         }
         else if(hung >= getHungerMax()/2 && indep == 1){
 
-          alerte(mainChar);
+            alerte(mainChar);
 
         }
         else{
             hunger.set(0,hung);
         }
-
-    }
-    private void alerte(Player mainChar){
-        int option = JOptionPane.showConfirmDialog(null, "Vous devez nourrir votre enfant\n Il vous reste : " + mainChar.getFoodFridge() + " snacks", "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (option == JOptionPane.OK_OPTION) {
-            mainChar.setPosXY(getPosX(),getPosY());
-            if (mainChar.getFoodFridge() == mainChar.getFoodFridgeMin()) {
-                JOptionPane.showMessageDialog(null, "Vous n'avez plus de nourriture, vous devez payer 5e", "Attention !", JOptionPane.INFORMATION_MESSAGE);
-                mainChar.setMoney(-5);
-                mainChar.setFoodFridge(1);
-            }else{
-
-
-            mainChar.setFoodFridge(-1);
-            this.hunger.set(0,0.0);
-            }
-        }
     }
 
-    private void movePNJ(int x, int y) {
-        if(this.movable) {
-            int nextX = this.getPosX() + x;
-            int nextY = this.getPosY() + y;
 
-            boolean obstacle = false;
-            for (GameObject object : Game.objects) {
-                if (object != null) {
-                    if (object.isAtPosition(nextX, nextY)) {
-                        obstacle = object.isObstacle();
-                    }
-                    if (obstacle) {
-                        break;
-                    }
-                }
-            }
-            this.rotate(x, y);
-            if (!obstacle) {
-                System.out.println("move x" + x);
-                System.out.println("move y" + y);
-                this.move(x, y);
-            }
-        }
-    }
-
-    private void rotate(int x, int y) {
-        if (x == 0 && y == -1)
-            direction = NORTH;
-        else if (x == 0 && y == 1)
-            direction = SOUTH;
-        else if (x == 1 && y == 0)
-            direction = EAST;
-        else if (x == -1 && y == 0)
-            direction = WEST;
-    }
+    //Everything happens here. This method handles the different interaction between the player and the PNJ
 
     @Override
     public Player activate(Player mainChar, Game game) {
@@ -158,7 +165,7 @@ public class PNJ extends GameObject implements Directable, Activable{
                             for (int i = 4; i > 0; i--) {
                                 try {
                                     time = (Integer.toString(i));
-                                    System.out.println("te");
+
                                     lblClock.setText(time);
                                     Thread.sleep(1000);
                                 } catch (InterruptedException e) {
@@ -192,7 +199,6 @@ public class PNJ extends GameObject implements Directable, Activable{
                     for (int i = 5; i > 0; i--) {
                         try {
                             time = (Integer.toString(i));
-                            System.out.println("te");
                             lblClock.setText(time);
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -226,7 +232,6 @@ public class PNJ extends GameObject implements Directable, Activable{
                         for(int i=5 ;i>0;i--){
                             try {
                                 time = (Integer.toString(i));
-                                System.out.println("te");
                                 lblClock.setText(time);
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) {

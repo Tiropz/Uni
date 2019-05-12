@@ -23,8 +23,6 @@ public class StudentRoom extends JPanel implements MapInterface {
         this.setOpaque(true);
         this.BLOC_SIZE = (Math.round(3* height_screen /(5*y_blocks)));     //Blocsize equation
         x_middle = (Math.round(width_screen /(2*BLOC_SIZE)));              //x_middle equation
-        System.out.println("testi"+ x_middle);
-        System.out.println("prout" + screenSize.getWidth());
         construct();
     }
 

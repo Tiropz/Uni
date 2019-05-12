@@ -139,11 +139,9 @@ public class Library extends JPanel implements MapInterface {
     public Player setObjects(ArrayList<GameObject> objects, Player mainChar, MapInterface currentMap) {
         this.libraryObjects = new ArrayList<>(objects);
         mainChar.setPosXY(x_middle+8,10);                           //Player start at the door
-        System.out.println("NbreLS " + this.libraryObjects.size());
         return mainChar;
     }
     public ArrayList<GameObject> getObjects(){
-        System.out.println("NbreLG " + this.libraryObjects.size());
         return this.libraryObjects;
     }
 

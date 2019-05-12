@@ -30,6 +30,7 @@ public class Player extends GameObject implements Directable {
     private static JLabel lblClock = new JLabel("");
     private int timer;
 
+    //Constructor
 
     public Player(int x, int y, String name, String sex, String study, String cercle, String map, Double energy, Double hunger, Double bladder,Double hygiene, int nbreFood, int nbreFoodFridge, int xp, int xpCurrent, int xpNext, int lvl, int intel, int social, int money, int timer, int foodBasket, boolean hasWork, boolean hasApp) {
         super(x, y);
@@ -81,8 +82,12 @@ public class Player extends GameObject implements Directable {
     }
 
 
-    ///////////////////////////////////////Life sim methods//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////Life sim methods//////////////////////////////////////////////////////////////////////
 
+    /*
+    Each method works the same way. You get an option pane to confirm and then it checks variables min and max to see if you can
+    do the action. Then it sets a timer and increments needed variables.
+     */
 
     void work(int val, int timer, Player mainChar, Game g){
         int option = JOptionPane.showConfirmDialog(null, "Voulez-vous travailler ?\n", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -97,10 +102,8 @@ public class Player extends GameObject implements Directable {
             dialog.pack();
             new Thread(() -> {
                 for (int i = timer; i > 0; i--) {
-
                     try {
                         time = (Integer.toString(i));
-                        System.out.println("te");
                         lblClock.setText(time);
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -134,7 +137,6 @@ public class Player extends GameObject implements Directable {
 
                         try {
                             time = (Integer.toString(i));
-                            System.out.println("te");
                             lblClock.setText(time);
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -179,7 +181,6 @@ public class Player extends GameObject implements Directable {
                     for(int i=timer;i>0;i--){
                         try {
                             time = (Integer.toString(i));
-                            System.out.println("te");
                             lblClock.setText(time);
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -205,9 +206,7 @@ public class Player extends GameObject implements Directable {
         int option = JOptionPane.showConfirmDialog(null, "Voulez-vous aller aux toilettes ?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
             if (mainChar.getBladder() > mainChar.getBladderMin()) {
-                System.out.println("fini1");
                 final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-                System.out.println("fini2");
                 final JDialog dialog = new JDialog();
                 dialog.setTitle("Vous pissez");
                 dialog.setModal(true);
@@ -219,7 +218,6 @@ public class Player extends GameObject implements Directable {
                     for(int i=timer;i>0;i--){
                         try {
                             time = (Integer.toString(i));
-                            System.out.println("te");
                             lblClock.setText(time);
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -228,14 +226,12 @@ public class Player extends GameObject implements Directable {
                     }
                     mainChar.setBladder(-val);
                     if(mainChar.getBladder() < mainChar.getBladderMin()) {
-                        System.out.println("PRTGERGEGEGERG");
                         mainChar.setBladder(-mainChar.getBladder());
                     }
                     dialog.dispose();
                 }).start();
                 dialog.setVisible(true);
                 upXp(2, mainChar, g);
-                System.out.println("afterclock");
                 dialog.dispose();
 
             } else {
@@ -260,7 +256,6 @@ public class Player extends GameObject implements Directable {
                     for(int i=timer;i>0;i--){
                         try {
                             time = (Integer.toString(i));
-                            System.out.println("te");
                             lblClock.setText(time);
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -272,7 +267,6 @@ public class Player extends GameObject implements Directable {
                 }).start();
                 dialog.setVisible(true);
                 upXp(2, mainChar, g);
-                System.out.println("afterclock");
                 dialog.dispose();
 
             } else {
@@ -297,7 +291,6 @@ public class Player extends GameObject implements Directable {
                     for(int i=timer;i>0;i--){
                         try {
                             time = (Integer.toString(i));
-                            System.out.println("te");
                             lblClock.setText(time);
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -312,7 +305,6 @@ public class Player extends GameObject implements Directable {
                 }).start();
                 dialog.setVisible(true);
                 upXp(2, mainChar, g);
-                System.out.println("afterclock");
                 dialog.dispose();
 
             } else {
@@ -337,7 +329,6 @@ public class Player extends GameObject implements Directable {
                     for(int i=timer ;i>0;i--){
                         try {
                             time = (Integer.toString(i));
-                            System.out.println("te");
                             lblClock.setText(time);
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -349,7 +340,6 @@ public class Player extends GameObject implements Directable {
                     dialog.dispose();
                 }).start();
                 dialog.setVisible(true);
-                System.out.println("afterclock");
                 dialog.dispose();
 
             } else if(mainChar.getFoodFridge() == mainChar.getFoodFridgeMax()) {
@@ -392,19 +382,15 @@ public class Player extends GameObject implements Directable {
     }
 
     void inv(Player mainChar, String map){
-        System.out.println(map);
         if(map.equals("Supermarché")){
-
         JOptionPane.showMessageDialog(null, "Vous avez dans votre inventaire :\n" + "- " + mainChar.getFood()+ " nourriture\nEt dans votre panier :\n" + "- "+ mainChar.getFoodBasket()+ " nourriture", "Inventaire", JOptionPane.INFORMATION_MESSAGE);
-
         }else{
-
             JOptionPane.showMessageDialog(null, "Vous avez dans votre inventaire :\n" + "- " + mainChar.getFood()+ " nourriture\n", "Inventaire", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
 
-    /////////////////////////////////////Leveling methods//////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////Leveling methods//////////////////////////////////////////////////////////////////////
 
 
     private void upXp(int val, Player mainChar, Game g) {
@@ -428,7 +414,7 @@ public class Player extends GameObject implements Directable {
         }
     }
 
-    private void upLvl(Player mainChar, Game g){
+    private void upLvl(Player mainChar, Game g){                    //This method checks what new option are available when leveling up
         if(mainChar.lvl >= 15 && mainChar.getSocial() >= 350){
             PNJ partner = null;
             Gson gson = new Gson();
@@ -436,14 +422,11 @@ public class Player extends GameObject implements Directable {
                 BufferedReader br = new BufferedReader(
                         new FileReader("partner.json"));
                 partner = gson.fromJson(br, PNJ.class);
-            } catch (FileNotFoundException ignored) {
-            }
-                JOptionPane jop = new JOptionPane();
+            } catch (FileNotFoundException ignored) { }
                 int option = JOptionPane.showConfirmDialog(null, "Voulez-vous faire un enfant", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (option == JOptionPane.OK_OPTION) {
                     if (partner != null) {
                         PNJ kid = new PNJ(mainChar.getPosX(),mainChar.getPosY(), 1, "Enfant", 0.0, true);
-
                         //convert the Java object to json
                         String jsonString = gson.toJson(kid);
                         //Write JSON String to file
@@ -471,9 +454,7 @@ public class Player extends GameObject implements Directable {
         }if(mainChar.lvl >= 10 && mainChar.getSocial() >= 150){
             PNJ partner = g.partner;
             Gson gson = new Gson();
-            System.out.println(partner);
             if (partner == null) {
-                JOptionPane jop = new JOptionPane();
                 int option = JOptionPane.showConfirmDialog(null, "Voulez-vous avoir un partenaire", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (option == JOptionPane.OK_OPTION) {
                     partner = new PNJ(mainChar.getPosX(), mainChar.getPosY(), 0, "Partner", 0.0, true);
@@ -519,7 +500,7 @@ public class Player extends GameObject implements Directable {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////Position and definition methods//////////////////////////////////////////////////////////////////////
 
     @Override
     public boolean isObstacle() {
@@ -556,7 +537,7 @@ public class Player extends GameObject implements Directable {
 
 
 
-    ///////////////////////////////////Getters and setters for gaming variables/////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////Getters and setters for gaming variables//////////////////////////////////////////////////////////////////////
 
 
     //Info Getters//
@@ -603,7 +584,7 @@ public class Player extends GameObject implements Directable {
         energy.set(0,ener);
     }
 
-        //Hunger Getters and Setters//
+    //Hunger Getters and Setters//
     public double getHunger() { return hunger.get(0); }
     public double getHungerMax() { return hunger.get(1); }
     private double getHungerMin() { return hunger.get(2); }

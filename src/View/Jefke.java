@@ -21,12 +21,8 @@ public class Jefke extends JPanel implements MapInterface {
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));
         this.setBackground(Color.GRAY);
         this.setOpaque(true);
-        System.out.println("coucou" + y_blocks);
-        System.out.println(x_blocks);
-        System.out.println(x_middle);
         this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));  //Blocsize equation
         x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));            //x_middle equation
-        System.out.println(screenSize.getWidth());
         construct();
     }
 
