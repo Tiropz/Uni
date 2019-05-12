@@ -1,8 +1,8 @@
 public class MenuInfo {
     private String nom, sexe, study, cercle;
 
-    public MenuInfo(){}
-    public MenuInfo(String nom, String sexe, String study, String cercle){
+    MenuInfo(){}
+    MenuInfo(String nom, String sexe, String study, String cercle){
         this.nom = nom;
         this.sexe = sexe;
         this.study = study;
@@ -22,14 +22,5 @@ public class MenuInfo {
             str = "Aucune information !";
         }
         return str;
-    }
-    public String getNom(){
-        return this.nom;
-    }
-    public String getSexe(){
-        return this.sexe;
-    }
-    public String getStudy(){
-        return this.study;
     }
 }

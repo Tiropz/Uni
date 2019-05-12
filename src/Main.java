@@ -14,7 +14,7 @@ public class Main extends JFrame {
 
     public static void main(String[] args) {
         Gson gson = new Gson();
-        Player mainChar = null;
+        Player mainChar;
         PNJ partner = null;
         PNJ kid = null;
         try {
@@ -24,8 +24,7 @@ public class Main extends JFrame {
         } catch (FileNotFoundException e) {
             MenuSelection menu = new MenuSelection(null, "Menu", true);
             MenuInfo Info = menu.showInfo();
-            JOptionPane jop = new JOptionPane();
-            jop.showMessageDialog(null, Info.toString(), "Informations personnage", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, Info.toString(), "Informations personnage", JOptionPane.INFORMATION_MESSAGE);
             BufferedReader br = null;
             try {
                 br = new BufferedReader(
@@ -34,19 +33,18 @@ public class Main extends JFrame {
                 ex.printStackTrace();
             }
             mainChar = gson.fromJson(br, Player.class);
-
         }
         try {
             BufferedReader br = new BufferedReader(
                     new FileReader("partner.json"));
             partner = gson.fromJson(br, PNJ.class);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException ignored) {
 
         }try {
             BufferedReader br = new BufferedReader(
                     new FileReader("kid.json"));
             kid = gson.fromJson(br, PNJ.class);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException ignored) {
 
         }
       new Game("Uni", mainChar, partner, kid);

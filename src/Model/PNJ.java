@@ -145,11 +145,12 @@ public class PNJ extends GameObject implements Directable, Activable{
 
     @Override
     public Player activate(Player mainChar, Game game) {
-        if(indep == 1){
+        switch (indep) {
+            case 1:
             this.movable = false;
-            Object[] options = {"Nourrir","Interagir"};
-            int option = JOptionPane.showOptionDialog(null, "Que voulez-vous faire ?\n", "Choix", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
-            if (option == JOptionPane.YES_OPTION) {
+            Object[] options = {"Nourrir", "Interagir"};
+            int option1 = JOptionPane.showOptionDialog(null, "Que voulez-vous faire ?\n", "Choix", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
+            if (option1 == JOptionPane.YES_OPTION) {
                 int option2 = JOptionPane.showConfirmDialog(null, "Vous devez nourrir votre enfant\n Il vous reste : " + mainChar.getFoodFridge() + " snacks", "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (option2 == JOptionPane.YES_OPTION) {
                     if ((int) this.getHunger() > this.getHungerMin() && mainChar.getFoodFridge() > mainChar.getFoodFridgeMin()) {
@@ -185,7 +186,7 @@ public class PNJ extends GameObject implements Directable, Activable{
                         JOptionPane.showMessageDialog(null, "Vous n'avez plus de nourriture", "Attention !", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
-            }else if(option == JOptionPane.NO_OPTION){
+            } else if (option1 == JOptionPane.NO_OPTION) {
                 final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
                 final JDialog dialog = new JDialog();
                 dialog.setTitle("Vous vous occupez de votre enfant");
@@ -215,11 +216,11 @@ public class PNJ extends GameObject implements Directable, Activable{
             }
 
             this.movable = true;
-
-        }else if (indep == 0){
-            this.movable = false;
-            int option = JOptionPane.showConfirmDialog(null, "Voulez-vous discutez avec votre partenaire?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (option == JOptionPane.OK_OPTION) {
+            break;
+            case 0:
+                this.movable = false;
+                int option = JOptionPane.showConfirmDialog(null, "Voulez-vous discutez avec votre partenaire?", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (option == JOptionPane.OK_OPTION) {
                     final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
                     final JDialog dialog = new JDialog();
                     dialog.setTitle("Discussion");
@@ -229,7 +230,7 @@ public class PNJ extends GameObject implements Directable, Activable{
                     dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
                     dialog.pack();
                     new Thread(() -> {
-                        for(int i=5 ;i>0;i--){
+                        for (int i = 5; i > 0; i--) {
                             try {
                                 time = (Integer.toString(i));
                                 lblClock.setText(time);
@@ -243,9 +244,31 @@ public class PNJ extends GameObject implements Directable, Activable{
                     }).start();
                     dialog.setVisible(true);
                     dialog.dispose();
+                }
+                this.movable = true;
+            break;
+            case 3:
+                String randomText = new String();
+                Random rand = new Random();
+                int movevalue = rand.nextInt(3);
+                switch (movevalue){
+                    case 0:
+                        randomText = "Hey c'est trop bien ici!!";
+                        break;
+                    case 1:
+                        randomText = "Tu veux qu'on s'affonne ?";
+                        break;
+                    case 2:
+                        randomText = "Apparement le CP met un fut";
+                        break;
+                }
+                this.movable = false;
+                JOptionPane.showConfirmDialog(null, randomText, "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                this.movable = true;
+                break;
+
+
             }
-            this.movable = true;
-        }
         return mainChar;
     }
 }

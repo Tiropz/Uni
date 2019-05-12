@@ -42,8 +42,6 @@ public class Keyboard implements KeyListener {
              case  KeyEvent.VK_Q:
              game.close();
              break;
-        case KeyEvent.VK_P:
-             game.playerPos();
         }
     }
 

@@ -141,21 +141,49 @@ public class Appartement extends JPanel implements MapInterface {
                             break;
                     }
                     g.drawImage(perso,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+                }else if(object instanceof PNJ){
+                    if(((PNJ) object).getIndep() == 0){
+                        int direction = ((Directable) object).getDirection();
+
+                        Image perso = null;
+                        switch (direction) {
+                            case Directable.EAST:
+                                perso = new ImageIcon("src/Image/personnage_fille_droite.png").getImage();
+                                break;
+                            case Directable.NORTH:
+                                perso = new ImageIcon("src/Image/personnage_fille_haut.png").getImage();
+                                break;
+                            case Directable.WEST:
+                                perso = new ImageIcon("src/Image/personnage_fille_gauche.png").getImage();
+                                break;
+                            case Directable.SOUTH:
+                                perso = new ImageIcon("src/Image/personnage_fille_bas.png").getImage();
+                                break;
+                        }
+                        g.drawImage(perso,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+                    }else{
+                        int direction = ((Directable) object).getDirection();
+
+                        Image perso = null;
+                        switch (direction) {
+                            case Directable.EAST:
+                                perso = new ImageIcon("src/Image/personnage_kid_droite.png").getImage();
+                                break;
+                            case Directable.NORTH:
+                                perso = new ImageIcon("src/Image/personnage_kid_haut.png").getImage();
+                                break;
+                            case Directable.WEST:
+                                perso = new ImageIcon("src/Image/personnage_kid_gauche.png").getImage();
+                                break;
+                            case Directable.SOUTH:
+                                perso = new ImageIcon("src/Image/personnage_kid_bas.png").getImage();
+                                break;
+                        }
+                        g.drawImage(perso,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
+                    }
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public Player setObjects(ArrayList<GameObject> objects, Player mainChar, MapInterface currentMap) {

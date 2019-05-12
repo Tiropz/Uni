@@ -640,5 +640,4 @@ public class Player extends GameObject implements Directable {
     //HasApp Getters and Setters//
     public boolean getHasApp(){return hasApp;}
     private void setHasApp(boolean hasApp){this.hasApp = hasApp;}
-
 }

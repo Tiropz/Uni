@@ -19,7 +19,6 @@ public class Game extends JFrame {
     static ArrayList<GameObject> objects = new ArrayList<>();
     private ArrayList<GameObject> objectList = new ArrayList<>();
     private List<PNJ> randPNJ = new ArrayList<>();
-    private Player active_player;
     private Player mainChar;
     private PNJ kid;
     private StudentRoom kotMap = new StudentRoom();
@@ -62,7 +61,7 @@ public class Game extends JFrame {
         this.pack();
         this.setVisible(true);
         this.setPlayer(mainChar);
-        active_player = mainChar;
+
 
         TimerTask task = new TimerTask() {                                  //Setting Timer with call's for PNJ's
             @Override
@@ -133,7 +132,7 @@ public class Game extends JFrame {
         this.objectList.removeAll(removed);
         objects.clear();
         objects.add(this.mainChar);
-        if(gamemap == kotMap){
+        if(gamemap == kotMap || gamemap == appartementMap){
         objects.add(this.partner);
         objects.add(this.kid);
         }
@@ -147,8 +146,8 @@ public class Game extends JFrame {
     }
 
     public void movePlayer(int x, int y) {                        //Simple method to move the player
-        int nextX = active_player.getPosX() + x;
-        int nextY = active_player.getPosY() + y;
+        int nextX = mainChar.getPosX() + x;
+        int nextY = mainChar.getPosY() + y;
 
         boolean obstacle = false;
         for (GameObject object : objects) {
@@ -161,9 +160,9 @@ public class Game extends JFrame {
                 }
             }
         }
-        active_player.rotate(x, y);
+        mainChar.rotate(x, y);
         if (!obstacle) {
-            active_player.move(x, y);
+            mainChar.move(x, y);
         }
         notifyView(this.mainChar);
     }
@@ -176,7 +175,7 @@ public class Game extends JFrame {
         Activable aimedObject = null;
 		for(GameObject object : objects){
 		    if(object != null) {
-                if (object.isAtPosition(active_player.getFrontX(), active_player.getFrontY())) {
+                if (object.isAtPosition(mainChar.getFrontX(), mainChar.getFrontY())) {
                     if (object instanceof Activable) {
                         aimedObject = (Activable) object;
                     }
