@@ -18,13 +18,12 @@ import javax.swing.*;
 import com.google.gson.Gson;
 
 public class Game extends JFrame {
-    public static ArrayList<GameObject> objects = new ArrayList<GameObject>();
-    ArrayList<GameObject> objectList = new ArrayList<GameObject>();
-    private ArrayList<Player> players = new ArrayList<Player>();
-    List<PNJ> randPNJ = new ArrayList<PNJ>();
-    private Player active_player = null;
+    static ArrayList<GameObject> objects = new ArrayList<>();
+    private ArrayList<GameObject> objectList = new ArrayList<>();
+    private List<PNJ> randPNJ = new ArrayList<>();
+    private Player active_player;
     private Player mainChar;
-    public PNJ partner;
+    PNJ partner;
     private PNJ kid;
     private StudentRoom kotMap = new StudentRoom();
     private Library libraryMap = new Library();
@@ -32,11 +31,14 @@ public class Game extends JFrame {
     private Grocery groceryMap = new Grocery();
     private Work workMap = new Work();
     private Appartement appartementMap = new Appartement();
-    private Status status = new Status(mainChar);
-    public MapInterface gamemap;
-    public String mapName;
-    public int secondpassed = 0;
-    Timer myTimer = new Timer();
+    private Status status = new Status(null);
+    private MapInterface gamemap;
+    private String mapName;
+    private int secondpassed = 0;
+    private Timer myTimer = new Timer();
+    private FileWriter fileWriterc = null;
+    private FileWriter fileWriterp = null;
+    private FileWriter fileWriterk = null;
 
     public Game(String title, Player mainChar, PNJ partner, PNJ kid) {
         super(title);
@@ -61,10 +63,7 @@ public class Game extends JFrame {
         this.add((Component) gamemap, BorderLayout.NORTH);
         this.add(status, BorderLayout.SOUTH);
         this.pack();
-        // this.getContentPane().add(this.groupPanel, BorderLayout.CENTER);
         this.setVisible(true);
-
-        players.add(mainChar);
         this.setPlayer(mainChar);
         active_player = mainChar;
 
@@ -75,20 +74,17 @@ public class Game extends JFrame {
                 System.out.println(secondpassed);
                 if (gamemap == kotMap || gamemap == appartementMap) {
                     try {
-                        System.out.println("NOCATCH");
                         partner.setHunger(-0.01, mainChar);
                         partner.action(Game.this, mainChar);
                     } catch (NullPointerException e) {
-                        System.out.println("CATCH");
+                        System.out.println("No partner");
                     }
                     try {
                         kid.action(Game.this, mainChar);
                         kid.setHunger(-0.01, mainChar);
                     } catch (NullPointerException e) {
-
+                        System.out.println("No kid");
                     }
-
-
                 }
 
                 else if(gamemap == jefkeMap){
@@ -97,7 +93,7 @@ public class Game extends JFrame {
                             jpnj.action(Game.this, mainChar);
                         }
                     }catch (NullPointerException e){
-
+                        System.out.println("No kid");
                     }
                 }
                 mainChar.setHunger(0.01);
@@ -133,38 +129,27 @@ public class Game extends JFrame {
     }
 
     private void buildMap() {
-        ArrayList<GameObject> removed = new ArrayList<GameObject>();
+        ArrayList<GameObject> removed = new ArrayList<>();
         this.objectList.clear();
-
-        this.objectList = new ArrayList<GameObject>(getObjects());
-        System.out.println("Objlist " + this.objectList.size());
+        this.objectList = new ArrayList<>(getObjects());
         for(GameObject c:this.objectList){
             if(c instanceof Directable){
                 removed.add(c);
-                System.out.println("FONCTIONNE");
             }
         }
         this.objectList.removeAll(removed);
-        this.objects.clear();
-        this.objects.add(this.mainChar);
+        objects.clear();
+        objects.add(this.mainChar);
         if(gamemap == kotMap){
-
-
-        this.objects.add(this.partner);
-        this.objects.add(this.kid);
+        objects.add(this.partner);
+        objects.add(this.kid);
         }
         if(gamemap == jefkeMap){
-            this.objects.addAll(randPNJ);
+            objects.addAll(randPNJ);
         }
-
-     //   this.objects.add(this.kid);
-
-        System.out.println("Objlist2 " + this.objectList.size());
-        // Map building
-        // use currInstance
-        this.objects.addAll(objectList);
+        objects.addAll(objectList);
         System.out.println("Obj " + objects.size());
-        this.setGameObjects(this.objects);
+        this.setGameObjects(objects);
         Keyboard keyboard = new Keyboard(this);
         this.setKeyListener(keyboard);
     }
@@ -185,13 +170,13 @@ public class Game extends JFrame {
                 if (object.isAtPosition(nextX, nextY)) {
                     obstacle = object.isObstacle();
                 }
-                if (obstacle == true) {
+                if (obstacle) {
                     break;
                 }
             }
         }
         active_player.rotate(x, y);
-        if (obstacle == false) {
+        if (!obstacle) {
             active_player.move(x, y);
         }
 
@@ -224,13 +209,12 @@ public class Game extends JFrame {
           }
         }
 		if(aimedObject != null){
-		    System.out.println("");
 		    this.mainChar = aimedObject.activate(this.mainChar, Game.this);
             notifyView(this.mainChar);
 		}
 
     }
-    public void reload(PNJ kid, PNJ partner){
+    void reload(PNJ kid, PNJ partner){
         myTimer.cancel();
         this.partner = partner;
         this.kid = kid;
@@ -241,9 +225,6 @@ public class Game extends JFrame {
         String jsonStringp = gson.toJson(partner);
         String jsonStringc = gson.toJson(mainChar);
         //Write JSON String to file
-        FileWriter fileWriterc = null;
-        FileWriter fileWriterp = null;
-        FileWriter fileWriterk = null;
         try {
             fileWriterc = new FileWriter("mainChar.json");
             fileWriterp = new FileWriter("partner.json");
@@ -270,9 +251,7 @@ public class Game extends JFrame {
         new Game("Uni", this.mainChar, this.partner, this.kid);
     }
     public void close(){
-        //…
-        JOptionPane jop = new JOptionPane();
-        int option = jop.showConfirmDialog(null, "Voulez-vous quitter et sauvegarder ?", "Quitter", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int option = JOptionPane.showConfirmDialog(null, "Voulez-vous quitter et sauvegarder ?", "Quitter", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(option == JOptionPane.OK_OPTION){
             Gson gson = new Gson();
 
@@ -315,13 +294,13 @@ public class Game extends JFrame {
     }
 
     public ArrayList<GameObject> getGameObjects() {
-        return this.objects;
+        return objects;
     }
     public Player getPlayer(){
         return this.mainChar;
     }
 
-    public void update(Player actualPlayer) {
+    void update(Player actualPlayer) {
         this.status.redraw(actualPlayer);
         this.gamemap.redraw();
     }
@@ -330,11 +309,11 @@ public class Game extends JFrame {
     }
 
 
-    public void setKeyListener(KeyListener keyboard) {
+    private void setKeyListener(KeyListener keyboard) {
         this.gamemap.addKeyListener(keyboard);
     }
 
-    public void setGameObjects(ArrayList<GameObject> objects) {
+    private void setGameObjects(ArrayList<GameObject> objects) {
         this.mainChar = this.gamemap.setObjects(objects, this.mainChar, this.gamemap);
         this.gamemap.redraw();
     }
