@@ -80,6 +80,10 @@ public class Player extends GameObject implements Directable {
             direction = WEST;
     }
 
+
+    ///////////////////////////////////////Life sim methods//////////////////////////////////////////////////////////////
+
+
     void work(int val, int timer, Player mainChar, Game g){
         int option = JOptionPane.showConfirmDialog(null, "Voulez-vous travailler ?\n", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
@@ -399,6 +403,10 @@ public class Player extends GameObject implements Directable {
         }
     }
 
+
+    /////////////////////////////////////Leveling methods//////////////////////////////////////////////////////////////////////
+
+
     private void upXp(int val, Player mainChar, Game g) {
         int newXp;
         int x = mainChar.xp.get(0);
@@ -493,49 +501,42 @@ public class Player extends GameObject implements Directable {
             }
         }if(mainChar.lvl >= 10 && mainChar.getIntel() >= 200){
             if (!hasWork) {
-                JOptionPane jop = new JOptionPane();
-                int option = jop.showConfirmDialog(null, "Voulez-vous avoir un travail", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int option = JOptionPane.showConfirmDialog(null, "Voulez-vous avoir un travail", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (option == JOptionPane.OK_OPTION) {
                     mainChar.setHasWork(true);
                 }
             }
         }if(mainChar.lvl >= 10){
-            JOptionPane jop = new JOptionPane();
-            int option = jop.showConfirmDialog(null, "Voulez-vous acheter un appartement", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int option = JOptionPane.showConfirmDialog(null, "Voulez-vous acheter un appartement", "Confirmez", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (option == JOptionPane.OK_OPTION) {
                 if(mainChar.getMoney() >= 500){
-
                 mainChar.setMoney(-500);
                 mainChar.setHasApp(true);
                 }else{
-                    jop.showMessageDialog(null, "Vous n'avez pas assez d'argent il faut 500 euros", "Attention !", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent il faut 500 euros", "Attention !", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
     }
 
-    // //////////////////////////////////////////////////////////////////////////////////////
-
+    ////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public boolean isObstacle() {
         return true;
     }
-
     @Override
     public int getDirection() {
         return direction;
     }
-
-    public int getFrontX() {
+    int getFrontX() {
         int delta = 0;
         if (direction % 2 == 0) {
             delta += 1 - direction;
         }
         return this.posX + delta;
     }
-
-    public int getFrontY() {
+    int getFrontY() {
         int delta = 0;
         if (direction % 2 != 0) {
             delta += direction - 2;
@@ -543,102 +544,120 @@ public class Player extends GameObject implements Directable {
         return this.posY + delta;
     }
     public int getTimer(){return timer;}
-    public void setTimer(int val){
+    void setTimer(){
         if(timer == 86399){
             timer = 0;
         }
         else{
-            timer += val;
+            timer += 1;
         }
     }
     public void setPosXY(int x,int y){posX = x; posY = y;}
+
+
+
+    ///////////////////////////////////Getters and setters for gaming variables/////////////////////////////////////////////////
+
+
+    //Info Getters//
     public String getName(){return info.get(0);}
     public String getSex(){return info.get(1);}
     public String getStudy(){return info.get(2);}
     public String getCercle(){return info.get(3);}
+
+    //Intel Getters and Setters//
     public int getIntel(){ return intel;}
-    public void setIntel(int val){intel += val;}
+    private void setIntel(int val){intel += val;}
+
+    //Social Getters and Setters//
     public int getSocial(){return social;}
-    public void setSocial(int val){social += val;}
+    void setSocial(int val){social += val;}
+
+    //Money Getters and Setters//
     public int getMoney(){return money;}
-    public void setHygiene(double val){
+    void setMoney(int val){
+        money += val;
+    }
+
+    //Hygiene Getters and Setters//
+    public double getHygiene(){return hygiene.get(0);}
+    private double getHygieneMax(){return hygiene.get(1);}
+    public double getHygieneMin(){return hygiene.get(2);}
+    private void setHygiene(double val){
         double hyg = getHygiene();
         hyg += val;
         hygiene.set(0,hyg);
     }
-    public double getHygiene(){return hygiene.get(0);}
-    public double getHygieneMax(){return hygiene.get(1);}
-    public double getHygieneMin(){return hygiene.get(2);}
-    public double getEnergy() {
-        return energy.get(0);
-    }
-    public void setEnergy(double val){
-        Double ener = getEnergy();
-        ener += val;
-        energy.set(0,ener);
-    }
-    public double getEnergyMax(){
+
+    //Energy Getters and Setters//
+    public double getEnergy() { return energy.get(0); }
+    private double getEnergyMax(){
         return energy.get(1);
     }
     public double getEnergyMin(){
         return energy.get(2);
     }
-    public double getHunger() {
-        return hunger.get(0);
+    void setEnergy(double val){
+        double ener = getEnergy();
+        ener += val;
+        energy.set(0,ener);
     }
-    public void setHunger(double val){
-    Double hung = getHunger();
-    hung += val;
-    hunger.set(0,hung);
+
+        //Hunger Getters and Setters//
+    public double getHunger() { return hunger.get(0); }
+    public double getHungerMax() { return hunger.get(1); }
+    private double getHungerMin() { return hunger.get(2); }
+    void setHunger(double val){
+        double hung = getHunger();
+        hung += val;
+        hunger.set(0,hung);
     }
-    public double getHungerMax() {
-        return hunger.get(1);
-    }
-    public double getHungerMin() {
-        return hunger.get(2);
-    }
-    public void setBladder(double val){
-        Double blad = getBladder();
+
+    //Bladder Getters and Setters//
+    public double getBladder() { return bladder.get(0); }
+    private double getBladderMax() { return bladder.get(1); }
+    private double getBladderMin() { return bladder.get(2); }
+    private void setBladder(double val){
+        double blad = getBladder();
         blad += val;
         bladder.set(0,blad);
     }
-    public double getBladder() {
-        return bladder.get(0);
-    }
-    public double getBladderMax() {
-        return bladder.get(1);
-    }
-    public double getBladderMin() {
-        return bladder.get(2);
-    }
-    public void setMoney(int val){
-        money += val;
-    }
 
-    public void setFood(int val){
+    //Food Getters and Setters//
+    private int getFood(){ return food.get(0); }
+    private int getFoodMax(){ return food.get(1); }
+    private int getFoodMin(){ return food.get(2); }
+    private void setFood(int val){
         int bouf = getFood();
         bouf += val;
         food.set(0,bouf);
     }
-    public int getFood(){ return food.get(0); }
-    public int getFoodMax(){ return food.get(1); }
-    public int getFoodMin(){ return food.get(2); }
-    public int getFoodFridge(){ return foodFridge.get(0); }
-    public int getFoodFridgeMax(){ return foodFridge.get(1); }
-    public int getFoodFridgeMin(){ return foodFridge.get(2); }
-    public void setFoodFridge(int val){
+
+    //FoodFridge Getters and Setters//
+    int getFoodFridge(){ return foodFridge.get(0); }
+    private int getFoodFridgeMax(){ return foodFridge.get(1); }
+    int getFoodFridgeMin(){ return foodFridge.get(2); }
+    void setFoodFridge(int val){
         int bouf = getFoodFridge();
         bouf += val;
         foodFridge.set(0,bouf);
     }
+    //FoodBasket Getters and Setters//
+    int getFoodBasket(){return foodBasket;}
+    private void setFoodBasket(int foodBasket){this.foodBasket += foodBasket;}
+
+    //XP and LVL Getters//
     public int getXp(){ return xp.get(0);}
     public int getXpCurrent(){return xp.get(1);}
-    public int getXpNext(){return xp.get(2);}
+    private int getXpNext(){return xp.get(2);}
     public int getLvl(){return lvl;}
-    public int getFoodBasket(){return foodBasket;}
-    public void setFoodBasket(int foodBasket){this.foodBasket += foodBasket;}
+
+    //HasWork Getters and Setters//
     public boolean getHasWork(){return hasWork;}
-    public void setHasWork(boolean hasWork){this.hasWork = hasWork;}
+    private void setHasWork(boolean hasWork){this.hasWork = hasWork;}
+
+    //HasApp Getters and Setters//
     public boolean getHasApp(){return hasApp;}
-    public void setHasApp(boolean hasApp){this.hasApp = hasApp;}
+    private void setHasApp(boolean hasApp){this.hasApp = hasApp;}
+
 }

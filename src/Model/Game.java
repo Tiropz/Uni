@@ -98,7 +98,7 @@ public class Game extends JFrame {
                 }
                 mainChar.setHunger(0.01);
                 mainChar.setEnergy(-0.001);
-                mainChar.setTimer(1);
+                mainChar.setTimer();
                 update(mainChar);
             }
         };

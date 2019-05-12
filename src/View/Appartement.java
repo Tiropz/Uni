@@ -31,7 +31,6 @@ public class Appartement extends JPanel implements MapInterface {
 
     }
 
-
     public void paint(Graphics g) {
 
         //Instantiation of all images for paint
