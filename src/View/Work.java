@@ -133,7 +133,6 @@ public class Work extends JPanel implements MapInterface {
     }
 
     private void construct() {//Add all the room objects to the Map list
-
         this.workObjects.clear();
 
         for (int i = x_middle-9; i < x_middle+11; i++){
