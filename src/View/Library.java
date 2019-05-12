@@ -53,20 +53,6 @@ public class Library extends JPanel implements MapInterface {
                 g.drawImage(sol, i *BLOC_SIZE, j *BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
         }
-        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+2); i++) {
-            g.drawImage(brique, i*BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 0; j < 9; j++) {
-            g.drawImage(brique, (x_middle-(x_blocks/2)-1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(brique, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 0; j < y_blocks+2; j++) {
-            g.drawImage(brique, (x_middle-(x_blocks/2)-1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 11; j < y_blocks+2; j++) {
-            g.drawImage(brique, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
         for (int i = x_middle-5; i < x_middle+8; i = i+3) {
             g.drawImage(bibliotheque, i* BLOC_SIZE, 2 * BLOC_SIZE, BLOC_SIZE, 3 * BLOC_SIZE, null);
         }
@@ -112,7 +98,9 @@ public class Library extends JPanel implements MapInterface {
             if (object != null) {
                 int x = object.getPosX();
                 int y = object.getPosY();
-
+                if(object instanceof Wall){
+                    g.drawImage(brique,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+                }
                 if (object instanceof Player) {
                     int direction = ((Directable) object).getDirection();
                     Image perso = null;
@@ -160,15 +148,20 @@ public class Library extends JPanel implements MapInterface {
         libraryObjects.add(new Door(x_middle+9, 10));
 
         for (int i = (x_middle - (x_blocks / 2) - 1); i < (x_middle + (x_blocks / 2) + 1); i++) {
-            libraryObjects.add(new BlockUnbreakable(i, 0));
-            libraryObjects.add(new BlockUnbreakable(i, y_blocks + 1));
+            libraryObjects.add(new Wall(i, 0));
+            libraryObjects.add(new Wall(i, y_blocks + 1));
         }
         for (int j = 0; j < y_blocks + 2; j++) {
-            libraryObjects.add(new BlockUnbreakable((x_middle - (x_blocks / 2) - 1), j));
-            libraryObjects.add(new BlockUnbreakable((x_middle + (x_blocks / 2) + 1), j));
+            libraryObjects.add(new Wall((x_middle - (x_blocks / 2) - 1), j));
+
+        }
+        for (int j = 0; j < 9; j++) {
+            libraryObjects.add(new Wall((x_middle + (x_blocks / 2) + 1), j));
+        }
+        for (int j = 11; j < y_blocks+2; j++) {
+            libraryObjects.add(new Wall((x_middle + (x_blocks / 2) + 1), j));
         }
         for (int i = x_middle-7; i < x_middle+7; i = i+5) {
-
             libraryObjects.add(new BlockUnbreakable(i, 13)); //pouvelle
             libraryObjects.add(new BlockUnbreakable(i+1, 13)); //bibliothèques horizontales
             libraryObjects.add(new BlockUnbreakable(i+2, 13));
@@ -177,7 +170,6 @@ public class Library extends JPanel implements MapInterface {
             libraryObjects.add(new Desk(i+2, 17,0));
             libraryObjects.add(new Desk(i+3, 17,0));
         }
-
         for (int i = x_middle-1; i < x_middle+2; i++) {
             libraryObjects.add(new Desk(i, 8,0)); //tables horizontales de 2 de large
             libraryObjects.add(new Desk(i, 9,0));
@@ -186,12 +178,10 @@ public class Library extends JPanel implements MapInterface {
             libraryObjects.add(new Desk(x_middle-5, j,0)); //table verticale
             libraryObjects.add(new Desk(x_middle-4, j,0));
         }
-
         for (int i = x_middle+4; i < x_middle+7; i++) {
             libraryObjects.add(new Desk(i, 8,0)); //table horizontale de droite
             libraryObjects.add(new Desk(i, 9,0));
         }
-
         libraryObjects.add(new BlockUnbreakable((x_middle+x_blocks/2), 8)); //plante
         libraryObjects.add(new BlockUnbreakable((x_middle+x_blocks/2), 11)); //plante
         libraryObjects.add(new BlockUnbreakable((x_middle-2), 5)); //poubelle
@@ -217,12 +207,5 @@ public class Library extends JPanel implements MapInterface {
         libraryObjects.add(new Desk((x_middle+6), 7,0));
         libraryObjects.add(new Desk((x_middle+4), 10,0));
         libraryObjects.add(new Desk((x_middle+6), 10,0));
-
-
-
-
     }
-
-
-
 }

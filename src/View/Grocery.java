@@ -51,19 +51,6 @@ public class Grocery extends JPanel implements MapInterface {
                 g.drawImage(sol_grocery, i * BLOC_SIZE, j * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
         }
-        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
-            g.drawImage(brique, i*BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int i = (x_middle-(x_blocks/2)-1); i < x_middle-6; i++) {
-            g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int i = x_middle-4; i < (x_middle+(x_blocks/2)+3); i++) {
-            g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 1;j< y_blocks+1; j++){
-            g.drawImage(brique, (x_middle-11)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(brique, (x_middle+12)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
         for (int j = 3; j < 10; j = j+6){
             g.drawImage(caisse, (x_middle-8)*BLOC_SIZE, j*BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
         }
@@ -71,7 +58,6 @@ public class Grocery extends JPanel implements MapInterface {
             g.drawImage(pasta, i*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE, null);
             g.drawImage(pasta, i*BLOC_SIZE, 7*BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE, null);
         }
-
         for (int j = 3; j < 11; j = j + 2){
             g.drawImage(vegetables, (x_middle+10)*BLOC_SIZE, j*BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
         }
@@ -94,7 +80,9 @@ public class Grocery extends JPanel implements MapInterface {
             if (object != null) {
                 int x = object.getPosX();
                 int y = object.getPosY();
-
+                if(object instanceof Wall){
+                    g.drawImage(brique,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+                }
                 if (object instanceof Player) {
                     int direction = ((Directable) object).getDirection();
                     Image perso = null;
@@ -137,18 +125,18 @@ public class Grocery extends JPanel implements MapInterface {
         this.groceryObjects.clear();
 
         for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+3); i++) { //mur horizontal supérieur
-            groceryObjects.add(new BlockUnbreakable(i, 0));
+            groceryObjects.add(new Wall(i, 0));
         }
 
         for (int i = (x_middle-(x_blocks/2)-1); i < x_middle-6; i++) { //mur inférieur
-            groceryObjects.add(new BlockUnbreakable(i, (y_blocks+1)));
+            groceryObjects.add(new Wall(i, (y_blocks+1)));
         }
         for (int i = x_middle-4; i < (x_middle+(x_blocks/2)+3); i++) { //mur inférieur
-            groceryObjects.add(new BlockUnbreakable( i, (y_blocks+1)));
+            groceryObjects.add(new Wall( i, (y_blocks+1)));
         }
         for (int j = 1;j< y_blocks+2; j++){
-            groceryObjects.add(new BlockUnbreakable( x_middle-11, j));  //murs grocery verticaux
-            groceryObjects.add(new BlockUnbreakable( x_middle+12, j));
+            groceryObjects.add(new Wall( x_middle-11, j));  //murs grocery verticaux
+            groceryObjects.add(new Wall( x_middle+12, j));
         }
         for (int j = 3; j < 10; j = j+6){
             groceryObjects.add(new Register((x_middle-8), (j+1))); //2 caisses

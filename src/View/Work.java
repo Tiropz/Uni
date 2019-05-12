@@ -19,7 +19,6 @@ public class Work extends JPanel implements MapInterface {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));
-        //this.setBackground();
         this.setOpaque(true);
         this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));      //Blocsize equation
         x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));                //x_middle equation
@@ -49,31 +48,14 @@ public class Work extends JPanel implements MapInterface {
 
         super.paintComponent(g);                //Painting at the right place
 
-
         g.drawImage(background, 0, 0, width_screen, height_screen, null);
+
+        //Drawing of the floor based on map size
+
         for (int i = x_middle - (x_blocks / 2); i < x_middle + (x_blocks / 2) + 3; i++) {
             for (int j = 1; j < y_blocks + 2; j++) {
                 g.drawImage(sol_travail, i * BLOC_SIZE, j * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
-        }
-        for (int i =x_middle-9; i < x_middle+11; i++){
-            g.drawImage(brique,i * BLOC_SIZE, 0, BLOC_SIZE,BLOC_SIZE, null );
-            g.drawImage(brique,i * BLOC_SIZE, 15*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
-        }
-        for (int j = 1; j< 15; j++){
-            g.drawImage(brique,(x_middle-9) * BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
-        }
-        for (int j = 1; j< 8; j++){
-            g.drawImage(brique,(x_middle+10) * BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
-        }
-        for (int j = 10; j< 15; j++){
-            g.drawImage(brique,(x_middle+10) * BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
-        }
-        for (int j = 1; j < 6; j++){
-            g.drawImage(brique,(x_middle+3) * BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
-        }
-        for (int i = x_middle+6; i < x_middle+10; i++){
-            g.drawImage(brique,i * BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
         }
 
         g.drawImage(porte,(x_middle+10) * BLOC_SIZE, 8*BLOC_SIZE, BLOC_SIZE,2* BLOC_SIZE, null );
@@ -102,13 +84,15 @@ public class Work extends JPanel implements MapInterface {
         g.drawImage(bureau_complet2,(x_middle+3) * BLOC_SIZE, 8*BLOC_SIZE, 4*BLOC_SIZE,3* BLOC_SIZE, null );
         g.drawImage(bureau_special,(x_middle+6) * BLOC_SIZE, 2*BLOC_SIZE, 3*BLOC_SIZE,2* BLOC_SIZE, null );
 
-        //drawing of the player and PNJ
+        //drawing of the player, PNJ and walls
 
         for (GameObject object : this.workObjects) {
             if (object != null) {
                 int x = object.getPosX();
                 int y = object.getPosY();
-
+                if(object instanceof Wall){
+                    g.drawImage(brique,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+                }
                 if (object instanceof Player) {
                     int direction = ((Directable) object).getDirection();
                     Image perso = null;
@@ -153,29 +137,26 @@ public class Work extends JPanel implements MapInterface {
         this.workObjects.clear();
 
         for (int i = x_middle-9; i < x_middle+11; i++){
-            workObjects.add(new BlockUnbreakable(i, 0)); //mur horizontal supérieur
-            workObjects.add(new BlockUnbreakable(i, 15)); //mur horizontal inférieur
+            workObjects.add(new Wall(i, 0)); //mur horizontal supérieur
+            workObjects.add(new Wall(i, 15)); //mur horizontal inférieur
         }
         for (int j = 1; j< 15; j++){
-            workObjects.add(new BlockUnbreakable(x_middle-9, j)); //mur vertical gauche
+            workObjects.add(new Wall(x_middle-9, j)); //mur vertical gauche
         }
         for (int j = 1; j< 8; j++){
-            workObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
+            workObjects.add(new Wall(x_middle+10, j)); //mur vertical droite
         }
         for(int j =8; j<10; j++){
             workObjects.add(new Door(x_middle+10,j));
         }
         for (int j = 10; j< 15; j++){
-            workObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
-        }
-        for (int j = 8; j< 10; j++){
-            workObjects.add(new BlockUnbreakable(x_middle+10, j)); //mur vertical droite
+            workObjects.add(new Wall(x_middle+10, j)); //mur vertical droite
         }
         for (int j = 1; j< 6; j++){
-            workObjects.add(new BlockUnbreakable(x_middle+3, j)); //mur vertical bureau
+            workObjects.add(new Wall(x_middle+3, j)); //mur vertical bureau
         }
         for (int i = x_middle+6; i < x_middle+11; i++){
-            workObjects.add(new BlockUnbreakable(i,5 ));    //mur horizontal bureau
+            workObjects.add(new Wall(i,5 ));    //mur horizontal bureau
         }
         for (int i = x_middle+6; i < x_middle+9; i++){
             for (int j = 2; j < 4; j++){

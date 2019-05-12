@@ -60,43 +60,6 @@ public class Appartement extends JPanel implements MapInterface {
                 g.drawImage(sol_appartement, i * BLOC_SIZE, j * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
             }
         }
-        for (int i = x_middle-14; i < x_middle+16; i++){
-            g.drawImage(brique, i * BLOC_SIZE,  0, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 1; j< y_blocks+2; j++){
-            g.drawImage(brique, (x_middle-14) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(brique, (x_middle+15) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int i = x_middle-14; i <x_middle-4; i++){
-            g.drawImage(brique, i * BLOC_SIZE,  16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int i = x_middle-2; i <x_middle+16; i++){
-            g.drawImage(brique, i * BLOC_SIZE,  16*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 11; j < 16; j++){
-            g.drawImage(brique, (x_middle-5) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 10; j < 13; j++){
-            g.drawImage(brique, (x_middle-2) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 14; j < 16; j++){
-            g.drawImage(brique, (x_middle-2) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int i = x_middle-1; i < x_middle+2; i++){
-            g.drawImage(brique, i * BLOC_SIZE,  10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 11; j < 16; j++){
-            g.drawImage(brique, (x_middle+1) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int i = x_middle+2; i < x_middle+5; i++){
-            g.drawImage(brique, i * BLOC_SIZE,  11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 10; j < 16; j++){
-            g.drawImage(brique, (x_middle+7) * BLOC_SIZE,  j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int i = x_middle+10; i < x_middle+15; i++){
-            g.drawImage(brique, i * BLOC_SIZE,  10*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
 
         g.drawImage(bureau, (x_middle-3) * BLOC_SIZE, BLOC_SIZE,4* BLOC_SIZE, 3*BLOC_SIZE, null);
         g.drawImage(table_a_manger, (x_middle-12) * BLOC_SIZE, 3 * BLOC_SIZE,8* BLOC_SIZE, 4*BLOC_SIZE, null);
@@ -122,7 +85,9 @@ public class Appartement extends JPanel implements MapInterface {
             if (object != null) {
                 int x = object.getPosX();
                 int y = object.getPosY();
-
+                if(object instanceof Wall){
+                    g.drawImage(brique,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+                }
                 if (object instanceof Player) {
                     int direction = ((Directable) object).getDirection();
                     Image perso = null;
@@ -205,171 +170,118 @@ public class Appartement extends JPanel implements MapInterface {
         this.appartementObjects.clear();
 
         for (int i = x_middle - 14; i < x_middle + 16; i++) { //mur horizontal supérieur
-            appartementObjects.add(new BlockUnbreakable(i, 0));
-
+            appartementObjects.add(new Wall(i, 0));
         }
-
         for (int j = 1; j < y_blocks + 2; j++) {
-            appartementObjects.add(new BlockUnbreakable(x_middle - 14, j)); //murs latéraux
-            appartementObjects.add(new BlockUnbreakable(x_middle + 15, j));
-
-
+            appartementObjects.add(new Wall(x_middle - 14, j)); //murs latéraux
+            appartementObjects.add(new Wall(x_middle + 15, j));
         }
-
         for (int i = x_middle-14; i <x_middle-4; i++){
-            appartementObjects.add(new BlockUnbreakable(i ,  16)); //mur horizontal inférieur
-
+            appartementObjects.add(new Wall(i ,  16)); //mur horizontal inférieur
         }
-
         for (int i = x_middle-2; i <x_middle+16; i++){
-            appartementObjects.add(new BlockUnbreakable(i ,  16)); //mur horizontal inférieur
-
+            appartementObjects.add(new Wall(i ,  16)); //mur horizontal inférieur
         }
-
         for (int j = 11; j < 16; j++){
-            appartementObjects.add(new BlockUnbreakable(x_middle-5,  j)); //mur porte d'netrée
-
+            appartementObjects.add(new Wall(x_middle-5,  j)); //mur porte d'netrée
         }
-
         for (int j = 10; j < 13; j++){
-            appartementObjects.add(new BlockUnbreakable(x_middle-2,  j)); //mur entrée toilettes supérieur
+            appartementObjects.add(new Wall(x_middle-2,  j)); //mur entrée toilettes supérieur
         }
-
         for (int j = 14; j < 16; j++){
-            appartementObjects.add(new BlockUnbreakable(x_middle-2,  j)); //mur entrée toilettes inférieur
-
+            appartementObjects.add(new Wall(x_middle-2,  j)); //mur entrée toilettes inférieur
         }
-
         for (int i = x_middle-1; i < x_middle+2; i++){
-            appartementObjects.add(new BlockUnbreakable(i,  10)); //mur  toilettes supérieur
-
+            appartementObjects.add(new Wall(i,  10)); //mur  toilettes supérieur
         }
-
         for (int j = 11; j < 16; j++){
-            appartementObjects.add(new BlockUnbreakable(x_middle+1,  j)); //mur  toilettes droite
-
+            appartementObjects.add(new Wall(x_middle+1,  j)); //mur  toilettes droite
         }
-
         for (int i = x_middle+2; i < x_middle+5; i++){
-            appartementObjects.add(new BlockUnbreakable(i,  11)); //mur sdb  supérieur
-
+            appartementObjects.add(new Wall(i,  11)); //mur sdb  supérieur
         }
-
         for (int j = 10; j < 16; j++){
-            appartementObjects.add(new BlockUnbreakable(x_middle+7,  j)); //mur  entre sdb et chmabre
-
+            appartementObjects.add(new Wall(x_middle+7,  j)); //mur  entre sdb et chmabre
         }
-
         for (int i = x_middle+10; i < x_middle+15; i++){
-            appartementObjects.add(new BlockUnbreakable(i,  10)); //mur horizontal chambre
-
+            appartementObjects.add(new Wall(i,  10)); //mur horizontal chambre
         }
-
         for (int i = x_middle-3; i < x_middle+1; i++){
             for (int j = 1; j < 3; j++){
                 appartementObjects.add(new Desk(i,  j,15));
                 appartementObjects.add(new Desk(x_middle-2,  3,15));
                 appartementObjects.add(new Desk(x_middle-1,  3,15));
-
-
             }
-
         }
-
         for (int i = x_middle-12; i < x_middle-4; i++){
             for (int j = 3; j < 7; j++){
                 appartementObjects.add(new Table(i,  j));
-
             }
-
         }
-
         for (int i = x_middle-13; i < x_middle-11; i++){
             for (int j = 10; j < 16; j++){
                 appartementObjects.add(new Kitchen(i,j));
             }
-
         }
-
         for (int i = x_middle-11; i < x_middle-8; i++){
             appartementObjects.add(new Kitchen(i,  15));
-
         }
-
         for (int i = x_middle-4; i < x_middle-2; i++){
             appartementObjects.add(new Door(i,  16));
-
         }
-
         for (int i = x_middle-1; i < x_middle+1; i++){
             for (int j = 14; j < 16; j++){
                 appartementObjects.add(new Toilet(i,  j));
-
             }
-
         }
-
         for (int i = x_middle+2; i < x_middle+4; i++){
             for (int j = 12; j < 16; j++){
                 appartementObjects.add(new Shower(i,  j));
             }
-
         }
-
-        appartementObjects.add(new BlockUnbreakable(x_middle-1,  11));  //lavabot toilettes
-        appartementObjects.add(new BlockUnbreakable(x_middle,  11));
-
-        appartementObjects.add(new BlockUnbreakable(x_middle+6,  14)); //lavabot sdb
-        appartementObjects.add(new BlockUnbreakable(x_middle+6,  13));
-
         for (int j = 12; j < 16; j++){
             appartementObjects.add(new BlockUnbreakable(x_middle+9,  j)); //armoire chmabre
             appartementObjects.add(new BlockUnbreakable(x_middle+8,  j));
             }
-
         for (int i = x_middle+12; i < x_middle+15; i++){
           for (int j = 12; j < 16; j++) {
               appartementObjects.add(new Bed(i, j));
           }
         }
-
         for (int i = x_middle+13; i < x_middle+15; i++){
             for (int j = 3; j < 6; j++) {
                 appartementObjects.add(new Tv(i, j));
             }
         }
-
         for (int i = x_middle+9; i < x_middle+11; i++){
             for (int j = 3; j < 5; j++) {
                 appartementObjects.add(new BlockUnbreakable(i, j)); //table basse
             }
         }
-
         for (int i = x_middle+3; i < x_middle+5; i++){
             for (int j = 1; j < 6; j++) {
                 appartementObjects.add(new Couch(i, j));
             }
         }
-
         for (int i = x_middle+5; i < x_middle+8; i++){
             for (int j = 1; j < 3; j++) {
                 appartementObjects.add(new Couch(i, j));
             }
         }
-
         for (int i = x_middle+6; i < x_middle+10; i++){
             for (int j = 7; j < 9; j++) {
                 appartementObjects.add(new BlockUnbreakable(i, j));
             }
         }
-
         for (int i = x_middle-7; i < x_middle-5; i++){
             for (int j = 14; j < 16; j++) {
                 appartementObjects.add(new Fridge(i, j));
             }
         }
-
-
+        appartementObjects.add(new BlockUnbreakable(x_middle-1,  11));  //lavabot toilettes
+        appartementObjects.add(new BlockUnbreakable(x_middle,  11));
+        appartementObjects.add(new BlockUnbreakable(x_middle+6,  14)); //lavabot sdb
+        appartementObjects.add(new BlockUnbreakable(x_middle+6,  13));
     }
 
 

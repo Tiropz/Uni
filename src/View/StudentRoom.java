@@ -56,42 +56,12 @@ public class StudentRoom extends JPanel implements MapInterface {
 
         //Painting at the right place
 
-        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+1); i++) {
-            g.setColor(Color.BLACK);
-            g.drawImage(wall,i * BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null );
-            g.drawImage(wall,i * BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null );
-        }
-        for (int j = 0; j < y_blocks+2; j++) {
-            g.drawImage(wall,(x_middle-(x_blocks/2)-1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE,null );
-            g.drawImage(wall,(x_middle+(x_blocks/2)+1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE,null );
-        }
         for (int i = x_middle-(x_blocks/2); i < x_middle+(x_blocks/2)+2; i++) {
             for (int j = 1; j < y_blocks+1; j++) {
                 Image sol_kot = new ImageIcon("src/Image/sol.jpg").getImage();
                 g.drawImage(sol_kot, i*BLOC_SIZE, j*BLOC_SIZE,BLOC_SIZE, BLOC_SIZE, null);
             }
         }
-        for (int i = (x_middle+(x_blocks/2)-2); i < (x_middle+(x_blocks/2)+1); i++) {
-            g.drawImage(brique,i*BLOC_SIZE, 8*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 5; j < 9; j++) {
-            g.drawImage(brique,((x_middle-(x_blocks/2)+5))*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+1); i++) {
-            g.drawImage(brique, i*BLOC_SIZE, 0, BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(brique, i*BLOC_SIZE, (y_blocks+1)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 0; j < 9; j++) {
-            g.drawImage(brique, (x_middle-(x_blocks/2)-1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-            g.drawImage(brique, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 0; j < y_blocks+2; j++) {
-            g.drawImage(brique, (x_middle-(x_blocks/2)-1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-        for (int j = 11; j < y_blocks+2; j++) {
-            g.drawImage(brique, (x_middle+(x_blocks/2)+1)*BLOC_SIZE, j*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        }
-
         g.drawImage(tv, (x_middle-(x_blocks/2))*BLOC_SIZE, BLOC_SIZE, 3*BLOC_SIZE, BLOC_SIZE, null);
         g.drawImage(sofa_horizontal, ((x_middle-(x_blocks/2)))*BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE*4, BLOC_SIZE*2, null);
         g.drawImage(plaque_cuisson, (x_middle+(x_blocks/2)-2)*BLOC_SIZE, BLOC_SIZE, 3*BLOC_SIZE, 2*BLOC_SIZE, null);
@@ -111,26 +81,6 @@ public class StudentRoom extends JPanel implements MapInterface {
         g.drawImage(chaise, (x_middle-(x_blocks/2)+6)*BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         g.drawImage(chaise, (x_middle-(x_blocks/2)+7)*BLOC_SIZE, 5*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
         g.drawImage(evier, (x_middle+(x_blocks/2)-1)*BLOC_SIZE, 3 *BLOC_SIZE, 2*BLOC_SIZE, 2*BLOC_SIZE, null);
-        g.drawImage(brique,((x_middle-(x_blocks/2)+6))*BLOC_SIZE, 8*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,((x_middle-(x_blocks/2)+7))*BLOC_SIZE, 8*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2))*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-1)*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-6)*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-7)*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-5)*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-4)*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-3)*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-3)*BLOC_SIZE, 12*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-3)*BLOC_SIZE, 13*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-3)*BLOC_SIZE, 14*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-9)*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-9)*BLOC_SIZE, 12*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-9)*BLOC_SIZE, 13*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-9)*BLOC_SIZE, 14*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-12)*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique,(x_middle+(x_blocks/2)-11)*BLOC_SIZE, 11*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique, (x_middle-(x_blocks/2)+5)*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
-        g.drawImage(brique, (x_middle-(x_blocks/2)+5)*BLOC_SIZE, 2*BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);
 
         //drawing of the player and PNJ
 
@@ -138,7 +88,9 @@ public class StudentRoom extends JPanel implements MapInterface {
             if (object != null) {
                 int x = object.getPosX();
                 int y = object.getPosY();
-
+                if(object instanceof Wall){
+                    g.drawImage(brique,x*BLOC_SIZE, y*BLOC_SIZE, BLOC_SIZE,BLOC_SIZE, null );
+                }
                 if (object instanceof Player) {
                     int direction = ((Directable) object).getDirection();
                     Image perso = null;
@@ -218,17 +170,17 @@ public class StudentRoom extends JPanel implements MapInterface {
     private void construct() {                   //Add all the room objects to the Map list
         this.studentObjects.clear();
         for (int i = (x_middle-(x_blocks/2)-1); i < (x_middle+(x_blocks/2)+1); i++) {
-            studentObjects.add(new BlockUnbreakable(i, 0));
-            studentObjects.add(new BlockUnbreakable(i, y_blocks+1));
+            studentObjects.add(new Wall(i, 0));
+            studentObjects.add(new Wall(i, y_blocks+1));
         }
         for (int j = 0; j < y_blocks+2; j++) {
-            studentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)-1), j));
+            studentObjects.add(new Wall((x_middle-(x_blocks/2)-1), j));
         }
         for (int j = 0; j < y_blocks-5; j++) {
-            studentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)+1), j));
+            studentObjects.add(new Wall((x_middle+(x_blocks/2)+1), j));
         }
-        for (int j = 11; j < y_blocks; j++) {
-            studentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)+1), j));
+        for (int j = 11; j < y_blocks+2; j++) {
+            studentObjects.add(new Wall((x_middle+(x_blocks/2)+1), j));
         }
         for (int i = (x_middle-(x_blocks/2)+10); i < (x_middle+(x_blocks/2)+1); i++) {
             studentObjects.add(new Kitchen(i, 1)); //cuisine
@@ -239,33 +191,33 @@ public class StudentRoom extends JPanel implements MapInterface {
             studentObjects.add(new Kitchen((x_middle+(x_blocks/2)), j));
         }
         for (int i = (x_middle+(x_blocks/2)-2); i < (x_middle+(x_blocks/2)+1); i++) {
-            studentObjects.add(new BlockUnbreakable(i, 8));//mur horizontal à côté en haut de la porte d'enntrée
+            studentObjects.add(new Wall(i, 8));//mur horizontal à côté en haut de la porte d'enntrée
         }
         for (int j = 12; j < 15; j++) {
             studentObjects.add(new Bed((x_middle+(x_blocks/2)-4), j)); //lit + mur
-            studentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-3), j));
+            studentObjects.add(new Wall((x_middle+(x_blocks/2)-3), j));
             studentObjects.add(new Bed((x_middle+(x_blocks/2)-5), j));
         }
         for (int i = (x_middle+(x_blocks/2)-5); i <(x_middle+(x_blocks/2)-2); i++) { // mur au dessus du lit
-            studentObjects.add(new BlockUnbreakable(i, 11));
+            studentObjects.add(new Wall(i, 11));
         }
         for (int j = 11; j < 15; j++) {
             studentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)), j)); //douche+mur
         }
         for (int j = 11; j < 15; j++) {
-            studentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1)+2, j)); //mur entre chambre et douche
+            studentObjects.add(new Wall((x_middle-(x_blocks/2)+1)+2, j)); //mur entre chambre et douche
         }
         for (int j = 5; j < 9; j++) {
-            studentObjects.add(new BlockUnbreakable(((x_middle-(x_blocks/2)+5)), j)); //mur entre salon et cuisine
+            studentObjects.add(new Wall(((x_middle-(x_blocks/2)+5)), j)); //mur entre salon et cuisine
         }
         for (int j = 5; j < 9; j++) {
             studentObjects.add(new Table(((x_middle-(x_blocks/2)+6)), j)); //  chaises + table dans cuisine + mur horizontal
             studentObjects.add(new Table(((x_middle-(x_blocks/2)+7)), j));
         }
-
-        studentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-6), 11)); //mur chambre
-        studentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-7), 11));
-        studentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+1), 11)); //mur salle de douche
+        studentObjects.add(new Wall((x_middle+(x_blocks/2)-6), 11)); //mur chambre
+        studentObjects.add(new Wall((x_middle+(x_blocks/2)-7), 11));
+        studentObjects.add(new Wall((x_middle-(x_blocks/2)+1), 11)); //mur toilette
+        studentObjects.add(new Wall((x_middle-(x_blocks/2)), 11)); //mur toilette
         studentObjects.add(new Shower((x_middle+(x_blocks/2)), 13)); //Douche
         studentObjects.add(new Shower((x_middle+(x_blocks/2)-1), 13));
         studentObjects.add(new Shower((x_middle+(x_blocks/2)), 14));
@@ -284,10 +236,10 @@ public class StudentRoom extends JPanel implements MapInterface {
         studentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 8,10)); //bureau + chaise
         studentObjects.add(new Desk((x_middle-(x_blocks/2)+1), 9,10));
         studentObjects.add(new Desk((x_middle-(x_blocks/2)+2), 8,10));
-        studentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 1)); //mur vertical
-        studentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+5), 2));
-        studentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)), 11)); //mur horizontal à côté en bas de la porte d'enntrée
-        studentObjects.add(new BlockUnbreakable((x_middle+(x_blocks/2)-1), 11));
+        studentObjects.add(new Wall((x_middle-(x_blocks/2)+5), 1)); //mur vertical
+        studentObjects.add(new Wall((x_middle-(x_blocks/2)+5), 2));
+        studentObjects.add(new Wall((x_middle+(x_blocks/2)), 11)); //mur horizontal à côté en bas de la porte d'enntrée
+        studentObjects.add(new Wall((x_middle+(x_blocks/2)-1), 11));
         studentObjects.add(new Couch((x_middle-(x_blocks/2)+1), 5)); //canapé horizontal
         studentObjects.add(new Couch((x_middle-(x_blocks/2)+2), 5));
         studentObjects.add(new Couch((x_middle-(x_blocks/2)), 5));
@@ -300,6 +252,5 @@ public class StudentRoom extends JPanel implements MapInterface {
         studentObjects.add(new BlockUnbreakable((x_middle-(x_blocks/2)+4), 13)); //armoire chmabre
         studentObjects.add(new Toilet((x_middle-(x_blocks/2)+1), 14)); //toilette
         studentObjects.add(new Toilet((x_middle-(x_blocks/2)+1), 13));
-
     }
 }
