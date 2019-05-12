@@ -16,9 +16,6 @@ public class Grocery extends JPanel implements MapInterface {
     public Grocery() {                        //Constructor
         this.y_blocks = 12;
         this.x_blocks = 20;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width_screen = (int) screenSize.getWidth();
-        int height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));

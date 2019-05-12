@@ -15,9 +15,6 @@ public class Library extends JPanel implements MapInterface {
     public Library() {                  //Constructor
         this.y_blocks = 17;
         this.x_blocks = 17;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width_screen = (int) screenSize.getWidth();
-        int height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2* height_screen /3));

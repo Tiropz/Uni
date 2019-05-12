@@ -16,9 +16,6 @@ public class Work extends JPanel implements MapInterface {
     public Work() {                         //Constructor
         this.y_blocks = 13;
         this.x_blocks = 17;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width_screen = (int) screenSize.getWidth();
-        int height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));
@@ -28,7 +25,6 @@ public class Work extends JPanel implements MapInterface {
         x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));                //x_middle equation
         construct();
     }
-
 
     public void paint(Graphics g) {
 
@@ -137,7 +133,6 @@ public class Work extends JPanel implements MapInterface {
 
     }
 
-
     public Player setObjects(ArrayList<GameObject> objects, Player mainChar, MapInterface currentMap) {
 
         this.workObjects = new ArrayList<>(objects);
@@ -153,7 +148,8 @@ public class Work extends JPanel implements MapInterface {
         this.repaint();
     }
 
-    private void construct() {                  //Add all the room objects to the Map list
+    private void construct() {//Add all the room objects to the Map list
+
         this.workObjects.clear();
 
         for (int i = x_middle-9; i < x_middle+11; i++){

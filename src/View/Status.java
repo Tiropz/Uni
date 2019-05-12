@@ -13,8 +13,8 @@ import Model.Player;
 import com.google.gson.Gson;
 
 public class Status extends JPanel {
-    Gson gson = new Gson();
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private Gson gson = new Gson();
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public int width_screen;
     public int height_screen;
     public int height_status;

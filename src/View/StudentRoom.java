@@ -12,12 +12,10 @@ public class StudentRoom extends JPanel implements MapInterface {
     private int y_blocks;
     private int x_middle;
     private int x_blocks;
+
     public StudentRoom() {                      //Constructor
         this.y_blocks = 14;
         this.x_blocks = 13;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width_screen = (int) screenSize.getWidth();
-        int height_screen = (int) screenSize.getHeight();
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2* height_screen /3));
@@ -29,7 +27,6 @@ public class StudentRoom extends JPanel implements MapInterface {
         System.out.println("prout" + screenSize.getWidth());
         construct();
     }
-
 
     public void paint(Graphics g) {
 
