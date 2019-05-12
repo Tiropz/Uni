@@ -19,7 +19,7 @@ public class Work extends JPanel implements MapInterface {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setPreferredSize(new Dimension(width_screen, 2 * height_screen / 3));
-        this.setBackground(Color.GRAY);
+        //this.setBackground();
         this.setOpaque(true);
         this.BLOC_SIZE = (Math.round(5 * height_screen / (9 * y_blocks)));      //Blocsize equation
         x_middle = (Math.round(width_screen / (2 * BLOC_SIZE)));                //x_middle equation
@@ -29,7 +29,7 @@ public class Work extends JPanel implements MapInterface {
     public void paint(Graphics g) {
 
         //Instantiation of all images for paint
-
+        Image background = new ImageIcon("src/Image/grass.jpg").getImage();
         Image sol_travail = new ImageIcon("src/Image/sol_bibli.jpg").getImage();
         Image poubelle = new ImageIcon("src/Image/trash.png").getImage();
         Image plante = new ImageIcon("src/Image/plante.png").getImage();
@@ -47,10 +47,10 @@ public class Work extends JPanel implements MapInterface {
         Image livres = new ImageIcon("src/Image/bibliothèque.png").getImage();
         Image porte = new ImageIcon("src/Image/porte.png").getImage();
 
-        super.paintComponent(g);
+        super.paintComponent(g);                //Painting at the right place
 
-        //Painting at the right place
 
+        g.drawImage(background, 0, 0, width_screen, height_screen, null);
         for (int i = x_middle - (x_blocks / 2); i < x_middle + (x_blocks / 2) + 3; i++) {
             for (int j = 1; j < y_blocks + 2; j++) {
                 g.drawImage(sol_travail, i * BLOC_SIZE, j * BLOC_SIZE, BLOC_SIZE, BLOC_SIZE, null);

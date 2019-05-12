@@ -30,6 +30,8 @@ public class StudentRoom extends JPanel implements MapInterface {
 
         //Instantiation of all images for paint
 
+        Image background = new ImageIcon("src/Image/grass.jpg").getImage();
+
         Image wall = new ImageIcon("src/Image/wall.jpg").getImage();
         Image frigo = new ImageIcon("src/Image/frigo_projet.png").getImage();
         Image sofa_horizontal = new ImageIcon("src/Image/sofa.png").getImage();
