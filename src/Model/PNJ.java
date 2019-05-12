@@ -95,6 +95,7 @@ public class PNJ extends GameObject implements Directable, Activable{
                 JOptionPane.showMessageDialog(null, "Vous n'avez plus de nourriture, vous devez payer 5e", "Attention !", JOptionPane.INFORMATION_MESSAGE);
                 mainChar.setMoney(-5);
                 mainChar.setFoodFridge(1);
+                mainChar.setSocial(-3);
             }else{
                 mainChar.setFoodFridge(-1);
                 this.hunger.set(0,0.0);
@@ -126,6 +127,7 @@ public class PNJ extends GameObject implements Directable, Activable{
             if (mainChar.getFoodFridge() == mainChar.getFoodFridgeMin()) {
                 mainChar.setMoney(-5);
                 mainChar.setFoodFridge(1);
+                mainChar.setSocial(-3);
             }
             mainChar.setFoodFridge(-1);
             hunger.set(0,hung-hung/2);
@@ -269,6 +271,7 @@ public class PNJ extends GameObject implements Directable, Activable{
 
 
             }
+            mainChar.setSocial(+5);
         return mainChar;
     }
 }
