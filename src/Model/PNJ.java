@@ -248,7 +248,7 @@ public class PNJ extends GameObject implements Directable, Activable{
                 this.movable = true;
             break;
             case 3:
-                String randomText = new String();
+                String randomText = "";
                 Random rand = new Random();
                 int movevalue = rand.nextInt(3);
                 switch (movevalue){
