@@ -34,7 +34,7 @@ public class PNJ extends GameObject implements Directable, Activable{
 
     void action(Game g, Player mainChar) {                      //Call the movePNJ method based on a random value
         Random rand = new Random();
-        int movevalue = rand.nextInt(30);
+            int movevalue = rand.nextInt(30);
         switch (movevalue){
             case 0:
                 movePNJ(0,1);

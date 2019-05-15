@@ -43,8 +43,8 @@ public class Player extends GameObject implements Directable {
         this.energy.add(energy);
         this.energy.add(0.0);
         this.hunger.add(0.0);
-        this.hunger.add(hunger);
         this.hunger.add(0.0);
+        this.hunger.add(hunger);
         this.bladder.add(0.0);
         this.bladder.add(bladder);
         this.bladder.add(0.0);
@@ -208,7 +208,7 @@ public class Player extends GameObject implements Directable {
             if (mainChar.getBladder() > mainChar.getBladderMin()) {
                 final JOptionPane optionPane = new JOptionPane(lblClock, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
                 final JDialog dialog = new JDialog();
-                dialog.setTitle("Vous pissez");
+                dialog.setTitle("Vous faites pipi");
                 dialog.setModal(true);
                 dialog.setLocationRelativeTo(null);
                 dialog.setContentPane(optionPane);
@@ -370,8 +370,10 @@ public class Player extends GameObject implements Directable {
         if (option == JOptionPane.OK_OPTION) {
             if (mainChar.getFoodBasket() != 0 && mainChar.getMoney() >= (mainChar.getFoodBasket()*3)) {
 
+                mainChar.setMoney(getFoodBasket()*3);
                 mainChar.setFood(mainChar.getFoodBasket());
                 mainChar.setFoodBasket(-mainChar.getFoodBasket());
+
 
             } else if (mainChar.getMoney() < (mainChar.getFoodBasket()*3)){
                 JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent", "Attention !", JOptionPane.INFORMATION_MESSAGE);
